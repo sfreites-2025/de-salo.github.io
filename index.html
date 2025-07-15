@@ -8,7 +8,8 @@
       margin: 0;
       height: 100vh;
       font-family: 'Times New Roman', Times, serif;
-      background: linear-gradient(135deg, #f5d6e1 0%, #c8e0f7 100%);
+      /* Degradado naranja: de intenso a suave */
+      background: linear-gradient(180deg, #ff7300 0%, #ffb347 100%);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -34,7 +35,6 @@
       opacity: 0;
       pointer-events: none;
     }
-    /* Creativa portada de amor */
     .love-header {
       font-size: 2.7em;
       color: #b20e41;
@@ -66,7 +66,6 @@
     .next-btn:hover {
       background: linear-gradient(90deg, #f6336e, #fecfe9);
     }
-    /* Página 2 */
     .special-message {
       font-size: 1.7em;
       color: #da2f59;
@@ -79,12 +78,11 @@
       line-height: 1.4;
       margin: 0 20px;
     }
-    /* Botón para regresar */
     .back-btn {
       position: fixed;
       top: 20px;
       left: 20px;
-      background: linear-gradient(90deg, #6a8cd4, #aabffc);
+      background: linear-gradient(90deg, #ff7300, #ffb347);
       color: #fff;
       border: none;
       border-radius: 20px;
@@ -92,13 +90,13 @@
       font-size: 1em;
       font-family: 'Times New Roman', Times, serif;
       cursor: pointer;
-      box-shadow: 0 3px 8px rgba(60, 90, 150, 0.5);
+      box-shadow: 0 3px 8px rgba(60, 90, 150, 0.13);
       transition: background 0.3s;
       z-index: 10;
       user-select: none;
     }
     .back-btn:hover {
-      background: linear-gradient(90deg, #5276cc, #869edc);
+      background: linear-gradient(90deg, #ff9000, #ffd392);
     }
   </style>
 </head>
@@ -108,7 +106,8 @@
     <div class="love-header">Para ti, con amor</div>
     <div class="love-message">
       A veces las palabras se quedan guardadas y el tiempo se encarga de hacerlas más grandes. 
-      Esta página es ese pequeño espacio donde quisiera decirte lo que nunca pude, compartir lo que sentí y recordar lo hermoso que fue lo nuestro. 
+      Esta página es ese pequeño espacio donde quisiera decirte lo que nunca pude,
+      compartir lo que sentí y recordar lo hermoso que fue lo nuestro. 
       Gracias por cada memoria y por el amor que sigue latiendo aquí.
     </div>
     <button class="next-btn" onclick="showSlide2()">Siguiente</button>
