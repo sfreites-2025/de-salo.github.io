@@ -2,99 +2,114 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Prueba de página web</title>
+  <title>Para ti, con amor</title>
   <style>
     body {
-      background-color: #add8e6; /* Azul claro */
-      font-family: 'Times New Roman', Times, serif;
       margin: 0;
-      padding: 0;
+      height: 100vh;
+      font-family: 'Times New Roman', Times, serif;
+      background: linear-gradient(135deg, #f5d6e1 0%, #c8e0f7 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+    .slide {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      width: 100vw; height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
-      height: 100vh;
-      color: #000;
+      justify-content: center;
+      transition: opacity 0.8s ease;
+      opacity: 1;
+      pointer-events: all;
     }
-
-    h1 {
-      margin-top: 50px;
-      font-size: 3em;
-      text-align: center;
+    .slide.hidden {
+      opacity: 0;
+      pointer-events: none;
     }
-    h2 {
-      font-size: 2em;
-      margin-top: 0.5em;
-      margin-bottom: 30px;
-      text-align: center;
+    /* Creativa portada de amor */
+    .love-header {
+      font-size: 2.7em;
+      color: #b20e41;
+      text-shadow: 0 2px 8px #fff, 0 6px 16px #f6a;
+      margin-bottom: 0.5em;
     }
-    img {
-      max-width: 300px;
-      height: auto;
-      border-radius: 10px;
-      margin-bottom: 40px;
-    }
-    /* Estilos para la pestaña */
-    .accordion {
-      background-color: #e0f0ff;
-      cursor: pointer;
-      padding: 15px 20px;
-      width: 350px;
-      text-align: center;
-      border: none;
-      outline: none;
-      transition: background-color 0.3s ease;
+    .love-message {
       font-size: 1.5em;
-      border-radius: 8px;
-      user-select: none;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-      margin-bottom: 10px;
+      color: #4a3842;
+      margin-bottom: 2em;
+      text-align: center;
+      max-width: 550px;
+      line-height: 1.5;
     }
-    .accordion:hover {
-      background-color: #c0e0ff;
+    .heart-img {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 1.5em;
+      animation: beat 1.2s infinite;
     }
-    .accordion.active {
-      background-color: #a0cfff;
+    @keyframes beat {
+      0%, 100% { transform: scale(1);}
+      35% { transform: scale(1.11);}
+      70% { transform: scale(0.93);}
     }
-    .panel {
-      width: 350px;
-      background-color: #f0f8ff;
-      overflow: hidden;
-      max-height: 0;
-      transition: max-height 0.3s ease;
-      padding: 0 20px;
-      border-radius: 0 0 8px 8px;
-      font-size: 1.2em;
-      box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+    .next-btn {
+      background: linear-gradient(90deg, #fd5e53, #ffb6b9);
+      color: #fff;
+      border: none;
+      border-radius: 25px;
+      padding: 14px 40px;
+      font-size: 1.3em;
+      font-family: 'Times New Roman', Times, serif;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(252, 95, 139, 0.18);
+      margin-top: 1.5em;
+      transition: background 0.3s;
     }
-    .panel.open {
-      padding: 15px 20px;
-      max-height: 100px; /* Ajusta para que el contenido se vea bien */
+    .next-btn:hover {
+      background: linear-gradient(90deg, #f6336e, #fecfe9);
+    }
+    /* Página 2 */
+    .special-message {
+      font-size: 1.7em;
+      color: #da2f59;
+      background: rgba(255,255,255,0.87);
+      padding: 35px 35px 25px 35px;
+      border-radius: 22px;
+      box-shadow: 0 6px 32px #e59fab77;
+      text-align: center;
+      max-width: 600px;
     }
   </style>
 </head>
 <body>
-  <h1>Pruebas de página web</h1>
-  <h2>Este es un subtitulado</h2>
-  <img src="https://via.placeholder.com/300x200.png?text=Imagen+de+prueba" alt="Imagen de prueba" />
-
-  <button class="accordion">Haz clic aquí</button>
-  <div class="panel">
-    <p>Prueba de pestaña exitosa</p>
+  <!-- PRIMERA DIAPOSITIVA / PORTADA -->
+  <div class="slide" id="slide1">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Heart_coraz%C3%B3n.svg/240px-Heart_coraz%C3%B3n.svg.png" alt="corazón" class="heart-img" />
+    <div class="love-header">Para ti, con amor</div>
+    <div class="love-message">
+      A veces las palabras se quedan guardadas y el tiempo se encarga de hacerlas más grandes. 
+      Esta página es ese pequeño espacio donde quisiera decirte lo que nunca pude, compartir lo que sentí y recordar lo hermoso que fue lo nuestro. 
+      Gracias por cada memoria y por el amor que sigue latiendo aquí.
+    </div>
+    <button class="next-btn" onclick="showSlide2()">Siguiente</button>
+  </div>
+  <!-- SEGUNDA DIAPOSITIVA / MENSAJE ESPECIAL -->
+  <div class="slide hidden" id="slide2">
+    <div class="special-message">
+      Todos los 28 de cada mes recuerdo tu voz, tu risa, tu cabello, incluso tus defectos, y la verdad las extraño, extraño cada minuto, segundo e incluso milisegundo en donde recibía constantes ondas de choque, que cada vez me aceleraban el corazón.
+    </div>
   </div>
 
   <script>
-    const accordion = document.querySelector(".accordion");
-    const panel = document.querySelector(".panel");
-
-    accordion.addEventListener("click", function() {
-      this.classList.toggle("active");
-      if (panel.classList.contains("open")) {
-        panel.classList.remove("open");
-      } else {
-        panel.classList.add("open");
-      }
-    });
+    function showSlide2() {
+      document.getElementById("slide1").classList.add("hidden");
+      document.getElementById("slide2").classList.remove("hidden");
+    }
   </script>
 </body>
 </html>
