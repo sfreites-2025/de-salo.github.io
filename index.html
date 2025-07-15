@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Para ti, con amor y cariño</title>
+  <title>Para ti, con amor</title>
   <style>
     body {
       margin: 0;
@@ -26,6 +26,8 @@
       transition: opacity 0.8s ease;
       opacity: 1;
       pointer-events: all;
+      padding: 0 20px;
+      box-sizing: border-box;
     }
     .slide.hidden {
       opacity: 0;
@@ -37,6 +39,7 @@
       color: #b20e41;
       text-shadow: 0 2px 8px #fff, 0 6px 16px #f6a;
       margin-bottom: 0.5em;
+      text-align: center;
     }
     .love-message {
       font-size: 1.5em;
@@ -45,20 +48,6 @@
       text-align: center;
       max-width: 550px;
       line-height: 1.5;
-    }
-    .heart-img {
-      width: 80px;
-      height: 80px;
-      margin-bottom: 1.5em;
-      animation: beat 1.2s infinite;
-      border-radius: 12px;
-      object-fit: cover;
-      box-shadow: 0 0 15px #f57c00aa;
-    }
-    @keyframes beat {
-      0%, 100% { transform: scale(1);}
-      35% { transform: scale(1.11);}
-      70% { transform: scale(0.93);}
     }
     .next-btn {
       background: linear-gradient(90deg, #fd5e53, #ffb6b9);
@@ -87,13 +76,13 @@
       text-align: center;
       max-width: 600px;
       line-height: 1.4;
+      margin: 0 20px;
     }
   </style>
 </head>
 <body>
   <!-- PRIMERA DIAPOSITIVA / PORTADA -->
   <div class="slide" id="slide1">
-    <img src="https://pplx-res.cloudinary.com/image/private/user_uploads/78811917/7d3a4c32-ced7-424d-b4bf-37f25a343dc6/image.jpg" alt="corazón naranja" class="heart-img" />
     <div class="love-header">Para ti, con amor</div>
     <div class="love-message">
       A veces las palabras se quedan guardadas y el tiempo se encarga de hacerlas más grandes. 
