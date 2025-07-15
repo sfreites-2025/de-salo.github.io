@@ -12,7 +12,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 100vh;
       overflow: hidden;
       position: relative;
     }
@@ -20,19 +19,28 @@
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
       width: 100vw; height: 100vh;
+      padding: 0 20px;
+      box-sizing: border-box;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      transition: opacity 0.8s ease;
-      opacity: 1;
-      pointer-events: all;
-      padding: 0 20px;
-      box-sizing: border-box;
-    }
-    .slide.hidden {
+      transition: transform 0.8s ease, opacity 0.8s ease;
       opacity: 0;
       pointer-events: none;
+      transform: translateX(100%);
+    }
+    .slide.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateX(0);
+      z-index: 2;
+    }
+    .slide.inactive-left {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateX(-100%);
+      z-index: 1;
     }
     .love-header {
       font-size: 2.7em;
@@ -93,6 +101,12 @@
       transition: background 0.3s;
       z-index: 10;
       user-select: none;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .back-btn.visible {
+      opacity: 1;
+      pointer-events: auto;
     }
     .back-btn:hover {
       background: linear-gradient(90deg, #5276cc, #869edc);
@@ -101,7 +115,7 @@
 </head>
 <body>
   <!-- PRIMERA DIAPOSITIVA / PORTADA -->
-  <div class="slide" id="slide1">
+  <div class="slide active" id="slide1">
     <div class="love-header">Para ti, con amor</div>
     <div class="love-message">
       A veces las palabras se quedan guardadas y el tiempo se encarga de hacerlas más grandes. 
@@ -111,21 +125,32 @@
     <button class="next-btn" onclick="showSlide2()">Siguiente</button>
   </div>
   <!-- SEGUNDA DIAPOSITIVA / MENSAJE ESPECIAL -->
-  <div class="slide hidden" id="slide2">
-    <button class="back-btn" onclick="showSlide1()">← Volver</button>
+  <div class="slide inactive-left" id="slide2">
+    <button class="back-btn" id="backBtn" onclick="showSlide1()">← Volver</button>
     <div class="special-message">
       Todos los 28 de cada mes recuerdo tu voz, tu risa, tu cabello, incluso tus defectos, y la verdad las extraño, extraño cada minuto, segundo e incluso milisegundo en donde recibía constantes ondas de choque, que cada vez me aceleraban el corazón.
     </div>
   </div>
 
   <script>
+    const slide1 = document.getElementById("slide1");
+    const slide2 = document.getElementById("slide2");
+    const backBtn = document.getElementById("backBtn");
+
     function showSlide2() {
-      document.getElementById("slide1").classList.add("hidden");
-      document.getElementById("slide2").classList.remove("hidden");
+      slide1.classList.remove("active");
+      slide1.classList.add("inactive-left");
+      slide2.classList.remove("inactive-left");
+      slide2.classList.add("active");
+      backBtn.classList.add("visible");
     }
+
     function showSlide1() {
-      document.getElementById("slide2").classList.add("hidden");
-      document.getElementById("slide1").classList.remove("hidden");
+      slide2.classList.remove("active");
+      slide2.classList.add("inactive-left");
+      slide1.classList.remove("inactive-left");
+      slide1.classList.add("active");
+      backBtn.classList.remove("visible");
     }
   </script>
 </body>
