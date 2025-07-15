@@ -14,6 +14,7 @@
       justify-content: center;
       min-height: 100vh;
       overflow: hidden;
+      position: relative;
     }
     .slide {
       position: absolute;
@@ -78,6 +79,27 @@
       line-height: 1.4;
       margin: 0 20px;
     }
+    /* Botón para regresar */
+    .back-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: linear-gradient(90deg, #6a8cd4, #aabffc);
+      color: #fff;
+      border: none;
+      border-radius: 20px;
+      padding: 10px 20px;
+      font-size: 1em;
+      font-family: 'Times New Roman', Times, serif;
+      cursor: pointer;
+      box-shadow: 0 3px 8px rgba(60, 90, 150, 0.5);
+      transition: background 0.3s;
+      z-index: 10;
+      user-select: none;
+    }
+    .back-btn:hover {
+      background: linear-gradient(90deg, #5276cc, #869edc);
+    }
   </style>
 </head>
 <body>
@@ -93,6 +115,7 @@
   </div>
   <!-- SEGUNDA DIAPOSITIVA / MENSAJE ESPECIAL -->
   <div class="slide hidden" id="slide2">
+    <button class="back-btn" onclick="showSlide1()">← Volver</button>
     <div class="special-message">
       Todos los 28 de cada mes recuerdo tu voz, tu risa, tu cabello, incluso tus defectos, y la verdad las extraño, extraño cada minuto, segundo e incluso milisegundo en donde recibía constantes ondas de choque, que cada vez me aceleraban el corazón.
     </div>
@@ -102,6 +125,10 @@
     function showSlide2() {
       document.getElementById("slide1").classList.add("hidden");
       document.getElementById("slide2").classList.remove("hidden");
+    }
+    function showSlide1() {
+      document.getElementById("slide2").classList.add("hidden");
+      document.getElementById("slide1").classList.remove("hidden");
     }
   </script>
 </body>
