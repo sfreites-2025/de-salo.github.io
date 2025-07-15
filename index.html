@@ -42,7 +42,6 @@
       transform: translateX(-100%);
       z-index: 1;
     }
-    /* Corazón emoji naranja en esquina superior izquierda */
     .heart-corner {
       position: fixed;
       top: 20px;
@@ -154,10 +153,8 @@
   </style>
 </head>
 <body>
-  <!-- Corazón naranja emoji en esquina superior izquierda -->
   <div id="heartCorner" class="heart-corner" aria-label="Corazón naranja" title="Corazón naranja" role="img">🧡</div>
 
-  <!-- PRIMERA DIAPOSITIVA -->
   <div class="slide active" id="slide1">
     <div class="info-box">
       <div class="love-header">Para ti, con amor</div>
@@ -168,10 +165,9 @@
       </div>
       <button class="next-btn" onclick="showSlide2()">Siguiente</button>
     </div>
-    <img class="beach-img" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=900&q=80" alt="Paisaje romántico de playa" />
+    <img class="beach-img" src="https://cdn.vecteezy.com/system/resources/previews/005/119/471/original/tropical-beach-palm-trees-sea-ocean-sunset-summer-vacation-cartoon-illustration-free-vector.jpg" alt="Paisaje tropical de playa" />
   </div>
 
-  <!-- SEGUNDA DIAPOSITIVA / MENSAJE ESPECIAL -->
   <div class="slide inactive-left" id="slide2">
     <button class="back-btn" id="backBtn" onclick="showSlide1()">← Volver</button>
     <div class="special-message">
