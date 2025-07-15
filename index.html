@@ -42,15 +42,16 @@
       transform: translateX(-100%);
       z-index: 1;
     }
-    /* Corazón naranja en esquina superior izquierda */
+    /* Corazón emoji naranja en esquina superior izquierda */
     .heart-corner {
       position: fixed;
       top: 20px;
       left: 20px;
-      width: 50px;
-      height: 50px;
+      font-size: 48px;
+      user-select: none;
       z-index: 20;
       transition: opacity 0.6s ease;
+      cursor: default;
     }
     .heart-corner.hidden {
       opacity: 0;
@@ -153,13 +154,9 @@
   </style>
 </head>
 <body>
-  <!-- Corazón naranja en esquina superior izquierda -->
-  <img
-    src="https://pplx-res.cloudinary.com/image/private/user_uploads/78811917/7d3a4c32-ced7-424d-b4bf-37f25a343dc6/image.jpg"
-    alt="Corazón naranja"
-    class="heart-corner"
-    id="heartCorner"
-  />
+  <!-- Corazón naranja emoji en esquina superior izquierda -->
+  <div id="heartCorner" class="heart-corner" aria-label="Corazón naranja" title="Corazón naranja" role="img">🧡</div>
+
   <!-- PRIMERA DIAPOSITIVA -->
   <div class="slide active" id="slide1">
     <div class="info-box">
@@ -173,6 +170,7 @@
     </div>
     <img class="beach-img" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=900&q=80" alt="Paisaje romántico de playa" />
   </div>
+
   <!-- SEGUNDA DIAPOSITIVA / MENSAJE ESPECIAL -->
   <div class="slide inactive-left" id="slide2">
     <button class="back-btn" id="backBtn" onclick="showSlide1()">← Volver</button>
@@ -180,6 +178,7 @@
       Todos los 28 de cada mes recuerdo tu voz, tu risa, tu cabello, incluso tus defectos, y la verdad las extraño, extraño cada minuto, segundo e incluso milisegundo en donde recibía constantes ondas de choque, que cada vez me aceleraban el corazón.
     </div>
   </div>
+
   <script>
     const slide1 = document.getElementById("slide1");
     const slide2 = document.getElementById("slide2");
@@ -192,7 +191,6 @@
       slide2.classList.remove("inactive-left");
       slide2.classList.add("active");
       backBtn.classList.add("visible");
-      // Ocultar corazón naranja al pasar a la segunda diapositiva
       heartCorner.classList.add("hidden");
     }
 
@@ -202,7 +200,6 @@
       slide1.classList.remove("inactive-left");
       slide1.classList.add("active");
       backBtn.classList.remove("visible");
-      // Mostrar corazón naranja al volver a la primera diapositiva
       heartCorner.classList.remove("hidden");
     }
   </script>
