@@ -298,6 +298,9 @@
       height: auto;
       display: block;
     }
+    a.no-decoration {
+      text-decoration: none;
+    }
   </style>
 </head>
 <body>
@@ -418,8 +421,10 @@
       <path d="M 50 720 Q 60 720 60 730" class="line" />
       <path d="M 1090 730 Q 1090 720 1100 720" class="line" />
     </svg>
-    <!-- Cambiar botón siguiente para ir a index2.html -->
-    <button class="next-btn" onclick="window.location.href='index2.html'">Siguiente</button>
+    <!-- Cambio botón siguiente a enlace -->
+    <a href="index2.html" class="no-decoration">
+      <button class="next-btn" type="button">Siguiente</button>
+    </a>
   </div>
 
 <script>
