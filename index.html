@@ -166,6 +166,44 @@
       white-space: pre-line;
       min-height: 180px;
     }
+    /* --- CUARTA PÁGINA PARIS FONDO Y CAJA MENSAJE --- */
+    .paris-slide-bg {
+      background-image: url('https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=80');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      z-index: 2;
+    }
+    .paris-message-box {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      background: rgba(255,255,255,0.91);
+      border-radius: 24px;
+      padding: 36px 36px 30px 36px;
+      box-shadow: 0 8px 36px #351f4625;
+      max-width: 520px;
+      min-height: 260px;
+      margin-left: 0;
+      margin-right: auto;
+    }
+    .paris-message-title {
+      font-size: 1.45em;
+      color: #99603a;
+      font-weight: bold;
+      margin-bottom: 1.1em;
+      letter-spacing: 0.015em;
+    }
+    .paris-message-text {
+      color: #304158;
+      font-size: 1.13em;
+      line-height: 1.7;
+      text-align: left;
+      white-space: pre-line;
+      max-width: 450px;
+    }
+    /* Botones navega */
     .back-btn {
       position: fixed;
       top: 20px;
@@ -192,10 +230,13 @@
     .back-btn:hover {
       background: linear-gradient(90deg, #5276cc, #869edc);
     }
+    @media (max-width: 1100px) {
+      .paris-message-box {max-width: 99vw; padding: 25px;}
+    }
     @media (max-width: 800px) {
       .slide {flex-direction: column;}
-      .dedicatory-box, .info-box {margin-right: 0; margin-bottom: 24px; align-items: center;}
-      .dedicatory-title, .dedicatory-subtitle, .love-header, .love-message {text-align: center;}
+      .dedicatory-box, .info-box, .paris-message-box {margin-right: 0; margin-bottom: 24px; align-items: center;}
+      .dedicatory-title, .dedicatory-subtitle, .love-header, .love-message, .paris-message-title, .paris-message-text {text-align: center;}
       .beach-img {margin-left: 0; max-width: 90vw;}
     }
   </style>
@@ -204,7 +245,7 @@
 
   <div id="heartCorner" class="heart-corner" aria-label="Corazón naranja" title="Corazón naranja" role="img">🧡</div>
 
-  <!-- Primera página -->
+  <!-- 1. Portada -->
   <div class="slide active" id="slide0">
     <div class="dedicatory-box">
       <div class="dedicatory-title">Para Oriana Valentina Villarroel Escobar</div>
@@ -218,7 +259,7 @@ Gracias por estar aquí.
     </div>
   </div>
 
-  <!-- Segunda página -->
+  <!-- 2. Mensaje Playa -->
   <div class="slide inactive-left" id="slide1">
     <button class="back-btn" id="backBtn1" onclick="goToSlide0()">← Volver</button>
     <div class="info-box">
@@ -235,11 +276,23 @@ recuerdo esa tarde en que caminamos juntos a la orilla del mar; el mundo parecia
     />
   </div>
 
-  <!-- Tercera página -->
+  <!-- 3. Mensaje 28 de cada mes -->
   <div class="slide inactive-left" id="slide2">
     <button class="back-btn" id="backBtn2" onclick="goToSlide1From2()">← Volver</button>
     <div class="special-message">
 Cada dia 28 vuelvo a repasar tu recuerdo, como si se tratara de una melodia que mi corazon no pudiera olvidar. Me viene a la mente tu voz, tu risa contagiosa y hasta esos detalles unicos que te hacen tan especial, incluso aquellos que solias llamar defectos
+    </div>
+    <button class="next-btn" style="position: absolute; bottom: 50px; right: 60px;" onclick="goToSlide3()">Siguiente</button>
+  </div>
+
+  <!-- 4. París y Copita de Francia -->
+  <div class="slide inactive-left paris-slide-bg" id="slide3">
+    <button class="back-btn" id="backBtn3" onclick="goToSlide2From3()">← Volver</button>
+    <div class="paris-message-box">
+      <div class="paris-message-title">Mi copita de Francia</div>
+      <div class="paris-message-text">
+París siempre ha sido conocida como la ciudad de la luz y el amor, pero cuando pensaba en ti, sentía que guardaba dentro de mi corazón un pequeño rincón parisino, único y propio. Eres y serás siempre mi copita de Francia: ese destello elegante y dulce que hace que cualquier momento, por sencillo que sea, se sienta extraordinario. Así como un vino francés deja huella con su fragancia y sabor, tú dejaste en mi vida un encanto imposible de borrar. Pensar en ti es pasear por la ribera del Sena al atardecer, viendo cómo la ciudad se ilumina mientras todo cobra sentido. Porque, como París, eres arte, magia y romanticismo; y yo, afortunado de haber degustado la dicha de quererte.
+      </div>
     </div>
   </div>
 
@@ -247,8 +300,10 @@ Cada dia 28 vuelvo a repasar tu recuerdo, como si se tratara de una melodia que 
     const slide0 = document.getElementById("slide0");
     const slide1 = document.getElementById("slide1");
     const slide2 = document.getElementById("slide2");
+    const slide3 = document.getElementById("slide3");
     const backBtn1 = document.getElementById("backBtn1");
     const backBtn2 = document.getElementById("backBtn2");
+    const backBtn3 = document.getElementById("backBtn3");
     const heartCorner = document.getElementById("heartCorner");
 
     function goToSlide1() {
@@ -259,6 +314,7 @@ Cada dia 28 vuelvo a repasar tu recuerdo, como si se tratara de una melodia que 
       heartCorner.classList.add("hidden");
       backBtn1.classList.add("visible");
       backBtn2.classList.remove("visible");
+      backBtn3.classList.remove("visible");
     }
 
     function goToSlide2() {
@@ -269,6 +325,7 @@ Cada dia 28 vuelvo a repasar tu recuerdo, como si se tratara de una melodia que 
       heartCorner.classList.add("hidden");
       backBtn1.classList.remove("visible");
       backBtn2.classList.add("visible");
+      backBtn3.classList.remove("visible");
     }
 
     function goToSlide0() {
@@ -279,6 +336,7 @@ Cada dia 28 vuelvo a repasar tu recuerdo, como si se tratara de una melodia que 
       heartCorner.classList.remove("hidden");
       backBtn1.classList.remove("visible");
       backBtn2.classList.remove("visible");
+      backBtn3.classList.remove("visible");
     }
 
     function goToSlide1From2() {
@@ -289,6 +347,29 @@ Cada dia 28 vuelvo a repasar tu recuerdo, como si se tratara de una melodia que 
       heartCorner.classList.add("hidden");
       backBtn2.classList.remove("visible");
       backBtn1.classList.add("visible");
+      backBtn3.classList.remove("visible");
+    }
+
+    function goToSlide3() {
+      slide2.classList.remove("active");
+      slide2.classList.add("inactive-left");
+      slide3.classList.remove("inactive-left");
+      slide3.classList.add("active");
+      heartCorner.classList.add("hidden");
+      backBtn3.classList.add("visible");
+      backBtn2.classList.remove("visible");
+      backBtn1.classList.remove("visible");
+    }
+
+    function goToSlide2From3() {
+      slide3.classList.remove("active");
+      slide3.classList.add("inactive-left");
+      slide2.classList.remove("inactive-left");
+      slide2.classList.add("active");
+      heartCorner.classList.add("hidden");
+      backBtn3.classList.remove("visible");
+      backBtn2.classList.add("visible");
+      backBtn1.classList.remove("visible");
     }
   </script>
 </body>
