@@ -5,50 +5,80 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Sexta diapositiva - Index2</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Times+New+Roman:ital,wght@0,400;0,700;1,400&display=swap');
+
+    body, html {
+      margin: 0; padding: 0; height: 100%;
+      font-family: "Times New Roman", Times, serif;
+      overflow: hidden;
+    }
+
     body {
-      margin: 0;
-      height: 100vh;
-      font-family: 'Times New Roman', Times, serif;
-      /* Fondo imagen Tierra estilo ONU + color naranja semitransparente */
-      background: 
-        linear-gradient(rgba(255,102,0,0.75), rgba(255,102,0,0.85)),
-        url('https://images.unsplash.com/photo-1465101162946-4377e57745c3?auto=format&fit=crop&w=1200&q=80') center center/cover no-repeat fixed;
-      color: #000000;
+      /* Fondo: imagen de set de música */
+      background: url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1400&q=80') no-repeat center center fixed;
+      background-size: cover;
       display: flex;
       align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      position: relative;
-      padding: 40px;
+      justify-content: flex-end;
+      padding: 40px 60px;
       box-sizing: border-box;
-      text-align: center;
+      color: black;
     }
-    .slide-content {
-      max-width: 700px;
-      background: rgba(255,255,255,0.85);
+
+    .text-container {
+      background: rgba(255 255 255 / 0.85);
+      max-width: 600px;
+      padding: 30px 40px;
       border-radius: 20px;
-      padding: 30px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.25);
+      text-align: right;
+      /* Animación */
+      opacity: 0;
+      transform: translateX(30px);
+      animation: fadeSlideIn 1.5s forwards ease-out;
+      animation-delay: 0.3s;
     }
+
+    @keyframes fadeSlideIn {
+      to {
+        opacity: 1;
+        transform: translateX(0);
+        text-shadow:
+          0 0 6px #f6336e55,
+          1px 1px 3px #00000055;
+      }
+    }
+
     h1 {
       margin-top: 0;
-      font-weight: bold;
-      font-size: 2.25em;
-      letter-spacing: 0.01em;
+      font-weight: 700;
+      font-size: 2.5em;
+      letter-spacing: 0.02em;
+      margin-bottom: 0.8em;
+      /* Texto animado color suave */
+      animation: colorPulse 4s infinite alternate ease-in-out;
     }
+
+    @keyframes colorPulse {
+      0% { color: #444; text-shadow: none; }
+      100% { color: #fd5e53; text-shadow: 0 0 20px #fd5e53aa; }
+    }
+
     p {
-      font-size: 1.2em;
-      line-height: 1.5;
+      font-size: 1.15em;
+      line-height: 1.6;
       white-space: pre-line;
+      font-weight: 400;
     }
+
     button.back-btn {
       background: linear-gradient(90deg, #6a8cd4, #aabffc);
-      color: #fff;
+      color: white;
       border: none;
       border-radius: 20px;
       padding: 12px 24px;
       font-size: 1.1em;
-      font-family: 'Times New Roman', Times, serif;
+      font-family: "Times New Roman", Times, serif;
       cursor: pointer;
       box-shadow: 0 3px 8px rgba(60, 90, 150, 0.5);
       transition: background 0.3s;
@@ -61,19 +91,40 @@
     button.back-btn:hover {
       background: linear-gradient(90deg, #5276cc, #869edc);
     }
+
+    /* Responsive */
+    @media(max-width: 720px){
+      body {
+        justify-content: center;
+        padding: 20px;
+      }
+      .text-container {
+        max-width: 100%;
+        text-align: center;
+      }
+      h1 {
+        font-size: 2em;
+      }
+      p {
+        font-size: 1em;
+      }
+    }
   </style>
 </head>
 <body>
 
-  <div class="slide-content" role="main" aria-label="Sexta diapositiva">
-    <h1>Construyendo un mundo mejor 🌍</h1>
+  <div class="text-container" role="main" aria-label="Texto de la sexta diapositiva">
+    <h1>Reflexiones y recuerdos</h1>
     <p>
-      Esta es la sexta diapositiva ubicada en <strong>index2.html</strong>.<br />
-      El fondo evoca el espíritu global de los comités de la ONU y el cuidado de nuestro planeta.<br />
-      Así como las naciones se unen para construir un futuro más verde y justo, los recuerdos y sueños que tejemos pueden mejorar nuestro pequeño mundo día a día.
+      Hay ciudades que despiertan anhelos y noches que se convierten en recuerdos imborrables, pero nada se compara con lo que siento cuando pienso en ti después de soñar que debía dejarte ir. En ese mundo efímero, tuve que decirte adiós y me di cuenta de que, aunque no entienda del todo su significado, mi corazón eligió seguir tus pasos dondequiera que estés.
+
+      Eres y serás siempre mi destino favorito, la razón por la que cada instante cobra sentido y cada noche se vuelve única. Nadie puede prometer el mañana, por eso elijo amarte como si cada noche fuera la última vez que pudiera recordarte y guardar tu luz entre mis memorias más profundas.
+
+      If the world was ending I’d wanna be next to you. I’d wanna hold you just for a while and die with a smile, To live forever with your memory and be able to die in peace, knowing that I was able to walk in heaven.
     </p>
-    <button class="back-btn" onclick="window.location.href='index.html'">← Volver al inicio</button>
   </div>
+
+  <button class="back-btn" onclick="window.location.href='index.html'">← Volver al inicio</button>
 
 </body>
 </html>
