@@ -109,34 +109,67 @@
       pointer-events: none;
       visibility: hidden;
     }
-    /* Primera página */
+    /* Primera página - modificaciones de bienvenida */
+    #slide0 {
+      background: linear-gradient(120deg, #f9d5e5 0%, #fcefe3 50%, #f7e8f3 100%);
+      flex-direction: column;
+      justify-content: center;
+      padding: 60px 40px;
+      text-align: center;
+    }
     .dedicatory-box {
       max-width: 700px;
-      padding: 60px 40px 60px 0;
+      padding: 0;
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
+      align-items: center;
       justify-content: center;
-      margin-right: 60px;
+      margin: 0;
     }
     .dedicatory-title {
-      font-size: 2.25em;
+      font-size: 2.5em;
       font-weight: bold;
-      color: #fd5e53;
-      margin-bottom: 0.4em;
-      text-shadow: 0 2px 8px #fff, 0 4px 12px #f6a2;
+      color: #b8325a;
+      margin-bottom: 0.6em;
+      text-shadow: 0 2px 10px #f7b2c4;
       letter-spacing: 0.01em;
     }
     .dedicatory-subtitle {
-      font-size: 1.15em;
-      color: #314355;
-      margin-bottom: 2.4em;
+      font-size: 1.2em;
+      color: #7a4e65;
+      font-style: italic;
       line-height: 1.6;
-      max-width: 440px;
       white-space: pre-line;
-      text-align: left;
+      animation: fadeInUp 2s ease forwards;
+      max-width: 500px;
     }
-    /* Segunda página */
+    .dedicatory-box button.go-btn {
+      margin-top: 40px;
+      padding: 14px 38px;
+      background: linear-gradient(90deg, #d34c6a, #f28ab2);
+      border-radius: 28px;
+      font-weight: bold;
+      box-shadow: 0 6px 14px #f69fc2aa;
+      transition: background 0.3s ease;
+      color: white;
+      cursor: pointer;
+      font-size: 1.1em;
+    }
+    .dedicatory-box button.go-btn:hover {
+      background: linear-gradient(90deg, #f3587a, #f7a2be);
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    /* Segunda página y siguientes sin cambios */
     .info-box {
       max-width: 380px;
       display: flex;
@@ -170,7 +203,6 @@
       object-fit: cover;
       margin-left: 24px;
     }
-    /* Tercera página */
     .special-message {
       font-size: 1.23em;
       color: #da2f59;
@@ -188,7 +220,6 @@
       justify-content: center;
       align-items: center;
     }
-    /* Cuarta página París */
     .paris-slide-bg {
       background-image: url('https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=80');
       background-size: cover;
@@ -221,7 +252,6 @@
       margin-bottom: 1.1em;
       letter-spacing: 0.015em;
     }
-    /* Quinta página Futbol con cancha 2D SVG y texto a la derecha */
     .futbol-slide-bg {
       background-color: #4caf50;
       z-index: 2;
@@ -263,7 +293,6 @@
       background: #4caf50;
       box-shadow: inset 0 0 12px #3a8521;
     }
-    /* Imágenes responsivas */
     img {
       max-width: 100%;
       height: auto;
@@ -278,12 +307,12 @@
   <!-- Página 1 -->
   <div class="slide active" id="slide0">
     <div class="dedicatory-box">
-      <div class="dedicatory-title">Para Oriana Valentina Villarroel Escobar</div>
+      <div class="dedicatory-title">Para: Oriana Valentina Villarroel Escobar</div>
       <div class="dedicatory-subtitle">
-        Este es un espacio creado con cariño, donde cada detalle expresa un sentimiento especial.
-        Explora con calma, deja que las palabras y recuerdos te acaricien el alma.
-
-        Gracias por estar aquí.
+        Bienvenida, Oriana.<br/>
+        Esto que estás por ver es tuyo y sólo tuyo,<br/>
+        única y exclusivamente para ti.<br/><br/>
+        Disfruta cada momento de esta experiencia pensada con todo mi cariño.
       </div>
       <button class="go-btn" onclick="goToSlide1()">Siguiente</button>
     </div>
