@@ -150,17 +150,21 @@
       object-fit: cover;
     }
     .special-message {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
       font-size: 1.23em;
       color: #da2f59;
       background: rgba(255,255,255,0.87);
       padding: 35px 35px 25px 35px;
       border-radius: 22px;
       box-shadow: 0 6px 32px #e59fab77;
-      text-align: center;
       max-width: 600px;
       line-height: 1.6;
       margin: 0 20px;
       white-space: pre-line;
+      min-height: 180px;
     }
     .back-btn {
       position: fixed;
@@ -200,7 +204,7 @@
 
   <div id="heartCorner" class="heart-corner" aria-label="Corazón naranja" title="Corazón naranja" role="img">🧡</div>
 
-  <!-- PRIMERA DIAPOSITIVA -->
+  <!-- Primera página -->
   <div class="slide active" id="slide0">
     <div class="dedicatory-box">
       <div class="dedicatory-title">Para Oriana Valentina Villarroel Escobar</div>
@@ -214,7 +218,7 @@ Gracias por estar aquí.
     </div>
   </div>
 
-  <!-- SEGUNDA DIAPOSITIVA -->
+  <!-- Segunda página -->
   <div class="slide inactive-left" id="slide1">
     <button class="back-btn" id="backBtn1" onclick="goToSlide0()">← Volver</button>
     <div class="info-box">
@@ -230,8 +234,8 @@ recuerdo esa tarde en que caminamos juntos a la orilla del mar; el mundo parecia
       alt="Playa hermosa"
     />
   </div>
-  
-  <!-- TERCERA DIAPOSITIVA / MENSAJE ESPECIAL NUEVO -->
+
+  <!-- Tercera página -->
   <div class="slide inactive-left" id="slide2">
     <button class="back-btn" id="backBtn2" onclick="goToSlide1From2()">← Volver</button>
     <div class="special-message">
