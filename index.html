@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Para ti, con amor y cariño</title>
+  <title>Para Oriana Valentina Villarroel Escobar</title>
   <style>
     body {
       margin: 0;
@@ -22,13 +22,13 @@
       padding: 0 20px;
       box-sizing: border-box;
       display: flex;
-      flex-direction: row;
       align-items: center;
       justify-content: center;
       transition: transform 0.8s ease, opacity 0.8s ease;
       opacity: 0;
       pointer-events: none;
       transform: translateX(100%);
+      z-index: 1;
     }
     .slide.active {
       opacity: 1;
@@ -42,6 +42,50 @@
       transform: translateX(-100%);
       z-index: 1;
     }
+    /* Estilos portada dedicada */
+    .dedicatory-box {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      max-width: 700px;
+      margin-left: 0;
+      padding: 60px 40px 60px 0;
+    }
+    .dedicatory-title {
+      font-size: 2.25em;
+      font-weight: bold;
+      color: #fd5e53;
+      margin-bottom: 0.4em;
+      text-shadow: 0 2px 8px #fff, 0 4px 12px #f6a2;
+      letter-spacing: 0.01em;
+    }
+    .dedicatory-subtitle {
+      font-size: 1.15em;
+      color: #314355;
+      margin-bottom: 2.4em;
+      text-align: left;
+      line-height: 1.6;
+      white-space: pre-line;
+      max-width: 440px;
+    }
+    .go-btn {
+      background: linear-gradient(90deg, #fd5e53, #ffb6b9);
+      color: #fff;
+      border: none;
+      border-radius: 25px;
+      padding: 12px 32px;
+      font-size: 1.08em;
+      font-family: 'Times New Roman', Times, serif;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(252, 95, 139, 0.15);
+      margin-top: 12px;
+      transition: background 0.3s;
+    }
+    .go-btn:hover {
+      background: linear-gradient(90deg, #f6336e, #fecfe9);
+    }
+    /* Corazón emoji naranja */
     .heart-corner {
       position: fixed;
       top: 20px;
@@ -146,16 +190,33 @@
     }
     @media (max-width: 800px) {
       .slide {flex-direction: column;}
-      .info-box {margin-right: 0; margin-bottom: 24px; align-items: center;}
-      .love-header, .love-message {text-align: center;}
+      .dedicatory-box, .info-box {margin-right: 0; margin-bottom: 24px; align-items: center;}
+      .dedicatory-title, .dedicatory-subtitle, .love-header, .love-message {text-align: center;}
       .beach-img {margin-left: 0; max-width: 90vw;}
     }
   </style>
 </head>
 <body>
+
+  <!-- Corazón naranja emoji en esquina superior izquierda solo en la 2da página -->
   <div id="heartCorner" class="heart-corner" aria-label="Corazón naranja" title="Corazón naranja" role="img">🧡</div>
 
-  <div class="slide active" id="slide1">
+  <!-- NUEVA PRIMERA DIAPOSITIVA (PORTADA PARA ORIANA) -->
+  <div class="slide active" id="slide0">
+    <div class="dedicatory-box">
+      <div class="dedicatory-title">Para Oriana Valentina Villarroel Escobar</div>
+      <div class="dedicatory-subtitle">
+Este es un espacio creado con cariño, donde cada detalle expresa un sentimiento especial.
+Explora con calma, deja que las palabras y recuerdos te acaricien el alma.
+
+Gracias por estar aquí.
+      </div>
+      <button class="go-btn" onclick="goToSlide1()">Siguiente</button>
+    </div>
+  </div>
+
+  <!-- SEGUNDA DIAPOSITIVA (originalmente la 1ra) -->
+  <div class="slide inactive-left" id="slide1">
     <div class="info-box">
       <div class="love-header">Para ti, con amor</div>
       <div class="love-message">
@@ -171,7 +232,8 @@
       alt="Playa hermosa"
     />
   </div>
-
+  
+  <!-- TERCERA DIAPOSITIVA / MENSAJE ESPECIAL -->
   <div class="slide inactive-left" id="slide2">
     <button class="back-btn" id="backBtn" onclick="showSlide1()">← Volver</button>
     <div class="special-message">
@@ -180,10 +242,20 @@
   </div>
 
   <script>
+    const slide0 = document.getElementById("slide0");
     const slide1 = document.getElementById("slide1");
     const slide2 = document.getElementById("slide2");
     const backBtn = document.getElementById("backBtn");
     const heartCorner = document.getElementById("heartCorner");
+
+    function goToSlide1() {
+      // Slide0 (dedicatoria) sale, slide1 (inicio con corazón) entra
+      slide0.classList.remove("active");
+      slide0.classList.add("inactive-left");
+      slide1.classList.remove("inactive-left");
+      slide1.classList.add("active");
+      heartCorner.classList.remove("hidden");
+    }
 
     function showSlide2() {
       slide1.classList.remove("active");
