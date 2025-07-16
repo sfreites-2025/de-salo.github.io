@@ -42,15 +42,14 @@
       transform: translateX(-100%);
       z-index: 1;
     }
-    /* Estilos páginas anteriores y botones iguales compartidos */
-    .dedicatory-box, .info-box {
-      max-width: 700px;
-      padding: 60px 40px 60px 0;
+    .dedicatory-box {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
       justify-content: center;
-      margin-right: 60px;
+      max-width: 700px;
+      margin-left: 0;
+      padding: 60px 40px 60px 0;
     }
     .dedicatory-title {
       font-size: 2.25em;
@@ -60,22 +59,71 @@
       text-shadow: 0 2px 8px #fff, 0 4px 12px #f6a2;
       letter-spacing: 0.01em;
     }
-    .dedicatory-subtitle, .love-message, .futbol-message-text, .paris-message-text {
-      font-size: 1.1em;
+    .dedicatory-subtitle {
+      font-size: 1.15em;
       color: #314355;
+      margin-bottom: 2.4em;
+      text-align: left;
       line-height: 1.6;
       white-space: pre-line;
       max-width: 440px;
-      text-align: left;
     }
-    .love-header, .paris-message-title, .futbol-message-title {
-      font-size: 2em;
+    .go-btn {
+      background: linear-gradient(90deg, #fd5e53, #ffb6b9);
+      color: #fff;
+      border: none;
+      border-radius: 25px;
+      padding: 12px 32px;
+      font-size: 1.08em;
+      font-family: 'Times New Roman', Times, serif;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(252, 95, 139, 0.15);
+      margin-top: 12px;
+      transition: background 0.3s;
+    }
+    .go-btn:hover {
+      background: linear-gradient(90deg, #f6336e, #fecfe9);
+    }
+    .heart-corner {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      font-size: 48px;
+      user-select: none;
+      z-index: 20;
+      transition: opacity 0.6s ease;
+      cursor: default;
+    }
+    .heart-corner.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .info-box {
+      max-width: 380px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding-top: 60px;
+      margin-right: 60px;
+    }
+    .love-header {
+      font-size: 2.2em;
       color: #b20e41;
       text-shadow: 0 2px 8px #fff, 0 6px 16px #f6a;
       margin-bottom: 0.3em;
-      font-weight: 600;
+      text-align: left;
     }
-    button {
+    .love-message {
+      font-size: 1.08em;
+      color: #4a3842;
+      margin-bottom: 1.2em;
+      text-align: left;
+      line-height: 1.6;
+      max-width: 400px;
+      white-space: pre-line;
+    }
+    .next-btn {
       background: linear-gradient(90deg, #fd5e53, #ffb6b9);
       color: #fff;
       border: none;
@@ -89,8 +137,109 @@
       margin-left: 2px;
       transition: background 0.3s;
     }
-    button:hover {
+    .next-btn:hover {
       background: linear-gradient(90deg, #f6336e, #fecfe9);
+    }
+    .beach-img {
+      max-width: 60vw;
+      max-height: 65vh;
+      border-radius: 22px;
+      box-shadow: 0 6px 28px #b0d9fc66;
+      display: block;
+      margin-left: 24px;
+      object-fit: cover;
+    }
+    .special-message {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      font-size: 1.23em;
+      color: #da2f59;
+      background: rgba(255,255,255,0.87);
+      padding: 35px 35px 25px 35px;
+      border-radius: 22px;
+      box-shadow: 0 6px 32px #e59fab77;
+      max-width: 600px;
+      line-height: 1.6;
+      margin: 0 20px;
+      white-space: pre-line;
+      min-height: 180px;
+    }
+    /* --- CUARTA PÁGINA PARIS FONDO Y CAJA MENSAJE --- */
+    .paris-slide-bg {
+      background-image: url('https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=80');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      z-index: 2;
+    }
+    .paris-message-box {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      background: rgba(255,255,255,0.91);
+      border-radius: 24px;
+      padding: 36px 36px 30px 36px;
+      box-shadow: 0 8px 36px #351f4625;
+      max-width: 520px;
+      min-height: 260px;
+      margin-left: 0;
+      margin-right: auto;
+    }
+    .paris-message-title {
+      font-size: 1.45em;
+      color: #99603a;
+      font-weight: bold;
+      margin-bottom: 1.1em;
+      letter-spacing: 0.015em;
+    }
+    .paris-message-text {
+      color: #304158;
+      font-size: 1.13em;
+      line-height: 1.7;
+      text-align: left;
+      white-space: pre-line;
+      max-width: 450px;
+    }
+    /* --- QUINTA PÁGINA FUTBOL FONDO Y CAJA MENSAJE --- */
+    .futbol-slide-bg {
+      background-image: url('https://images.unsplash.com/photo-1505843272625-99d5dc1a7f09?auto=format&fit=crop&w=1200&q=80');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      z-index: 2;
+    }
+    .futbol-message-box {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: flex-end;
+      background: rgba(255,255,255,0.85);
+      border-radius: 26px;
+      padding: 36px 36px 30px 36px;
+      box-shadow: 0 8px 34px #234e7e19;
+      max-width: 540px;
+      min-height: 270px;
+      margin-left: auto;
+      margin-right: 0;
+    }
+    .futbol-message-title {
+      font-size: 1.25em;
+      color: #18407c;
+      font-weight: bold;
+      margin-bottom: 0.8em;
+      letter-spacing: 0.01em;
+      text-align: right;
+    }
+    .futbol-message-text {
+      color: #25425f;
+      font-size: 1.11em;
+      line-height: 1.65;
+      text-align: right;
+      white-space: pre-line;
+      max-width: 460px;
     }
     .back-btn {
       position: fixed;
@@ -118,102 +267,20 @@
     .back-btn:hover {
       background: linear-gradient(90deg, #5276cc, #869edc);
     }
-    .beach-img {
-      max-width: 60vw;
-      max-height: 65vh;
-      border-radius: 22px;
-      box-shadow: 0 6px 28px #b0d9fc66;
-      object-fit: cover;
-      margin-left: 24px;
-    }
-    .special-message {
-      font-size: 1.23em;
-      color: #da2f59;
-      background: rgba(255,255,255,0.87);
-      padding: 35px;
-      border-radius: 22px;
-      box-shadow: 0 6px 32px #e59fab77;
-      max-width: 600px;
-      text-align: center;
-      line-height: 1.6;
-      margin: 0 20px;
-      white-space: pre-line;
-      min-height: 180px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    /* Fondo Paris */
-    .paris-slide-bg {
-      background-image: url('https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=80');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      z-index: 2;
-    }
-    .paris-message-box {
-      background: rgba(255,255,255,0.91);
-      border-radius: 24px;
-      padding: 36px;
-      box-shadow: 0 8px 36px #351f4625;
-      max-width: 520px;
-      min-height: 260px;
-      margin-left: 0;
-      margin-right: auto;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: flex-start;
-    }
-    /* Fondo Futbol */
-    .futbol-slide-bg {
-      background-image: url('https://images.unsplash.com/photo-1505843272625-99d5dc1a7f09?auto=format&fit=crop&w=1200&q=80');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      z-index: 2;
-    }
-    .futbol-message-box {
-      background: rgba(255,255,255,0.85);
-      border-radius: 26px;
-      padding: 36px;
-      box-shadow: 0 8px 34px #234e7e19;
-      max-width: 540px;
-      min-height: 270px;
-      margin-left: auto;
-      margin-right: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      align-items: flex-end;
-    }
-    .futbol-message-title {
-      font-size: 1.25em;
-      color: #18407c;
-      font-weight: bold;
-      margin-bottom: 0.8em;
-      letter-spacing: 0.01em;
-      text-align: right;
-    }
-    .futbol-message-text {
-      color: #25425f;
-      font-size: 1.11em;
-      line-height: 1.65;
-      text-align: right;
-      white-space: pre-line;
-      max-width: 460px;
+    .slide .next-btn {
+      position: absolute;
+      bottom: 50px;
+      right: 60px;
     }
     @media (max-width: 1150px) {
       .paris-message-box, .futbol-message-box {max-width: 99vw; padding: 22px;}
     }
     @media (max-width: 900px) {
-      .dedicatory-box, .info-box, .paris-message-box, .futbol-message-box {
-        margin-right: 0;
-        margin-bottom: 8vw;
-        align-items: center;
-        text-align: center !important;
-      }
+      .dedicatory-box, .info-box, .paris-message-box, .futbol-message-box {margin-right: 0; margin-bottom: 8vw; align-items: center;}
+      .dedicatory-title, .dedicatory-subtitle, .love-header, .love-message, .paris-message-title, .paris-message-text, .futbol-message-title, .futbol-message-text {text-align: center!important;}
       .beach-img {margin-left: 0; max-width: 90vw;}
+      .paris-message-box, .futbol-message-box {margin: 0 auto;}
+      .slide .next-btn {right: 20px;}
     }
   </style>
 </head>
@@ -226,22 +293,22 @@
     <div class="dedicatory-box">
       <div class="dedicatory-title">Para Oriana Valentina Villarroel Escobar</div>
       <div class="dedicatory-subtitle">
-        Este es un espacio creado con cariño, donde cada detalle expresa un sentimiento especial.
-        Explora con calma, deja que las palabras y recuerdos te acaricien el alma.
+Este es un espacio creado con cariño, donde cada detalle expresa un sentimiento especial.
+Explora con calma, deja que las palabras y recuerdos te acaricien el alma.
 
-        Gracias por estar aquí.
+Gracias por estar aquí.
       </div>
       <button class="go-btn" onclick="goToSlide1()">Siguiente</button>
     </div>
   </div>
 
-  <!-- Página 2. Playa -->
+  <!-- Página 2. Mensaje Playa -->
   <div class="slide inactive-left" id="slide1">
-    <button class="back-btn visible" id="backBtn1" onclick="goToSlide0()">← Volver</button>
+    <button class="back-btn" id="backBtn1" onclick="goToSlide0()">← Volver</button>
     <div class="info-box">
       <div class="love-header">Para ti, con amor</div>
       <div class="love-message">
-        recuerdo esa tarde en que caminamos juntos a la orilla del mar; el mundo parecia ir pausado, el viento movia tu cabello suavemente y la luz del atardecer iluminaba tus hermosos ojos marrones haciendolos de un intenso color, te veia y eras como la playa; acogedora, calida y llena de magia. Cada ola que llegaba a la arena era como la dulzura de tu risa, el horizonte se extendia tan vasto como el amor que provocabas en mi pecho y la brisa llevaba tu perfume mezclandose como la salitre, haciendome desear que ese momento sea eterno 
+recuerdo esa tarde en que caminamos juntos a la orilla del mar; el mundo parecia ir pausado, el viento movia tu cabello suavemente y la luz del atardecer iluminaba tus hermosos ojos marrones haciendolos de un intenso color, te veia y eras como la playa; acogedora, calida y llena de magia. Cada ola que llegaba a la arena era como la dulzura de tu risa, el horizonte se extendia tan vasto como el amor que provocabas en mi pecho y la brisa llevaba tu perfume mezclandose como la salitre, haciendome desear que ese momento sea eterno 
       </div>
       <button class="next-btn" onclick="goToSlide2()">Siguiente</button>
     </div>
@@ -252,34 +319,34 @@
     />
   </div>
 
-  <!-- Página 3. 28 de cada mes -->
+  <!-- Página 3. Mensaje 28 de cada mes -->
   <div class="slide inactive-left" id="slide2">
     <button class="back-btn" id="backBtn2" onclick="goToSlide1From2()">← Volver</button>
     <div class="special-message">
-      Cada dia 28 vuelvo a repasar tu recuerdo, como si se tratara de una melodia que mi corazon no pudiera olvidar. Me viene a la mente tu voz, tu risa contagiosa y hasta esos detalles unicos que te hacen tan especial, incluso aquellos que solias llamar defectos
+Cada dia 28 vuelvo a repasar tu recuerdo, como si se tratara de una melodia que mi corazon no pudiera olvidar. Me viene a la mente tu voz, tu risa contagiosa y hasta esos detalles unicos que te hacen tan especial, incluso aquellos que solias llamar defectos
     </div>
     <button class="next-btn" onclick="goToSlide3()">Siguiente</button>
   </div>
 
-  <!-- Página 4. París -->
+  <!-- Página 4. París y Copita de Francia -->
   <div class="slide inactive-left paris-slide-bg" id="slide3">
     <button class="back-btn" id="backBtn3" onclick="goToSlide2From3()">← Volver</button>
     <div class="paris-message-box">
       <div class="paris-message-title">Mi copita de Francia</div>
       <div class="paris-message-text">
-        París siempre ha sido conocida como la ciudad de la luz y el amor, pero cuando pensaba en ti, sentía que guardaba dentro de mi corazón un pequeño rincón parisino, único y propio. Eres y serás siempre mi copita de Francia: ese destello elegante y dulce que hace que cualquier momento, por sencillo que sea, se sienta extraordinario. Así como un vino francés deja huella con su fragancia y sabor, tú dejaste en mi vida un encanto imposible de borrar. Pensar en ti es pasear por la ribera del Sena al atardecer, viendo cómo la ciudad se ilumina mientras todo cobra sentido. Porque, como París, eres arte, magia y romanticismo; y yo, afortunado de haber degustado la dicha de quererte.
+París siempre ha sido conocida como la ciudad de la luz y el amor, pero cuando pensaba en ti, sentía que guardaba dentro de mi corazón un pequeño rincón parisino, único y propio. Eres y serás siempre mi copita de Francia: ese destello elegante y dulce que hace que cualquier momento, por sencillo que sea, se sienta extraordinario. Así como un vino francés deja huella con su fragancia y sabor, tú dejaste en mi vida un encanto imposible de borrar. Pensar en ti es pasear por la ribera del Sena al atardecer, viendo cómo la ciudad se ilumina mientras todo cobra sentido. Porque, como París, eres arte, magia y romanticismo; y yo, afortunado de haber degustado la dicha de quererte.
       </div>
     </div>
     <button class="next-btn" onclick="goToSlide4()">Siguiente</button>
   </div>
 
-  <!-- Página 5. Fútbol -->
+  <!-- Página 5. Fútbol y Recuerdo -->
   <div class="slide inactive-left futbol-slide-bg" id="slide4">
     <button class="back-btn" id="backBtn4" onclick="goToSlide3From4()">← Volver</button>
     <div class="futbol-message-box">
       <div class="futbol-message-title">Recuerdos en la cancha</div>
       <div class="futbol-message-text">
-        El fútbol fue mucho más que un juego para mi,y contigo, se convirtió en una cosa que no se puede explicar con simples palabras. Cada vez que entro a la cancha, siento que juego contigo nuevamente, como en aquellas veces que compartimos con el balon, corriendo, soñando y luchando cada vez que el balón ruedaba, Así como aquel partido inolvidable en Fuerte Tiuna y aquellas pruebas en el Caracas, dejo su marca en mi memoria;  tú dejaste en mi vida un legado de alegría y fuerza que nunca se borrara. Eres y serás siempre mi motivo para seguir corriendo tras el balón; Porque, como el fútbol, fuiste magia, entrega y amor en movimiento; y yo, afortunado de haber jugado junto a ti, y pues en la cancha, vuelvo a verte sonreír, a sentir esa energía que me acelera el pulso y me hace amar cada instante bajo el sol y el viento, justo como lo hacías tú.
+El fútbol fue mucho más que un juego para mi,y contigo, se convirtió en una cosa que no se puede explicar con simples palabras. Cada vez que entro a la cancha, siento que juego contigo nuevamente, como en aquellas veces que compartimos con el balon, corriendo, soñando y luchando cada vez que el balón ruedaba, Así como aquel partido inolvidable en Fuerte Tiuna y aquellas pruebas en el Caracas, dejo su marca en mi memoria;  tú dejaste en mi vida un legado de alegría y fuerza que nunca se borrara. Eres y serás siempre mi motivo para seguir corriendo tras el balón; Porque, como el fútbol, fuiste magia, entrega y amor en movimiento; y yo, afortunado de haber jugado junto a ti, y pues en la cancha, vuelvo a verte sonreír, a sentir esa energía que me acelera el pulso y me hace amar cada instante bajo el sol y el viento, justo como lo hacías tú.
       </div>
     </div>
   </div>
