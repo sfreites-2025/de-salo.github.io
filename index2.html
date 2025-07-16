@@ -3,44 +3,55 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Sexta diapositiva - Index2</title>
+  <title>Index2 - Páginas 6 y 7</title>
   <style>
     body, html {
       margin: 0; padding: 0; height: 100%;
       font-family: "Times New Roman", Times, serif;
       overflow: hidden;
-    }
-    body {
-      background: url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1400&q=80') no-repeat center center fixed;
-      background-size: cover;
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      padding: 40px 60px;
-      box-sizing: border-box;
       color: black;
     }
-    .text-container {
-      max-width: 600px;
-      background: rgba(255 255 255 / 0.85);
-      padding: 30px 40px;
-      border-radius: 20px;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.25);
-      text-align: right;
+
+    /* Contenedores comunes */
+    .slide {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      display: flex;
+      align-items: center;
+      padding: 40px 60px;
+      box-sizing: border-box;
       opacity: 0;
-      transform: translateX(30px);
-      animation: fadeSlideIn 1.5s forwards ease-out;
-      animation-delay: 0.3s;
+      pointer-events: none;
+      transition: opacity 0.8s ease;
     }
+    .slide.active {
+      opacity: 1;
+      pointer-events: auto;
+      z-index: 2;
+    }
+    .slide .text-container {
+      border-radius: 20px;
+      padding: 30px 40px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.25);
+      animation: fadeSlideIn 1.5s forwards ease-out;
+      opacity: 0;
+      animation-delay: 0.3s;
+      animation-fill-mode: forwards;
+      font-weight: 400;
+      line-height: 1.6;
+      font-size: 1.15em;
+      background: rgba(255 255 255 / 0.85);
+      max-width: 600px;
+      box-sizing: border-box;
+    }
+
     @keyframes fadeSlideIn {
       to {
         opacity: 1;
-        transform: translateX(0);
-        text-shadow:
-          0 0 6px #f6336e55,
-          1px 1px 3px #00000055;
+        text-shadow: 0 0 6px #f6336e55, 1px 1px 3px #00000055;
       }
     }
+
     h1 {
       margin-top: 0;
       font-weight: 700;
@@ -53,64 +64,173 @@
       0% { color: #444; text-shadow: none; }
       100% { color: #fd5e53; text-shadow: 0 0 20px #fd5e53aa; }
     }
-    p {
-      font-size: 1.15em;
-      line-height: 1.6;
-      white-space: pre-line;
-      font-weight: 400;
+
+    /* --- Página 6 --- */
+    #slide6 {
+      background: url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1400&q=80') no-repeat center center fixed;
+      background-size: cover;
+      justify-content: flex-end;
+      color: black;
+      text-align: right;
     }
-    button.back-btn {
-      background: linear-gradient(90deg, #6a8cd4, #aabffc);
-      color: white;
-      border: none;
+    #slide6 .text-container {
+      /* override for page 6 */
+      max-width: 600px;
+      background: rgba(255 255 255 / 0.85);
       border-radius: 20px;
-      padding: 12px 24px;
-      font-size: 1.1em;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.25);
+      animation-delay: 0.3s;
+      text-align: right;
+    }
+
+    /* --- Página 7 --- */
+    #slide7 {
+      background: url('https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=1400&q=80') no-repeat center center fixed;
+      background-size: cover;
+      justify-content: flex-start;
+      color: #f0f0f0;
+      text-align: left;
+    }
+    #slide7 .text-container {
+      max-width: 650px;
+      background: rgba(0,0,0,0.75);
+      color: #eee;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.9);
+      animation-delay: 0.3s;
+      text-align: left;
+    }
+    /* Animación título página 7 */
+    #slide7 h1 {
+      margin-top: 0;
+      margin-bottom: 1rem;
+      font-size: 2.5em;
+      font-weight: 700;
+      color: #f9d342;
+      letter-spacing: 0.02em;
+      text-shadow: 0 0 12px #f9d342cc;
+      animation: glowPulse 4s infinite alternate ease-in-out;
+    }
+    @keyframes glowPulse {
+      0% {
+        color: #f9d342;
+        text-shadow: 0 0 12px #f9d342cc;
+      }
+      100% {
+        color: #fffd9a;
+        text-shadow: 0 0 20px #fffd9aaa, 0 0 40px #fffbaaaa;
+      }
+    }
+
+    /* Botones comunes */
+    button {
       font-family: "Times New Roman", Times, serif;
+      border: none;
+      border-radius: 25px;
+      padding: 12px 30px;
+      font-size: 1.1em;
       cursor: pointer;
-      box-shadow: 0 3px 8px rgba(60, 90, 150, 0.5);
-      transition: background 0.3s;
       user-select: none;
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      z-index: 10;
+      box-shadow: 0 4px 10px rgba(253, 94, 83, 0.6);
+      background: linear-gradient(90deg, #fd5e53 0%, #ffb6b9 100%);
+      color: white;
+      transition: background 0.3s;
+      margin: 0 10px 0 0;
     }
-    button.back-btn:hover {
-      background: linear-gradient(90deg, #5276cc, #869edc);
+    button:hover {
+      background: linear-gradient(90deg, #f6336e, #fecfe9);
     }
+
+    .buttons-container {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    /* Responsive */
     @media(max-width: 720px){
       body {
-        justify-content: center;
         padding: 20px;
       }
-      .text-container {
+      .slide {
+        padding: 20px;
+        justify-content: center !important;
+      }
+      #slide6 .text-container,
+      #slide7 .text-container {
         max-width: 100%;
-        text-align: center;
+        text-align: center !important;
       }
-      h1 {
-        font-size: 2em;
+      .buttons-container {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 12px;
       }
-      p {
-        font-size: 1em;
+      button {
+        width: 100%;
+        max-width: 300px;
+        margin: 0 0 10px 0;
       }
     }
   </style>
 </head>
 <body>
 
-  <div class="text-container" role="main" aria-label="Texto de la sexta diapositiva">
-    <h1>Reflexiones y Recuerdos</h1>
-    <p>
-      Hay ciudades que despiertan anhelos y noches que se convierten en recuerdos imborrables, pero nada se compara con lo que dicta aquella melodía, después de soñarte y de revivirte muchísimas veces, me di cuenta de que aunque no entienda del todo mi corazón siempre elegirá seguir tus pasos dondequiera que estés.
+  <!-- Página 6 -->
+  <main id="slide6" class="slide active" role="main" aria-label="Sexta diapositiva, reflexiones y recuerdos">
+    <div class="text-container">
+      <h1>Reflexiones y Recuerdos</h1>
+      <p>
+        Hay ciudades que despiertan anhelos y noches que se convierten en recuerdos imborrables, pero nada se compara con lo que dicta aquella melodía, después de soñarte y de revivirte muchísimas veces, me di cuenta de que aunque no entienda del todo mi corazón siempre elegirá seguir tus pasos dondequiera que estés.
 
-      Nadie puede prometer el mañana por eso elijo amarte como si todas las noches fueran la última vez que pudiera recordarte y guardar tu luz entre mis memorias más profundas.
+        Nadie puede prometer el mañana por eso elijo amarte como si todas las noches fueran la última vez que pudiera recordarte y guardar tu luz entre mis memorias más profundas.
 
-      If the world were to end, I'd want to be by your side. I'd want to hold you just for a moment and die with a smile. To live forever with your memory and be able to die in peace, knowing I could walk in heaven.
-    </p>
-  </div>
+        If the world were to end, I'd want to be by your side. I'd want to hold you just for a moment and die with a smile. To live forever with your memory and be able to die in peace, knowing I could walk in heaven.
+      </p>
+      <div class="buttons-container">
+        <button id="toSlide5" onclick="window.location.href='index.html'">← Volver al inicio</button>
+        <button id="toSlide7">Siguiente →</button>
+      </div>
+    </div>
+  </main>
 
-  <button class="back-btn" onclick="window.location.href='index.html'">← Volver al inicio</button>
+  <!-- Página 7 -->
+  <section id="slide7" class="slide" role="main" aria-label="Séptima diapositiva, sobre esfuerzo y dedicación">
+    <div class="text-container">
+      <h1>Esfuerzo y dedicación sin límites</h1>
+      <p>
+        El esfuerzo es la clave para alcanzar cualquier meta en la vida. La dedicación constante, la perseverancia y la voluntad férrea nos impulsan más allá de los límites que creemos tener.
+        
+        No importa cuán difícil sea el camino, cada paso perseverante construye el camino al éxito y a la realización personal.
+
+        El compromiso con nuestros sueños es lo que realmente mueve montañas y transforma imposibles en conquistas palpables.
+
+        Recuerda siempre: no existen límites para quien trabaja con pasión y entrega total.
+      </p>
+      <div class="buttons-container">
+        <button id="backTo6">← Volver</button>
+        <button onclick="alert('Aquí puedes implementar la siguiente página')">Siguiente →</button>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const slide6 = document.getElementById('slide6');
+    const slide7 = document.getElementById('slide7');
+    const toSlide7Btn = document.getElementById('toSlide7');
+    const backTo6Btn = document.getElementById('backTo6');
+
+    toSlide7Btn.addEventListener('click', () => {
+      slide6.classList.remove('active');
+      slide7.classList.add('active');
+      window.scrollTo(0,0);
+    });
+
+    backTo6Btn.addEventListener('click', () => {
+      slide7.classList.remove('active');
+      slide6.classList.add('active');
+      window.scrollTo(0,0);
+    });
+  </script>
 
 </body>
 </html>
