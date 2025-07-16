@@ -5,16 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Sexta diapositiva - Index2</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Times+New+Roman:ital,wght@0,400;0,700;1,400&display=swap');
-
     body, html {
       margin: 0; padding: 0; height: 100%;
       font-family: "Times New Roman", Times, serif;
       overflow: hidden;
     }
-
     body {
-      /* Fondo: imagen de set de música */
       background: url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1400&q=80') no-repeat center center fixed;
       background-size: cover;
       display: flex;
@@ -24,21 +20,18 @@
       box-sizing: border-box;
       color: black;
     }
-
     .text-container {
-      background: rgba(255 255 255 / 0.85);
       max-width: 600px;
+      background: rgba(255 255 255 / 0.85);
       padding: 30px 40px;
       border-radius: 20px;
       box-shadow: 0 8px 16px rgba(0,0,0,0.25);
       text-align: right;
-      /* Animación */
       opacity: 0;
       transform: translateX(30px);
       animation: fadeSlideIn 1.5s forwards ease-out;
       animation-delay: 0.3s;
     }
-
     @keyframes fadeSlideIn {
       to {
         opacity: 1;
@@ -48,29 +41,24 @@
           1px 1px 3px #00000055;
       }
     }
-
     h1 {
       margin-top: 0;
       font-weight: 700;
       font-size: 2.5em;
       letter-spacing: 0.02em;
       margin-bottom: 0.8em;
-      /* Texto animado color suave */
       animation: colorPulse 4s infinite alternate ease-in-out;
     }
-
     @keyframes colorPulse {
       0% { color: #444; text-shadow: none; }
       100% { color: #fd5e53; text-shadow: 0 0 20px #fd5e53aa; }
     }
-
     p {
       font-size: 1.15em;
       line-height: 1.6;
       white-space: pre-line;
       font-weight: 400;
     }
-
     button.back-btn {
       background: linear-gradient(90deg, #6a8cd4, #aabffc);
       color: white;
@@ -91,8 +79,6 @@
     button.back-btn:hover {
       background: linear-gradient(90deg, #5276cc, #869edc);
     }
-
-    /* Responsive */
     @media(max-width: 720px){
       body {
         justify-content: center;
@@ -114,13 +100,13 @@
 <body>
 
   <div class="text-container" role="main" aria-label="Texto de la sexta diapositiva">
-    <h1>Reflexiones y recuerdos</h1>
+    <h1>Reflexiones y Recuerdos</h1>
     <p>
-      Hay ciudades que despiertan anhelos y noches que se convierten en recuerdos imborrables, pero nada se compara con lo que siento cuando pienso en ti después de soñar que debía dejarte ir. En ese mundo efímero, tuve que decirte adiós y me di cuenta de que, aunque no entienda del todo su significado, mi corazón eligió seguir tus pasos dondequiera que estés.
+      Hay ciudades que despiertan anhelos y noches que se convierten en recuerdos imborrables, pero nada se compara con lo que dicta aquella melodía, después de soñarte y de revivirte muchísimas veces, me di cuenta de que aunque no entienda del todo mi corazón siempre elegirá seguir tus pasos dondequiera que estés.
 
-      Eres y serás siempre mi destino favorito, la razón por la que cada instante cobra sentido y cada noche se vuelve única. Nadie puede prometer el mañana, por eso elijo amarte como si cada noche fuera la última vez que pudiera recordarte y guardar tu luz entre mis memorias más profundas.
+      Nadie puede prometer el mañana por eso elijo amarte como si todas las noches fueran la última vez que pudiera recordarte y guardar tu luz entre mis memorias más profundas.
 
-      If the world was ending I’d wanna be next to you. I’d wanna hold you just for a while and die with a smile, To live forever with your memory and be able to die in peace, knowing that I was able to walk in heaven.
+      If the world were to end, I'd want to be by your side. I'd want to hold you just for a moment and die with a smile. To live forever with your memory and be able to die in peace, knowing I could walk in heaven.
     </p>
   </div>
 
