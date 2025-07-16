@@ -3,492 +3,234 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Para Oriana Valentina Villarroel Escobar</title>
+  <title>Index2 - Páginas 6 y 7</title>
   <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      font-family: 'Times New Roman', Times, serif;
-      background: linear-gradient(135deg, #f5d6e1 0%, #c8e0f7 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    body, html {
+      margin: 0; padding: 0; height: 100%;
+      font-family: "Times New Roman", Times, serif;
       overflow: hidden;
-      position: relative;
+      color: black;
     }
+
+    /* Contenedores comunes */
     .slide {
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      width: 100vw; height: 100vh;
-      padding: 0 20px;
-      box-sizing: border-box;
       display: flex;
       align-items: center;
-      justify-content: center;
-      transition: transform 0.8s ease, opacity 0.8s ease;
+      padding: 40px 60px;
+      box-sizing: border-box;
       opacity: 0;
       pointer-events: none;
-      transform: translateX(100%);
-      z-index: 1;
-      flex-wrap: nowrap;
-      flex-direction: row;
+      transition: opacity 0.8s ease;
     }
     .slide.active {
       opacity: 1;
       pointer-events: auto;
-      transform: translateX(0);
       z-index: 2;
     }
-    .slide.inactive-left {
-      opacity: 0;
-      pointer-events: none;
-      transform: translateX(-100%);
-      z-index: 1;
-    }
-    /* Botones comunes */
-    .back-btn {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      background: linear-gradient(90deg, #6a8cd4, #aabffc);
-      color: #fff;
-      border: none;
+    .slide .text-container {
       border-radius: 20px;
-      padding: 10px 20px;
-      font-size: 1em;
-      font-family: 'Times New Roman', Times, serif;
-      cursor: pointer;
-      box-shadow: 0 3px 8px rgba(60, 90, 150, 0.5);
-      transition: background 0.3s;
-      z-index: 10;
-      user-select: none;
+      padding: 30px 40px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.25);
+      animation: fadeSlideIn 1.5s forwards ease-out;
       opacity: 0;
-      pointer-events: none;
-    }
-    .back-btn.visible {
-      opacity: 1;
-      pointer-events: auto;
-    }
-    .back-btn:hover {
-      background: linear-gradient(90deg, #5276cc, #869edc);
-    }
-    button.next-btn {
-      background: linear-gradient(90deg, #fd5e53, #ffb6b9);
-      color: #fff;
-      border: none;
-      border-radius: 25px;
-      padding: 12px 32px;
+      animation-delay: 0.3s;
+      animation-fill-mode: forwards;
+      font-weight: 400;
+      line-height: 1.6;
       font-size: 1.15em;
-      font-family: 'Times New Roman', Times, serif;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(252, 95, 139, 0.18);
-      margin-top: 18px;
-      margin-left: 2px;
-      transition: background 0.3s;
-      position: absolute;
-      bottom: 50px;
-      right: 60px;
-      z-index: 20;
-    }
-    button.next-btn:hover {
-      background: linear-gradient(90deg, #f6336e, #fecfe9);
-    }
-    /* Corazón naranja */
-    .heart-corner {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      font-size: 48px;
-      user-select: none;
-      z-index: 20;
-      cursor: default;
-      transition: opacity 0.5s ease;
-    }
-    .heart-corner.hidden {
-      opacity: 0;
-      pointer-events: none;
-      visibility: hidden;
+      background: rgba(255 255 255 / 0.85);
+      max-width: 600px;
+      box-sizing: border-box;
     }
 
-    /* --- Primera página (bienvenida) --- */
-    #slide0 {
-      background: linear-gradient(120deg, #f9d5e5 0%, #fcefe3 50%, #f7e8f3 100%);
-      flex-direction: column;
-      justify-content: center;
-      padding: 60px 40px;
-      text-align: center;
-    }
-    .dedicatory-box {
-      max-width: 700px;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      margin: 0;
-    }
-    .dedicatory-title {
-      font-size: 2.5em;
-      font-weight: bold;
-      color: #b8325a;
-      margin-bottom: 0.6em;
-      text-shadow: 0 2px 10px #f7b2c4;
-      letter-spacing: 0.01em;
-    }
-    .dedicatory-subtitle {
-      font-size: 1.2em;
-      color: #7a4e65;
-      font-style: italic;
-      line-height: 1.6;
-      white-space: pre-line;
-      animation: fadeInUp 2s ease forwards;
-      max-width: 500px;
-    }
-    .dedicatory-box button.go-btn {
-      margin-top: 40px;
-      padding: 14px 38px;
-      background: linear-gradient(90deg, #d34c6a, #f28ab2);
-      border-radius: 28px;
-      font-weight: bold;
-      box-shadow: 0 6px 14px #f69fc2aa;
-      transition: background 0.3s ease;
-      color: white;
-      cursor: pointer;
-      font-size: 1.1em;
-    }
-    .dedicatory-box button.go-btn:hover {
-      background: linear-gradient(90deg, #f3587a, #f7a2be);
-    }
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
+    @keyframes fadeSlideIn {
       to {
         opacity: 1;
-        transform: translateY(0);
+        text-shadow: 0 0 6px #f6336e55, 1px 1px 3px #00000055;
       }
     }
 
-    /* --- Segunda página: estilo playa tropical y animaciones --- */
-    #slide1 {
-      background: linear-gradient(180deg, #78d5fb 0%, #56c5a5 60%, #ffe291 100%);
-      overflow: hidden;
-      position: relative;
+    h1 {
+      margin-top: 0;
+      font-weight: 700;
+      font-size: 2.5em;
+      letter-spacing: 0.02em;
+      margin-bottom: 0.8em;
+      animation: colorPulse 4s infinite alternate ease-in-out;
     }
-    /* Sol animado */
-    .tropical-sun {
-      position: absolute;
-      top: 13%;
-      left: 65%;
-      width: 130px;
-      height: 130px;
-      background: radial-gradient(circle at 50% 45%, #fff9b3 0%, #ffe97a 60%, #ffc801 100%);
-      border-radius: 50%;
-      box-shadow: 0 0 90px #ffe97a66, 0 0 0 40px #ffe97a22;
-      animation: sunFloat 4s ease-in-out infinite alternate;
-      z-index: 1;
-    }
-    @keyframes sunFloat {
-      from { top: 13%; }
-      to { top: 18%; }
-    }
-    /* Palmas animadas (SVG) */
-    .tropical-palms {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 380px;
-      height: 280px;
-      z-index: 2;
-      pointer-events: none;
-      animation: palmsSway 6s ease-in-out infinite alternate;
-    }
-    @keyframes palmsSway {
-      from { transform: rotate(-2deg) scale(1); }
-      to   { transform: rotate(2deg) scale(1.02); }
-    }
-    /* Olas animadas (SVG) */
-    .tropical-waves {
-      position: absolute;
-      left: 0; right: 0;
-      bottom: 0;
-      width: 100vw;
-      height: 110px;
-      z-index: 3;
-      animation: wavesMove 8s linear infinite;
-    }
-    @keyframes wavesMove {
-      to { background-position-x: 240px; }
-    }
-    /* Texto y caja encima del fondo tropical */
-    .info-box {
-      max-width: 380px;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: flex-start;
-      padding-top: 60px;
-      margin-right: 60px;
-      z-index: 10;
-      background: rgba(255,255,255,0.83);
-      border-radius: 18px;
-      box-shadow: 0 4px 18px #39bbd725;
-      position: relative;
-    }
-    .love-header {
-      font-size: 2.2em;
-      color: #17a89d;
-      text-shadow: 0 2px 8px #fff, 0 6px 16px #acf6f6;
-      margin-bottom: 0.3em;
-      text-align: left;
-    }
-    .love-message {
-      font-size: 1.09em;
-      color: #408f87;
-      margin-bottom: 1.2em;
-      line-height: 1.64;
-      max-width: 400px;
-      white-space: pre-line;
-      text-align: left;
-    }
-    .beach-img {
-      max-width: 60vw;
-      max-height: 65vh;
-      border-radius: 22px;
-      box-shadow: 0 6px 28px #b0d9fc66;
-      object-fit: cover;
-      margin-left: 24px;
-      z-index: 10;
-      position: relative;
+    @keyframes colorPulse {
+      0% { color: #444; text-shadow: none; }
+      100% { color: #fd5e53; text-shadow: 0 0 20px #fd5e53aa; }
     }
 
-    /* (el resto igual) ... */
-    .special-message {
-      font-size: 1.23em;
-      color: #da2f59;
-      background: rgba(255,255,255,0.87);
-      padding: 35px;
-      border-radius: 22px;
-      box-shadow: 0 6px 32px #e59fab77;
-      max-width: 600px;
-      text-align: center;
-      line-height: 1.6;
-      margin: 0 20px;
-      white-space: pre-line;
-      min-height: 180px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    /* --- Página 6 --- */
+    #slide6 {
+      background: url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1400&q=80') no-repeat center center fixed;
+      background-size: cover;
+      justify-content: flex-end;
+      color: black;
+      text-align: right;
     }
-    .paris-slide-bg { /* ... */ }
-    .paris-message-box { /* ... */ }
-    .paris-message-title { /* ... */ }
-    .futbol-slide-bg { /* ... */ }
-    .futbol-message-box { /* ... */ }
-    .futbol-message-title { /* ... */ }
-    .soccer-field-svg { /* ... */ }
-    img { max-width: 100%; height: auto; display: block; }
+    #slide6 .text-container {
+      /* override for page 6 */
+      max-width: 600px;
+      background: rgba(255 255 255 / 0.85);
+      border-radius: 20px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.25);
+      animation-delay: 0.3s;
+      text-align: right;
+    }
+
+    /* --- Página 7 --- */
+    #slide7 {
+      background: url('https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=1400&q=80') no-repeat center center fixed;
+      background-size: cover;
+      justify-content: flex-start;
+      color: #f0f0f0;
+      text-align: left;
+    }
+    #slide7 .text-container {
+      max-width: 650px;
+      background: rgba(0,0,0,0.75);
+      color: #eee;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.9);
+      animation-delay: 0.3s;
+      text-align: left;
+    }
+    /* Animación título página 7 */
+    #slide7 h1 {
+      margin-top: 0;
+      margin-bottom: 1rem;
+      font-size: 2.5em;
+      font-weight: 700;
+      color: #f9d342;
+      letter-spacing: 0.02em;
+      text-shadow: 0 0 12px #f9d342cc;
+      animation: glowPulse 4s infinite alternate ease-in-out;
+    }
+    @keyframes glowPulse {
+      0% {
+        color: #f9d342;
+        text-shadow: 0 0 12px #f9d342cc;
+      }
+      100% {
+        color: #fffd9a;
+        text-shadow: 0 0 20px #fffd9aaa, 0 0 40px #fffbaaaa;
+      }
+    }
+
+    /* Botones comunes */
+    button {
+      font-family: "Times New Roman", Times, serif;
+      border: none;
+      border-radius: 25px;
+      padding: 12px 30px;
+      font-size: 1.1em;
+      cursor: pointer;
+      user-select: none;
+      box-shadow: 0 4px 10px rgba(253, 94, 83, 0.6);
+      background: linear-gradient(90deg, #fd5e53 0%, #ffb6b9 100%);
+      color: white;
+      transition: background 0.3s;
+      margin: 0 10px 0 0;
+    }
+    button:hover {
+      background: linear-gradient(90deg, #f6336e, #fecfe9);
+    }
+
+    .buttons-container {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    /* Responsive */
+    @media(max-width: 720px){
+      body {
+        padding: 20px;
+      }
+      .slide {
+        padding: 20px;
+        justify-content: center !important;
+      }
+      #slide6 .text-container,
+      #slide7 .text-container {
+        max-width: 100%;
+        text-align: center !important;
+      }
+      .buttons-container {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      button {
+        width: 100%;
+        max-width: 300px;
+        margin: 0 0 10px 0;
+      }
+    }
   </style>
 </head>
 <body>
-  <div id="heartCorner" class="heart-corner" aria-label="Corazón naranja" title="Corazón naranja" role="img">🧡</div>
 
-  <!-- Página 1 -->
-  <div class="slide active" id="slide0">
-    <div class="dedicatory-box">
-      <div class="dedicatory-title">Para: Oriana Valentina Villarroel Escobar</div>
-      <div class="dedicatory-subtitle">
-        Bienvenida, Oriana.<br/>
-        Esto que estás por ver es tuyo y sólo tuyo,<br/>
-        única y exclusivamente para ti.<br/><br/>
-        Disfruta cada momento de esta experiencia pensada con todo mi cariño.
-      </div>
-      <button class="go-btn" onclick="goToSlide1()">Siguiente</button>
-    </div>
-  </div>
+  <!-- Página 6 -->
+  <main id="slide6" class="slide active" role="main" aria-label="Sexta diapositiva, reflexiones y recuerdos">
+    <div class="text-container">
+      <h1>Reflexiones y Recuerdos</h1>
+      <p>
+        Hay ciudades que despiertan anhelos y noches que se convierten en recuerdos imborrables, pero nada se compara con lo que dicta aquella melodía, después de soñarte y de revivirte muchísimas veces, me di cuenta de que aunque no entienda del todo mi corazón siempre elegirá seguir tus pasos dondequiera que estés.
 
-  <!-- Página 2 - Playa Tropical con animaciones -->
-  <div class="slide inactive-left" id="slide1">
-    <!-- Sol animado -->
-    <div class="tropical-sun"></div>
-    <!-- Palmas animadas SVG -->
-    <svg class="tropical-palms" viewBox="0 0 380 240" xmlns="http://www.w3.org/2000/svg">
-      <g id="palms">
-        <path d="M80,180 Q50,100 120,60 Q100,160 180,80 Q160,180 250,60 Q210,140 315,110" stroke="#477b56" stroke-width="6" fill="none"/>
-        <path d="M70,110 Q66,86 107,74" stroke="#66ad73" stroke-width="11" fill="none"/>
-        <path d="M170,120 Q170,88 200,78" stroke="#66ad73" stroke-width="10" fill="none"/>
-        <ellipse cx="115" cy="77" rx="19" ry="12" fill="#81e2ac" stroke="#52a47a" stroke-width="3"/>
-        <ellipse cx="215" cy="81" rx="17" ry="11" fill="#81e2ac" stroke="#52a47a" stroke-width="3"/>
-        <ellipse cx="315" cy="102" rx="20" ry="13" fill="#81e2ac" stroke="#52a47a" stroke-width="3"/>
-        <ellipse cx="250" cy="64" rx="15" ry="8" fill="#81e2ac" stroke="#52a47a" stroke-width="2"/>
-      </g>
-    </svg>
-    <!-- Olas animadas SVG -->
-    <svg class="tropical-waves" viewBox="0 0 1440 110" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-      <path d="M0,80 Q180,110 360,80 T720,70 T1080,100 T1440,80 V110H0V80Z" fill="#6cdbe8" opacity="0.7"/>
-      <path d="M0,85 Q200,100 400,85 T800,90 T1200,95 T1440,80 V110H0V85Z" fill="#4acec2" opacity="0.48"/>
-      <path d="M0,100 Q180,110 360,100 T720,95 T1080,105 T1440,100 V110H0V100Z" fill="#62e6ef" opacity="0.56"/>
-    </svg>
-    <button class="back-btn" id="backBtn1" onclick="goToSlide0()">← Volver</button>
-    <div class="info-box">
-      <div class="love-header">Para ti, con amor</div>
-      <div class="love-message">
-        recuerdo esa tarde en que caminamos juntos a la orilla del mar; el mundo parecia ir pausado, el viento movia tu cabello suavemente y la luz del atardecer iluminaba tus hermosos ojos marrones haciendolos de un intenso color, te veia y eras como la playa; acogedora, calida y llena de magia. Cada ola que llegaba a la arena era como la dulzura de tu risa, el horizonte se extendia tan vasto como el amor que provocabas en mi pecho y la brisa llevaba tu perfume mezclandose como la salitre, haciendome desear que ese momento sea eterno 
-      </div>
-      <button class="next-btn" onclick="goToSlide2()">Siguiente</button>
-    </div>
-    <img
-      class="beach-img"
-      src="https://images.pexels.com/photos/457882/pexels-photo-457882.jpeg?auto=compress&cs=tinysrgb&w=900"
-      alt="Playa hermosa"
-    />
-  </div>
+        Nadie puede prometer el mañana por eso elijo amarte como si todas las noches fueran la última vez que pudiera recordarte y guardar tu luz entre mis memorias más profundas.
 
-  <!-- Página 3 -->
-  <div class="slide inactive-left" id="slide2">
-    <button class="back-btn" id="backBtn2" onclick="goToSlide1From2()">← Volver</button>
-    <div class="special-message">
-      Cada dia 28 vuelvo a repasar tu recuerdo, como si se tratara de una melodia que mi corazon no pudiera olvidar. Me viene a la mente tu voz, tu risa contagiosa y hasta esos detalles unicos que te hacen tan especial, incluso aquellos que solias llamar defectos
-    </div>
-    <button class="next-btn" onclick="goToSlide3()">Siguiente</button>
-  </div>
-  <!-- Página 4 -->
-  <div class="slide inactive-left paris-slide-bg" id="slide3">
-    <button class="back-btn" id="backBtn3" onclick="goToSlide2From3()">← Volver</button>
-    <div class="paris-message-box">
-      <div class="paris-message-title">Mi copita de Francia</div>
-      <div class="paris-message-text">
-        París siempre ha sido conocida como la ciudad de la luz y el amor, pero cuando pensaba en ti, sentía que guardaba dentro de mi corazón un pequeño rincón parisino, único y propio. Eres y serás siempre mi copita de Francia: ese destello elegante y dulce que hace que cualquier momento, por sencillo que sea, se sienta extraordinario. Así como un vino francés deja huella con su fragancia y sabor, tú dejaste en mi vida un encanto imposible de borrar. Pensar en ti es pasear por la ribera del Sena al atardecer, viendo cómo la ciudad se ilumina mientras todo cobra sentido. Porque, como París, eres arte, magia y romanticismo; y yo, afortunado de haber degustado la dicha de quererte.
+        If the world were to end, I'd want to be by your side. I'd want to hold you just for a moment and die with a smile. To live forever with your memory and be able to die in peace, knowing I could walk in heaven.
+      </p>
+      <div class="buttons-container">
+        <button id="toSlide5" onclick="window.location.href='index.html'">← Volver al inicio</button>
+        <button id="toSlide7">Siguiente →</button>
       </div>
     </div>
-    <button class="next-btn" onclick="goToSlide4()">Siguiente</button>
-  </div>
-  <!-- Página 5 -->
-  <div class="slide inactive-left futbol-slide-bg" id="slide4">
-    <button class="back-btn" id="backBtn4" onclick="goToSlide3From4()">← Volver</button>
-    <div class="futbol-message-box">
-      <div class="futbol-message-title">Recuerdos en la cancha</div>
-      <div class="futbol-message-text">
-        El fútbol fue mucho más que un juego para mi,y contigo, se convirtió en una cosa que no se puede explicar con simples palabras. Cada vez que entro a la cancha, siento que juego contigo nuevamente, como en aquellas veces que compartimos con el balon, corriendo, soñando y luchando cada vez que el balón ruedaba, Así como aquel partido inolvidable en Fuerte Tiuna y aquellas pruebas en el Caracas, dejo su marca en mi memoria;  tú dejaste en mi vida un legado de alegría y fuerza que nunca se borrara. Eres y serás siempre mi motivo para seguir corriendo tras el balón; Porque, como el fútbol, fuiste magia, entrega y amor en movimiento; y yo, afortunado de haber jugado junto a ti, y pues en la cancha, vuelvo a verte sonreír, a sentir esa energía que me acelera el pulso y me hace amar cada instante bajo el sol y el viento, justo como lo hacías tú.
+  </main>
+
+  <!-- Página 7 -->
+  <section id="slide7" class="slide" role="main" aria-label="Séptima diapositiva, sobre esfuerzo y dedicación">
+    <div class="text-container">
+      <h1>Esfuerzo y dedicación sin límites</h1>
+      <p>
+        El esfuerzo es la clave para alcanzar cualquier meta en la vida. La dedicación constante, la perseverancia y la voluntad férrea nos impulsan más allá de los límites que creemos tener.
+        
+        No importa cuán difícil sea el camino, cada paso perseverante construye el camino al éxito y a la realización personal.
+
+        El compromiso con nuestros sueños es lo que realmente mueve montañas y transforma imposibles en conquistas palpables.
+
+        Recuerda siempre: no existen límites para quien trabaja con pasión y entrega total.
+      </p>
+      <div class="buttons-container">
+        <button id="backTo6">← Volver</button>
+        <button onclick="alert('Aquí puedes implementar la siguiente página')">Siguiente →</button>
       </div>
     </div>
-    <svg class="soccer-field-svg" viewBox="0 0 1150 780" xmlns="http://www.w3.org/2000/svg" aria-label="Dibujo 2D cancha de fútbol" role="img" >
-      <!-- ...SVG cancha de fútbol... -->
-    </svg>
-    <!-- Cambiar botón siguiente para ir a index2.html -->
-    <button class="next-btn" onclick="window.location.href='index2.html'">Siguiente</button>
-  </div>
-<script>
-  const slide0 = document.getElementById("slide0");
-  const slide1 = document.getElementById("slide1");
-  const slide2 = document.getElementById("slide2");
-  const slide3 = document.getElementById("slide3");
-  const slide4 = document.getElementById("slide4");
+  </section>
 
-  const backBtn1 = document.getElementById("backBtn1");
-  const backBtn2 = document.getElementById("backBtn2");
-  const backBtn3 = document.getElementById("backBtn3");
-  const backBtn4 = document.getElementById("backBtn4");
+  <script>
+    const slide6 = document.getElementById('slide6');
+    const slide7 = document.getElementById('slide7');
+    const toSlide7Btn = document.getElementById('toSlide7');
+    const backTo6Btn = document.getElementById('backTo6');
 
-  const heartCorner = document.getElementById("heartCorner");
+    toSlide7Btn.addEventListener('click', () => {
+      slide6.classList.remove('active');
+      slide7.classList.add('active');
+      window.scrollTo(0,0);
+    });
 
-  function goToSlide1() {
-    slide0.classList.remove("active");
-    slide0.classList.add("inactive-left");
-    slide1.classList.remove("inactive-left");
-    slide1.classList.add("active");
-    heartCorner.classList.add("hidden");
-    backBtn1.classList.add("visible");
+    backTo6Btn.addEventListener('click', () => {
+      slide7.classList.remove('active');
+      slide6.classList.add('active');
+      window.scrollTo(0,0);
+    });
+  </script>
 
-    backBtn2.classList.remove("visible");
-    backBtn3.classList.remove("visible");
-    backBtn4.classList.remove("visible");
-  }
-  function goToSlide2() {
-    slide1.classList.remove("active");
-    slide1.classList.add("inactive-left");
-    slide2.classList.remove("inactive-left");
-    slide2.classList.add("active");
-    heartCorner.classList.add("hidden");
-    backBtn2.classList.add("visible");
-
-    backBtn1.classList.remove("visible");
-    backBtn3.classList.remove("visible");
-    backBtn4.classList.remove("visible");
-  }
-  function goToSlide0() {
-    slide1.classList.remove("active");
-    slide1.classList.add("inactive-left");
-    slide0.classList.remove("inactive-left");
-    slide0.classList.add("active");
-    heartCorner.classList.remove("hidden");
-
-    backBtn1.classList.remove("visible");
-    backBtn2.classList.remove("visible");
-    backBtn3.classList.remove("visible");
-    backBtn4.classList.remove("visible");
-  }
-  function goToSlide1From2() {
-    slide2.classList.remove("active");
-    slide2.classList.add("inactive-left");
-    slide1.classList.remove("inactive-left");
-    slide1.classList.add("active");
-    heartCorner.classList.add("hidden");
-    backBtn1.classList.add("visible");
-
-    backBtn2.classList.remove("visible");
-    backBtn3.classList.remove("visible");
-    backBtn4.classList.remove("visible");
-  }
-  function goToSlide3() {
-    slide2.classList.remove("active");
-    slide2.classList.add("inactive-left");
-    slide3.classList.remove("inactive-left");
-    slide3.classList.add("active");
-    heartCorner.classList.add("hidden");
-    backBtn3.classList.add("visible");
-
-    backBtn1.classList.remove("visible");
-    backBtn2.classList.remove("visible");
-    backBtn4.classList.remove("visible");
-  }
-  function goToSlide2From3() {
-    slide3.classList.remove("active");
-    slide3.classList.add("inactive-left");
-    slide2.classList.remove("inactive-left");
-    slide2.classList.add("active");
-    heartCorner.classList.add("hidden");
-    backBtn2.classList.add("visible");
-
-    backBtn1.classList.remove("visible");
-    backBtn3.classList.remove("visible");
-    backBtn4.classList.remove("visible");
-  }
-  function goToSlide4() {
-    slide3.classList.remove("active");
-    slide3.classList.add("inactive-left");
-    slide4.classList.remove("inactive-left");
-    slide4.classList.add("active");
-    heartCorner.classList.add("hidden");
-    backBtn4.classList.add("visible");
-
-    backBtn1.classList.remove("visible");
-    backBtn2.classList.remove("visible");
-    backBtn3.classList.remove("visible");
-  }
-  function goToSlide3From4() {
-    slide4.classList.remove("active");
-    slide4.classList.add("inactive-left");
-    slide3.classList.remove("inactive-left");
-    slide3.classList.add("active");
-    heartCorner.classList.add("hidden");
-    backBtn3.classList.add("visible");
-
-    backBtn1.classList.remove("visible");
-    backBtn2.classList.remove("visible");
-    backBtn4.classList.remove("visible");
-  }
-</script>
 </body>
 </html>
