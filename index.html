@@ -42,7 +42,6 @@
       transform: translateX(-100%);
       z-index: 1;
     }
-    /* Estilos portada dedicada */
     .dedicatory-box {
       display: flex;
       flex-direction: column;
@@ -85,7 +84,6 @@
     .go-btn:hover {
       background: linear-gradient(90deg, #f6336e, #fecfe9);
     }
-    /* Corazón emoji naranja */
     .heart-corner {
       position: fixed;
       top: 20px;
@@ -117,12 +115,13 @@
       text-align: left;
     }
     .love-message {
-      font-size: 1.15em;
+      font-size: 1.08em;
       color: #4a3842;
       margin-bottom: 1.2em;
       text-align: left;
-      line-height: 1.5;
-      max-width: 350px;
+      line-height: 1.6;
+      max-width: 400px;
+      white-space: pre-line;
     }
     .next-btn {
       background: linear-gradient(90deg, #fd5e53, #ffb6b9);
@@ -198,8 +197,6 @@
 </head>
 <body>
 
-  <!-- Corazón naranja emoji en esquina superior izquierda -->
-  <!-- Inicialmente visible, se oculta con JS -->
   <div id="heartCorner" class="heart-corner" aria-label="Corazón naranja" title="Corazón naranja" role="img">🧡</div>
 
   <!-- PRIMERA DIAPOSITIVA (PORTADA PARA ORIANA) -->
@@ -216,15 +213,13 @@ Gracias por estar aquí.
     </div>
   </div>
 
-  <!-- SEGUNDA DIAPOSITIVA (originalmente la 1ra, ahora con botón de volver a slide0) -->
+  <!-- SEGUNDA DIAPOSITIVA -->
   <div class="slide inactive-left" id="slide1">
     <button class="back-btn" id="backBtn1" onclick="goToSlide0()">← Volver</button>
     <div class="info-box">
       <div class="love-header">Para ti, con amor</div>
       <div class="love-message">
-        A veces las palabras se quedan guardadas y el tiempo se encarga de hacerlas más grandes.<br>
-        Esta página es ese pequeño espacio donde quisiera decirte lo que nunca pude, compartir lo que sentí y recordar lo hermoso que fue lo nuestro.<br>
-        Gracias por cada memoria y por el amor que sigue latiendo aquí.
+Recuerdo aquella tarde en que caminamos juntos a la orilla del mar: el mundo parecía haber pausado su ritmo, el viento acariciaba suavemente tu cabello y la luz del atardecer jugaba en tus ojos. Todo estaba en calma, y tú irradiabas una belleza serena y profunda, como esa playa infinita ante nosotros. Te miraba y sentía que eras como la propia playa: acogedora, cálida y llena de magia. Cada ola que llegaba a la arena era como la dulzura de tu risa, el horizonte se extendía tan vasto como el amor que provocabas en mi pecho, y la brisa llevaba tu perfume mezclándose con el salitre, haciéndome desear que ese instante durara para siempre. Como la playa, tienes ese poder de inspirar paz, asombro y un deseo incontrolable de quedarme siempre a tu lado.
       </div>
       <button class="next-btn" onclick="goToSlide2()">Siguiente</button>
     </div>
@@ -235,7 +230,7 @@ Gracias por estar aquí.
     />
   </div>
   
-  <!-- TERCERA DIAPOSITIVA / MENSAJE ESPECIAL (originalmente la 2da) -->
+  <!-- TERCERA DIAPOSITIVA / MENSAJE ESPECIAL -->
   <div class="slide inactive-left" id="slide2">
     <button class="back-btn" id="backBtn2" onclick="goToSlide1From2()">← Volver</button>
     <div class="special-message">
@@ -247,54 +242,48 @@ Gracias por estar aquí.
     const slide0 = document.getElementById("slide0");
     const slide1 = document.getElementById("slide1");
     const slide2 = document.getElementById("slide2");
-    const backBtn1 = document.getElementById("backBtn1"); // Botón de volver en slide1
-    const backBtn2 = document.getElementById("backBtn2"); // Botón de volver en slide2
+    const backBtn1 = document.getElementById("backBtn1");
+    const backBtn2 = document.getElementById("backBtn2");
     const heartCorner = document.getElementById("heartCorner");
 
-    // Inicialmente, el corazón está visible en slide0, luego se oculta al ir a slide1
-    // (Por eso no tiene la clase 'hidden' al inicio en el HTML)
-
-    // Función para ir de slide0 a slide1
     function goToSlide1() {
       slide0.classList.remove("active");
       slide0.classList.add("inactive-left");
       slide1.classList.remove("inactive-left");
       slide1.classList.add("active");
       heartCorner.classList.add("hidden"); // Oculta el corazón al ir a slide1
-      backBtn1.classList.add("visible"); // Muestra el botón de volver en slide1
+      backBtn1.classList.add("visible");
+      backBtn2.classList.remove("visible");
     }
 
-    // Función para ir de slide1 a slide2
     function goToSlide2() {
       slide1.classList.remove("active");
       slide1.classList.add("inactive-left");
       slide2.classList.remove("inactive-left");
       slide2.classList.add("active");
-      heartCorner.classList.add("hidden"); // El corazón ya debería estar oculto, pero se asegura
-      backBtn1.classList.remove("visible"); // Oculta el botón de volver de slide1
-      backBtn2.classList.add("visible"); // Muestra el botón de volver en slide2
+      heartCorner.classList.add("hidden");
+      backBtn1.classList.remove("visible");
+      backBtn2.classList.add("visible");
     }
 
-    // Función para ir de slide1 a slide0 (portada)
     function goToSlide0() {
       slide1.classList.remove("active");
       slide1.classList.add("inactive-left");
       slide0.classList.remove("inactive-left");
       slide0.classList.add("active");
       heartCorner.classList.remove("hidden"); // Muestra el corazón al volver a slide0
-      backBtn1.classList.remove("visible"); // Oculta el botón de volver de slide1
-      backBtn2.classList.remove("visible"); // Asegura que el botón de slide2 esté oculto si venía de ahí
+      backBtn1.classList.remove("visible");
+      backBtn2.classList.remove("visible");
     }
 
-    // Función para ir de slide2 a slide1
     function goToSlide1From2() {
       slide2.classList.remove("active");
       slide2.classList.add("inactive-left");
       slide1.classList.remove("inactive-left");
       slide1.classList.add("active");
-      heartCorner.classList.add("hidden"); // El corazón debe permanecer oculto en slide1
-      backBtn2.classList.remove("visible"); // Oculta el botón de volver de slide2
-      backBtn1.classList.add("visible"); // Muestra el botón de volver en slide1
+      heartCorner.classList.add("hidden"); // El corazón debe estar oculto en slide1
+      backBtn2.classList.remove("visible");
+      backBtn1.classList.add("visible");
     }
   </script>
 </body>
