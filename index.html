@@ -42,205 +42,7 @@
       transform: translateX(-100%);
       z-index: 1;
     }
-    .dedicatory-box {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: center;
-      max-width: 700px;
-      margin-left: 0;
-      padding: 60px 40px 60px 0;
-    }
-    .dedicatory-title {
-      font-size: 2.25em;
-      font-weight: bold;
-      color: #fd5e53;
-      margin-bottom: 0.4em;
-      text-shadow: 0 2px 8px #fff, 0 4px 12px #f6a2;
-      letter-spacing: 0.01em;
-    }
-    .dedicatory-subtitle {
-      font-size: 1.15em;
-      color: #314355;
-      margin-bottom: 2.4em;
-      text-align: left;
-      line-height: 1.6;
-      white-space: pre-line;
-      max-width: 440px;
-    }
-    .go-btn {
-      background: linear-gradient(90deg, #fd5e53, #ffb6b9);
-      color: #fff;
-      border: none;
-      border-radius: 25px;
-      padding: 12px 32px;
-      font-size: 1.08em;
-      font-family: 'Times New Roman', Times, serif;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(252, 95, 139, 0.15);
-      margin-top: 12px;
-      transition: background 0.3s;
-    }
-    .go-btn:hover {
-      background: linear-gradient(90deg, #f6336e, #fecfe9);
-    }
-    .heart-corner {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      font-size: 48px;
-      user-select: none;
-      z-index: 20;
-      transition: opacity 0.6s ease;
-      cursor: default;
-    }
-    .heart-corner.hidden {
-      opacity: 0;
-      pointer-events: none;
-    }
-    .info-box {
-      max-width: 380px;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: flex-start;
-      padding-top: 60px;
-      margin-right: 60px;
-    }
-    .love-header {
-      font-size: 2.2em;
-      color: #b20e41;
-      text-shadow: 0 2px 8px #fff, 0 6px 16px #f6a;
-      margin-bottom: 0.3em;
-      text-align: left;
-    }
-    .love-message {
-      font-size: 1.08em;
-      color: #4a3842;
-      margin-bottom: 1.2em;
-      text-align: left;
-      line-height: 1.6;
-      max-width: 400px;
-      white-space: pre-line;
-    }
-    .next-btn {
-      background: linear-gradient(90deg, #fd5e53, #ffb6b9);
-      color: #fff;
-      border: none;
-      border-radius: 25px;
-      padding: 12px 32px;
-      font-size: 1.15em;
-      font-family: 'Times New Roman', Times, serif;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(252, 95, 139, 0.18);
-      margin-top: 18px;
-      margin-left: 2px;
-      transition: background 0.3s;
-    }
-    .next-btn:hover {
-      background: linear-gradient(90deg, #f6336e, #fecfe9);
-    }
-    .beach-img {
-      max-width: 60vw;
-      max-height: 65vh;
-      border-radius: 22px;
-      box-shadow: 0 6px 28px #b0d9fc66;
-      display: block;
-      margin-left: 24px;
-      object-fit: cover;
-    }
-    .special-message {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      font-size: 1.23em;
-      color: #da2f59;
-      background: rgba(255,255,255,0.87);
-      padding: 35px 35px 25px 35px;
-      border-radius: 22px;
-      box-shadow: 0 6px 32px #e59fab77;
-      max-width: 600px;
-      line-height: 1.6;
-      margin: 0 20px;
-      white-space: pre-line;
-      min-height: 180px;
-    }
-    /* --- CUARTA PÁGINA PARIS FONDO Y CAJA MENSAJE --- */
-    .paris-slide-bg {
-      background-image: url('https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=80');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      z-index: 2;
-    }
-    .paris-message-box {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: flex-start;
-      background: rgba(255,255,255,0.91);
-      border-radius: 24px;
-      padding: 36px 36px 30px 36px;
-      box-shadow: 0 8px 36px #351f4625;
-      max-width: 520px;
-      min-height: 260px;
-      margin-left: 0;
-      margin-right: auto;
-    }
-    .paris-message-title {
-      font-size: 1.45em;
-      color: #99603a;
-      font-weight: bold;
-      margin-bottom: 1.1em;
-      letter-spacing: 0.015em;
-    }
-    .paris-message-text {
-      color: #304158;
-      font-size: 1.13em;
-      line-height: 1.7;
-      text-align: left;
-      white-space: pre-line;
-      max-width: 450px;
-    }
-    /* --- QUINTA PÁGINA FUTBOL FONDO Y CAJA MENSAJE --- */
-    .futbol-slide-bg {
-      background-image: url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      z-index: 2;
-    }
-    .futbol-message-box {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      justify-content: flex-end;
-      background: rgba(255,255,255,0.85);
-      border-radius: 26px;
-      padding: 36px 36px 30px 36px;
-      box-shadow: 0 8px 34px #234e7e19;
-      max-width: 540px;
-      min-height: 270px;
-      margin-left: auto;
-      margin-right: 0;
-    }
-    .futbol-message-title {
-      font-size: 1.25em;
-      color: #18407c;
-      font-weight: bold;
-      margin-bottom: 0.8em;
-      letter-spacing: 0.01em;
-      text-align: right;
-    }
-    .futbol-message-text {
-      color: #25425f;
-      font-size: 1.11em;
-      line-height: 1.65;
-      text-align: right;
-      white-space: pre-line;
-      max-width: 460px;
-    }
+    /* Botones comunes */
     .back-btn {
       position: fixed;
       top: 20px;
@@ -267,20 +69,211 @@
     .back-btn:hover {
       background: linear-gradient(90deg, #5276cc, #869edc);
     }
-    .slide .next-btn {
+    button.next-btn {
+      background: linear-gradient(90deg, #fd5e53, #ffb6b9);
+      color: #fff;
+      border: none;
+      border-radius: 25px;
+      padding: 12px 32px;
+      font-size: 1.15em;
+      font-family: 'Times New Roman', Times, serif;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(252, 95, 139, 0.18);
+      margin-top: 18px;
+      margin-left: 2px;
+      transition: background 0.3s;
       position: absolute;
       bottom: 50px;
       right: 60px;
+      z-index: 20;
     }
+    button.next-btn:hover {
+      background: linear-gradient(90deg, #f6336e, #fecfe9);
+    }
+    /* Corazón naranja */
+    .heart-corner {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      font-size: 48px;
+      user-select: none;
+      z-index: 20;
+      cursor: default;
+      transition: opacity 0.5s ease;
+    }
+    .heart-corner.hidden {
+      opacity: 0;
+      pointer-events: none;
+      visibility: hidden;
+    }
+    /* Primera página */
+    .dedicatory-box {
+      max-width: 700px;
+      padding: 60px 40px 60px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      margin-right: 60px;
+    }
+    .dedicatory-title {
+      font-size: 2.25em;
+      font-weight: bold;
+      color: #fd5e53;
+      margin-bottom: 0.4em;
+      text-shadow: 0 2px 8px #fff, 0 4px 12px #f6a2;
+      letter-spacing: 0.01em;
+    }
+    .dedicatory-subtitle {
+      font-size: 1.15em;
+      color: #314355;
+      margin-bottom: 2.4em;
+      line-height: 1.6;
+      max-width: 440px;
+      white-space: pre-line;
+      text-align: left;
+    }
+    /* Segunda página */
+    .info-box {
+      max-width: 380px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding-top: 60px;
+      margin-right: 60px;
+    }
+    .love-header {
+      font-size: 2.2em;
+      color: #b20e41;
+      text-shadow: 0 2px 8px #fff, 0 6px 16px #f6a;
+      margin-bottom: 0.3em;
+      text-align: left;
+    }
+    .love-message {
+      font-size: 1.08em;
+      color: #4a3842;
+      margin-bottom: 1.2em;
+      line-height: 1.6;
+      max-width: 400px;
+      white-space: pre-line;
+      text-align: left;
+    }
+    .beach-img {
+      max-width: 60vw;
+      max-height: 65vh;
+      border-radius: 22px;
+      box-shadow: 0 6px 28px #b0d9fc66;
+      object-fit: cover;
+      margin-left: 24px;
+    }
+    /* Tercera página */
+    .special-message {
+      font-size: 1.23em;
+      color: #da2f59;
+      background: rgba(255,255,255,0.87);
+      padding: 35px;
+      border-radius: 22px;
+      box-shadow: 0 6px 32px #e59fab77;
+      max-width: 600px;
+      text-align: center;
+      line-height: 1.6;
+      margin: 0 20px;
+      white-space: pre-line;
+      min-height: 180px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    /* Cuarta página París */
+    .paris-slide-bg {
+      background-image: url('https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=80');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      z-index: 2;
+    }
+    .paris-message-box {
+      background: rgba(255,255,255,0.91);
+      border-radius: 24px;
+      padding: 36px;
+      box-shadow: 0 8px 36px #351f4625;
+      max-width: 520px;
+      min-height: 260px;
+      margin-left: 0;
+      margin-right: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      text-align: left;
+      color: #304158;
+      font-size: 1.13em;
+      line-height: 1.7;
+    }
+    .paris-message-title {
+      font-size: 1.45em;
+      color: #99603a;
+      font-weight: bold;
+      margin-bottom: 1.1em;
+      letter-spacing: 0.015em;
+    }
+    /* Quinta página Futbol */
+    .futbol-slide-bg {
+      background-image: url('https://images.unsplash.com/photo-1505843272625-99d5dc1a7f09?auto=format&fit=crop&w=1200&q=80');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      z-index: 2;
+    }
+    .futbol-message-box {
+      background: rgba(255,255,255,0.85);
+      border-radius: 26px;
+      padding: 36px;
+      box-shadow: 0 8px 34px #234e7e19;
+      max-width: 540px;
+      min-height: 270px;
+      margin-left: auto;
+      margin-right: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: flex-end;
+      color: #25425f;
+      font-size: 1.11em;
+      line-height: 1.65;
+      text-align: right;
+      white-space: pre-line;
+    }
+    .futbol-message-title {
+      font-size: 1.25em;
+      color: #18407c;
+      font-weight: bold;
+      margin-bottom: 0.8em;
+      letter-spacing: 0.01em;
+      text-align: right;
+    }
+    /* Responsive */
     @media (max-width: 1150px) {
-      .paris-message-box, .futbol-message-box {max-width: 99vw; padding: 22px;}
+      .paris-message-box, .futbol-message-box {
+        max-width: 99vw;
+        padding: 22px;
+      }
     }
     @media (max-width: 900px) {
-      .dedicatory-box, .info-box, .paris-message-box, .futbol-message-box {margin-right: 0; margin-bottom: 8vw; align-items: center;}
-      .dedicatory-title, .dedicatory-subtitle, .love-header, .love-message, .paris-message-title, .paris-message-text, .futbol-message-title, .futbol-message-text {text-align: center!important;}
-      .beach-img {margin-left: 0; max-width: 90vw;}
-      .paris-message-box, .futbol-message-box {margin: 0 auto;}
-      .slide .next-btn {right: 20px;}
+      .dedicatory-box, .info-box, .paris-message-box, .futbol-message-box {
+        margin-right: 0;
+        margin-bottom: 8vw;
+        align-items: center;
+        text-align: center !important;
+      }
+      .beach-img {
+        margin-left: 0;
+        max-width: 90vw;
+      }
+      .paris-message-box, .futbol-message-box {
+        margin: 0 auto;
+      }
     }
   </style>
 </head>
@@ -288,7 +281,7 @@
 
   <div id="heartCorner" class="heart-corner" aria-label="Corazón naranja" title="Corazón naranja" role="img">🧡</div>
 
-  <!-- Página 1. Portada -->
+  <!-- Página 1 -->
   <div class="slide active" id="slide0">
     <div class="dedicatory-box">
       <div class="dedicatory-title">Para Oriana Valentina Villarroel Escobar</div>
@@ -302,7 +295,7 @@ Gracias por estar aquí.
     </div>
   </div>
 
-  <!-- Página 2. Mensaje Playa -->
+  <!-- Página 2 -->
   <div class="slide inactive-left" id="slide1">
     <button class="back-btn" id="backBtn1" onclick="goToSlide0()">← Volver</button>
     <div class="info-box">
@@ -319,7 +312,7 @@ recuerdo esa tarde en que caminamos juntos a la orilla del mar; el mundo parecia
     />
   </div>
 
-  <!-- Página 3. Mensaje 28 de cada mes -->
+  <!-- Página 3 -->
   <div class="slide inactive-left" id="slide2">
     <button class="back-btn" id="backBtn2" onclick="goToSlide1From2()">← Volver</button>
     <div class="special-message">
@@ -328,7 +321,7 @@ Cada dia 28 vuelvo a repasar tu recuerdo, como si se tratara de una melodia que 
     <button class="next-btn" onclick="goToSlide3()">Siguiente</button>
   </div>
 
-  <!-- Página 4. París y Copita de Francia -->
+  <!-- Página 4 -->
   <div class="slide inactive-left paris-slide-bg" id="slide3">
     <button class="back-btn" id="backBtn3" onclick="goToSlide2From3()">← Volver</button>
     <div class="paris-message-box">
@@ -340,7 +333,7 @@ París siempre ha sido conocida como la ciudad de la luz y el amor, pero cuando 
     <button class="next-btn" onclick="goToSlide4()">Siguiente</button>
   </div>
 
-  <!-- Página 5. Fútbol y Recuerdo -->
+  <!-- Página 5 -->
   <div class="slide inactive-left futbol-slide-bg" id="slide4">
     <button class="back-btn" id="backBtn4" onclick="goToSlide3From4()">← Volver</button>
     <div class="futbol-message-box">
@@ -351,106 +344,107 @@ El fútbol fue mucho más que un juego para mi,y contigo, se convirtió en una c
     </div>
   </div>
 
-  <script>
-    const slide0 = document.getElementById("slide0");
-    const slide1 = document.getElementById("slide1");
-    const slide2 = document.getElementById("slide2");
-    const slide3 = document.getElementById("slide3");
-    const slide4 = document.getElementById("slide4");
-    const backBtn1 = document.getElementById("backBtn1");
-    const backBtn2 = document.getElementById("backBtn2");
-    const backBtn3 = document.getElementById("backBtn3");
-    const backBtn4 = document.getElementById("backBtn4");
-    const heartCorner = document.getElementById("heartCorner");
+<script>
+  const slide0 = document.getElementById("slide0");
+  const slide1 = document.getElementById("slide1");
+  const slide2 = document.getElementById("slide2");
+  const slide3 = document.getElementById("slide3");
+  const slide4 = document.getElementById("slide4");
+  const backBtn1 = document.getElementById("backBtn1");
+  const backBtn2 = document.getElementById("backBtn2");
+  const backBtn3 = document.getElementById("backBtn3");
+  const backBtn4 = document.getElementById("backBtn4");
+  const heartCorner = document.getElementById("heartCorner");
 
-    function goToSlide1() {
-      slide0.classList.remove("active");
-      slide0.classList.add("inactive-left");
-      slide1.classList.remove("inactive-left");
-      slide1.classList.add("active");
-      heartCorner.classList.add("hidden");
-      backBtn1.classList.add("visible");
-      backBtn2.classList.remove("visible");
-      backBtn3.classList.remove("visible");
-      backBtn4.classList.remove("visible");
-    }
-    function goToSlide2() {
-      slide1.classList.remove("active");
-      slide1.classList.add("inactive-left");
-      slide2.classList.remove("inactive-left");
-      slide2.classList.add("active");
-      heartCorner.classList.add("hidden");
-      backBtn1.classList.remove("visible");
-      backBtn2.classList.add("visible");
-      backBtn3.classList.remove("visible");
-      backBtn4.classList.remove("visible");
-    }
-    function goToSlide0() {
-      slide1.classList.remove("active");
-      slide1.classList.add("inactive-left");
-      slide0.classList.remove("inactive-left");
-      slide0.classList.add("active");
-      heartCorner.classList.remove("hidden");
-      backBtn1.classList.remove("visible");
-      backBtn2.classList.remove("visible");
-      backBtn3.classList.remove("visible");
-      backBtn4.classList.remove("visible");
-    }
-    function goToSlide1From2() {
-      slide2.classList.remove("active");
-      slide2.classList.add("inactive-left");
-      slide1.classList.remove("inactive-left");
-      slide1.classList.add("active");
-      heartCorner.classList.add("hidden");
-      backBtn2.classList.remove("visible");
-      backBtn1.classList.add("visible");
-      backBtn3.classList.remove("visible");
-      backBtn4.classList.remove("visible");
-    }
-    function goToSlide3() {
-      slide2.classList.remove("active");
-      slide2.classList.add("inactive-left");
-      slide3.classList.remove("inactive-left");
-      slide3.classList.add("active");
-      heartCorner.classList.add("hidden");
-      backBtn3.classList.add("visible");
-      backBtn2.classList.remove("visible");
-      backBtn1.classList.remove("visible");
-      backBtn4.classList.remove("visible");
-    }
-    function goToSlide2From3() {
-      slide3.classList.remove("active");
-      slide3.classList.add("inactive-left");
-      slide2.classList.remove("inactive-left");
-      slide2.classList.add("active");
-      heartCorner.classList.add("hidden");
-      backBtn3.classList.remove("visible");
-      backBtn2.classList.add("visible");
-      backBtn1.classList.remove("visible");
-      backBtn4.classList.remove("visible");
-    }
-    function goToSlide4() {
-      slide3.classList.remove("active");
-      slide3.classList.add("inactive-left");
-      slide4.classList.remove("inactive-left");
-      slide4.classList.add("active");
-      heartCorner.classList.add("hidden");
-      backBtn4.classList.add("visible");
-      backBtn3.classList.remove("visible");
-      backBtn2.classList.remove("visible");
-      backBtn1.classList.remove("visible");
-    }
-    function goToSlide3From4() {
-      slide4.classList.remove("active");
-      slide4.classList.add("inactive-left");
-      slide3.classList.remove("inactive-left");
-      slide3.classList.add("active");
-      heartCorner.classList.add("hidden");
-      backBtn4.classList.remove("visible");
-      backBtn3.classList.add("visible");
-      backBtn2.classList.remove("visible");
-      backBtn1.classList.remove("visible");
-    }
-  </script>
+  function goToSlide1() {
+    slide0.classList.remove("active");
+    slide0.classList.add("inactive-left");
+    slide1.classList.remove("inactive-left");
+    slide1.classList.add("active");
+    heartCorner.classList.add("hidden");
+    backBtn1.classList.add("visible");
+    backBtn2.classList.remove("visible");
+    backBtn3.classList.remove("visible");
+    backBtn4.classList.remove("visible");
+  }
+  function goToSlide2() {
+    slide1.classList.remove("active");
+    slide1.classList.add("inactive-left");
+    slide2.classList.remove("inactive-left");
+    slide2.classList.add("active");
+    heartCorner.classList.add("hidden");
+    backBtn1.classList.remove("visible");
+    backBtn2.classList.add("visible");
+    backBtn3.classList.remove("visible");
+    backBtn4.classList.remove("visible");
+  }
+  function goToSlide0() {
+    slide1.classList.remove("active");
+    slide1.classList.add("inactive-left");
+    slide0.classList.remove("inactive-left");
+    slide0.classList.add("active");
+    heartCorner.classList.remove("hidden");
+    backBtn1.classList.remove("visible");
+    backBtn2.classList.remove("visible");
+    backBtn3.classList.remove("visible");
+    backBtn4.classList.remove("visible");
+  }
+  function goToSlide1From2() {
+    slide2.classList.remove("active");
+    slide2.classList.add("inactive-left");
+    slide1.classList.remove("inactive-left");
+    slide1.classList.add("active");
+    heartCorner.classList.add("hidden");
+    backBtn2.classList.remove("visible");
+    backBtn1.classList.add("visible");
+    backBtn3.classList.remove("visible");
+    backBtn4.classList.remove("visible");
+  }
+  function goToSlide3() {
+    slide2.classList.remove("active");
+    slide2.classList.add("inactive-left");
+    slide3.classList.remove("inactive-left");
+    slide3.classList.add("active");
+    heartCorner.classList.add("hidden");
+    backBtn3.classList.add("visible");
+    backBtn2.classList.remove("visible");
+    backBtn1.classList.remove("visible");
+    backBtn4.classList.remove("visible");
+  }
+  function goToSlide2From3() {
+    slide3.classList.remove("active");
+    slide3.classList.add("inactive-left");
+    slide2.classList.remove("inactive-left");
+    slide2.classList.add("active");
+    heartCorner.classList.add("hidden");
+    backBtn3.classList.remove("visible");
+    backBtn2.classList.add("visible");
+    backBtn1.classList.remove("visible");
+    backBtn4.classList.remove("visible");
+  }
+  function goToSlide4() {
+    slide3.classList.remove("active");
+    slide3.classList.add("inactive-left");
+    slide4.classList.remove("inactive-left");
+    slide4.classList.add("active");
+    heartCorner.classList.add("hidden");
+    backBtn4.classList.add("visible");
+    backBtn3.classList.remove("visible");
+    backBtn2.classList.remove("visible");
+    backBtn1.classList.remove("visible");
+  }
+  function goToSlide3From4() {
+    slide4.classList.remove("active");
+    slide4.classList.add("inactive-left");
+    slide3.classList.remove("inactive-left");
+    slide3.classList.add("active");
+    heartCorner.classList.add("hidden");
+    backBtn4.classList.remove("visible");
+    backBtn3.classList.add("visible");
+    backBtn2.classList.remove("visible");
+    backBtn1.classList.remove("visible");
+  }
+</script>
+
 </body>
 </html>
