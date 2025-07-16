@@ -109,7 +109,119 @@
       pointer-events: none;
       visibility: hidden;
     }
-    /* Otros estilos omitidos por brevedad (misma estructura y contenido que tienes) */
+    /* Primera página */
+    .dedicatory-box {
+      max-width: 700px;
+      padding: 60px 40px 60px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      margin-right: 60px;
+    }
+    .dedicatory-title {
+      font-size: 2.25em;
+      font-weight: bold;
+      color: #fd5e53;
+      margin-bottom: 0.4em;
+      text-shadow: 0 2px 8px #fff, 0 4px 12px #f6a2;
+      letter-spacing: 0.01em;
+    }
+    .dedicatory-subtitle {
+      font-size: 1.15em;
+      color: #314355;
+      margin-bottom: 2.4em;
+      line-height: 1.6;
+      max-width: 440px;
+      white-space: pre-line;
+      text-align: left;
+    }
+    /* Segunda página */
+    .info-box {
+      max-width: 380px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding-top: 60px;
+      margin-right: 60px;
+    }
+    .love-header {
+      font-size: 2.2em;
+      color: #b20e41;
+      text-shadow: 0 2px 8px #fff, 0 6px 16px #f6a;
+      margin-bottom: 0.3em;
+      text-align: left;
+    }
+    .love-message {
+      font-size: 1.08em;
+      color: #4a3842;
+      margin-bottom: 1.2em;
+      line-height: 1.6;
+      max-width: 400px;
+      white-space: pre-line;
+      text-align: left;
+    }
+    .beach-img {
+      max-width: 60vw;
+      max-height: 65vh;
+      border-radius: 22px;
+      box-shadow: 0 6px 28px #b0d9fc66;
+      object-fit: cover;
+      margin-left: 24px;
+    }
+    /* Tercera página */
+    .special-message {
+      font-size: 1.23em;
+      color: #da2f59;
+      background: rgba(255,255,255,0.87);
+      padding: 35px;
+      border-radius: 22px;
+      box-shadow: 0 6px 32px #e59fab77;
+      max-width: 600px;
+      text-align: center;
+      line-height: 1.6;
+      margin: 0 20px;
+      white-space: pre-line;
+      min-height: 180px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    /* Cuarta página París */
+    .paris-slide-bg {
+      background-image: url('https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=80');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      z-index: 2;
+    }
+    .paris-message-box {
+      background: rgba(255,255,255,0.91);
+      border-radius: 24px;
+      padding: 36px;
+      box-shadow: 0 8px 36px #351f4625;
+      max-width: 520px;
+      min-height: 260px;
+      margin-left: 0;
+      margin-right: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      text-align: left;
+      color: #304158;
+      font-size: 1.13em;
+      line-height: 1.7;
+    }
+    .paris-message-title {
+      font-size: 1.45em;
+      color: #99603a;
+      font-weight: bold;
+      margin-bottom: 1.1em;
+      letter-spacing: 0.015em;
+    }
+    /* Quinta página Futbol con cancha 2D SVG y texto a la derecha */
     .futbol-slide-bg {
       background-color: #4caf50;
       z-index: 2;
@@ -142,32 +254,256 @@
       letter-spacing: 0.01em;
       text-align: right;
     }
+    .soccer-field-svg {
+      width: 520px;
+      max-width: 100vw;
+      height: auto;
+      filter: drop-shadow(0 0 5px rgba(0,0,0,0.3));
+      border-radius: 18px;
+      background: #4caf50;
+      box-shadow: inset 0 0 12px #3a8521;
+    }
+    /* Imágenes responsivas */
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
   </style>
 </head>
 <body>
 
   <div id="heartCorner" class="heart-corner" aria-label="Corazón naranja" title="Corazón naranja" role="img">🧡</div>
 
-  <!-- páginas 0 a 3 no modificadas -->
+  <!-- Página 1 -->
+  <div class="slide active" id="slide0">
+    <div class="dedicatory-box">
+      <div class="dedicatory-title">Para Oriana Valentina Villarroel Escobar</div>
+      <div class="dedicatory-subtitle">
+        Este es un espacio creado con cariño, donde cada detalle expresa un sentimiento especial.
+        Explora con calma, deja que las palabras y recuerdos te acaricien el alma.
 
-  <!-- Página 5 -->
-<div class="slide active futbol-slide-bg" id="slide4" style="background-color: #4caf50;">
-  <button class="back-btn visible" id="backBtn4" onclick="goToSlide3From4()">← Volver</button>
-  <div class="futbol-message-box">
-    <div class="futbol-message-title">Recuerdos en la cancha</div>
-    <div class="futbol-message-text">
-      El fútbol fue mucho más que un juego para mí, y contigo, se convirtió en una cosa que no se puede explicar con simples palabras. Cada vez que entro a la cancha, siento que juego contigo nuevamente, como en aquellas veces que compartimos con el balón, corriendo, soñando y luchando cada vez que el balón rodaba. Así como aquel partido inolvidable en Fuerte Tiuna y aquellas pruebas en el Caracas, dejaron su marca en mi memoria; tú dejaste en mi vida un legado de alegría y fuerza que nunca se borrará. Eres y serás siempre mi motivo para seguir corriendo tras el balón.
+        Gracias por estar aquí.
+      </div>
+      <button class="go-btn" onclick="goToSlide1()">Siguiente</button>
     </div>
   </div>
-  <!-- Aquí cambiaremos el botón "Siguiente" para que salte a index2.html -->
-  <button class="next-btn" onclick="window.location.href='index2.html'">Siguiente</button>
-</div>
+
+  <!-- Página 2 -->
+  <div class="slide inactive-left" id="slide1">
+    <button class="back-btn" id="backBtn1" onclick="goToSlide0()">← Volver</button>
+    <div class="info-box">
+      <div class="love-header">Para ti, con amor</div>
+      <div class="love-message">
+        recuerdo esa tarde en que caminamos juntos a la orilla del mar; el mundo parecia ir pausado, el viento movia tu cabello suavemente y la luz del atardecer iluminaba tus hermosos ojos marrones haciendolos de un intenso color, te veia y eras como la playa; acogedora, calida y llena de magia. Cada ola que llegaba a la arena era como la dulzura de tu risa, el horizonte se extendia tan vasto como el amor que provocabas en mi pecho y la brisa llevaba tu perfume mezclandose como la salitre, haciendome desear que ese momento sea eterno 
+      </div>
+      <button class="next-btn" onclick="goToSlide2()">Siguiente</button>
+    </div>
+    <img
+      class="beach-img"
+      src="https://images.pexels.com/photos/457882/pexels-photo-457882.jpeg?auto=compress&cs=tinysrgb&w=900"
+      alt="Playa hermosa"
+    />
+  </div>
+
+  <!-- Página 3 -->
+  <div class="slide inactive-left" id="slide2">
+    <button class="back-btn" id="backBtn2" onclick="goToSlide1From2()">← Volver</button>
+    <div class="special-message">
+      Cada dia 28 vuelvo a repasar tu recuerdo, como si se tratara de una melodia que mi corazon no pudiera olvidar. Me viene a la mente tu voz, tu risa contagiosa y hasta esos detalles unicos que te hacen tan especial, incluso aquellos que solias llamar defectos
+    </div>
+    <button class="next-btn" onclick="goToSlide3()">Siguiente</button>
+  </div>
+
+  <!-- Página 4 -->
+  <div class="slide inactive-left paris-slide-bg" id="slide3">
+    <button class="back-btn" id="backBtn3" onclick="goToSlide2From3()">← Volver</button>
+    <div class="paris-message-box">
+      <div class="paris-message-title">Mi copita de Francia</div>
+      <div class="paris-message-text">
+        París siempre ha sido conocida como la ciudad de la luz y el amor, pero cuando pensaba en ti, sentía que guardaba dentro de mi corazón un pequeño rincón parisino, único y propio. Eres y serás siempre mi copita de Francia: ese destello elegante y dulce que hace que cualquier momento, por sencillo que sea, se sienta extraordinario. Así como un vino francés deja huella con su fragancia y sabor, tú dejaste en mi vida un encanto imposible de borrar. Pensar en ti es pasear por la ribera del Sena al atardecer, viendo cómo la ciudad se ilumina mientras todo cobra sentido. Porque, como París, eres arte, magia y romanticismo; y yo, afortunado de haber degustado la dicha de quererte.
+      </div>
+    </div>
+    <button class="next-btn" onclick="goToSlide4()">Siguiente</button>
+  </div>
+
+  <!-- Página 5 -->
+  <div class="slide inactive-left futbol-slide-bg" id="slide4">
+    <button class="back-btn" id="backBtn4" onclick="goToSlide3From4()">← Volver</button>
+    <div class="futbol-message-box">
+      <div class="futbol-message-title">Recuerdos en la cancha</div>
+      <div class="futbol-message-text">
+        El fútbol fue mucho más que un juego para mi,y contigo, se convirtió en una cosa que no se puede explicar con simples palabras. Cada vez que entro a la cancha, siento que juego contigo nuevamente, como en aquellas veces que compartimos con el balon, corriendo, soñando y luchando cada vez que el balón ruedaba, Así como aquel partido inolvidable en Fuerte Tiuna y aquellas pruebas en el Caracas, dejo su marca en mi memoria;  tú dejaste en mi vida un legado de alegría y fuerza que nunca se borrara. Eres y serás siempre mi motivo para seguir corriendo tras el balón; Porque, como el fútbol, fuiste magia, entrega y amor en movimiento; y yo, afortunado de haber jugado junto a ti, y pues en la cancha, vuelvo a verte sonreír, a sentir esa energía que me acelera el pulso y me hace amar cada instante bajo el sol y el viento, justo como lo hacías tú.
+      </div>
+    </div>
+    <svg class="soccer-field-svg" viewBox="0 0 1150 780" xmlns="http://www.w3.org/2000/svg" aria-label="Dibujo 2D cancha de fútbol" role="img" >
+      <defs>
+        <pattern id="striped" patternUnits="userSpaceOnUse" width="4" height="4">
+          <rect x="0" y="0" width="4" height="4" fill="transparent" />
+          <path d="M-1,1 l2,-2 M0,4 l4,-4 M3,5 l2,-2" class="stripe" />
+        </pattern>
+        <pattern id="goal" patternUnits="userSpaceOnUse" width="2" height="2">
+          <rect x="0" y="0" width="2" height="2" fill="transparent" />
+          <line x1="0" y1="0" x2="1" y2="0" class="goal-stripe" />
+          <line x1="1" y1="0" x2="1" y2="1" class="goal-stripe" />
+        </pattern>
+      </defs>
+      <style>
+        .turf { fill:#53c653; }
+        .cell-free { fill:#7F7C5D; }
+        .cell-reserved, .cell-free:hover { fill: url(#striped); }
+        .cell-sold { fill: transparent; }
+        .stripe { stroke:#7F7C5D; stroke-width:1; }
+        .line { stroke:#FFFFFF; stroke-width:1.2; fill:none; }
+        .curve { stroke:#FFFFFF; stroke-width:1.2; fill:none; }
+        .dot { stroke:#FFFFFF; fill:#FFFFFF; r:1.5; }
+        .goal { stroke:#FFFFFF; stroke-width:0.75; fill:url(#goal); }
+        .goal-stripe { stroke:#FFFFFF; stroke-width:1; }
+      </style>
+
+      <!-- Campo -->
+      <path d="M 0,0 h1150 v780 h-1150z" class="turf" />
+      <!-- Líneas exteriores -->
+      <polyline points="50,50 1100,50 1100,730 50,730 50,50" class="line" />
+      <!-- Círculo centro -->
+      <circle cx="575" cy="390" r="91.5" class="line" />
+      <!-- Punto central -->
+      <circle cx="575" cy="390" r="7" class="dot" />
+      <!-- Áreas penales -->
+      <polyline points="50,298.4 215,298.4 215,591.6 50,591.6" class="line" />
+      <polyline points="1100,298.4 935,298.4 935,591.6 1100,591.6" class="line" />
+      <!-- Puntos penales -->
+      <circle cx="160" cy="390" r="7" class="dot" />
+      <circle cx="990" cy="390" r="7" class="dot" />
+      <!-- Arcos -->
+      <polyline points="35,353.4 50,353.4 50,426.6 35,426.6" class="goal" />
+      <polyline points="1115,353.4 1100,353.4 1100,426.6 1115,426.6" class="goal" />
+      <!-- Semicírculos -->
+      <path d="M251.5,390 a91.5,91.5 0 0,0 -36.5,-73.4" class="line" />
+      <path d="M251.5,390 a91.5,91.5 0 0,1 -36.5,73.4" class="line" />
+      <path d="M898.5,390 a91.5,91.5 0 0,0 36.5,73.4" class="line" />
+      <path d="M898.5,390 a91.5,91.5 0 0,1 36.5,-73.4" class="line" />
+      <!-- Esquinas -->
+      <path d="M 50 60 Q 60 60 60 50" class="line" />
+      <path d="M 1090 50 Q 1090 60 1100 60" class="line" />
+      <path d="M 50 720 Q 60 720 60 730" class="line" />
+      <path d="M 1090 730 Q 1090 720 1100 720" class="line" />
+    </svg>
+    <!-- Cambiar botón siguiente para ir a index2.html -->
+    <button class="next-btn" onclick="window.location.href='index2.html'">Siguiente</button>
+  </div>
 
 <script>
-  // Aquí defines otras funciones si quieres para la navegación interior del index.html
+  const slide0 = document.getElementById("slide0");
+  const slide1 = document.getElementById("slide1");
+  const slide2 = document.getElementById("slide2");
+  const slide3 = document.getElementById("slide3");
+  const slide4 = document.getElementById("slide4");
+
+  const backBtn1 = document.getElementById("backBtn1");
+  const backBtn2 = document.getElementById("backBtn2");
+  const backBtn3 = document.getElementById("backBtn3");
+  const backBtn4 = document.getElementById("backBtn4");
+
+  const heartCorner = document.getElementById("heartCorner");
+
+  function goToSlide1() {
+    slide0.classList.remove("active");
+    slide0.classList.add("inactive-left");
+    slide1.classList.remove("inactive-left");
+    slide1.classList.add("active");
+    heartCorner.classList.add("hidden");
+    backBtn1.classList.add("visible");
+
+    backBtn2.classList.remove("visible");
+    backBtn3.classList.remove("visible");
+    backBtn4.classList.remove("visible");
+  }
+  function goToSlide2() {
+    slide1.classList.remove("active");
+    slide1.classList.add("inactive-left");
+    slide2.classList.remove("inactive-left");
+    slide2.classList.add("active");
+    heartCorner.classList.add("hidden");
+    backBtn2.classList.add("visible");
+
+    backBtn1.classList.remove("visible");
+    backBtn3.classList.remove("visible");
+    backBtn4.classList.remove("visible");
+  }
+  function goToSlide0() {
+    slide1.classList.remove("active");
+    slide1.classList.add("inactive-left");
+    slide0.classList.remove("inactive-left");
+    slide0.classList.add("active");
+    heartCorner.classList.remove("hidden");
+
+    backBtn1.classList.remove("visible");
+    backBtn2.classList.remove("visible");
+    backBtn3.classList.remove("visible");
+    backBtn4.classList.remove("visible");
+  }
+  function goToSlide1From2() {
+    slide2.classList.remove("active");
+    slide2.classList.add("inactive-left");
+    slide1.classList.remove("inactive-left");
+    slide1.classList.add("active");
+    heartCorner.classList.add("hidden");
+    backBtn1.classList.add("visible");
+
+    backBtn2.classList.remove("visible");
+    backBtn3.classList.remove("visible");
+    backBtn4.classList.remove("visible");
+  }
+  function goToSlide3() {
+    slide2.classList.remove("active");
+    slide2.classList.add("inactive-left");
+    slide3.classList.remove("inactive-left");
+    slide3.classList.add("active");
+    heartCorner.classList.add("hidden");
+    backBtn3.classList.add("visible");
+
+    backBtn1.classList.remove("visible");
+    backBtn2.classList.remove("visible");
+    backBtn4.classList.remove("visible");
+  }
+  function goToSlide2From3() {
+    slide3.classList.remove("active");
+    slide3.classList.add("inactive-left");
+    slide2.classList.remove("inactive-left");
+    slide2.classList.add("active");
+    heartCorner.classList.add("hidden");
+    backBtn2.classList.add("visible");
+
+    backBtn1.classList.remove("visible");
+    backBtn3.classList.remove("visible");
+    backBtn4.classList.remove("visible");
+  }
+  function goToSlide4() {
+    slide3.classList.remove("active");
+    slide3.classList.add("inactive-left");
+    slide4.classList.remove("inactive-left");
+    slide4.classList.add("active");
+    heartCorner.classList.add("hidden");
+    backBtn4.classList.add("visible");
+
+    backBtn1.classList.remove("visible");
+    backBtn2.classList.remove("visible");
+    backBtn3.classList.remove("visible");
+  }
   function goToSlide3From4() {
-    alert('Implementa aquí la función para ir a la página 4 si la tienes.');
+    slide4.classList.remove("active");
+    slide4.classList.add("inactive-left");
+    slide3.classList.remove("inactive-left");
+    slide3.classList.add("active");
+    heartCorner.classList.add("hidden");
+    backBtn3.classList.add("visible");
+
+    backBtn1.classList.remove("visible");
+    backBtn2.classList.remove("visible");
+    backBtn4.classList.remove("visible");
   }
 </script>
+
 </body>
 </html>
