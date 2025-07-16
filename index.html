@@ -45,6 +45,7 @@
       transform: translateX(-100%);
       z-index: 1;
     }
+    /* Botones comunes */
     .back-btn {
       position: fixed;
       top: 20px;
@@ -92,6 +93,7 @@
     button.next-btn:hover {
       background: linear-gradient(90deg, #f6336e, #fecfe9);
     }
+    /* Corazón naranja */
     .heart-corner {
       position: fixed;
       top: 20px;
@@ -107,19 +109,204 @@
       pointer-events: none;
       visibility: hidden;
     }
-    /* Personalizaciones para la página 6 */
-    #slide6 {
-      background-color: black;
-      color: white;
-      flex-direction: column;
-      text-align: center;
-      padding: 60px 40px;
-    }
-    #slide6 div.content-box {
+    /* Primera página */
+    .dedicatory-box {
       max-width: 700px;
-      margin: auto;
-      font-size: 1.2em;
-      line-height: 1.5;
+      padding: 60px 40px 60px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      margin-right: 60px;
+    }
+    .dedicatory-title {
+      font-size: 2.25em;
+      font-weight: bold;
+      color: #fd5e53;
+      margin-bottom: 0.4em;
+      text-shadow: 0 2px 8px #fff, 0 4px 12px #f6a2;
+      letter-spacing: 0.01em;
+    }
+    .dedicatory-subtitle {
+      font-size: 1.15em;
+      color: #314355;
+      margin-bottom: 2.4em;
+      line-height: 1.6;
+      max-width: 440px;
+      white-space: pre-line;
+      text-align: left;
+    }
+    /* Segunda página */
+    .info-box {
+      max-width: 380px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding-top: 60px;
+      margin-right: 60px;
+    }
+    .love-header {
+      font-size: 2.2em;
+      color: #b20e41;
+      text-shadow: 0 2px 8px #fff, 0 6px 16px #f6a;
+      margin-bottom: 0.3em;
+      text-align: left;
+    }
+    .love-message {
+      font-size: 1.08em;
+      color: #4a3842;
+      margin-bottom: 1.2em;
+      line-height: 1.6;
+      max-width: 400px;
+      white-space: pre-line;
+      text-align: left;
+    }
+    .beach-img {
+      max-width: 60vw;
+      max-height: 65vh;
+      border-radius: 22px;
+      box-shadow: 0 6px 28px #b0d9fc66;
+      object-fit: cover;
+      margin-left: 24px;
+    }
+    /* Tercera página */
+    .special-message {
+      font-size: 1.23em;
+      color: #da2f59;
+      background: rgba(255,255,255,0.87);
+      padding: 35px;
+      border-radius: 22px;
+      box-shadow: 0 6px 32px #e59fab77;
+      max-width: 600px;
+      text-align: center;
+      line-height: 1.6;
+      margin: 0 20px;
+      white-space: pre-line;
+      min-height: 180px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    /* Cuarta página París */
+    .paris-slide-bg {
+      background-image: url('https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=80');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      z-index: 2;
+    }
+    .paris-message-box {
+      background: rgba(255,255,255,0.91);
+      border-radius: 24px;
+      padding: 36px;
+      box-shadow: 0 8px 36px #351f4625;
+      max-width: 520px;
+      min-height: 260px;
+      margin-left: 0;
+      margin-right: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      text-align: left;
+      color: #304158;
+      font-size: 1.13em;
+      line-height: 1.7;
+    }
+    .paris-message-title {
+      font-size: 1.45em;
+      color: #99603a;
+      font-weight: bold;
+      margin-bottom: 1.1em;
+      letter-spacing: 0.015em;
+    }
+    /* Quinta página Futbol con cancha 2D SVG y texto a la derecha */
+    .futbol-slide-bg {
+      background-color: #4caf50;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      gap: 40px;
+    }
+    .futbol-message-box {
+      background: rgba(255,255,255,0.9);
+      border-radius: 26px;
+      padding: 32px;
+      box-shadow: 0 8px 34px #234e7e19;
+      max-width: 480px;
+      color: #25425f;
+      font-size: 1.11em;
+      line-height: 1.65;
+      text-align: right;
+      white-space: pre-line;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .futbol-message-title {
+      font-size: 1.3em;
+      color: #18407c;
+      font-weight: bold;
+      margin-bottom: 0.8em;
+      letter-spacing: 0.01em;
+      text-align: right;
+    }
+    .soccer-field-svg {
+      width: 520px;
+      max-width: 100vw;
+      height: auto;
+      filter: drop-shadow(0 0 5px rgba(0,0,0,0.3));
+      border-radius: 18px;
+      background: #4caf50;
+      box-shadow: inset 0 0 12px #3a8521;
+    }
+    /* Sexta página mensaje sin cuadro spotify */
+    .song-msg-only-box {
+      background: rgba(255,255,255,0.92);
+      border-radius: 28px;
+      padding: 38px 38px;
+      min-width: 360px;
+      max-width: 800px;
+      margin: 0 20px;
+      color: #2c2a3c;
+      font-size: 1.12em;
+      line-height: 1.7;
+      text-align: left;
+      box-shadow: 0 8px 32px #a6a6cc55;
+      white-space: pre-line;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .slide5-content {
+      display: flex;
+      gap: 60px;
+      align-items: center;
+      justify-content: center;
+      width: 100vw;
+      max-width: 1200px;
+      padding: 40px;
+      box-sizing: border-box;
+    }
+    @media (max-width: 900px) {
+      .slide5-content {
+        flex-direction: column;
+        padding: 20px;
+        gap: 20px;
+      }
+      .song-msg-only-box {
+        max-width: 90vw;
+        text-align: center;
+      }
+    }
+    /* Imágenes responsivas */
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
     }
   </style>
 </head>
@@ -189,22 +376,71 @@
       </div>
     </div>
     <svg class="soccer-field-svg" viewBox="0 0 1150 780" xmlns="http://www.w3.org/2000/svg" aria-label="Dibujo 2D cancha de fútbol" role="img" >
-      <!-- SVG omitido para brevedad -->
+      <defs>
+        <pattern id="striped" patternUnits="userSpaceOnUse" width="4" height="4">
+          <rect x="0" y="0" width="4" height="4" fill="transparent" />
+          <path d="M-1,1 l2,-2 M0,4 l4,-4 M3,5 l2,-2" class="stripe" />
+        </pattern>
+        <pattern id="goal" patternUnits="userSpaceOnUse" width="2" height="2">
+          <rect x="0" y="0" width="2" height="2" fill="transparent" />
+          <line x1="0" y1="0" x2="1" y2="0" class="goal-stripe" />
+          <line x1="1" y1="0" x2="1" y2="1" class="goal-stripe" />
+        </pattern>
+      </defs>
+      <style>
+        .turf { fill:#53c653; }
+        .cell-free { fill:#7F7C5D; }
+        .cell-reserved, .cell-free:hover { fill: url(#striped); }
+        .cell-sold { fill: transparent; }
+        .stripe { stroke:#7F7C5D; stroke-width:1; }
+        .line { stroke:#FFFFFF; stroke-width:1.2; fill:none; }
+        .curve { stroke:#FFFFFF; stroke-width:1.2; fill:none; }
+        .dot { stroke:#FFFFFF; fill:#FFFFFF; r:1.5; }
+        .goal { stroke:#FFFFFF; stroke-width:0.75; fill:url(#goal); }
+        .goal-stripe { stroke:#FFFFFF; stroke-width:1; }
+      </style>
+
+      <!-- Campo -->
+      <path d="M 0,0 h1150 v780 h-1150z" class="turf" />
+      <!-- Líneas exteriores -->
+      <polyline points="50,50 1100,50 1100,730 50,730 50,50" class="line" />
+      <!-- Círculo centro -->
+      <circle cx="575" cy="390" r="91.5" class="line" />
+      <!-- Punto central -->
+      <circle cx="575" cy="390" r="7" class="dot" />
+      <!-- Áreas penales -->
+      <polyline points="50,298.4 215,298.4 215,591.6 50,591.6" class="line" />
+      <polyline points="1100,298.4 935,298.4 935,591.6 1100,591.6" class="line" />
+      <!-- Puntos penales -->
+      <circle cx="160" cy="390" r="7" class="dot" />
+      <circle cx="990" cy="390" r="7" class="dot" />
+      <!-- Arcos -->
+      <polyline points="35,353.4 50,353.4 50,426.6 35,426.6" class="goal" />
+      <polyline points="1115,353.4 1100,353.4 1100,426.6 1115,426.6" class="goal" />
+      <!-- Semicírculos -->
+      <path d="M251.5,390 a91.5,91.5 0 0,0 -36.5,-73.4" class="line" />
+      <path d="M251.5,390 a91.5,91.5 0 0,1 -36.5,73.4" class="line" />
+      <path d="M898.5,390 a91.5,91.5 0 0,0 36.5,73.4" class="line" />
+      <path d="M898.5,390 a91.5,91.5 0 0,1 36.5,-73.4" class="line" />
+      <!-- Esquinas -->
+      <path d="M 50 60 Q 60 60 60 50" class="line" />
+      <path d="M 1090 50 Q 1090 60 1100 60" class="line" />
+      <path d="M 50 720 Q 60 720 60 730" class="line" />
+      <path d="M 1090 730 Q 1090 720 1100 720" class="line" />
     </svg>
-    <button class="next-btn" onclick="goToSlide6()">Siguiente</button>
   </div>
 
-  <!-- Página 6 limpia y simple -->
-  <div class="slide inactive-left" id="slide6">
+  <!-- Página 6 (nueva, fondo negro) -->
+  <div class="slide inactive-left" id="slide6" style="background-color: black; color: white; flex-direction: column; text-align: center; padding: 60px 40px;">
     <button class="back-btn" id="backBtn6" onclick="goToSlide5From6()">← Volver</button>
-    <div class="content-box">
-      <h1>Página 6 - Fondo Negro</h1>
-      <p>
-        Esta es la nueva página agregada al final con fondo negro.<br />
+    <div style="max-width: 700px; margin: auto;">
+      <h1 style="font-family: 'Times New Roman', Times, serif; margin-bottom: 1rem;">Página Seis - Fondo Negro</h1>
+      <p style="font-size: 1.2em; line-height: 1.5;">
+        Esta es la nueva página agregada al final con fondo negro.
         Aquí puedes colocar el contenido que desees, manteniendo el estilo elegante y sobrio.
       </p>
     </div>
-    <button class="next-btn" onclick="goToSlide7Alert()">Siguiente</button>
+    <button class="next-btn" onclick="goToSlide7Alert()" style="position: fixed; bottom: 50px; right: 60px;">Siguiente</button>
   </div>
 
 <script>
