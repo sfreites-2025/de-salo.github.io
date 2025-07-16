@@ -220,7 +220,7 @@
     }
     /* Quinta página Futbol con cancha 2D SVG y texto a la derecha */
     .futbol-slide-bg {
-      background-color: #4caf50; /* fondo verde para cancha y contraste */
+      background-color: #4caf50;
       z-index: 2;
       display: flex;
       align-items: center;
@@ -251,7 +251,6 @@
       letter-spacing: 0.01em;
       text-align: right;
     }
-    /* Contenedor cancha SVG */
     .soccer-field-svg {
       width: 520px;
       max-width: 100vw;
@@ -261,12 +260,123 @@
       background: #4caf50;
       box-shadow: inset 0 0 12px #3a8521;
     }
-    /* Responsive */
-    @media (max-width: 1150px) {
-      .paris-message-box, .futbol-message-box {
-        max-width: 99vw;
-        padding: 22px;
-      }
+    /* Sexta página Spotify + mensaje */
+    .spotify-card-section {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100vw;
+      max-width: 1400px;
+      gap: 60px;
+    }
+    .spotify-card {
+      background: rgba(14,23,37,0.90);
+      border-radius: 32px;
+      padding: 30px 36px 25px 36px;
+      box-shadow: 0 8px 40px #3a232877;
+      min-width: 340px;
+      width: 350px;
+      max-width: 90vw;
+      color: #fafafe;
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+    .spotify-cover {
+      width: 115px;
+      height: 115px;
+      background: #222;
+      border-radius: 21px;
+      margin-bottom: 22px;
+      margin-left: auto;
+      margin-right: auto;
+      object-fit: cover;
+      display: block;
+    }
+    .spotify-song-title {
+      text-align: center;
+      font-weight: 800;
+      font-size: 1.1em;
+      margin: 9px 0 5px 0;
+      letter-spacing: 0.04em;
+      color: #fff;
+      text-shadow: 0 2px 16px #311a, 0 2px 4px #111a;
+    }
+    .spotify-artist {
+      text-align: center;
+      color: #c7c9d3;
+      font-size: 0.98em;
+      margin-bottom: 13px;
+    }
+    .spotify-bar-bg {
+      width: 100%;
+      height: 9px;
+      background: #36405a;
+      border-radius: 7px;
+      position: relative;
+      margin: 16px 0 6px 0;
+    }
+    .spotify-bar-fg {
+      height: 9px;
+      background: linear-gradient(90deg, #fd5e53 0%, #ffb6b9 100%);
+      border-radius: 7px;
+      width: 40%;
+      position: absolute;
+      top: 0; left: 0;
+      box-shadow: 0 1px 4px #fc5f8b33;
+    }
+    .spotify-txt-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.98em;
+      margin-bottom: 4px;
+      color: #abb2b9;
+    }
+    .spotify-controls {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 22px;
+      margin-top: 8px;
+      margin-bottom: 4px;
+    }
+    .spotify-controls button {
+      background: none;
+      border: none;
+      color: #eee;
+      font-size: 1.6em;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+    .spotify-controls button:hover { color: #fd5e53; }
+    /* Mensaje lado derecho */
+    .song-msg-box {
+      background: rgba(255,255,255,0.92);
+      border-radius: 28px;
+      padding: 38px 38px;
+      min-width: 360px;
+      max-width: 550px;
+      margin-left: 0;
+      margin-right: 0;
+      color: #2c2a3c;
+      font-size: 1.12em;
+      line-height: 1.7;
+      text-align: left;
+      box-shadow: 0 8px 32px #a6a6cc55;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      white-space: pre-line;
+    }
+    .song-msg-box .msg-heading {
+      font-weight: bold;
+      font-size: 1.18em;
+      margin-bottom: 1em;
+      color: #ba3a43;
+    }
+    @media (max-width: 1200px) {
+      .spotify-card-section { flex-direction: column; gap: 34px;}
+      .song-msg-box, .spotify-card {margin: 0 auto;}
+      .song-msg-box {max-width: 95vw;}
       .futbol-slide-bg {
         flex-direction: column;
         padding: 20px;
@@ -278,7 +388,7 @@
       }
     }
     @media (max-width: 900px) {
-      .dedicatory-box, .info-box, .paris-message-box, .futbol-message-box {
+      .dedicatory-box, .info-box, .paris-message-box, .futbol-message-box, .song-msg-box, .spotify-card {
         margin-right: 0;
         margin-bottom: 8vw;
         align-items: center;
@@ -288,7 +398,7 @@
         margin-left: 0;
         max-width: 90vw;
       }
-      .paris-message-box, .futbol-message-box {
+      .paris-message-box, .futbol-message-box, .song-msg-box, .spotify-card {
         margin: 0 auto;
       }
       .futbol-message-box {
@@ -417,16 +527,47 @@ El fútbol fue mucho más que un juego para mi,y contigo, se convirtió en una c
     </svg>
   </div>
 
+  <!-- Página 6 -->
+  <div class="slide inactive-left" id="slide5">
+    <button class="back-btn" id="backBtn5" onclick="goToSlide4From5()">← Volver</button>
+    <div class="spotify-card-section">
+      <div class="spotify-card">
+        <img class="spotify-cover" src="https://i.imgur.com/vEeV2KZ.jpg" alt="Portada Die With a Smile" />
+        <div class="spotify-song-title">Die With A Smile</div>
+        <div class="spotify-artist">Lady Gaga, Bruno Mars</div>
+        <div class="spotify-bar-bg" aria-label="Barra de progreso de la canción">
+          <div class="spotify-bar-fg"></div>
+        </div>
+        <div class="spotify-txt-row"><span>0:10</span><span>4:01</span></div>
+        <div class="spotify-controls" role="group" aria-label="Controles de reproducción">
+          <button title="Anterior">&#9198;</button>
+          <button title="Reproducir">&#9654;</button>
+          <button title="Siguiente">&#9197;</button>
+        </div>
+      </div>
+      <div class="song-msg-box">
+        Hay ciudades que despiertan anhelos y noches que se convierten en recuerdos imborrables, pero nada se compara con lo que siento cuando pienso en ti después de soñar que debía dejarte ir. En ese mundo efímero, tuve que decirte adiós y me di cuenta de que, aunque no entienda del todo su significado, mi corazón eligió seguir tus pasos dondequiera que estés.
+
+        Eres y serás siempre mi destino favorito, la razón por la que cada instante cobra sentido y cada noche se vuelve única. Nadie puede prometer el mañana, por eso elijo amarte como si cada noche fuera la última vez que pudiera recordarte y guardar tu luz entre mis memorias más profundas.
+
+        If the world was ending I’d wanna be next to you. I’d wanna hold you just for a while and die with a smile, To live forever with your memory and be able to die in peace, knowing that I was able to walk in heaven.
+      </div>
+    </div>
+    <button class="next-btn" onclick="goToSlide6()">Siguiente</button>
+  </div>
+
 <script>
   const slide0 = document.getElementById("slide0");
   const slide1 = document.getElementById("slide1");
   const slide2 = document.getElementById("slide2");
   const slide3 = document.getElementById("slide3");
   const slide4 = document.getElementById("slide4");
+  const slide5 = document.getElementById("slide5");
   const backBtn1 = document.getElementById("backBtn1");
   const backBtn2 = document.getElementById("backBtn2");
   const backBtn3 = document.getElementById("backBtn3");
   const backBtn4 = document.getElementById("backBtn4");
+  const backBtn5 = document.getElementById("backBtn5");
   const heartCorner = document.getElementById("heartCorner");
 
   function goToSlide1() {
@@ -439,6 +580,7 @@ El fútbol fue mucho más que un juego para mi,y contigo, se convirtió en una c
     backBtn2.classList.remove("visible");
     backBtn3.classList.remove("visible");
     backBtn4.classList.remove("visible");
+    backBtn5.classList.remove("visible");
   }
   function goToSlide2() {
     slide1.classList.remove("active");
@@ -450,6 +592,7 @@ El fútbol fue mucho más que un juego para mi,y contigo, se convirtió en una c
     backBtn2.classList.add("visible");
     backBtn3.classList.remove("visible");
     backBtn4.classList.remove("visible");
+    backBtn5.classList.remove("visible");
   }
   function goToSlide0() {
     slide1.classList.remove("active");
@@ -461,6 +604,7 @@ El fútbol fue mucho más que un juego para mi,y contigo, se convirtió en una c
     backBtn2.classList.remove("visible");
     backBtn3.classList.remove("visible");
     backBtn4.classList.remove("visible");
+    backBtn5.classList.remove("visible");
   }
   function goToSlide1From2() {
     slide2.classList.remove("active");
@@ -472,6 +616,7 @@ El fútbol fue mucho más que un juego para mi,y contigo, se convirtió en una c
     backBtn1.classList.add("visible");
     backBtn3.classList.remove("visible");
     backBtn4.classList.remove("visible");
+    backBtn5.classList.remove("visible");
   }
   function goToSlide3() {
     slide2.classList.remove("active");
@@ -483,6 +628,7 @@ El fútbol fue mucho más que un juego para mi,y contigo, se convirtió en una c
     backBtn2.classList.remove("visible");
     backBtn1.classList.remove("visible");
     backBtn4.classList.remove("visible");
+    backBtn5.classList.remove("visible");
   }
   function goToSlide2From3() {
     slide3.classList.remove("active");
@@ -494,6 +640,7 @@ El fútbol fue mucho más que un juego para mi,y contigo, se convirtió en una c
     backBtn2.classList.add("visible");
     backBtn1.classList.remove("visible");
     backBtn4.classList.remove("visible");
+    backBtn5.classList.remove("visible");
   }
   function goToSlide4() {
     slide3.classList.remove("active");
@@ -505,6 +652,7 @@ El fútbol fue mucho más que un juego para mi,y contigo, se convirtió en una c
     backBtn3.classList.remove("visible");
     backBtn2.classList.remove("visible");
     backBtn1.classList.remove("visible");
+    backBtn5.classList.remove("visible");
   }
   function goToSlide3From4() {
     slide4.classList.remove("active");
@@ -516,6 +664,34 @@ El fútbol fue mucho más que un juego para mi,y contigo, se convirtió en una c
     backBtn3.classList.add("visible");
     backBtn2.classList.remove("visible");
     backBtn1.classList.remove("visible");
+    backBtn5.classList.remove("visible");
+  }
+  function goToSlide5() {
+    slide4.classList.remove("active");
+    slide4.classList.add("inactive-left");
+    slide5.classList.remove("inactive-left");
+    slide5.classList.add("active");
+    heartCorner.classList.add("hidden");
+    backBtn5.classList.add("visible");
+    backBtn4.classList.remove("visible");
+    backBtn3.classList.remove("visible");
+    backBtn2.classList.remove("visible");
+    backBtn1.classList.remove("visible");
+  }
+  function goToSlide4From5() {
+    slide5.classList.remove("active");
+    slide5.classList.add("inactive-left");
+    slide4.classList.remove("inactive-left");
+    slide4.classList.add("active");
+    heartCorner.classList.add("hidden");
+    backBtn5.classList.remove("visible");
+    backBtn4.classList.add("visible");
+    backBtn3.classList.remove("visible");
+    backBtn2.classList.remove("visible");
+    backBtn1.classList.remove("visible");
+  }
+  function goToSlide6() {
+    alert("No hay sexta página implementada."); 
   }
 </script>
 </body>
