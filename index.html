@@ -203,7 +203,44 @@
       white-space: pre-line;
       max-width: 450px;
     }
-    /* Botones navega */
+    /* --- QUINTA PÁGINA FUTBOL FONDO Y CAJA MENSAJE --- */
+    .futbol-slide-bg {
+      background-image: url('https://images.unsplash.com/photo-1505843272625-99d5dc1a7f09?auto=format&fit=crop&w=1200&q=80');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      z-index: 2;
+    }
+    .futbol-message-box {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: flex-end;
+      background: rgba(255,255,255,0.85);
+      border-radius: 26px;
+      padding: 36px 36px 30px 36px;
+      box-shadow: 0 8px 34px #234e7e19;
+      max-width: 540px;
+      min-height: 270px;
+      margin-left: auto;
+      margin-right: 0;
+    }
+    .futbol-message-title {
+      font-size: 1.25em;
+      color: #18407c;
+      font-weight: bold;
+      margin-bottom: 0.8em;
+      letter-spacing: 0.01em;
+      text-align: right;
+    }
+    .futbol-message-text {
+      color: #25425f;
+      font-size: 1.11em;
+      line-height: 1.65;
+      text-align: right;
+      white-space: pre-line;
+      max-width: 460px;
+    }
     .back-btn {
       position: fixed;
       top: 20px;
@@ -230,14 +267,20 @@
     .back-btn:hover {
       background: linear-gradient(90deg, #5276cc, #869edc);
     }
-    @media (max-width: 1100px) {
-      .paris-message-box {max-width: 99vw; padding: 25px;}
+    .slide .next-btn {
+      position: absolute;
+      bottom: 50px;
+      right: 60px;
     }
-    @media (max-width: 800px) {
-      .slide {flex-direction: column;}
-      .dedicatory-box, .info-box, .paris-message-box {margin-right: 0; margin-bottom: 24px; align-items: center;}
-      .dedicatory-title, .dedicatory-subtitle, .love-header, .love-message, .paris-message-title, .paris-message-text {text-align: center;}
+    @media (max-width: 1150px) {
+      .paris-message-box, .futbol-message-box {max-width: 99vw; padding: 22px;}
+    }
+    @media (max-width: 900px) {
+      .dedicatory-box, .info-box, .paris-message-box, .futbol-message-box {margin-right: 0; margin-bottom: 8vw; align-items: center;}
+      .dedicatory-title, .dedicatory-subtitle, .love-header, .love-message, .paris-message-title, .paris-message-text, .futbol-message-title, .futbol-message-text {text-align: center!important;}
       .beach-img {margin-left: 0; max-width: 90vw;}
+      .paris-message-box, .futbol-message-box {margin: 0 auto;}
+      .slide .next-btn {right: 20px;}
     }
   </style>
 </head>
@@ -245,7 +288,7 @@
 
   <div id="heartCorner" class="heart-corner" aria-label="Corazón naranja" title="Corazón naranja" role="img">🧡</div>
 
-  <!-- 1. Portada -->
+  <!-- Página 1. Portada -->
   <div class="slide active" id="slide0">
     <div class="dedicatory-box">
       <div class="dedicatory-title">Para Oriana Valentina Villarroel Escobar</div>
@@ -259,7 +302,7 @@ Gracias por estar aquí.
     </div>
   </div>
 
-  <!-- 2. Mensaje Playa -->
+  <!-- Página 2. Mensaje Playa -->
   <div class="slide inactive-left" id="slide1">
     <button class="back-btn" id="backBtn1" onclick="goToSlide0()">← Volver</button>
     <div class="info-box">
@@ -276,22 +319,34 @@ recuerdo esa tarde en que caminamos juntos a la orilla del mar; el mundo parecia
     />
   </div>
 
-  <!-- 3. Mensaje 28 de cada mes -->
+  <!-- Página 3. Mensaje 28 de cada mes -->
   <div class="slide inactive-left" id="slide2">
     <button class="back-btn" id="backBtn2" onclick="goToSlide1From2()">← Volver</button>
     <div class="special-message">
 Cada dia 28 vuelvo a repasar tu recuerdo, como si se tratara de una melodia que mi corazon no pudiera olvidar. Me viene a la mente tu voz, tu risa contagiosa y hasta esos detalles unicos que te hacen tan especial, incluso aquellos que solias llamar defectos
     </div>
-    <button class="next-btn" style="position: absolute; bottom: 50px; right: 60px;" onclick="goToSlide3()">Siguiente</button>
+    <button class="next-btn" onclick="goToSlide3()">Siguiente</button>
   </div>
 
-  <!-- 4. París y Copita de Francia -->
+  <!-- Página 4. París y Copita de Francia -->
   <div class="slide inactive-left paris-slide-bg" id="slide3">
     <button class="back-btn" id="backBtn3" onclick="goToSlide2From3()">← Volver</button>
     <div class="paris-message-box">
       <div class="paris-message-title">Mi copita de Francia</div>
       <div class="paris-message-text">
 París siempre ha sido conocida como la ciudad de la luz y el amor, pero cuando pensaba en ti, sentía que guardaba dentro de mi corazón un pequeño rincón parisino, único y propio. Eres y serás siempre mi copita de Francia: ese destello elegante y dulce que hace que cualquier momento, por sencillo que sea, se sienta extraordinario. Así como un vino francés deja huella con su fragancia y sabor, tú dejaste en mi vida un encanto imposible de borrar. Pensar en ti es pasear por la ribera del Sena al atardecer, viendo cómo la ciudad se ilumina mientras todo cobra sentido. Porque, como París, eres arte, magia y romanticismo; y yo, afortunado de haber degustado la dicha de quererte.
+      </div>
+    </div>
+    <button class="next-btn" onclick="goToSlide4()">Siguiente</button>
+  </div>
+
+  <!-- Página 5. Fútbol y Recuerdo -->
+  <div class="slide inactive-left futbol-slide-bg" id="slide4">
+    <button class="back-btn" id="backBtn4" onclick="goToSlide3From4()">← Volver</button>
+    <div class="futbol-message-box">
+      <div class="futbol-message-title">Recuerdos en la cancha</div>
+      <div class="futbol-message-text">
+El fútbol fue mucho más que un juego para mi,y contigo, se convirtió en una cosa que no se puede explicar con simples palabras. Cada vez que entro a la cancha, siento que juego contigo nuevamente, como en aquellas veces que compartimos con el balon, corriendo, soñando y luchando cada vez que el balón ruedaba, Así como aquel partido inolvidable en Fuerte Tiuna y aquellas pruebas en el Caracas, dejo su marca en mi memoria;  tú dejaste en mi vida un legado de alegría y fuerza que nunca se borrara. Eres y serás siempre mi motivo para seguir corriendo tras el balón; Porque, como el fútbol, fuiste magia, entrega y amor en movimiento; y yo, afortunado de haber jugado junto a ti, y pues en la cancha, vuelvo a verte sonreír, a sentir esa energía que me acelera el pulso y me hace amar cada instante bajo el sol y el viento, justo como lo hacías tú.
       </div>
     </div>
   </div>
@@ -301,9 +356,11 @@ París siempre ha sido conocida como la ciudad de la luz y el amor, pero cuando 
     const slide1 = document.getElementById("slide1");
     const slide2 = document.getElementById("slide2");
     const slide3 = document.getElementById("slide3");
+    const slide4 = document.getElementById("slide4");
     const backBtn1 = document.getElementById("backBtn1");
     const backBtn2 = document.getElementById("backBtn2");
     const backBtn3 = document.getElementById("backBtn3");
+    const backBtn4 = document.getElementById("backBtn4");
     const heartCorner = document.getElementById("heartCorner");
 
     function goToSlide1() {
@@ -315,8 +372,8 @@ París siempre ha sido conocida como la ciudad de la luz y el amor, pero cuando 
       backBtn1.classList.add("visible");
       backBtn2.classList.remove("visible");
       backBtn3.classList.remove("visible");
+      backBtn4.classList.remove("visible");
     }
-
     function goToSlide2() {
       slide1.classList.remove("active");
       slide1.classList.add("inactive-left");
@@ -326,8 +383,8 @@ París siempre ha sido conocida como la ciudad de la luz y el amor, pero cuando 
       backBtn1.classList.remove("visible");
       backBtn2.classList.add("visible");
       backBtn3.classList.remove("visible");
+      backBtn4.classList.remove("visible");
     }
-
     function goToSlide0() {
       slide1.classList.remove("active");
       slide1.classList.add("inactive-left");
@@ -337,8 +394,8 @@ París siempre ha sido conocida como la ciudad de la luz y el amor, pero cuando 
       backBtn1.classList.remove("visible");
       backBtn2.classList.remove("visible");
       backBtn3.classList.remove("visible");
+      backBtn4.classList.remove("visible");
     }
-
     function goToSlide1From2() {
       slide2.classList.remove("active");
       slide2.classList.add("inactive-left");
@@ -348,8 +405,8 @@ París siempre ha sido conocida como la ciudad de la luz y el amor, pero cuando 
       backBtn2.classList.remove("visible");
       backBtn1.classList.add("visible");
       backBtn3.classList.remove("visible");
+      backBtn4.classList.remove("visible");
     }
-
     function goToSlide3() {
       slide2.classList.remove("active");
       slide2.classList.add("inactive-left");
@@ -359,8 +416,8 @@ París siempre ha sido conocida como la ciudad de la luz y el amor, pero cuando 
       backBtn3.classList.add("visible");
       backBtn2.classList.remove("visible");
       backBtn1.classList.remove("visible");
+      backBtn4.classList.remove("visible");
     }
-
     function goToSlide2From3() {
       slide3.classList.remove("active");
       slide3.classList.add("inactive-left");
@@ -369,6 +426,29 @@ París siempre ha sido conocida como la ciudad de la luz y el amor, pero cuando 
       heartCorner.classList.add("hidden");
       backBtn3.classList.remove("visible");
       backBtn2.classList.add("visible");
+      backBtn1.classList.remove("visible");
+      backBtn4.classList.remove("visible");
+    }
+    function goToSlide4() {
+      slide3.classList.remove("active");
+      slide3.classList.add("inactive-left");
+      slide4.classList.remove("inactive-left");
+      slide4.classList.add("active");
+      heartCorner.classList.add("hidden");
+      backBtn4.classList.add("visible");
+      backBtn3.classList.remove("visible");
+      backBtn2.classList.remove("visible");
+      backBtn1.classList.remove("visible");
+    }
+    function goToSlide3From4() {
+      slide4.classList.remove("active");
+      slide4.classList.add("inactive-left");
+      slide3.classList.remove("inactive-left");
+      slide3.classList.add("active");
+      heartCorner.classList.add("hidden");
+      backBtn4.classList.remove("visible");
+      backBtn3.classList.add("visible");
+      backBtn2.classList.remove("visible");
       backBtn1.classList.remove("visible");
     }
   </script>
