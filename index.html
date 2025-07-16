@@ -367,12 +367,7 @@
       justify-content: center;
       white-space: pre-line;
     }
-    .song-msg-box .msg-heading {
-      font-weight: bold;
-      font-size: 1.18em;
-      margin-bottom: 1em;
-      color: #ba3a43;
-    }
+    /* Responsive */
     @media (max-width: 1200px) {
       .spotify-card-section { flex-direction: column; gap: 34px;}
       .song-msg-box, .spotify-card {margin: 0 auto;}
@@ -409,152 +404,147 @@
 </head>
 <body>
 
-  <div id="heartCorner" class="heart-corner" aria-label="Corazón naranja" title="Corazón naranja" role="img">🧡</div>
+<div id="heartCorner" class="heart-corner" aria-label="Corazón naranja" title="Corazón naranja" role="img">🧡</div>
 
-  <!-- Página 1 -->
-  <div class="slide active" id="slide0">
-    <div class="dedicatory-box">
-      <div class="dedicatory-title">Para Oriana Valentina Villarroel Escobar</div>
-      <div class="dedicatory-subtitle">
-Este es un espacio creado con cariño, donde cada detalle expresa un sentimiento especial.
-Explora con calma, deja que las palabras y recuerdos te acaricien el alma.
+<!-- Página 1 -->
+<div class="slide active" id="slide0">
+  <div class="dedicatory-box">
+    <div class="dedicatory-title">Para Oriana Valentina Villarroel Escobar</div>
+    <div class="dedicatory-subtitle">
+      Este es un espacio creado con cariño, donde cada detalle expresa un sentimiento especial.
+      Explora con calma, deja que las palabras y recuerdos te acaricien el alma.
 
-Gracias por estar aquí.
-      </div>
-      <button class="go-btn" onclick="goToSlide1()">Siguiente</button>
+      Gracias por estar aquí.
+    </div>
+    <button class="go-btn" onclick="goToSlide1()">Siguiente</button>
+  </div>
+</div>
+
+<!-- Página 2 -->
+<div class="slide inactive-left" id="slide1">
+  <button class="back-btn" id="backBtn1" onclick="goToSlide0()">← Volver</button>
+  <div class="info-box">
+    <div class="love-header">Para ti, con amor</div>
+    <div class="love-message">
+      recuerdo esa tarde en que caminamos juntos a la orilla del mar; el mundo parecia ir pausado, el viento movia tu cabello suavemente y la luz del atardecer iluminaba tus hermosos ojos marrones haciendolos de un intenso color, te veia y eras como la playa; acogedora, calida y llena de magia. Cada ola que llegaba a la arena era como la dulzura de tu risa, el horizonte se extendia tan vasto como el amor que provocabas en mi pecho y la brisa llevaba tu perfume mezclandose como la salitre, haciendome desear que ese momento sea eterno 
+    </div>
+    <button class="next-btn" onclick="goToSlide2()">Siguiente</button>
+  </div>
+  <img
+    class="beach-img"
+    src="https://images.pexels.com/photos/457882/pexels-photo-457882.jpeg?auto=compress&cs=tinysrgb&w=900"
+    alt="Playa hermosa"
+  />
+</div>
+
+<!-- Página 3 -->
+<div class="slide inactive-left" id="slide2">
+  <button class="back-btn" id="backBtn2" onclick="goToSlide1From2()">← Volver</button>
+  <div class="special-message">
+    Cada dia 28 vuelvo a repasar tu recuerdo, como si se tratara de una melodia que mi corazon no pudiera olvidar. Me viene a la mente tu voz, tu risa contagiosa y hasta esos detalles unicos que te hacen tan especial, incluso aquellos que solias llamar defectos
+  </div>
+  <button class="next-btn" onclick="goToSlide3()">Siguiente</button>
+</div>
+
+<!-- Página 4 -->
+<div class="slide inactive-left paris-slide-bg" id="slide3">
+  <button class="back-btn" id="backBtn3" onclick="goToSlide2From3()">← Volver</button>
+  <div class="paris-message-box">
+    <div class="paris-message-title">Mi copita de Francia</div>
+    <div class="paris-message-text">
+      París siempre ha sido conocida como la ciudad de la luz y el amor, pero cuando pensaba en ti, sentía que guardaba dentro de mi corazón un pequeño rincón parisino, único y propio. Eres y serás siempre mi copita de Francia: ese destello elegante y dulce que hace que cualquier momento, por sencillo que sea, se sienta extraordinario. Así como un vino francés deja huella con su fragancia y sabor, tú dejaste en mi vida un encanto imposible de borrar. Pensar en ti es pasear por la ribera del Sena al atardecer, viendo cómo la ciudad se ilumina mientras todo cobra sentido. Porque, como París, eres arte, magia y romanticismo; y yo, afortunado de haber degustado la dicha de quererte.
     </div>
   </div>
+  <button class="next-btn" onclick="goToSlide4()">Siguiente</button>
+</div>
 
-  <!-- Página 2 -->
-  <div class="slide inactive-left" id="slide1">
-    <button class="back-btn" id="backBtn1" onclick="goToSlide0()">← Volver</button>
-    <div class="info-box">
-      <div class="love-header">Para ti, con amor</div>
-      <div class="love-message">
-recuerdo esa tarde en que caminamos juntos a la orilla del mar; el mundo parecia ir pausado, el viento movia tu cabello suavemente y la luz del atardecer iluminaba tus hermosos ojos marrones haciendolos de un intenso color, te veia y eras como la playa; acogedora, calida y llena de magia. Cada ola que llegaba a la arena era como la dulzura de tu risa, el horizonte se extendia tan vasto como el amor que provocabas en mi pecho y la brisa llevaba tu perfume mezclandose como la salitre, haciendome desear que ese momento sea eterno 
-      </div>
-      <button class="next-btn" onclick="goToSlide2()">Siguiente</button>
+<!-- Página 5 -->
+<div class="slide inactive-left futbol-slide-bg" id="slide4">
+  <button class="back-btn" id="backBtn4" onclick="goToSlide3From4()">← Volver</button>
+  <div class="futbol-message-box">
+    <div class="futbol-message-title">Recuerdos en la cancha</div>
+    <div class="futbol-message-text">
+      El fútbol fue mucho más que un juego para mi,y contigo, se convirtió en una cosa que no se puede explicar con simples palabras. Cada vez que entro a la cancha, siento que juego contigo nuevamente, como en aquellas veces que compartimos con el balon, corriendo, soñando y luchando cada vez que el balón ruedaba, Así como aquel partido inolvidable en Fuerte Tiuna y aquellas pruebas en el Caracas, dejo su marca en mi memoria;  tú dejaste en mi vida un legado de alegría y fuerza que nunca se borrara. Eres y serás siempre mi motivo para seguir corriendo tras el balón; Porque, como el fútbol, fuiste magia, entrega y amor en movimiento; y yo, afortunado de haber jugado junto a ti, y pues en la cancha, vuelvo a verte sonreír, a sentir esa energía que me acelera el pulso y me hace amar cada instante bajo el sol y el viento, justo como lo hacías tú.
     </div>
-    <img
-      class="beach-img"
-      src="https://images.pexels.com/photos/457882/pexels-photo-457882.jpeg?auto=compress&cs=tinysrgb&w=900"
-      alt="Playa hermosa"
-    />
   </div>
+  <svg class="soccer-field-svg" viewBox="0 0 1150 780" xmlns="http://www.w3.org/2000/svg" aria-label="Dibujo 2D cancha de fútbol" role="img" >
+    <defs>
+      <pattern id="striped" patternUnits="userSpaceOnUse" width="4" height="4">
+        <rect x="0" y="0" width="4" height="4" fill="transparent" />
+        <path d="M-1,1 l2,-2 M0,4 l4,-4 M3,5 l2,-2" class="stripe" />
+      </pattern>
+      <pattern id="goal" patternUnits="userSpaceOnUse" width="2" height="2">
+        <rect x="0" y="0" width="2" height="2" fill="transparent" />
+        <line x1="0" y1="0" x2="1" y2="0" class="goal-stripe" />
+        <line x1="1" y1="0" x2="1" y2="1" class="goal-stripe" />
+      </pattern>
+    </defs>
+    <style>
+      .turf { fill:#53c653; }
+      .stripe { stroke:#7F7C5D; stroke-width:1; }
+      .line { stroke:#FFFFFF; stroke-width:1.2; fill:none; }
+      .dot { stroke:#FFFFFF; fill:#FFFFFF; r:1.5; }
+      .goal { stroke:#FFFFFF; stroke-width:0.75; fill:url(#goal); }
+    </style>
 
-  <!-- Página 3 -->
-  <div class="slide inactive-left" id="slide2">
-    <button class="back-btn" id="backBtn2" onclick="goToSlide1From2()">← Volver</button>
-    <div class="special-message">
-Cada dia 28 vuelvo a repasar tu recuerdo, como si se tratara de una melodia que mi corazon no pudiera olvidar. Me viene a la mente tu voz, tu risa contagiosa y hasta esos detalles unicos que te hacen tan especial, incluso aquellos que solias llamar defectos
-    </div>
-    <button class="next-btn" onclick="goToSlide3()">Siguiente</button>
-  </div>
+    <!-- Campo -->
+    <path d="M 0,0 h1150 v780 h-1150z" class="turf" />
+    <!-- Líneas exteriores -->
+    <polyline points="50,50 1100,50 1100,730 50,730 50,50" class="line" />
+    <!-- Círculo centro -->
+    <circle cx="575" cy="390" r="91.5" class="line" />
+    <!-- Punto central -->
+    <circle cx="575" cy="390" r="7" class="dot" />
+    <!-- Áreas penales -->
+    <polyline points="50,298.4 215,298.4 215,591.6 50,591.6" class="line" />
+    <polyline points="1100,298.4 935,298.4 935,591.6 1100,591.6" class="line" />
+    <!-- Puntos penales -->
+    <circle cx="160" cy="390" r="7" class="dot" />
+    <circle cx="990" cy="390" r="7" class="dot" />
+    <!-- Arcos -->
+    <polyline points="35,353.4 50,353.4 50,426.6 35,426.6" class="goal" />
+    <polyline points="1115,353.4 1100,353.4 1100,426.6 1115,426.6" class="goal" />
+    <!-- Semicírculos -->
+    <path d="M251.5,390 a91.5,91.5 0 0,0 -36.5,-73.4" class="line" />
+    <path d="M251.5,390 a91.5,91.5 0 0,1 -36.5,73.4" class="line" />
+    <path d="M898.5,390 a91.5,91.5 0 0,0 36.5,73.4" class="line" />
+    <path d="M898.5,390 a91.5,91.5 0 0,1 36.5,-73.4" class="line" />
+    <!-- Esquinas -->
+    <path d="M 50 60 Q 60 60 60 50" class="line" />
+    <path d="M 1090 50 Q 1090 60 1100 60" class="line" />
+    <path d="M 50 720 Q 60 720 60 730" class="line" />
+    <path d="M 1090 730 Q 1090 720 1100 720" class="line" />
+  </svg>
+</div>
 
-  <!-- Página 4 -->
-  <div class="slide inactive-left paris-slide-bg" id="slide3">
-    <button class="back-btn" id="backBtn3" onclick="goToSlide2From3()">← Volver</button>
-    <div class="paris-message-box">
-      <div class="paris-message-title">Mi copita de Francia</div>
-      <div class="paris-message-text">
-París siempre ha sido conocida como la ciudad de la luz y el amor, pero cuando pensaba en ti, sentía que guardaba dentro de mi corazón un pequeño rincón parisino, único y propio. Eres y serás siempre mi copita de Francia: ese destello elegante y dulce que hace que cualquier momento, por sencillo que sea, se sienta extraordinario. Así como un vino francés deja huella con su fragancia y sabor, tú dejaste en mi vida un encanto imposible de borrar. Pensar en ti es pasear por la ribera del Sena al atardecer, viendo cómo la ciudad se ilumina mientras todo cobra sentido. Porque, como París, eres arte, magia y romanticismo; y yo, afortunado de haber degustado la dicha de quererte.
+<!-- Página 6 -->
+<div class="slide inactive-left" id="slide5">
+  <button class="back-btn" id="backBtn5" onclick="goToSlide4From5()">← Volver</button>
+  <div class="spotify-card-section">
+    <div class="spotify-card">
+      <img class="spotify-cover" src="https://i.imgur.com/vEeV2KZ.jpg" alt="Portada Die With a Smile" />
+      <div class="spotify-song-title">Die With A Smile</div>
+      <div class="spotify-artist">Lady Gaga, Bruno Mars</div>
+      <div class="spotify-bar-bg" aria-label="Barra de progreso de la canción">
+        <div class="spotify-bar-fg"></div>
       </div>
-    </div>
-    <button class="next-btn" onclick="goToSlide4()">Siguiente</button>
-  </div>
-
-  <!-- Página 5 -->
-  <div class="slide inactive-left futbol-slide-bg" id="slide4">
-    <button class="back-btn" id="backBtn4" onclick="goToSlide3From4()">← Volver</button>
-    <div class="futbol-message-box">
-      <div class="futbol-message-title">Recuerdos en la cancha</div>
-      <div class="futbol-message-text">
-El fútbol fue mucho más que un juego para mi,y contigo, se convirtió en una cosa que no se puede explicar con simples palabras. Cada vez que entro a la cancha, siento que juego contigo nuevamente, como en aquellas veces que compartimos con el balon, corriendo, soñando y luchando cada vez que el balón ruedaba, Así como aquel partido inolvidable en Fuerte Tiuna y aquellas pruebas en el Caracas, dejo su marca en mi memoria;  tú dejaste en mi vida un legado de alegría y fuerza que nunca se borrara. Eres y serás siempre mi motivo para seguir corriendo tras el balón; Porque, como el fútbol, fuiste magia, entrega y amor en movimiento; y yo, afortunado de haber jugado junto a ti, y pues en la cancha, vuelvo a verte sonreír, a sentir esa energía que me acelera el pulso y me hace amar cada instante bajo el sol y el viento, justo como lo hacías tú.
-      </div>
-    </div>
-    <svg class="soccer-field-svg" viewBox="0 0 1150 780" xmlns="http://www.w3.org/2000/svg" aria-label="Dibujo 2D cancha de fútbol" role="img" >
-      <defs>
-        <pattern id="striped" patternUnits="userSpaceOnUse" width="4" height="4">
-          <rect x="0" y="0" width="4" height="4" fill="transparent" />
-          <path d="M-1,1 l2,-2 M0,4 l4,-4 M3,5 l2,-2" class="stripe" />
-        </pattern>
-        <pattern id="goal" patternUnits="userSpaceOnUse" width="2" height="2">
-          <rect x="0" y="0" width="2" height="2" fill="transparent" />
-          <line x1="0" y1="0" x2="1" y2="0" class="goal-stripe" />
-          <line x1="1" y1="0" x2="1" y2="1" class="goal-stripe" />
-        </pattern>
-      </defs>
-      <style>
-        .turf { fill:#53c653; }
-        .cell-free { fill:#7F7C5D; }
-        .cell-reserved, .cell-free:hover { fill: url(#striped); }
-        .cell-sold { fill: transparent; }
-        .stripe { stroke:#7F7C5D; stroke-width:1; }
-        .line { stroke:#FFFFFF; stroke-width:1.2; fill:none; }
-        .curve { stroke:#FFFFFF; stroke-width:1.2; fill:none; }
-        .dot { stroke:#FFFFFF; fill:#FFFFFF; r:1.5; }
-        .goal { stroke:#FFFFFF; stroke-width:0.75; fill:url(#goal); }
-        .goal-stripe { stroke:#FFFFFF; stroke-width:1; }
-      </style>
-
-      <!-- Campo -->
-      <path d="M 0,0 h1150 v780 h-1150z" class="turf" />
-      <!-- Líneas exteriores -->
-      <polyline points="50,50 1100,50 1100,730 50,730 50,50" class="line" />
-      <!-- Círculo centro -->
-      <circle cx="575" cy="390" r="91.5" class="line" />
-      <!-- Punto central -->
-      <circle cx="575" cy="390" r="7" class="dot" />
-      <!-- Áreas penales -->
-      <polyline points="50,298.4 215,298.4 215,591.6 50,591.6" class="line" />
-      <polyline points="1100,298.4 935,298.4 935,591.6 1100,591.6" class="line" />
-      <!-- Puntos penales -->
-      <circle cx="160" cy="390" r="7" class="dot" />
-      <circle cx="990" cy="390" r="7" class="dot" />
-      <!-- Arcos -->
-      <polyline points="35,353.4 50,353.4 50,426.6 35,426.6" class="goal" />
-      <polyline points="1115,353.4 1100,353.4 1100,426.6 1115,426.6" class="goal" />
-      <!-- Semicírculos -->
-      <path d="M251.5,390 a91.5,91.5 0 0,0 -36.5,-73.4" class="line" />
-      <path d="M251.5,390 a91.5,91.5 0 0,1 -36.5,73.4" class="line" />
-      <path d="M898.5,390 a91.5,91.5 0 0,0 36.5,73.4" class="line" />
-      <path d="M898.5,390 a91.5,91.5 0 0,1 36.5,-73.4" class="line" />
-      <!-- Esquinas -->
-      <path d="M 50 60 Q 60 60 60 50" class="line" />
-      <path d="M 1090 50 Q 1090 60 1100 60" class="line" />
-      <path d="M 50 720 Q 60 720 60 730" class="line" />
-      <path d="M 1090 730 Q 1090 720 1100 720" class="line" />
-    </svg>
-  </div>
-
-  <!-- Página 6 -->
-  <div class="slide inactive-left" id="slide5">
-    <button class="back-btn" id="backBtn5" onclick="goToSlide4From5()">← Volver</button>
-    <div class="spotify-card-section">
-      <div class="spotify-card">
-        <img class="spotify-cover" src="https://i.imgur.com/vEeV2KZ.jpg" alt="Portada Die With a Smile" />
-        <div class="spotify-song-title">Die With A Smile</div>
-        <div class="spotify-artist">Lady Gaga, Bruno Mars</div>
-        <div class="spotify-bar-bg" aria-label="Barra de progreso de la canción">
-          <div class="spotify-bar-fg"></div>
-        </div>
-        <div class="spotify-txt-row"><span>0:10</span><span>4:01</span></div>
-        <div class="spotify-controls" role="group" aria-label="Controles de reproducción">
-          <button title="Anterior">&#9198;</button>
-          <button title="Reproducir">&#9654;</button>
-          <button title="Siguiente">&#9197;</button>
-        </div>
-      </div>
-      <div class="song-msg-box">
-        Hay ciudades que despiertan anhelos y noches que se convierten en recuerdos imborrables, pero nada se compara con lo que siento cuando pienso en ti después de soñar que debía dejarte ir. En ese mundo efímero, tuve que decirte adiós y me di cuenta de que, aunque no entienda del todo su significado, mi corazón eligió seguir tus pasos dondequiera que estés.
-
-        Eres y serás siempre mi destino favorito, la razón por la que cada instante cobra sentido y cada noche se vuelve única. Nadie puede prometer el mañana, por eso elijo amarte como si cada noche fuera la última vez que pudiera recordarte y guardar tu luz entre mis memorias más profundas.
-
-        If the world was ending I’d wanna be next to you. I’d wanna hold you just for a while and die with a smile, To live forever with your memory and be able to die in peace, knowing that I was able to walk in heaven.
+      <div class="spotify-txt-row"><span>0:10</span><span>4:01</span></div>
+      <div class="spotify-controls" role="group" aria-label="Controles de reproducción">
+        <button title="Anterior">&#9198;</button>
+        <button title="Reproducir">&#9654;</button>
+        <button title="Siguiente">&#9197;</button>
       </div>
     </div>
-    <button class="next-btn" onclick="goToSlide6()">Siguiente</button>
+    <div class="song-msg-box">
+      Hay ciudades que despiertan anhelos y noches que se convierten en recuerdos imborrables, pero nada se compara con lo que siento cuando pienso en ti después de soñar que debía dejarte ir. En ese mundo efímero, tuve que decirte adiós y me di cuenta de que, aunque no entienda del todo su significado, mi corazón eligió seguir tus pasos dondequiera que estés.
+
+      Eres y serás siempre mi destino favorito, la razón por la que cada instante cobra sentido y cada noche se vuelve única. Nadie puede prometer el mañana, por eso elijo amarte como si cada noche fuera la última vez que pudiera recordarte y guardar tu luz entre mis memorias más profundas.
+
+      If the world was ending I’d wanna be next to you. I’d wanna hold you just for a while and die with a smile, To live forever with your memory and be able to die in peace, knowing that I was able to walk in heaven.
+    </div>
   </div>
+  <button class="next-btn" onclick="goToSlide6()">Siguiente</button>
+</div>
 
 <script>
   const slide0 = document.getElementById("slide0");
@@ -689,9 +679,6 @@ El fútbol fue mucho más que un juego para mi,y contigo, se convirtió en una c
     backBtn3.classList.remove("visible");
     backBtn2.classList.remove("visible");
     backBtn1.classList.remove("visible");
-  }
-  function goToSlide6() {
-    alert("No hay sexta página implementada."); 
   }
 </script>
 </body>
