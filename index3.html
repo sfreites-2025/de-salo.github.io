@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>¡Juega y sonríe! - Final interactivo</title>
+  <style>
+    body, html {
+      margin: 0; padding: 0; height: 100%;
+      width: 100vw;
+      overflow: hidden;
+      background: linear-gradient(120deg, #fde68a 0%, #ffb6b9 45%, #a3cef1 100%);
+      font-family: 'Times New Roman', Times, serif;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+    }
+    h1 {
+      margin: 30px 0 8px 0;
+      font-size: 2.2em;
+      color: #f9436e;
+      letter-spacing: 0.02em;
+      font-weight: bold;
+      text-shadow: 0 2px 12px #ffb6b988, 0 1px 20px #fff6, 2px 2px 4px #fa617b33;
+      animation: rainbowPulse 3s infinite alternate cubic-bezier(.67,0,.32,1.3);
+    }
+    @keyframes rainbowPulse {
+      0% {
+        color: #f9436e;
+        text-shadow: 0 2px 12px #ffb6b988, 0 1px 20px #fff6;
+      }
+      100% {
+        color: #fdbe27;
+        text-shadow: 0 2px 24px #a3cef166, 0 3px 30px #fff9;
+      }
+    }
+    #gameArea {
+      background: rgba(255,255,255,0.14);
+      border-radius: 25px;
+      border: 3px solid #f9436e10;
+      box-shadow: 0 8px 38px 0 #cc2a5e44;
+      position: relative;
+      overflow: hidden;
+      width: 360px;
+      height: 480px;
+      margin: 5px auto 22px auto;
+      z-index: 1;
+    }
+    #basket {
+      position: absolute;
+      bottom: 10px;
+      left: 160px;
+      width: 60px;
+      height: 44px;
+      background: transparent;
+      z-index: 5;
+      transition: left 0.05s;
+    }
+    #basket svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .heart {
+      position: absolute;
+      font-size: 2.3em;
+      pointer-events: none;
+      filter: drop-shadow(0 4px 16px #fd5e5355);
+      animation: bounce 1.5s infinite alternate ease-in;
+      opacity: 0.94;
+      z-index: 4;
+      user-select: none;
+    }
+    @keyframes bounce {
+      0% { transform: scale(1) rotate(-15deg);}
+      100% { transform: scale(1.09) rotate(10deg);}
+    }
+    #scorePanel {
+      text-align: center;
+      margin-bottom: 2px;
+    }
+    #scorePanel span {
+      font-weight: bold;
+      color: #26355d;
+      font-size: 1.3em;
+      /* subtle animation */
+      text-shadow: 0 2px 14px #fff4;
+      transition: color 0.3s;
+    }
+    #msg {
+      font-size: 1em;
+      color: #f9436e;
+      min-height: 32px;
+      height: 32px;
+      margin-top: 6px;
+      animation: fadeIn 1s;
+    }
+    @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+    #playAgain {
+      display: none;
+      margin-top: 18px;
+      padding: 10px 26px;
+      background: linear-gradient(90deg,#f9436e,#ffb6b9 90%);
+      color: #fff;
+      border: none;
+      border-radius: 18px;
+      font-size: 1.1em;
+      font-family: inherit;
+      cursor: pointer;
+      box-shadow: 0 4px 18px #fa617b44;
+      transition: background 0.22s;
+    }
+    #playAgain:hover {
+      background: linear-gradient(90deg,#ffb6b9,#f9436e);
+    }
+    /* Responsive game */
+    @media (max-width:480px) {
+      #gameArea {width: 98vw; max-width: 375px;}
+      #basket {left: 44vw;}
+      h1 { font-size: 1.19em; }
+    }
+  </style>
+</head>
+<body>
+  <h1>¡Atrapa los corazones! ❤️</h1>
+  <div id="scorePanel">Puntaje: <span id="score">0</span></div>
+  <div id="gameArea">
+    <div id="basket"><!-- SVG del "cesto" o "mano" aquí --></div>
+    <!-- los corazones se generan dinámicamente -->
+  </div>
+  <div id="msg"></div>
+  <button id="playAgain">Jugar de nuevo</button>
+
+  <script>
+    // --- CORAZONES/JUEGO ---
+    const gameArea = document.getElementById('gameArea');
+    const basket = document.getElementById('basket');
+    const scoreSpan = document.getElementById('score');
+    const msg = document.getElementById('msg');
+    const playAgain = document.getElementById('playAgain');
+    // SVG de tipo "cesta" estilizada, simulando una mano alegre 🍀
+    basket.innerHTML = `
+      <svg viewBox="0 0 98 68" width="60" height="44">
+        <ellipse cx="49" cy="58" rx="46" ry="9" fill="#e28e39" opacity="0.37"/>
+        <rect x="16" y="24" rx="18" ry="21" width="70" height="32" fill="#fff6c6" stroke="#e28e39" stroke-width="4"/>
+        <ellipse cx="51" cy="45" rx="30" ry="11" fill="#ffe089" stroke="#e28e39" stroke-width="2"/>
+        <ellipse cx="51" cy="39" rx="21" ry="7" fill="#f8f8e4" opacity="0.6"/>
+        <ellipse cx="38" cy="56" rx="7" ry="3" fill="#ffd29a" stroke="#e28e39" stroke-width="1"/>
+        <ellipse cx="59" cy="56" rx="7" ry="3" fill="#ffd29a" stroke="#e28e39" stroke-width="1"/>
+      </svg>
+    `;
+
+    let left = 150; // posición inicial
+    let score = 0;
+    let hearts = [];
+    let running = true;
+    let gameInterval = null;
+    let heartInterval = null;
+    let timeLimit = 42; // segundos
+    let timeCount = 0;
+    let heartsCatched = 0;
+    let gameStart = false;
+
+    // Movimiento del "cesto" (mouse/tocar/flechas)
+    function setBasket(x) {
+      left = Math.max(0, Math.min(gameArea.offsetWidth - basket.offsetWidth, x));
+      basket.style.left = left + "px";
+    }
+
+    // Mov mouse/tactil
+    gameArea.addEventListener('mousemove', e => {
+      let rect = gameArea.getBoundingClientRect();
+      setBasket(e.clientX - rect.left - basket.offsetWidth / 2);
+    });
+    gameArea.addEventListener('touchmove', e => {
+      let rect = gameArea.getBoundingClientRect();
+      let touch = e.touches[0];
+      setBasket(touch.clientX - rect.left - basket.offsetWidth / 2);
+    });
+
+    // Mov flechas
+    window.addEventListener('keydown', e => {
+      if (!running) return;
+      if (e.key === 'ArrowLeft') setBasket(left - 28);
+      else if (e.key === 'ArrowRight') setBasket(left + 28);
+    });
+
+    // Crear corazones animados
+    function newHeart() {
+      let heart = document.createElement('div');
+      heart.className = 'heart';
+      let emojis = [ '❤️','💖','💗','💛','💚','💙','💜','🧡','🤍','🌸' ];
+      let emoji = emojis[Math.floor(Math.random()*emojis.length)];
+      heart.style.left = Math.floor(Math.random() * (gameArea.offsetWidth - 38))+"px";
+      heart.style.top = "-36px";
+      heart.style.fontSize = (30 + Math.random()*26) + "px";
+      heart.textContent = emoji;
+      // velocidad variable
+      let vel = 1 + Math.random() * 1.2;
+      gameArea.appendChild(heart);
+      hearts.push({el: heart, y: -36, x: parseFloat(heart.style.left), vel});
+    }
+
+    function playGame() {
+      gameStart = true; running = true; score = 0; timeCount = 0; heartsCatched = 0; scoreSpan.textContent = 0; msg.textContent = '';
+      // Limpiar corazones
+      document.querySelectorAll('.heart').forEach(h=>h.remove());
+      hearts = [];
+      setBasket(gameArea.offsetWidth / 2 - basket.offsetWidth/2);
+      // Crear corazones cada 770ms
+      heartInterval = setInterval(newHeart, 770);
+      // Loop juego: mover corazones
+      gameInterval = setInterval(() => {
+        for (let item of hearts) {
+          item.y += item.vel + Math.random() * 1.5;
+          item.el.style.top = item.y + "px";
+        }
+        // Colisiones/capturas
+        for (let i = hearts.length-1; i >=0; --i) {
+          let h = hearts[i];
+          if (h.y > gameArea.offsetHeight - 68) {
+            // ¿colisiona con cesto?
+            if (
+              h.x + 30 > left && h.x < left + basket.offsetWidth + 10
+            ) {
+              // atrapa corazón
+              gameArea.removeChild(h.el);
+              hearts.splice(i,1);
+              score += 5;
+              heartsCatched++;
+              scoreSpan.textContent = score;
+              // ¡Efecto pop!
+              showFloatingEmoji(h.x+10, h.y-18, h.el.textContent);
+              continue;
+            } else if (h.y > gameArea.offsetHeight) {
+              gameArea.removeChild(h.el);
+              hearts.splice(i,1);
+            }
+          }
+        }
+        // Tiempo límite
+        timeCount += 0.037;
+        if (timeCount >= timeLimit) endGame();
+      }, 19);
+    }
+
+    function showFloatingEmoji(x,y,emoji) {
+      let floater = document.createElement('span');
+      floater.textContent = "✨";
+      floater.style.position = 'absolute';
+      floater.style.left = x+"px";
+      floater.style.top = y+"px";
+      floater.style.fontSize = "1.6em";
+      floater.style.pointerEvents = "none";
+      floater.style.opacity = "0.92";
+      floater.style.transition = "all 1s cubic-bezier(.47,2.2,.6,.99)";
+      gameArea.appendChild(floater);
+      setTimeout(()=>{
+        floater.style.transform = "translateY(-56px) scale(1.9) rotate(-23deg)";
+        floater.style.opacity = 0;
+      }, 15);
+      setTimeout(()=>gameArea.removeChild(floater), 1001);
+    }
+
+    function endGame() {
+      running = false;
+      clearInterval(gameInterval);
+      clearInterval(heartInterval);
+      document.querySelectorAll('.heart').forEach(h=>h.remove());
+      let message = heartsCatched === 0 ? "¡Intenta otra vez! 😅" :
+          heartsCatched < 8 ? "¡Bien! 💫" :
+          heartsCatched < 18 ? "¡Genial! 😃💖" :
+          "¡Increíble, atrapaste muchos! 🥳🎉";
+      msg.innerHTML = `<b>Juego terminado</b><br>Puntaje final: ${score}<br>${message}`;
+      playAgain.style.display = '';
+    }
+
+    playAgain.onclick = ()=> {
+      playAgain.style.display = 'none';
+      msg.textContent = '';
+      playGame();
+    }
+
+    // Inicia juego
+    window.onload = ()=>{
+      playAgain.style.display = 'none';
+      playGame();
+    };
+  </script>
+  <div style="margin-top:24px;text-align:center;font-size:1em;color:#444;">
+    <a href="index2.html" style="text-decoration:none;color:#fa617b;font-weight:bold;">⟵ Volver a las diapositivas</a>
+  </div>
+</body>
+</html>
