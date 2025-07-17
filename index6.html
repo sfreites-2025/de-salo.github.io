@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Spider-Man • Hero Message</title>
+  <style>
+    html, body {
+      margin: 0; padding: 0; min-height: 100vh; width: 100vw;
+      font-family: "Times New Roman", Times, serif;
+      background:
+        linear-gradient(120deg,#1c253a 70%, #e33e3a66 100%),
+        url('https://images.alphacoders.com/133/1339962.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      min-height: 100vh;
+      height: 100vh;
+      overflow-x: hidden;
+      animation: spideyIn 1.2s cubic-bezier(.14,.68,.12,1.1) both;
+    }
+    @keyframes spideyIn {
+      0% {opacity: 0; filter: blur(8px);}
+      100%{opacity: 1; filter: none;}
+    }
+    .main-flex2 {
+      width: 100vw; min-height: 100vh;
+      display: flex;
+      align-items: center; justify-content: space-between;
+      position: relative; z-index: 2;
+      padding: 0 2vw 0 2vw;
+      animation: mainFade 1s 0.3s both;
+    }
+    .mainFade { animation: mainFade 1s 0.3s both;}
+    @keyframes mainFade {
+      0% {opacity: 0; transform: translateY(60px);}
+      100%{opacity: 1; transform: none;}
+    }
+    .side-left2 {
+      flex: 1.1; min-width: 82px;
+      display: flex; flex-direction: column; align-items: flex-start; justify-content: center;
+    }
+    .btns-nav2 {
+      margin-top: 40px;
+      display: flex; gap: 28px;
+      flex-direction: row; align-items: center; margin-left: 24px;
+    }
+    .btns-nav2 button {
+      font-family: inherit;
+      font-size: 1.08em;
+      font-weight: 700;
+      padding: 15px 36px;
+      background: linear-gradient(110deg, #ed3555 18%, #3568b7 100%);
+      color: #fff; border: none;
+      border-radius: 23px;
+      box-shadow: 0 2px 13px #e96676a9, 0 2px 19px #3662a099;
+      cursor: pointer; min-width: 112px; outline: none;
+      transition: background 0.25s, color 0.18s, box-shadow 0.21s;
+      letter-spacing: 0.03em;
+      animation: btnpulseIn 1.2s infinite alternate;
+    }
+    .btns-nav2 button:hover {
+      background: linear-gradient(100deg,#3568b7,#ed3555 80%);
+      color: #ffd793;
+      box-shadow: 0 4px 19px #ed355566, 0 2px 28px #3559a177;
+    }
+    .spidey-message2 {
+      display: flex; flex-direction: column; align-items: flex-end; justify-content: center;
+      flex: 2;
+      min-width: 340px;
+      max-width: 640px;
+      padding-right: 5vw;
+      z-index: 10;
+    }
+    .msg-card2 {
+      background: linear-gradient(99deg, #e3f0ff 80%, #d64b6870 100%);
+      border-radius: 38px 17px 30px 18px / 28px 34px 38px 21px;
+      box-shadow: 0 8px 44px #e7343442, 0 2px 44px #4773e688;
+      padding: 48px 42px 38px 45px;
+      font-size: 1.08em;
+      color: #172444;
+      line-height: 1.69;
+      font-weight: 400;
+      min-width: 320px;
+      max-width: 570px;
+      letter-spacing: 0.01em;
+      text-align: right;
+      white-space: pre-line;
+      animation: slideHeroIn 1.26s cubic-bezier(.43,.91,.27,1.01) both;
+      opacity: 0;
+      animation-delay: 0.48s;
+    }
+    .msg-card2:before {
+      content: "";
+      display: block;
+      width: 68px; height: 68px;
+      background: url('https://upload.wikimedia.org/wikipedia/commons/0/02/Spider-Man_Cartoon.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: right;
+      float: right;
+      margin-left: 20px;
+      margin-bottom: 6px;
+      opacity: .91;
+      animation: swingSpider 4s infinite alternate;
+    }
+    @keyframes swingSpider {
+      0% {transform: rotate(0deg) scale(1.0);}
+      15%{transform: rotate(-3deg) scale(1.12);}
+      44%{transform: rotate(6deg) scale(1.08);}
+      81%{transform: rotate(-6deg) scale(1.0);}
+      100%{transform: rotate(0.5deg) scale(1.09);}
+    }
+    @media (max-width:900px){
+      .main-flex2{flex-direction:column; min-height:105vh; align-items:flex-start; justify-content:flex-start;}
+      .side-left2{padding-left:3vw; margin-bottom:38px;}
+      .spidey-message2{align-items:center; padding-right:2vw;}
+      .msg-card2{text-align:center; min-width:unset; max-width:97vw;}
+      .btns-nav2{margin:24px auto 0 auto;}
+    }
+    @media (max-width:600px){
+      .main-flex2{padding:0;}
+      .side-left2{padding-left:4vw;}
+      .spidey-message2{padding-right:2vw;}
+      .msg-card2{padding:24px 2vw;}
+    }
+  </style>
+</head>
+<body>
+  <div class="main-flex2">
+    <div class="side-left2">
+      <div class="btns-nav2">
+        <button id="spideyRegresar">⟵ Regresar</button>
+        <button id="spideySiguiente">Siguiente →</button>
+      </div>
+    </div>
+    <div class="spidey-message2">
+      <div class="msg-card2">
+Sometimes I think about Spider-Man and how, even with the weight of the world on his shoulders, he never gives up on what he loves or on the people who matter to him.
+
+With great power comes great responsibility, but I’ve learned from you that real strength is not just about saving the world—it’s about never letting go of your dreams, protecting your heart, and helping others even when it’s hard.
+
+Like Spider-Man swinging fearlessly through the city, you face every challenge with courage and kindness. Knowing you has taught me that being a hero isn’t about having superpowers; it’s about having the bravery to keep going, no matter the obstacle.
+      </div>
+    </div>
+  </div>
+  <script>
+    document.getElementById('spideyRegresar').onclick = function(){
+      window.location.href = "index5.html";
+    };
+    document.getElementById('spideySiguiente').onclick = function(){
+      // Cambia aquí tu navegación a la siguiente página
+      alert('¡Aquí seguiría la historia!');
+    };
+  </script>
+</body>
+</html>
