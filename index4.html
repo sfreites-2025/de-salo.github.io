@@ -17,15 +17,16 @@
       position: absolute;
       top: 0; left: 0; width: 100vw; height: 100vh;
       display: flex; align-items: center; justify-content: flex-end;
-      background: url('https://images.unsplash.com/photo-1464980840309-c3c8c205b6b5?auto=format&fit=crop&w=1200&q=80') center center no-repeat;
+      /* Nuevo fondo de electricidad atractivo y llamativo */
+      background: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1400&q=80') center center no-repeat;
       background-size: cover;
       z-index: 12;
       transition: opacity 0.4s;
       min-height: 100vh;
     }
     #slide12 .content-electric {
-      background: linear-gradient(97deg, #e2eafd 78%, #a4e7e6 100%);
-      box-shadow: 0 8px 48px 0 #1a2037a0;
+      background: linear-gradient(90deg, #dff6ffCC 60%, #f2f7fcB5 100%);
+      box-shadow: 0 8px 48px 0 #20488e99;
       border-radius: 26px;
       padding: 48px 47px 40px 40px;
       max-width: 510px;
@@ -48,7 +49,7 @@
     #slide12 .elec-txt {
       font-size: 1.18em;
       line-height: 1.74;
-      margin-bottom: 36px;
+      margin-bottom: 30px;
       letter-spacing: 0.012em;
       text-align: right;
       min-height: 140px;
@@ -61,6 +62,22 @@
     @keyframes textSlideIn {
       from {opacity: 0; transform: translateY(55px);}
       to   {opacity: 1; transform: translateY(0);}
+    }
+    /* --- Texto para pulsar --- */
+    .pulse-hint {
+      color: #1571d6;
+      font-size: 1.1em;
+      font-weight: bold;
+      margin-bottom: 13px;
+      margin-right: 3px;
+      animation: pulseHint 1.25s infinite alternate;
+      letter-spacing: 0.045em;
+      text-shadow: 0 3px 8px #ddeeff;
+      text-align: right;
+    }
+    @keyframes pulseHint {
+      0%   { color: #1571d6; filter: brightness(1.1);}
+      100% { color: #0c2162; filter: brightness(1.25);}
     }
     #slide12 .electric-btn {
       background: linear-gradient(99deg, #137bf5 50%, #ffd700 100%);
@@ -86,7 +103,7 @@
     }
     @keyframes btnShine {
       0% { box-shadow: 0 6px 32px #1297f667, 0 2px 16px #ffd50057; filter: none; }
-      100% { box-shadow: 0 4px 44px #e8f6ff, 0 1px 50px #ffe88299; filter: brightness(1.1); }
+      100% { box-shadow: 0 4px 44px #e8f6ff, 0 1px 50px #ffe88299; filter: brightness(1.1);}
     }
     #slide12 .btn-heart-electric {
       margin-top: 12px;
@@ -196,7 +213,6 @@
       background: linear-gradient(90deg,#75c37f 15%, #214d3c 80%);
       color: #fff8d4;
     }
-    /* --------- Responsive ----------- */
     @media (max-width: 950px) {
       #slide12 .content-electric {max-width:95vw;padding:24px 5vw;}
       #slide13 .center-msg {padding:32px 5vw;}
@@ -216,6 +232,7 @@
       <div class="elec-txt" id="electricText">
 Hay algo mágico en la electrónica: la manera en que transforma energía, conecta mundos invisibles y hace posible que todo funcione con armonía, aunque por fuera parezca solo una red de caminos y circuitos. Así eres tú para mí: compleja y fascinante, con una esencia que late detrás de cada gesto y cada palabra, capaz de iluminar todo a tu alrededor incluso en los días grises.
       </div>
+      <div class="pulse-hint" id="pulseHint">Pulsa el botón</div>
       <button class="electric-btn" id="btnRayo" title="Siguiente">
         ⚡
       </button>
@@ -250,6 +267,7 @@ Hay algo mágico en la electrónica: la manera en que transforma energía, conec
     const slide13 = document.getElementById('slide13');
     const toElec = document.getElementById('toElec');
     const continue13 = document.getElementById('continue13');
+    const pulseHint = document.getElementById('pulseHint');
 
     let step = 0;
     btnRayo.onclick = () => {
@@ -259,6 +277,7 @@ Hay algo mágico en la electrónica: la manera en que transforma energía, conec
         electricText.style.opacity = 1;
         btnRayo.classList.add('hide');
         btnHeartRayo.classList.remove('hide');
+        pulseHint.classList.add('hide');
         step = 1;
       }, 360);
     };
@@ -294,6 +313,7 @@ Hay algo mágico en la electrónica: la manera en que transforma energía, conec
       btnRayo.classList.remove('hide');
       btnHeartRayo.classList.add('hide');
       elecNav.classList.add('hide');
+      pulseHint.classList.remove('hide');
       document.body.style.background = "#21294a";
     };
   </script>
