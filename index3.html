@@ -3,21 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>¡Juega y sonríe! - Final interactivo</title>
+  <title>Pausa interactiva - Atrapa los corazones</title>
   <style>
-    body, html {
-      margin: 0; padding: 0; height: 100%;
-      width: 100vw;
+    html, body { margin: 0; padding: 0; height: 100%; width: 100vw; }
+    body {
+      font-family: 'Times New Roman', Times, serif;
+      min-height: 100vh;
       overflow: hidden;
       background: linear-gradient(120deg, #fde68a 0%, #ffb6b9 45%, #a3cef1 100%);
-      font-family: 'Times New Roman', Times, serif;
-      position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
-      min-height: 100vh;
+      transition: background 1s;
     }
+    .hide { display: none !important; }
+    /* --- Juego --- */
+    #gameBlock { width: 100vw; min-height: 100vh; display: flex; flex-direction: column; align-items: center; }
     h1 {
       margin: 30px 0 8px 0;
       font-size: 2.2em;
@@ -28,14 +30,8 @@
       animation: rainbowPulse 3s infinite alternate cubic-bezier(.67,0,.32,1.3);
     }
     @keyframes rainbowPulse {
-      0% {
-        color: #f9436e;
-        text-shadow: 0 2px 12px #ffb6b988, 0 1px 20px #fff6;
-      }
-      100% {
-        color: #fdbe27;
-        text-shadow: 0 2px 24px #a3cef166, 0 3px 30px #fff9;
-      }
+      0% { color: #f9436e; text-shadow: 0 2px 12px #ffb6b988, 0 1px 20px #fff6;}
+      100% { color: #fdbe27; text-shadow: 0 2px 24px #a3cef166, 0 3px 30px #fff9;}
     }
     #gameArea {
       background: rgba(255,255,255,0.14);
@@ -59,11 +55,7 @@
       z-index: 5;
       transition: left 0.05s;
     }
-    #basket svg {
-      width: 100%;
-      height: 100%;
-      display: block;
-    }
+    #basket svg { width: 100%; height: 100%; display: block; }
     .heart {
       position: absolute;
       font-size: 2.3em;
@@ -74,74 +66,148 @@
       z-index: 4;
       user-select: none;
     }
-    @keyframes bounce {
-      0% { transform: scale(1) rotate(-15deg);}
-      100% { transform: scale(1.09) rotate(10deg);}
-    }
-    #scorePanel {
-      text-align: center;
-      margin-bottom: 2px;
-    }
+    @keyframes bounce { 0% {transform: scale(1) rotate(-15deg);} 100% {transform: scale(1.09) rotate(10deg);} }
+    #scorePanel { text-align: center; margin-bottom: 2px;}
     #scorePanel span {
-      font-weight: bold;
-      color: #26355d;
-      font-size: 1.3em;
-      /* subtle animation */
-      text-shadow: 0 2px 14px #fff4;
-      transition: color 0.3s;
+      font-weight: bold; color: #26355d; font-size: 1.3em;
+      text-shadow: 0 2px 14px #fff4; transition: color 0.3s;
     }
     #msg {
-      font-size: 1em;
+      font-size: 1.05em;
       color: #f9436e;
-      min-height: 32px;
-      height: 32px;
-      margin-top: 6px;
+      min-height: 46px;
+      margin-top: 17px;
       animation: fadeIn 1s;
+      max-width: 410px;
+      text-align: center;
+      background: rgba(255,255,255,0.78);
+      border-radius: 16px;
+      padding: 17px;
+      box-shadow: 0 2px 18px #ffb6b988;
+      margin-left: auto; margin-right: auto;
+      line-height: 1.45;
     }
     @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
-    #playAgain {
+    #buttons-group {
+      margin-top: 24px;
       display: none;
-      margin-top: 18px;
+      flex-direction: row;
+      gap: 20px;
+      justify-content: center;
+    }
+    #buttons-group button {
       padding: 10px 26px;
-      background: linear-gradient(90deg,#f9436e,#ffb6b9 90%);
-      color: #fff;
       border: none;
       border-radius: 18px;
-      font-size: 1.1em;
+      font-size: 1.08em;
       font-family: inherit;
       cursor: pointer;
       box-shadow: 0 4px 18px #fa617b44;
-      transition: background 0.22s;
+      background: linear-gradient(90deg,#f9436e,#ffb6b9 90%);
+      color: #fff;
+      font-weight: 600;
+      transition: background 0.22s, color 0.2s;
     }
-    #playAgain:hover {
+    #buttons-group button:hover {
       background: linear-gradient(90deg,#ffb6b9,#f9436e);
+      color: #ffe066;
     }
-    /* Responsive game */
-    @media (max-width:480px) {
-      #gameArea {width: 98vw; max-width: 375px;}
-      #basket {left: 44vw;}
-      h1 { font-size: 1.19em; }
+
+    /* --- Diapositiva Reflexión --- */
+    #reflectionSlide {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      min-width: 100vw;
+      position: absolute;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: url('https://images.unsplash.com/photo-1465101178521-c7aebf1a8496?auto=format&fit=crop&w=1400&q=80') center center no-repeat;
+      background-size: cover;
+      animation: upFade 1.2s 0.18s both;
+      z-index: 100;
+    }
+    @keyframes upFade {
+      0% { opacity: 0; filter: blur(5px) brightness(1.08);}
+      90% { filter: blur(0) brightness(1);}
+      100% { opacity: 1;}
+    }
+    .center-box {
+      background: rgba(255,255,255,0.94);
+      box-shadow: 0 16px 44px #b8e2af55, 0 2px 48px #78937a17;
+      border-radius: 28px;
+      max-width: 660px;
+      padding: 52px 42px 54px 42px;
+      text-align: center;
+      animation: fadeScaleIn 1.6s cubic-bezier(.41,.8,.36,1.05) both;
+    }
+    @keyframes fadeScaleIn {
+      0% { opacity: 0; transform: scale(0.95);}
+      100% { opacity: 1; transform: scale(1);}
+    }
+    .center-box h2 {
+      font-size: 2.1em;
+      color: #267266;
+      font-weight: bold;
+      letter-spacing: 0.03em;
+      margin-bottom: 18px;
+      text-shadow: 0 2px 14px #ffffffcc;
+      animation: greenPulse 3s infinite alternate;
+    }
+    @keyframes greenPulse {
+      0% { color: #267266; text-shadow: 0 1px 12px #beeed7cc;}
+      100% { color: #6bcf84; text-shadow: 0 3px 32px #8be9a0cc, 0 1px 33px #ffffff69;}
+    }
+    .center-box p {
+      font-size: 1.19em;
+      color: #214d3c;
+      line-height: 1.68;
+      letter-spacing: 0.01em;
+      animation: textRise 1.65s 0.18s both;
+      white-space: pre-line;
+      margin: 0; margin-bottom: 5px;
+      text-shadow: 0 3px 22px #beeed788, 0 1px 16px #eee7;
+    }
+    @keyframes textRise {
+      0% { opacity:0; transform: translateY(40px);}
+      100%{opacity: 1; transform: translateY(0);}
+    }
+    @media (max-width:800px) {
+      .center-box { max-width: 97vw; padding: 9vw 2vw;}
+      .center-box h2 { font-size:1.22em;}
+      .center-box p { font-size: 1em;}
     }
   </style>
 </head>
 <body>
-  <h1>¡Atrapa los corazones! ❤️</h1>
-  <div id="scorePanel">Puntaje: <span id="score">0</span></div>
-  <div id="gameArea">
-    <div id="basket"><!-- SVG del "cesto" o "mano" aquí --></div>
-    <!-- los corazones se generan dinámicamente -->
+  <div id="gameBlock">
+    <h1>¡Pausa interactiva: Atrapa los corazones! ❤️</h1>
+    <div id="scorePanel">Puntaje: <span id="score">0</span></div>
+    <div id="gameArea">
+      <div id="basket"></div>
+    </div>
+    <div id="msg"></div>
+    <div id="buttons-group">
+      <button id="playAgain">Jugar otra vez</button>
+      <button id="goToNext">Seguir →</button>
+    </div>
   </div>
-  <div id="msg"></div>
-  <button id="playAgain">Jugar de nuevo</button>
+
+  <!-- Diapositiva Reflexión tras el juego -->
+  <div id="reflectionSlide">
+    <div class="center-box">
+      <h2>Más que un juego, una lección</h2>
+      <p>
+La vida la podemos relacionar con un juego, incluso este momento en que lees esto es eso, un juego, debemos saber en qué momento seguir, obtener rutas para avanzar y mejorar con el paso del tiempo, llevo esas lecciones de alguien muy especial que me lo enseñó hace mucho tiempo. A no quejarme ni desistir facilmente, esa persona eres tú
+      </p>
+    </div>
+  </div>
 
   <script>
-    // --- CORAZONES/JUEGO ---
+    // --- JUEGO ---
     const gameArea = document.getElementById('gameArea');
     const basket = document.getElementById('basket');
-    const scoreSpan = document.getElementById('score');
-    const msg = document.getElementById('msg');
-    const playAgain = document.getElementById('playAgain');
-    // SVG de tipo "cesta" estilizada, simulando una mano alegre 🍀
     basket.innerHTML = `
       <svg viewBox="0 0 98 68" width="60" height="44">
         <ellipse cx="49" cy="58" rx="46" ry="9" fill="#e28e39" opacity="0.37"/>
@@ -152,25 +218,27 @@
         <ellipse cx="59" cy="56" rx="7" ry="3" fill="#ffd29a" stroke="#e28e39" stroke-width="1"/>
       </svg>
     `;
-
-    let left = 150; // posición inicial
+    let left = 150;
     let score = 0;
     let hearts = [];
     let running = true;
     let gameInterval = null;
     let heartInterval = null;
-    let timeLimit = 42; // segundos
+    let timeLimit = 40; 
     let timeCount = 0;
     let heartsCatched = 0;
-    let gameStart = false;
+    const scoreSpan = document.getElementById('score');
+    const msg = document.getElementById('msg');
+    const playAgain = document.getElementById('playAgain');
+    const goToNext = document.getElementById('goToNext');
+    const btnsGroup = document.getElementById('buttons-group');
+    const gameBlock = document.getElementById('gameBlock');
+    const reflectionSlide = document.getElementById('reflectionSlide');
 
-    // Movimiento del "cesto" (mouse/tocar/flechas)
     function setBasket(x) {
       left = Math.max(0, Math.min(gameArea.offsetWidth - basket.offsetWidth, x));
       basket.style.left = left + "px";
     }
-
-    // Mov mouse/tactil
     gameArea.addEventListener('mousemove', e => {
       let rect = gameArea.getBoundingClientRect();
       setBasket(e.clientX - rect.left - basket.offsetWidth / 2);
@@ -180,15 +248,12 @@
       let touch = e.touches[0];
       setBasket(touch.clientX - rect.left - basket.offsetWidth / 2);
     });
-
-    // Mov flechas
     window.addEventListener('keydown', e => {
       if (!running) return;
       if (e.key === 'ArrowLeft') setBasket(left - 28);
       else if (e.key === 'ArrowRight') setBasket(left + 28);
     });
 
-    // Crear corazones animados
     function newHeart() {
       let heart = document.createElement('div');
       heart.className = 'heart';
@@ -198,41 +263,34 @@
       heart.style.top = "-36px";
       heart.style.fontSize = (30 + Math.random()*26) + "px";
       heart.textContent = emoji;
-      // velocidad variable
       let vel = 1 + Math.random() * 1.2;
       gameArea.appendChild(heart);
       hearts.push({el: heart, y: -36, x: parseFloat(heart.style.left), vel});
     }
-
     function playGame() {
-      gameStart = true; running = true; score = 0; timeCount = 0; heartsCatched = 0; scoreSpan.textContent = 0; msg.textContent = '';
-      // Limpiar corazones
+      running = true; score = 0; timeCount = 0; heartsCatched = 0;
+      scoreSpan.textContent = 0; msg.textContent = '';
+      btnsGroup.style.display = "none";
       document.querySelectorAll('.heart').forEach(h=>h.remove());
       hearts = [];
       setBasket(gameArea.offsetWidth / 2 - basket.offsetWidth/2);
-      // Crear corazones cada 770ms
-      heartInterval = setInterval(newHeart, 770);
-      // Loop juego: mover corazones
+      heartInterval = setInterval(newHeart, 700);
       gameInterval = setInterval(() => {
         for (let item of hearts) {
-          item.y += item.vel + Math.random() * 1.5;
+          item.y += item.vel + Math.random() * 1.4;
           item.el.style.top = item.y + "px";
         }
-        // Colisiones/capturas
         for (let i = hearts.length-1; i >=0; --i) {
           let h = hearts[i];
           if (h.y > gameArea.offsetHeight - 68) {
-            // ¿colisiona con cesto?
             if (
               h.x + 30 > left && h.x < left + basket.offsetWidth + 10
             ) {
-              // atrapa corazón
               gameArea.removeChild(h.el);
               hearts.splice(i,1);
               score += 5;
               heartsCatched++;
               scoreSpan.textContent = score;
-              // ¡Efecto pop!
               showFloatingEmoji(h.x+10, h.y-18, h.el.textContent);
               continue;
             } else if (h.y > gameArea.offsetHeight) {
@@ -241,57 +299,62 @@
             }
           }
         }
-        // Tiempo límite
         timeCount += 0.037;
-        if (timeCount >= timeLimit) endGame();
-      }, 19);
+        if (score >= 100) { endGame(true); }
+        else if (timeCount >= timeLimit) { endGame(false); }
+      }, 18);
     }
-
-    function showFloatingEmoji(x,y,emoji) {
+    function showFloatingEmoji(x, y, emoji) {
       let floater = document.createElement('span');
       floater.textContent = "✨";
       floater.style.position = 'absolute';
       floater.style.left = x+"px";
       floater.style.top = y+"px";
-      floater.style.fontSize = "1.6em";
+      floater.style.fontSize = "1.55em";
       floater.style.pointerEvents = "none";
       floater.style.opacity = "0.92";
       floater.style.transition = "all 1s cubic-bezier(.47,2.2,.6,.99)";
       gameArea.appendChild(floater);
       setTimeout(()=>{
-        floater.style.transform = "translateY(-56px) scale(1.9) rotate(-23deg)";
+        floater.style.transform = "translateY(-56px) scale(1.7) rotate(-23deg)";
         floater.style.opacity = 0;
       }, 15);
       setTimeout(()=>gameArea.removeChild(floater), 1001);
     }
-
-    function endGame() {
+    function endGame(won) {
       running = false;
       clearInterval(gameInterval);
       clearInterval(heartInterval);
       document.querySelectorAll('.heart').forEach(h=>h.remove());
-      let message = heartsCatched === 0 ? "¡Intenta otra vez! 😅" :
-          heartsCatched < 8 ? "¡Bien! 💫" :
-          heartsCatched < 18 ? "¡Genial! 😃💖" :
-          "¡Increíble, atrapaste muchos! 🥳🎉";
-      msg.innerHTML = `<b>Juego terminado</b><br>Puntaje final: ${score}<br>${message}`;
-      playAgain.style.display = '';
+      let message = '';
+      if (won) {
+        message = "¡Felicidades! Has reunido todos los corazones, y no se trata solo de un juego es un recordatorio de todos los momentos hermosos que compartimos. Siempre serás ese latido único que hace que todo cobre sentido. ¡Te mereces todo el amor, hoy y siempre!";
+      } else {
+        message = "A veces no se gana en el primer intento, y está bien. Lo importante es disfrutar el camino, recordar lo bonito del juego y no perder nunca la sonrisa. Perder aquí no significa perder en la vida; significa que siempre hay una nueva oportunidad de volver a intentarlo y de descubrir alegría en cada intento.<br><br>¡Anímate a jugar otra vez! Yo siempre estaré celebrando cada uno de tus intentos y sonriendo contigo, pase lo que pase.";
+      }
+      msg.innerHTML = message;
+      btnsGroup.style.display = "flex";
     }
-
     playAgain.onclick = ()=> {
-      playAgain.style.display = 'none';
-      msg.textContent = '';
+      playAgain.blur();
       playGame();
-    }
+    };
+    goToNext.onclick = ()=> {
+      // Oculta el juego, muestra la reflexión
+      gameBlock.classList.add('hide');
+      reflectionSlide.style.display = 'flex';
+      document.body.style.overflow = 'auto';
+      // Cambia suavemente el fondo general para hacerlo más "verde"
+      document.body.style.background =
+        "linear-gradient(120deg, #f6ffe5 7%, #bceda1 37%, #aaf0c3 90%)";
+    };
 
-    // Inicia juego
-    window.onload = ()=>{
-      playAgain.style.display = 'none';
+    window.onload = ()=> {
+      btnsGroup.style.display = "none";
+      reflectionSlide.style.display = "none";
+      gameBlock.classList.remove('hide');
       playGame();
     };
   </script>
-  <div style="margin-top:24px;text-align:center;font-size:1em;color:#444;">
-    <a href="index2.html" style="text-decoration:none;color:#fa617b;font-weight:bold;">⟵ Volver a las diapositivas</a>
-  </div>
 </body>
 </html>
