@@ -18,6 +18,7 @@
       transition: background 1s;
     }
     .hide { display: none !important; }
+
     /* --- Juego --- */
     #gameBlock { width: 100vw; min-height: 100vh; display: flex; flex-direction: column; align-items: center; }
     h1 {
@@ -68,32 +69,56 @@
     }
     @keyframes bounce { 0% {transform: scale(1) rotate(-15deg);} 100% {transform: scale(1.09) rotate(10deg);} }
     #scorePanel { text-align: center; margin-bottom: 2px;}
-    #scorePanel span {
-      font-weight: bold; color: #26355d; font-size: 1.3em;
-      text-shadow: 0 2px 14px #fff4; transition: color 0.3s;
+    #scorePanel span { font-weight: bold; color: #26355d; font-size: 1.3em; text-shadow: 0 2px 14px #fff4; transition: color 0.3s; }
+
+    /* --- Mensaje de victoria/derrota, alineado a la izquierda --- */
+    #msgWrap {
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      margin-top: 22px;
     }
     #msg {
-      font-size: 1.05em;
+      font-size: 1.1em;
       color: #f9436e;
-      min-height: 46px;
-      margin-top: 17px;
-      animation: fadeIn 1s;
-      max-width: 410px;
-      text-align: center;
-      background: rgba(255,255,255,0.78);
-      border-radius: 16px;
-      padding: 17px;
-      box-shadow: 0 2px 18px #ffb6b988;
-      margin-left: auto; margin-right: auto;
-      line-height: 1.45;
+      min-height: 44px;
+      max-width: 390px;
+      background: rgba(255,255,255,0.90);
+      border-radius: 17px;
+      box-shadow: 0 2px 22px #ffb6b966;
+      padding: 22px 29px 17px 32px;
+      margin-left: 40px;
+      margin-top: 4px;
+      text-align: left;
+      line-height: 1.53;
+      letter-spacing: 0.01em;
+      opacity: 0;
+      transform: translateX(-45px);
+      transition: 
+        opacity 0.7s cubic-bezier(.33,.7,.32,1.11),
+        transform 0.8s cubic-bezier(.38,1.25,.6,1.12);
+      animation: msgAppear 1.09s both;
+      animation-delay: 0.20s;
+      /* prettier look */
     }
-    @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+    .msg-active { 
+      opacity: 1 !important;
+      transform: translateX(0) scale(1.01);
+      box-shadow: 0 5px 31px #ffb6b977, 0 2px 24px #fde68a4b;
+    }
+    @keyframes msgAppear {
+      0% { opacity:0; transform: translateX(-35px);}
+      100% { opacity:1; transform: translateX(0) scale(1.01);}
+    }
+
+    /* --- Botones juego --- */
     #buttons-group {
-      margin-top: 24px;
+      margin-top: 20px;
       display: none;
       flex-direction: row;
-      gap: 20px;
-      justify-content: center;
+      gap: 17px;
+      justify-content: flex-start;
+      margin-left: 42px;
     }
     #buttons-group button {
       padding: 10px 26px;
@@ -105,8 +130,8 @@
       box-shadow: 0 4px 18px #fa617b44;
       background: linear-gradient(90deg,#f9436e,#ffb6b9 90%);
       color: #fff;
+      transition: background 0.22s;
       font-weight: 600;
-      transition: background 0.22s, color 0.2s;
     }
     #buttons-group button:hover {
       background: linear-gradient(90deg,#ffb6b9,#f9436e);
@@ -127,6 +152,8 @@
       background-size: cover;
       animation: upFade 1.2s 0.18s both;
       z-index: 100;
+      display: flex;
+      flex-direction: column;
     }
     @keyframes upFade {
       0% { opacity: 0; filter: blur(5px) brightness(1.08);}
@@ -134,13 +161,14 @@
       100% { opacity: 1;}
     }
     .center-box {
-      background: rgba(255,255,255,0.94);
+      background: rgba(255,255,255,0.95);
       box-shadow: 0 16px 44px #b8e2af55, 0 2px 48px #78937a17;
       border-radius: 28px;
       max-width: 660px;
-      padding: 52px 42px 54px 42px;
+      padding: 52px 42px 36px 42px;
       text-align: center;
       animation: fadeScaleIn 1.6s cubic-bezier(.41,.8,.36,1.05) both;
+      margin: auto;
     }
     @keyframes fadeScaleIn {
       0% { opacity: 0; transform: scale(0.95);}
@@ -166,32 +194,59 @@
       letter-spacing: 0.01em;
       animation: textRise 1.65s 0.18s both;
       white-space: pre-line;
-      margin: 0; margin-bottom: 5px;
+      margin: 0 0 24px 0;
       text-shadow: 0 3px 22px #beeed788, 0 1px 16px #eee7;
     }
     @keyframes textRise {
       0% { opacity:0; transform: translateY(40px);}
       100%{opacity: 1; transform: translateY(0);}
     }
-    @media (max-width:800px) {
-      .center-box { max-width: 97vw; padding: 9vw 2vw;}
-      .center-box h2 { font-size:1.22em;}
+    .center-box .btns-reflection {
+      margin-top: 28px;
+      display: flex;
+      gap: 25px;
+      justify-content: center;
+    }
+    .center-box .btns-reflection button {
+      padding: 11px 30px;
+      font-size: 1.07em;
+      color: #fff;
+      background: linear-gradient(90deg,#71b97a, #7ee0c7 80%);
+      border: none;
+      border-radius: 18px;
+      font-family: inherit;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 3px 16px #79dfb688;
+      transition: background 0.2s, color 0.18s;
+    }
+    .center-box .btns-reflection button:hover {
+      background: linear-gradient(90deg, #7ee0c7,#71b97a 75%);
+      color: #267266;
+    }
+    @media (max-width:860px) {
+      #msg {margin:18px auto 0 auto; max-width:93vw;}
+      #msgWrap, #buttons-group {margin-left: 0;}
+      #reflectionSlide { min-width: 100vw; }
+      .center-box { max-width:97vw;padding:7vw 2vw;}
+      .center-box h2 { font-size:1.09em;}
       .center-box p { font-size: 1em;}
+      .center-box .btns-reflection {flex-direction: column;}
     }
   </style>
 </head>
 <body>
   <div id="gameBlock">
-    <h1>¡Pausa interactiva: Atrapa los corazones! ❤️</h1>
-    <div id="scorePanel">Puntaje: <span id="score">0</span></div>
-    <div id="gameArea">
-      <div id="basket"></div>
-    </div>
-    <div id="msg"></div>
-    <div id="buttons-group">
-      <button id="playAgain">Jugar otra vez</button>
-      <button id="goToNext">Seguir →</button>
-    </div>
+      <h1>¡Pausa interactiva: Atrapa los corazones! ❤️</h1>
+      <div id="scorePanel">Puntaje: <span id="score">0</span></div>
+      <div id="gameArea">
+        <div id="basket"></div>
+      </div>
+      <div id="msgWrap"><div id="msg"></div></div>
+      <div id="buttons-group">
+        <button id="playAgain">Jugar otra vez</button>
+        <button id="goToNext">Seguir →</button>
+      </div>
   </div>
 
   <!-- Diapositiva Reflexión tras el juego -->
@@ -201,6 +256,10 @@
       <p>
 La vida la podemos relacionar con un juego, incluso este momento en que lees esto es eso, un juego, debemos saber en qué momento seguir, obtener rutas para avanzar y mejorar con el paso del tiempo, llevo esas lecciones de alguien muy especial que me lo enseñó hace mucho tiempo. A no quejarme ni desistir facilmente, esa persona eres tú
       </p>
+      <div class="btns-reflection">
+        <button id="backToGame">⟵ Regresar</button>
+        <button id="continueBtn">Seguir</button>
+      </div>
     </div>
   </div>
 
@@ -229,11 +288,14 @@ La vida la podemos relacionar con un juego, incluso este momento en que lees est
     let heartsCatched = 0;
     const scoreSpan = document.getElementById('score');
     const msg = document.getElementById('msg');
+    const msgWrap = document.getElementById('msgWrap');
     const playAgain = document.getElementById('playAgain');
     const goToNext = document.getElementById('goToNext');
     const btnsGroup = document.getElementById('buttons-group');
     const gameBlock = document.getElementById('gameBlock');
     const reflectionSlide = document.getElementById('reflectionSlide');
+    const continueBtn = document.getElementById('continueBtn');
+    const backToGame = document.getElementById('backToGame');
 
     function setBasket(x) {
       left = Math.max(0, Math.min(gameArea.offsetWidth - basket.offsetWidth, x));
@@ -270,6 +332,7 @@ La vida la podemos relacionar con un juego, incluso este momento en que lees est
     function playGame() {
       running = true; score = 0; timeCount = 0; heartsCatched = 0;
       scoreSpan.textContent = 0; msg.textContent = '';
+      msg.classList.remove('msg-active');
       btnsGroup.style.display = "none";
       document.querySelectorAll('.heart').forEach(h=>h.remove());
       hearts = [];
@@ -333,6 +396,7 @@ La vida la podemos relacionar con un juego, incluso este momento en que lees est
         message = "A veces no se gana en el primer intento, y está bien. Lo importante es disfrutar el camino, recordar lo bonito del juego y no perder nunca la sonrisa. Perder aquí no significa perder en la vida; significa que siempre hay una nueva oportunidad de volver a intentarlo y de descubrir alegría en cada intento.<br><br>¡Anímate a jugar otra vez! Yo siempre estaré celebrando cada uno de tus intentos y sonriendo contigo, pase lo que pase.";
       }
       msg.innerHTML = message;
+      setTimeout(() => { msg.classList.add('msg-active'); }, 50);
       btnsGroup.style.display = "flex";
     }
     playAgain.onclick = ()=> {
@@ -340,15 +404,21 @@ La vida la podemos relacionar con un juego, incluso este momento en que lees est
       playGame();
     };
     goToNext.onclick = ()=> {
-      // Oculta el juego, muestra la reflexión
       gameBlock.classList.add('hide');
       reflectionSlide.style.display = 'flex';
       document.body.style.overflow = 'auto';
-      // Cambia suavemente el fondo general para hacerlo más "verde"
-      document.body.style.background =
-        "linear-gradient(120deg, #f6ffe5 7%, #bceda1 37%, #aaf0c3 90%)";
+      document.body.style.background = "linear-gradient(120deg, #f6ffe5 7%, #bceda1 37%, #aaf0c3 90%)";
     };
-
+    backToGame.onclick = () => {
+      reflectionSlide.style.display = "none";
+      gameBlock.classList.remove('hide');
+      document.body.style.overflow = 'hidden';
+      document.body.style.background = "linear-gradient(120deg, #fde68a 0%, #ffb6b9 45%, #a3cef1 100%)";
+      playGame(); // reinicia juego
+    };
+    continueBtn.onclick = () => {
+      alert('Aquí puedes enlazar la siguiente sección/final/URL 😊');
+    }
     window.onload = ()=> {
       btnsGroup.style.display = "none";
       reflectionSlide.style.display = "none";
