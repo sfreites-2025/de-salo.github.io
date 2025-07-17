@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Nada, Nadie, Nunca – Reik & Spider-Man</title>
+  <title>Nada, Nadie, Nunca – Reik</title>
   <style>
     html, body {
       margin: 0; padding: 0; min-height: 100vh; width: 100vw;
@@ -12,7 +12,6 @@
       background: #1c253a;
       overflow-x: hidden;
     }
-    /* ---- Página de la canción ---- */
     .main-flex {
       width: 100vw; min-height: 100vh; display: flex;
       align-items: center; justify-content: flex-start;
@@ -101,6 +100,23 @@
       0% {box-shadow: 0 3px 14px #d4b3ffd9, 0 2px 20px #a8f0ff44;}
       100%{box-shadow: 0 3px 26px #e2afea99, 0 2px 26px #ffe3f7aa;}
     }
+    .song-title {
+      font-size: 1.19em;
+      font-weight: 700;
+      color: #2d144c;
+      text-align: center;
+      margin-bottom: 7px;
+      letter-spacing: 0.01em;
+      text-shadow: 0 2px 10px #faf7ff,0 1px 5px #edddf599;
+    }
+    .artist-name {
+      font-size: 1em;
+      color: #8d4abb;
+      margin-bottom: 11px;
+      font-weight: 500;
+      text-align: center;
+      letter-spacing: 0.01em;
+    }
     .player-linkspace {
       width: 100%; display: flex; justify-content: center; align-items: center;
       margin-bottom: 4px;
@@ -177,7 +193,6 @@
       background: linear-gradient(97deg, #3568b7 40%, #ed3555 95%);
       color: #ffd793;
     }
-    /* Frase secundaria inferior derecha */
     .frase-secundaria-fixed {
       position: fixed;
       right: 2vw; bottom: 22px;
@@ -195,6 +210,14 @@
       0% {transform: translateY(60px); opacity:0;}
       100%{transform:none; opacity:0.73;}
     }
+    @keyframes susurroFlash {
+      from {filter: brightness(1);}
+      to {filter: brightness(1.15); color: #5f2777; letter-spacing: 0.026em;}
+    }
+    @keyframes btnpulseIn {
+      0%{box-shadow: 0 2px 13px #e96676a9;}
+      100%{box-shadow: 0 6px 28px #ed355580;}
+    }
     @media (max-width:900px){
       .main-flex{flex-direction:column; align-items:flex-start; min-height:100vh;}
       .side-text {padding-left:5vw; margin-top: 48px; padding-right:7vw; }
@@ -209,116 +232,11 @@
     @media (max-width:750px){
       .frase-secundaria-fixed{right: 6vw; bottom: 14px; font-size:0.96em;}
     }
-
-    /* SpiderMan PAGE */
-    #spidermanPage {
-      display: none;
-      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-      z-index: 1000;
-      background:
-        linear-gradient(120deg,#1c253ae9 65%, #ea354d88 100%),
-        url('https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=1200&q=80');
-      background-size: cover;
-      background-position: center;
-      min-height: 100vh;
-      animation: spideyIn 1s cubic-bezier(.14,.68,.12,1.1) both;
-      overflow-x:hidden;
-    }
-    @keyframes spideyIn {
-      0% {opacity: 0; filter: blur(8px);}
-      100%{opacity: 1; filter: none;}
-    }
-    .main-flex2 {
-      width: 100vw; min-height: 100vh; display: flex;
-      align-items: center; justify-content: space-between;
-      position: relative;
-      z-index: 2;
-      padding: 0 2vw 0 2vw;
-      animation: mainFade 1s 0.3s both;
-    }
-    .side-left2 {
-      flex: 1.1; min-width: 82px;
-      display: flex; flex-direction: column; align-items: flex-start; justify-content: center;
-    }
-    .btns-nav2 {
-      margin-top: 40px;
-      display: flex; gap: 28px;
-      flex-direction: row; align-items: center; margin-left: 24px;
-    }
-    .btns-nav2 button {
-      font-family: inherit; font-size: 1.08em; font-weight: 700;
-      padding: 15px 36px;
-      background: linear-gradient(110deg, #ed3555 18%, #3568b7 100%);
-      color: #fff; border: none;
-      border-radius: 23px;
-      box-shadow: 0 2px 13px #e96676a9, 0 2px 19px #3662a099;
-      cursor: pointer; min-width: 112px; outline: none;
-      letter-spacing: 0.03em; animation: btnpulseIn 1.2s infinite alternate;
-      transition: background 0.25s, color 0.18s, box-shadow 0.21s;
-    }
-    .btns-nav2 button:hover {
-      background: linear-gradient(100deg,#3568b7,#ed3555 80%);
-      color: #ffd793;
-      box-shadow: 0 4px 19px #ed355566, 0 2px 28px #3559a177;
-    }
-    .spidey-message2 {
-      display: flex; flex-direction: column; align-items: flex-end; justify-content: center;
-      flex: 2;
-      min-width: 340px;
-      max-width: 640px;
-      padding-right: 5vw;
-      z-index: 10;
-    }
-    .msg-card2 {
-      background: linear-gradient(99deg, #e3f0ff 80%, #d64b6870 100%);
-      border-radius: 38px 17px 30px 18px / 28px 34px 38px 21px;
-      box-shadow: 0 8px 44px #e7343442, 0 2px 44px #4773e688;
-      padding: 48px 42px 38px 45px;
-      font-size: 1.08em;
-      color: #172444;
-      line-height: 1.69;
-      font-weight: 400;
-      min-width: 320px;
-      max-width: 570px;
-      letter-spacing: 0.01em;
-      text-align: right;
-      white-space: pre-line;
-      animation: slideHeroIn 1.26s cubic-bezier(.43,.91,.27,1.01) both;
-      opacity: 0;
-      animation-delay: 0.48s;
-    }
-    .msg-card2:before {
-      content: "";
-      display: block;
-      width: 68px; height: 68px;
-      background: url('https://upload.wikimedia.org/wikipedia/commons/0/02/Spider-Man_Cartoon.png');
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: right;
-      float: right;
-      margin-left: 20px;
-      margin-bottom: 6px;
-      opacity: .91;
-      animation: swingSpider 4s infinite alternate;
-    }
-    @media (max-width:900px){
-      .main-flex2{flex-direction:column; min-height:105vh; align-items:flex-start; justify-content:flex-start;}
-      .side-left2{padding-left:3vw; margin-bottom:38px;}
-      .spidey-message2{align-items:center; padding-right:2vw;}
-      .msg-card2{text-align:center; min-width:unset; max-width:97vw;}
-      .btns-nav2{margin:24px auto 0 auto;}
-    }
-    @media (max-width:600px){
-      .main-flex2{padding:0;}
-      .side-left2{padding-left:4vw;}
-      .spidey-message2{padding-right:2vw;}
-      .msg-card2{padding:24px 2vw;}
-    }
   </style>
 </head>
 <body>
-  <!-- PRIMERA PAGINA: CANCIÓN DE REIK -->
-  <div class="main-flex" id="paginaCancion">
+  <div class="main-flex">
+    <!-- Mensaje izquierda -->
     <div class="side-text">
       <div class="mensaje-principal">
 Hay canciones que parecen escritas para nombrar lo que sentimos, por más que pase el tiempo, que cambien las estaciones o los destinos, nada, nadie y nunca podrá borrar lo que dejaste en mí. En cada latido, en cada silencio, tus huellas siguen vivas y llenas de luz. Si alguna vez dudé de lo que era amar, contigo lo aprendí: que no existen imposibles cuando el corazón se aferra a un momento, a una persona, a un recuerdo tan profundo, tan único.
@@ -329,6 +247,7 @@ Ahora comprendo que no importa cuán lejos estén nuestros caminos, porque hay c
         <button id="cancionSiguiente">Siguiente →</button>
       </div>
     </div>
+    <!-- Player derecha -->
     <div class="player-side">
       <div class="player-card">
         <div class="player-art"></div>
@@ -358,40 +277,8 @@ Ahora comprendo que no importa cuán lejos estén nuestros caminos, porque hay c
       La has oído...? Escúchala cuando puedas
     </div>
   </div>
-
-  <!-- SEGUNDA PAGINA: SPIDERMAN -->
-  <div id="spidermanPage" style="display:none;">
-    <div class="main-flex2">
-      <div class="side-left2">
-        <div class="btns-nav2">
-          <button id="spideyRegresar">⟵ Regresar</button>
-          <button id="spideySiguiente">Siguiente →</button>
-        </div>
-      </div>
-      <div class="spidey-message2">
-        <div class="msg-card2">
-Sometimes I think about Spider-Man and how, even with the weight of the world on his shoulders, he never gives up on what he loves or on the people who matter to him.
-
-With great power comes great responsibility, but I’ve learned from you that real strength is not just about saving the world—it’s about never letting go of your dreams, protecting your heart, and helping others even when it’s hard.
-
-Like Spider-Man swinging fearlessly through the city, you face every challenge with courage and kindness. Knowing you has taught me that being a hero isn’t about having superpowers; it’s about having the bravery to keep going, no matter the obstacle.
-        </div>
-      </div>
-    </div>
-  </div>
-
   <script>
-    // Avanzar a Spiderman
     document.getElementById('cancionSiguiente').onclick = function(){
-      document.getElementById('paginaCancion').style.display = "none";
-      document.getElementById('spidermanPage').style.display = "block";
-    };
-    // Regresar (vuelve a la canción)
-    document.getElementById('spideyRegresar').onclick = function(){
-      document.getElementById('spidermanPage').style.display = "none";
-      document.getElementById('paginaCancion').style.display = "flex";
-    };
-    document.getElementById('spideySiguiente').onclick = function(){
       window.location.href = "index6.html";
     };
   </script>
