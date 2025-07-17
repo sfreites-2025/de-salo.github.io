@@ -59,7 +59,8 @@
       0% { color: #444; text-shadow: none; }
       100% { color: #fd5e53; text-shadow: 0 0 20px #fd5e53aa; }
     }
-    /* --- Página 6 */
+
+    /* --- Página 6 --- */
     #slide6 {
       background: url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1400&q=80') no-repeat center center fixed;
       background-size: cover;
@@ -71,7 +72,8 @@
       max-width: 600px;
       text-align: right;
     }
-    /* --- Página 7 */
+
+    /* --- Página 7 --- */
     #slide7 {
       background: url('https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=1400&q=80') no-repeat center center fixed;
       background-size: cover;
@@ -94,6 +96,7 @@
       0% { color: #f9d342; text-shadow: 0 0 12px #f9d342cc; }
       100% { color: #fffd9a; text-shadow: 0 0 20px #fffd9aaa, 0 0 40px #fffbaaaa; }
     }
+
     /* --- Página 8 --- */
     #slide8 {
       background: url('https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=1400&q=80') no-repeat center center fixed;
@@ -118,7 +121,8 @@
       backdrop-filter: blur(2px);
       color: #312b38;
       line-height: 1.72;
-      font-size: 1.17em;
+      font-size: 1em; /* Texto más pequeño */
+      letter-spacing: 0.01em;
     }
     @keyframes leftFadeScaleIn {
       to {
@@ -129,7 +133,7 @@
     }
     #slide8 h1 {
       color: #26355d;
-      font-size: 2.32em;
+      font-size: 2.3em;
       margin-bottom: 1.1em;
       letter-spacing: 0.03em;
       font-weight: bold;
@@ -141,13 +145,15 @@
       100% { color: #fd5e53; text-shadow: 0 0 30px #fd5e5344, 0 2px 24px #fff5; }
     }
     #slide8 p {
-      font-size: 1.17em;
-      color: #2d2a35;
-      line-height: 1.79;
+      margin-bottom: 1.8em;
       white-space: pre-line;
       text-shadow: 0 4px 18px #fff4;
-      margin-bottom: 1.8em;
+      color: #2d2a35;
+      line-height: 1.6;
+      font-size: 1em; /* Texto más pequeño */
+      letter-spacing: 0.01em;
     }
+
     /* --- Botones --- */
     button {
       font-family: "Times New Roman", Times, serif;
@@ -173,6 +179,7 @@
       flex-wrap: wrap;
     }
     #slide8 .buttons-container { justify-content: flex-start; }
+
     @media(max-width: 900px){
       .slide { padding: 12px; }
       #slide6 .text-container, #slide7 .text-container, #slide8 .text-container {
@@ -232,16 +239,18 @@ Recuerda siempre: no existen límites para quien trabaja con pasión y entrega t
     </div>
   </section>
 
-  <!-- Página 8 (Graduación alineada izquierda) -->
+  <!-- Página 8 (Graduación alineada izquierda, texto pequeño y animado) -->
   <section id="slide8" class="slide" role="main" aria-label="Octava diapositiva, graduación">
     <div class="text-container">
-      <h1>¡Felicidades, graduada!</h1>
+      <h1>Nueva etapa</h1>
       <p>
-Pero no todo tiene que ser del pasado claramente, hoy celebras mucho más que un logro académico; celebras cada desvelo, cada reto superado y cada línea de código que te acercó un poco más a tus sueños. Llevas en tus manos el resultado de tu esfuerzo y una mente preparada para crear, innovar y transformar el mundo desde la informática.
-Verte avanzar, enfrentando cada problema con lógica, paciencia y dedicación, demuestra tu capacidad para reinventarte y salir adelante sin detenerte ante las dificultades. Eres prueba de que la pasión por aprender abre puertas y que, incluso en los momentos más complejos, tu determinación no conoce límites.Hoy comienza una nueva etapa y no puedo evitar sentir orgullo y admiración por la persona en la que te has convertido. Siempre serás esa inspiración silenciosa para seguir aprendiendo y creciendo, dentro y fuera de cualquier sala de computadoras.
+Pero no todo tiene que ser del pasado claramente, hoy celebras mucho más que un logro académico; celebras cada desvelo, cada reto superado y cada línea de código que te acercó un poco más a tus sueños. Llevas en tus manos el resultado de tu esfuerzo y una mente preparada para crear, innovar y transformar el mundo desde la informática.<br><br>
+Verte avanzar, enfrentando cada problema con lógica, paciencia y dedicación, demuestra tu capacidad para reinventarte y salir adelante sin detenerte ante las dificultades. Eres prueba de que la pasión por aprender abre puertas y que, incluso en los momentos más complejos, tu determinación no conoce límites.<br><br>
+Hoy comienza una nueva etapa y no puedo evitar sentir orgullo y admiración por la persona en la que te has convertido. Siempre serás esa inspiración silenciosa para seguir aprendiendo y creciendo, dentro y fuera de cualquier sala de computadoras.
       </p>
       <div class="buttons-container">
         <button id="backTo7">← Volver</button>
+        <button id="toSlide9">Siguiente →</button>
       </div>
     </div>
   </section>
@@ -256,6 +265,7 @@ Verte avanzar, enfrentando cada problema con lógica, paciencia y dedicación, d
     const toSlide8Btn = document.getElementById('toSlide8');
     const backTo6Btn = document.getElementById('backTo6');
     const backTo7Btn = document.getElementById('backTo7');
+    const toSlide9Btn = document.getElementById('toSlide9');
 
     // De 6 a 7
     toSlide7Btn.addEventListener('click', () => {
@@ -281,6 +291,12 @@ Verte avanzar, enfrentando cada problema con lógica, paciencia y dedicación, d
       slide7.classList.add('active');
       window.scrollTo(0,0);
     });
+    // Botón siguiente en página 8 (puedes personalizar su función después)
+    if (toSlide9Btn) {
+      toSlide9Btn.addEventListener('click', () => {
+        alert('Aquí puedes enlazar la página 9 o cualquier acción que quieras.');
+      });
+    }
   </script>
 </body>
 </html>
