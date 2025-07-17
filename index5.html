@@ -3,34 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Nada, Nadie, Nunca – Reik</title>
+  <title>Nada, Nadie, Nunca – Reik & Spider-Man</title>
   <style>
     html, body {
       margin: 0; padding: 0; min-height: 100vh; width: 100vw;
       font-family: "Times New Roman", Times, serif;
       height: 100vh;
-      background: linear-gradient(120deg, #404d6e 0%, #efd9de 90%);
+      background: #1c253a;
+      overflow-x: hidden;
+    }
+    /* ---- Página de la canción ---- */
+    .main-flex {
+      width: 100vw; min-height: 100vh; display: flex;
+      align-items: center; justify-content: flex-start;
+      gap: 0;
+      position: relative;
+      padding: 0; margin: 0;
       background-image:
         linear-gradient(120deg, #2b355276 15%, #b39abb44 66%, #f6e0e4 95%),
         url('https://images.unsplash.com/photo-1454067632098-886ccf29e204?auto=format&fit=crop&w=1400&q=80');
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center top;
-      position: relative;
-      overflow-x: hidden;
-    }
-    .main-flex {
-      width: 100vw; min-height: 100vh; display: flex;
-      align-items: center; justify-content: flex-start;
-      gap: 0; /* no gap desktop, stacked on mobile */
-      position: relative;
-      padding: 0; margin: 0;
       animation: fondoFade 1.6s both;
     }
-    @keyframes fondoFade {
-      0% {opacity:0; filter: blur(10px);}
-      100%{opacity:1; filter: none;}
-    }
+    @keyframes fondoFade { 0% {opacity:0; filter:blur(10px);} 100%{opacity:1; filter:none;} }
     .side-text {
       flex: 1.3;
       padding-left: 6vw;
@@ -198,21 +195,169 @@
       0%{width:19%;}
       100%{width:87%;}
     }
-    /* --- Responsive --- */
+    .pagina-cancion-nav {
+      margin-top: 44px;
+      margin-left: 4vw;
+      display: flex;
+      align-items: center; gap: 28px;
+      z-index: 10;
+      position: absolute; left: 0; bottom: 0;
+    }
+    .pagina-cancion-nav button {
+      font-family: inherit;
+      font-size: 1.11em;
+      font-weight: 700;
+      padding: 14px 40px;
+      background: linear-gradient(110deg, #ed3555 18%, #3568b7 100%);
+      color: #fff;
+      border: none;
+      border-radius: 23px;
+      box-shadow: 0 2px 13px #e96676a9, 0 2px 19px #3662a099;
+      cursor: pointer;
+      outline: none;
+      min-width: 124px;
+      margin-bottom: 36px;
+      letter-spacing: 0.03em;
+      animation: btnpulseIn 1.2s infinite alternate;
+      transition: background 0.25s, color 0.19s, box-shadow 0.18s;
+    }
+    .pagina-cancion-nav button:hover {
+      background: linear-gradient(97deg, #3568b7 40%, #ed3555 95%);
+      color: #ffd793;
+    }
+    @keyframes btnpulseIn {
+      0%{box-shadow: 0 2px 13px #e96676a9;}
+      100%{box-shadow: 0 6px 28px #ed355580;}
+    }
     @media (max-width:850px){
-      .main-flex{ flex-direction:column; align-items: flex-start; justify-content:flex-start; min-height:100vh; gap:0;}
-      .side-text { padding-left:5vw; margin-top: 48px; padding-right:10vw; }
-      .player-side{ padding-right:0; margin-left:0; height:auto; padding-bottom:41px;}
+      .main-flex{flex-direction:column; align-items:flex-start; min-height:100vh; gap:0;}
+      .side-text {padding-left:5vw; margin-top: 48px; padding-right:7vw; }
+      .player-side{padding-right:0; margin-left:0; height:auto; padding-bottom:41px;}
+      .pagina-cancion-nav{ position:static; flex-direction:row; margin:44px 0 0 0; justify-content:center;}
     }
     @media (max-width:580px){
       .main-flex{flex-direction:column;}
-      .side-text{padding:15px 7vw 7px 7vw; max-width:98vw; min-width:unset;}
+      .side-text{padding:15px 7vw 7px 7vw; max-width:98vw;}
       .player-card{padding:24px 2vw; margin-top:30px;}
+    }
+
+    /* -- SpiderMan PAGE -- */
+    #spidermanPage {
+      display: none;
+      width: 100vw; height: 100vh;
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 100;
+      background:
+        linear-gradient(120deg,#1c253a 72%, #8bd5f1ee 100%),
+        url('https://wallpapercave.com/wp/wp2186075.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center center;
+      min-height: 100vh;
+      animation: spideyIn 1.7s cubic-bezier(.14,.68,.12,1.1) both;
+      overflow-x:hidden;
+    }
+    @keyframes spideyIn {
+      0% {opacity: 0; filter: blur(8px);}
+      100%{opacity: 1; filter: none;}
+    }
+    .main-flex2 {
+      width: 100vw; min-height: 100vh; display: flex;
+      align-items: center; justify-content: space-between;
+      position: relative;
+      z-index: 2;
+      padding: 0 2vw 0 2vw;
+      animation: mainFade 1s 0.3s both;
+    }
+    .side-left2 {
+      flex: 1.1; min-width: 82px;
+      display: flex; flex-direction: column; align-items: flex-start; justify-content: center;
+    }
+    .btns-nav2 {
+      margin-top: 40px;
+      display: flex;
+      gap: 28px;
+      flex-direction: row;
+      align-items: center;
+      margin-left: 24px;
+    }
+    .btns-nav2 button {
+      font-family: inherit;
+      font-size: 1.08em;
+      font-weight: 700;
+      padding: 15px 36px;
+      background: linear-gradient(110deg, #ed3555 18%, #3568b7 100%);
+      color: #fff; border: none;
+      border-radius: 23px;
+      box-shadow: 0 2px 13px #e96676a9, 0 2px 19px #3662a099;
+      cursor: pointer; min-width: 112px; outline: none;
+      transition: background 0.25s, color 0.18s, box-shadow 0.21s;
+      letter-spacing: 0.03em;
+      animation: btnpulseIn 1.2s infinite alternate;
+    }
+    .btns-nav2 button:hover {
+      background: linear-gradient(100deg,#3568b7,#ed3555 80%);
+      color: #ffd793;
+      box-shadow: 0 4px 19px #ed355566, 0 2px 28px #3559a177;
+    }
+    .spidey-message2 {
+      display: flex; flex-direction: column; align-items: flex-end; justify-content: center;
+      flex: 2;
+      min-width: 340px;
+      max-width: 640px;
+      padding-right: 5vw;
+      z-index: 10;
+    }
+    .msg-card2 {
+      background: linear-gradient(99deg, #e3f0ff 80%, #d64b6870 100%);
+      border-radius: 38px 17px 30px 18px / 28px 34px 38px 21px;
+      box-shadow: 0 8px 44px #e7343442, 0 2px 44px #4773e688;
+      padding: 48px 42px 38px 45px;
+      font-size: 1.08em;
+      color: #172444;
+      line-height: 1.69;
+      font-weight: 400;
+      min-width: 320px;
+      max-width: 570px;
+      letter-spacing: 0.01em;
+      text-align: right;
+      white-space: pre-line;
+      animation: slideHeroIn 1.26s cubic-bezier(.43,.91,.27,1.01) both;
+      opacity: 0;
+      animation-delay: 0.48s;
+    }
+    .msg-card2:before {
+      content: "";
+      display: block;
+      width: 68px; height: 68px;
+      background: url('https://upload.wikimedia.org/wikipedia/commons/0/02/Spider-Man_Cartoon.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: right;
+      float: right;
+      margin-left: 20px;
+      margin-bottom: 6px;
+      opacity: .91;
+      animation: swingSpider 4s infinite alternate;
+    }
+    @media (max-width:900px){
+      .main-flex2{flex-direction:column; min-height:105vh; align-items:flex-start; justify-content:flex-start;}
+      .side-left2{padding-left:3vw; margin-bottom:38px;}
+      .spidey-message2{align-items:center; padding-right:2vw;}
+      .msg-card2{text-align:center; min-width:unset; max-width:97vw;}
+      .btns-nav2{margin:24px auto 0 auto;}
+    }
+    @media (max-width:600px){
+      .main-flex2{padding:0;}
+      .side-left2{padding-left:4vw;}
+      .spidey-message2{padding-right:2vw;}
+      .msg-card2{padding:24px 2vw;}
     }
   </style>
 </head>
 <body>
-  <div class="main-flex">
+  <!-- PRIMERA PAGINA: CANCIÓN DE REIK -->
+  <div class="main-flex" id="paginaCancion">
     <!-- Mensaje izquierda -->
     <div class="side-text">
       <div class="mensaje-principal">
@@ -221,6 +366,9 @@ Hay canciones que parecen escritas para nombrar lo que sentimos, por más que pa
 Ahora comprendo que no importa cuán lejos estén nuestros caminos, porque hay cosas que ni el tiempo ni la distancia logran desvanecer. Nada, nadie, nunca podrá ocupar ese lugar en mi vida que solo tú podrías llenar. Y así como la canción lo dice, “ni el mundo contra mí” sería suficiente para dejar de sentir este cariño. Lo que fuiste y eres para mí, se queda aquí, inviolable, permanente; porque hay amores que ni el olvido puede tocar.
       </div>
       <div class="frase-secundaria">La has oído...? Escúchala cuando puedas</div>
+      <div class="pagina-cancion-nav">
+        <button id="cancionSiguiente">Siguiente →</button>
+      </div>
     </div>
     <!-- Player derecha -->
     <div class="player-side">
@@ -248,5 +396,43 @@ Ahora comprendo que no importa cuán lejos estén nuestros caminos, porque hay c
       </div>
     </div>
   </div>
+
+  <!-- SEGUNDA PAGINA: SPIDERMAN -->
+  <div id="spidermanPage" style="display:none;">
+    <div class="main-flex2">
+      <div class="side-left2">
+        <div class="btns-nav2">
+          <button id="spideyRegresar">⟵ Regresar</button>
+          <button id="spideySiguiente">Siguiente →</button>
+        </div>
+      </div>
+      <div class="spidey-message2">
+        <div class="msg-card2">
+Sometimes I think about Spider-Man and how, even with the weight of the world on his shoulders, he never gives up on what he loves or on the people who matter to him.
+
+With great power comes great responsibility, but I’ve learned from you that real strength is not just about saving the world—it’s about never letting go of your dreams, protecting your heart, and helping others even when it’s hard.
+
+Like Spider-Man swinging fearlessly through the city, you face every challenge with courage and kindness. Knowing you has taught me that being a hero isn’t about having superpowers; it’s about having the bravery to keep going, no matter the obstacle.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Botón para avanzar a Spiderman
+    document.getElementById('cancionSiguiente').onclick = function(){
+      document.getElementById('paginaCancion').style.display = "none";
+      document.getElementById('spidermanPage').style.display = "";
+    };
+    // Botón regresar en Spiderman (vuelve a la canción)
+    document.getElementById('spideyRegresar').onclick = function(){
+      document.getElementById('spidermanPage').style.display = "none";
+      document.getElementById('paginaCancion').style.display = "";
+    };
+    // Botón siguiente: va a index6.html
+    document.getElementById('spideySiguiente').onclick = function(){
+      window.location.href = "index6.html";
+    };
+  </script>
 </body>
 </html>
