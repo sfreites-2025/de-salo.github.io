@@ -173,7 +173,6 @@
       flex-wrap: wrap;
     }
     #slide8 .buttons-container { justify-content: flex-start; }
-
     @media(max-width: 900px){
       .slide { padding: 12px; }
       #slide6 .text-container, #slide7 .text-container, #slide8 .text-container {
@@ -239,10 +238,7 @@ Recuerda siempre: no existen límites para quien trabaja con pasión y entrega t
       <h1>¡Felicidades, graduada!</h1>
       <p>
 Pero no todo tiene que ser del pasado claramente, hoy celebras mucho más que un logro académico; celebras cada desvelo, cada reto superado y cada línea de código que te acercó un poco más a tus sueños. Llevas en tus manos el resultado de tu esfuerzo y una mente preparada para crear, innovar y transformar el mundo desde la informática.
-
-Verte avanzar, enfrentando cada problema con lógica, paciencia y dedicación, demuestra tu capacidad para reinventarte y salir adelante sin detenerte ante las dificultades. Eres prueba de que la pasión por aprender abre puertas y que, incluso en los momentos más complejos, tu determinación no conoce límites.
-
-Hoy comienza una nueva etapa y no puedo evitar sentir orgullo y admiración por la persona en la que te has convertido. Siempre serás esa inspiración silenciosa para seguir aprendiendo y creciendo, dentro y fuera de cualquier sala de computadoras.
+Verte avanzar, enfrentando cada problema con lógica, paciencia y dedicación, demuestra tu capacidad para reinventarte y salir adelante sin detenerte ante las dificultades. Eres prueba de que la pasión por aprender abre puertas y que, incluso en los momentos más complejos, tu determinación no conoce límites.Hoy comienza una nueva etapa y no puedo evitar sentir orgullo y admiración por la persona en la que te has convertido. Siempre serás esa inspiración silenciosa para seguir aprendiendo y creciendo, dentro y fuera de cualquier sala de computadoras.
       </p>
       <div class="buttons-container">
         <button id="backTo7">← Volver</button>
@@ -261,31 +257,30 @@ Hoy comienza una nueva etapa y no puedo evitar sentir orgullo y admiración por 
     const backTo6Btn = document.getElementById('backTo6');
     const backTo7Btn = document.getElementById('backTo7');
 
-    // Pasa de 6 a 7
+    // De 6 a 7
     toSlide7Btn.addEventListener('click', () => {
       slide6.classList.remove('active');
       slide7.classList.add('active');
       window.scrollTo(0,0);
     });
-    // Vuelve de 7 a 6
+    // De 7 a 6
     backTo6Btn.addEventListener('click', () => {
       slide7.classList.remove('active');
       slide6.classList.add('active');
       window.scrollTo(0,0);
     });
-    // Pasa de 7 a 8
+    // De 7 a 8
     toSlide8Btn.addEventListener('click', () => {
       slide7.classList.remove('active');
       slide8.classList.add('active');
       window.scrollTo(0,0);
     });
-    // Vuelve de 8 a 7
+    // De 8 a 7
     backTo7Btn.addEventListener('click', () => {
       slide8.classList.remove('active');
       slide7.classList.add('active');
       window.scrollTo(0,0);
     });
   </script>
-
 </body>
 </html>
