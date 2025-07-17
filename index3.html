@@ -3,17 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Pausa interactiva y más (Juego, Reflexión, Electricidad, Final)</title>
+  <title>Pausa interactiva - Atrapa los corazones</title>
   <style>
-    html, body {
-      margin: 0; padding: 0; min-height: 100vh; width: 100vw;
-      font-family: 'Times New Roman', Times, serif;
-      background: #1a2037;
+    body, html {
+      margin: 0; padding: 0; height: 100%;
+      width: 100vw;
       overflow: hidden;
+      background: linear-gradient(120deg, #fde68a 0%, #ffb6b9 45%, #a3cef1 100%);
+      font-family: 'Times New Roman', Times, serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
     }
-    .hide { display: none !important; }
-    /* --- Juego -------- */
-    #gameBlock { width: 100vw; min-height: 100vh; display: flex; flex-direction: column; align-items: center; }
     h1 {
       margin: 30px 0 8px 0;
       font-size: 2.2em;
@@ -24,11 +26,9 @@
       animation: rainbowPulse 3s infinite alternate cubic-bezier(.67,0,.32,1.3);
     }
     @keyframes rainbowPulse {
-      0%   { color: #f9436e; text-shadow: 0 2px 12px #ffb6b988, 0 1px 20px #fff6;}
+      0% { color: #f9436e; text-shadow: 0 2px 12px #ffb6b988, 0 1px 20px #fff6;}
       100% { color: #fdbe27; text-shadow: 0 2px 24px #a3cef166, 0 3px 30px #fff9;}
     }
-    #scorePanel { text-align: center; margin-bottom: 2px;}
-    #scorePanel span { font-weight: bold; color: #26355d; font-size: 1.3em; text-shadow: 0 2px 14px #fff4; transition: color 0.3s; }
     #gameArea {
       background: rgba(255,255,255,0.14);
       border-radius: 25px;
@@ -63,49 +63,33 @@
       user-select: none;
     }
     @keyframes bounce { 0% {transform: scale(1) rotate(-15deg);} 100% {transform: scale(1.09) rotate(10deg);} }
-    /* --- Mensaje JUEGO izquierdo animado --- */
-    #msgWrap {
-      width: 100%;
-      display: flex;
-      justify-content: flex-start;
-      margin-top: 22px;
+    #scorePanel { text-align: center; margin-bottom: 2px;}
+    #scorePanel span {
+      font-weight: bold; color: #26355d; font-size: 1.3em;
+      text-shadow: 0 2px 14px #fff4; transition: color 0.3s;
     }
     #msg {
-      font-size: 1.1em;
+      font-size: 1.04em;
       color: #f9436e;
-      min-height: 44px;
-      max-width: 390px;
-      background: rgba(255,255,255,0.90);
-      border-radius: 17px;
-      box-shadow: 0 2px 22px #ffb6b966;
-      padding: 22px 29px 17px 32px;
-      margin-left: 40px;
-      margin-top: 4px;
-      text-align: left;
-      line-height: 1.53;
-      letter-spacing: 0.01em;
-      opacity: 0;
-      transform: translateX(-45px);
-      transition: opacity 0.7s cubic-bezier(.33,.7,.32,1.11), transform 0.8s cubic-bezier(.38,1.25,.6,1.12);
-      animation: msgAppear 1.09s both;
-      animation-delay: 0.20s;
+      min-height: 38px;
+      margin-top: 16px;
+      animation: fadeIn 1s;
+      max-width: 410px;
+      text-align: center;
+      background: rgba(255,255,255,0.75);
+      border-radius: 16px;
+      padding: 17px;
+      box-shadow: 0 2px 18px #ffb6b988;
+      margin-left: auto; margin-right: auto;
+      line-height: 1.42;
     }
-    .msg-active {
-      opacity: 1 !important;
-      transform: translateX(0) scale(1.01);
-      box-shadow: 0 5px 31px #ffb6b977, 0 2px 24px #fde68a4b;
-    }
-    @keyframes msgAppear {
-      0%   { opacity:0; transform: translateX(-35px);}
-      100% { opacity:1; transform: translateX(0) scale(1.01);}
-    }
+    @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
     #buttons-group {
       margin-top: 20px;
       display: none;
       flex-direction: row;
       gap: 17px;
-      justify-content: flex-start;
-      margin-left: 42px;
+      justify-content: center;
     }
     #buttons-group button {
       padding: 10px 26px;
@@ -117,329 +101,63 @@
       box-shadow: 0 4px 18px #fa617b44;
       background: linear-gradient(90deg,#f9436e,#ffb6b9 90%);
       color: #fff;
-      font-weight: 600;
       transition: background 0.22s;
+      font-weight: 600;
     }
     #buttons-group button:hover {
       background: linear-gradient(90deg,#ffb6b9,#f9436e);
       color: #ffe066;
     }
-
-    /* --- PAG 11 (Reflexión) --- */
-    #reflectionSlide { display:none; align-items:center; justify-content:center; min-height:100vh; min-width:100vw;
-      position:absolute; top:0; left:0; width:100vw; height:100vh;
-      background:url('https://images.unsplash.com/photo-1465101178521-c7aebf1a8496?auto=format&fit=crop&w=1400&q=80') center center no-repeat;
-      background-size:cover; animation:upFade 1.2s 0.18s both; z-index:100; flex-direction:column;}
-    @keyframes upFade { 0%{opacity:0; filter:blur(5px) brightness(1.08);} 90%{filter:blur(0) brightness(1);} 100%{opacity:1;} }
-    .center-box { background:rgba(255,255,255,0.94); box-shadow:0 16px 44px #b8e2af55, 0 2px 48px #78937a17;
-      border-radius:28px; max-width:660px; padding:52px 42px 36px 42px; text-align:center;
-      animation:fadeScaleIn 1.6s cubic-bezier(.41,.8,.36,1.05) both; margin:auto;}
-    @keyframes fadeScaleIn { 0%{opacity:0; transform:scale(0.95);} 100%{opacity:1; transform:scale(1);} }
-    .center-box h2 { font-size:2.1em; color:#267266; font-weight:bold; letter-spacing:0.03em; margin-bottom:18px;
-      text-shadow:0 2px 14px #ffffffcc; animation:greenPulse 3s infinite alternate;}
-    @keyframes greenPulse { 0%{color:#267266; text-shadow:0 1px 12px #beeed7cc;} 100%{color:#6bcf84; text-shadow:0 3px 32px #8be9a0cc, 0 1px 33px #ffffff69;} }
-    .center-box p { font-size:1.19em; color:#214d3c; line-height: 1.68; letter-spacing:0.01em;
-      animation: textRise 1.65s 0.18s both; white-space: pre-line; margin:0 0 24px 0;
-      text-shadow:0 3px 22px #beeed788, 0 1px 16px #eee7;}
-    @keyframes textRise { 0%{opacity:0; transform:translateY(40px);} 100%{opacity:1; transform:translateY(0);} }
-    .center-box .btns-reflection { margin-top:28px; display:flex; gap:25px; justify-content:center;}
-    .center-box .btns-reflection button { padding:11px 30px; font-size:1.07em; color:#fff;
-      background:linear-gradient(90deg,#71b97a, #7ee0c7 80%);
-      border:none; border-radius:18px; font-family:inherit; font-weight:600; cursor:pointer;
-      box-shadow:0 3px 16px #79dfb688; transition:background 0.2s, color 0.18s;}
-    .center-box .btns-reflection button:hover { background:linear-gradient(90deg, #7ee0c7,#71b97a 75%); color:#267266;}
-
-    /* ----- PAG 12: ELECTRICIDAD ----- */
-    #slide12 {
-      display: none;
-      position: absolute;
-      top: 0; left: 0; width: 100vw; height: 100vh;
-      display: flex; align-items: center; justify-content: flex-end;
-      background: url('https://images.unsplash.com/photo-1464980840309-c3c8c205b6b5?auto=format&fit=crop&w=1200&q=80') center center no-repeat;
-      background-size: cover;
-      z-index: 101;
-      transition: opacity 0.4s;
-      min-height: 100vh;
-    }
-    #slide12 .content-electric {
-      background: linear-gradient(97deg, #e2eafd 78%, #a4e7e6 100%);
-      box-shadow: 0 8px 48px 0 #1a2037a0;
-      border-radius: 26px;
-      padding: 48px 47px 40px 40px;
-      max-width: 510px;
-      margin-right: 7vw;
-      margin-left: 20px;
-      color: #2c253d;
-      display: flex; flex-direction: column;
-      align-items: flex-end;
-      min-width: 325px;
-      animation: fadeRightIn 1.25s;
-      opacity: 0;
-      animation-fill-mode: forwards;
-      animation-delay: 0.36s;
-    }
-    @keyframes fadeRightIn {
-      0% {opacity:0; transform: translateX(100px) scale(0.95);}
-      70% {opacity: .75;}
-      100% {opacity:1; transform: translateX(0) scale(1);}
-    }
-    #slide12 .elec-txt {
-      font-size: 1.18em;
-      line-height: 1.74;
-      margin-bottom: 36px;
-      letter-spacing: 0.012em;
-      text-align: right;
-      min-height: 140px;
-      max-width: 468px;
-      transition: color 0.4s;
-      text-shadow: 0 2px 18px #fcf5e277;
-      opacity: 1;
-      animation: textSlideIn 1.3s;
-    }
-    @keyframes textSlideIn {
-      from {opacity: 0; transform: translateY(55px);}
-      to   {opacity: 1; transform: translateY(0);}
-    }
-    #slide12 .electric-btn {
-      background: linear-gradient(99deg, #137bf5 50%, #ffd700 100%);
-      border: none;
-      border-radius: 50%;
-      width: 56px; height: 56px;
-      display: flex;
-      align-items: center; justify-content: center;
-      font-size: 2em;
-      color: #fffbe8;
-      box-shadow: 0 6px 32px #1297f667, 0 2px 16px #ffd50057;
-      transition: background 0.2s, box-shadow 0.2s;
-      cursor: pointer;
-      outline: none;
-      margin-bottom: 12px;
-      margin-right: 0;
-      margin-left: auto;
-      animation: btnShine 2s infinite alternate;
-    }
-    #slide12 .electric-btn:active {
-      background: linear-gradient(98deg,#ffd700 70%, #137bf5 100%);
-      box-shadow: 0 4px 20px #ffd33394;
-    }
-    @keyframes btnShine {
-      0% { box-shadow: 0 6px 32px #1297f667, 0 2px 16px #ffd50057; filter: none; }
-      100% { box-shadow: 0 4px 44px #e8f6ff, 0 1px 50px #ffe88299; filter: brightness(1.1); }
-    }
-    #slide12 .btn-heart-electric {
-      margin-top: 12px;
-      background: linear-gradient(85deg, #fff3e1 30%, #fdad36 65%, #ffd566 105%);
-      border: none;
-      border-radius: 24px;
-      padding: 7px 26px 7px 26px;
-      font-size: 1.22em;
-      display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 4px 25px #fdad3633;
-      color: #c2530d;
-      font-weight: 700;
-      cursor: pointer;
-      transition: background 0.22s, color 0.17s;
-      gap: 14px;
-      animation: pulseHeart 1.6s infinite alternate;
-    }
-    #slide12 .btn-heart-electric:active {
-      background: linear-gradient(95deg, #ffd566, #fdad36 90%);
-    }
-    @keyframes pulseHeart { from { filter: brightness(1);} to { filter:brightness(1.17);} }
-    #slide12 .btns-next {
-      margin-top: 34px;
-      display: flex;
-      flex-direction: row;
-      gap: 20px;
-      justify-content: flex-end;
-      width: 100%;
-    }
-    #slide12 .btns-next button {
-      padding: 10px 30px;
-      font-size: 1.08em;
-      color: #fff;
-      background: linear-gradient(90deg,#137bf5 50%, #ffd700 100%);
-      border: none;
-      border-radius: 18px;
-      font-family: inherit;
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow: 0 3px 16px #1297f64d;
-      transition: background 0.22s, color 0.18s;
-      min-width: 105px;
-    }
-    #slide12 .btns-next button:hover {
-      background: linear-gradient(90deg, #ffd700 25%, #137bf5 118%);
-      color: #137bf5;
-    }
-
-    /* --- PAG 13: FINAL CENTRAL --- */
-    #slide13 {
-      display: none;
-      position: absolute;
-      top: 0; left: 0; width: 100vw; height: 100vh;
-      display: flex; align-items: center; justify-content: center;
-      background: linear-gradient(120deg,#fff7e0 22%, #dbefff 65%, #a6e3e9 94%);
-      z-index: 115;
-      overflow: hidden;
-    }
-    #slide13 .center-msg {
-      background: rgba(255,255,255,0.96);
-      box-shadow: 0 10px 54px #fae7a944, 0 2px 44px #c4e3f333;
-      border-radius: 44px;
-      padding: 70px 48px 60px 48px;
-      min-width: 260px;
-      animation: popIn13 1.33s cubic-bezier(.2,.56,.36,1.1);
-      display: flex; flex-direction: column; align-items: center;
-    }
-    @keyframes popIn13 {
-      0% {opacity:0; transform:scale(0.81) translateY(120px);}
-      80% {opacity:.97;}
-      100% {opacity:1; transform:scale(1) translateY(0);}
-    }
-    #slide13 .bigtext {
-      font-size: 2.42em;
-      color: #214d3c;
-      font-weight: 600;
-      letter-spacing: 0.022em;
-      text-align: center;
-      text-shadow: 0 3px 25px #fffdebcd, 0 1px 12px #bae6ef;
-      margin-bottom: 56px;
-      animation: bounceText 2s infinite alternate cubic-bezier(0.64,1.6,.44,1.12);
-    }
-    @keyframes bounceText {
-      0% {transform: scale(1);}
-      100% {transform: scale(1.04) rotate(-1.2deg);}
-    }
-    #slide13 .btns-next13 {
-      justify-content: center;
-      gap: 22px;
-      display: flex;
-      width: 100%;
-      margin-top: 15px;
-    }
-    #slide13 .btns-next13 button {
-      padding: 12px 36px;
-      font-size: 1.11em;
-      color: #fff;
-      background: linear-gradient(90deg,#214d3c 5%, #75c37f 98%);
-      border: none;
-      border-radius: 18px;
-      font-family: inherit;
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow: 0 2px 22px #6bcf8480;
-      transition: background 0.22s, color 0.18s;
-    }
-    #slide13 .btns-next13 button:hover {
-      background: linear-gradient(90deg,#75c37f 15%, #214d3c 80%);
-      color: #fff8d4;
-    }
-    /* --------- Responsive ----------- */
-    @media (max-width: 950px) {
-      #slide12 .content-electric {max-width:95vw;padding:24px 5vw;}
-      #slide13 .center-msg {padding:32px 5vw;}
-    }
-    @media (max-width: 600px) {
-      #slide12 {padding-right: 0;}
-      #slide12 .content-electric {margin-right:0;padding:14px 3vw;}
-      #slide13 .center-msg {padding:20px 5vw;}
-      #slide13 .bigtext {font-size:1.1em;}
-      #msg {margin-left:7px; padding:14px;}
-      #buttons-group {margin-left:7px;}
+    /* Responsive game */
+    @media (max-width:480px) {
+      #gameArea {width: 98vw; max-width: 375px;}
+      #basket {left: 44vw;}
+      h1 { font-size: 1.15em; }
+      #msg { font-size:0.95em;}
     }
   </style>
 </head>
 <body>
-  <!-- PAG 10: JUEGO -->
-  <div id="gameBlock">
-      <h1>¡Pausa interactiva: Atrapa los corazones! ❤️</h1>
-      <div id="scorePanel">Puntaje: <span id="score">0</span></div>
-      <div id="gameArea"><div id="basket"></div></div>
-      <div id="msgWrap"><div id="msg"></div></div>
-      <div id="buttons-group">
-        <button id="playAgain">Jugar otra vez</button>
-        <button id="goTo11">Seguir →</button>
-      </div>
+  <h1>¡Pausa interactiva: Atrapa los corazones! ❤️</h1>
+  <div id="scorePanel">Puntaje: <span id="score">0</span></div>
+  <div id="gameArea">
+    <div id="basket"></div>
   </div>
-  <!-- PAG 11: REFLEXION -->
-  <div id="reflectionSlide" style="display:none;">
-    <div class="center-box">
-      <h2>Más que un juego, una lección</h2>
-      <p>
-La vida la podemos relacionar con un juego, incluso este momento en que lees esto es eso, un juego, debemos saber en qué momento seguir, obtener rutas para avanzar y mejorar con el paso del tiempo, llevo esas lecciones de alguien muy especial que me lo enseñó hace mucho tiempo. A no quejarme ni desistir facilmente, esa persona eres tú
-      </p>
-      <div class="btns-reflection">
-        <button id="backToGame">⟵ Regresar</button>
-        <button id="goTo12">Seguir</button>
-      </div>
-    </div>
+  <div id="msg"></div>
+  <div id="buttons-group">
+    <button id="playAgain">Jugar otra vez</button>
+    <button id="goToNext">Seguir →</button>
   </div>
-  <!-- PAG 12: ELECTRICIDAD -->
-  <section id="slide12" style="display:none;">
-    <div class="content-electric" id="elecCard">
-      <div class="elec-txt" id="electricText">
-Hay algo mágico en la electrónica: la manera en que transforma energía, conecta mundos invisibles y hace posible que todo funcione con armonía, aunque por fuera parezca solo una red de caminos y circuitos. Así eres tú para mí: compleja y fascinante, con una esencia que late detrás de cada gesto y cada palabra, capaz de iluminar todo a tu alrededor incluso en los días grises.
-      </div>
-      <button class="electric-btn" id="btnRayo" title="Siguiente">
-        ⚡
-      </button>
-      <button class="btn-heart-electric hide" id="btnHeartRayo" title="Descubrir más">
-        🧡⚡
-      </button>
-      <div class="btns-next hide" id="elecNav">
-        <button id="backTo11">⟵ Volver</button>
-        <button id="gotoSlide13">Siguiente →</button>
-      </div>
-    </div>
-  </section>
-  <!-- PAG 13: Mensaje central final -->
-  <section id="slide13" class="hide">
-    <div class="center-msg">
-      <div class="bigtext">
-        Ya casi acaba este presente...
-      </div>
-      <div class="btns-next13">
-        <button id="toElec">⟵ Volver</button>
-        <button id="continue13">Siguiente →</button>
-      </div>
-    </div>
-  </section>
 
   <script>
-    // ---- JUEGO ----
+    // CESTO
     const gameArea = document.getElementById('gameArea');
     const basket = document.getElementById('basket');
-    basket.innerHTML = `<svg viewBox="0 0 98 68" width="60" height="44">
-      <ellipse cx="49" cy="58" rx="46" ry="9" fill="#e28e39" opacity="0.37"/>
-      <rect x="16" y="24" rx="18" ry="21" width="70" height="32" fill="#fff6c6" stroke="#e28e39" stroke-width="4"/>
-      <ellipse cx="51" cy="45" rx="30" ry="11" fill="#ffe089" stroke="#e28e39" stroke-width="2"/>
-      <ellipse cx="51" cy="39" rx="21" ry="7" fill="#f8f8e4" opacity="0.6"/>
-      <ellipse cx="38" cy="56" rx="7" ry="3" fill="#ffd29a" stroke="#e28e39" stroke-width="1"/>
-      <ellipse cx="59" cy="56" rx="7" ry="3" fill="#ffd29a" stroke="#e28e39" stroke-width="1"/>
-    </svg>`;
-    let left = 150, score = 0, hearts = [], running = true, gameInterval = null, heartInterval = null,
-        timeLimit = 40, timeCount = 0, heartsCatched = 0;
+    basket.innerHTML = `
+      <svg viewBox="0 0 98 68" width="60" height="44">
+        <ellipse cx="49" cy="58" rx="46" ry="9" fill="#e28e39" opacity="0.37"/>
+        <rect x="16" y="24" rx="18" ry="21" width="70" height="32" fill="#fff6c6" stroke="#e28e39" stroke-width="4"/>
+        <ellipse cx="51" cy="45" rx="30" ry="11" fill="#ffe089" stroke="#e28e39" stroke-width="2"/>
+        <ellipse cx="51" cy="39" rx="21" ry="7" fill="#f8f8e4" opacity="0.6"/>
+        <ellipse cx="38" cy="56" rx="7" ry="3" fill="#ffd29a" stroke="#e28e39" stroke-width="1"/>
+        <ellipse cx="59" cy="56" rx="7" ry="3" fill="#ffd29a" stroke="#e28e39" stroke-width="1"/>
+      </svg>
+    `;
+    let left = 150;
+    let score = 0;
+    let hearts = [];
+    let running = true;
+    let gameInterval = null;
+    let heartInterval = null;
+    let timeLimit = 40; 
+    let timeCount = 0;
+    let heartsCatched = 0;
+    let gameStart = false;
     const scoreSpan = document.getElementById('score');
     const msg = document.getElementById('msg');
-    const msgWrap = document.getElementById('msgWrap');
     const playAgain = document.getElementById('playAgain');
-    const goTo11 = document.getElementById('goTo11');
+    const goToNext = document.getElementById('goToNext');
     const btnsGroup = document.getElementById('buttons-group');
-    const gameBlock = document.getElementById('gameBlock');
-    const reflectionSlide = document.getElementById('reflectionSlide');
-    const backToGame = document.getElementById('backToGame');
-    const goTo12 = document.getElementById('goTo12');
-    const slide12 = document.getElementById('slide12');
-    const electricText = document.getElementById('electricText');
-    const btnRayo = document.getElementById('btnRayo');
-    const btnHeartRayo = document.getElementById('btnHeartRayo');
-    const elecNav = document.getElementById('elecNav');
-    const backTo11 = document.getElementById('backTo11');
-    const gotoSlide13 = document.getElementById('gotoSlide13');
-    const slide13 = document.getElementById('slide13');
-    const toElec = document.getElementById('toElec');
-    const continue13 = document.getElementById('continue13');
 
     function setBasket(x) {
       left = Math.max(0, Math.min(gameArea.offsetWidth - basket.offsetWidth, x));
@@ -459,6 +177,7 @@ Hay algo mágico en la electrónica: la manera en que transforma energía, conec
       if (e.key === 'ArrowLeft') setBasket(left - 28);
       else if (e.key === 'ArrowRight') setBasket(left + 28);
     });
+
     function newHeart() {
       let heart = document.createElement('div');
       heart.className = 'heart';
@@ -475,7 +194,6 @@ Hay algo mágico en la electrónica: la manera en que transforma energía, conec
     function playGame() {
       running = true; score = 0; timeCount = 0; heartsCatched = 0;
       scoreSpan.textContent = 0; msg.textContent = '';
-      msg.classList.remove('msg-active');
       btnsGroup.style.display = "none";
       document.querySelectorAll('.heart').forEach(h=>h.remove());
       hearts = [];
@@ -536,65 +254,23 @@ Hay algo mágico en la electrónica: la manera en que transforma energía, conec
       if (won) {
         message = "¡Felicidades! Has reunido todos los corazones, y no se trata solo de un juego es un recordatorio de todos los momentos hermosos que compartimos. Siempre serás ese latido único que hace que todo cobre sentido. ¡Te mereces todo el amor, hoy y siempre!";
       } else {
-        message = "A veces no se gana en el primer intento, y está bien. Lo importante es disfrutar el camino, recordar lo bonito del juego y no perder nunca la sonrisa. Perder aquí no significa perder en la vida; significa que siempre hay una nueva oportunidad de volver a intentarlo y de descubrir alegría en cada intento.<br><br>¡Anímate a jugar otra vez! Yo siempre estaré celebrando cada uno de tus intentos y sonriendo contigo, pase lo que pase.";
+        message = "A veces no se gana en el primer intento, y está bien. Lo importante es disfrutar el camino, recordar lo bonito del juego y no perder nunca la sonrisa. Perder aquí no significa perder en la vida; significa que siempre hay una nueva oportunidad de volver a intentarlo y de descubrir alegría en cada intento.\n\n¡Anímate a jugar otra vez! Yo siempre estaré celebrando cada uno de tus intentos y sonriendo contigo, pase lo que pase.";
       }
       msg.innerHTML = message;
-      setTimeout(() => { msg.classList.add('msg-active'); }, 50);
       btnsGroup.style.display = "flex";
     }
-    playAgain.onclick = ()=> { playGame(); };
-    goTo11.onclick = ()=> {
-      gameBlock.classList.add('hide');
-      reflectionSlide.style.display = 'flex';
-      document.body.style.background = "linear-gradient(120deg, #f6ffe5 7%, #bceda1 37%, #aaf0c3 90%)";
-    };
-    // --- PAG 11 nav ---
-    backToGame.onclick = () => {
-      reflectionSlide.style.display = "none";
-      gameBlock.classList.remove('hide');
-      document.body.style.background = "linear-gradient(120deg, #fde68a 0%, #ffb6b9 45%, #a3cef1 100%)";
+    playAgain.onclick = ()=> {
+      playAgain.blur();
       playGame();
     };
-    goTo12.onclick = ()=> {
-      reflectionSlide.style.display='none';
-      slide12.style.display='flex';
-      document.body.style.background = "#21294a";
-      initSlide12();
+    goToNext.onclick = ()=> {
+      window.location.href = "index4.html";
     };
-    // ---- DIAPOSITIVA 12 ELECTRICIDAD ----
-    function initSlide12() {
-      electricText.innerHTML = `Hay algo mágico en la electrónica: la manera en que transforma energía, conecta mundos invisibles y hace posible que todo funcione con armonía, aunque por fuera parezca solo una red de caminos y circuitos. Así eres tú para mí: compleja y fascinante, con una esencia que late detrás de cada gesto y cada palabra, capaz de iluminar todo a tu alrededor incluso en los días grises.`;
-      electricText.style.opacity = 1;
-      btnRayo.classList.remove('hide');
-      btnHeartRayo.classList.add('hide');
-      elecNav.classList.add('hide');
-    }
-    btnRayo.onclick = () => {
-      electricText.style.opacity = 0;
-      setTimeout(()=>{
-        electricText.innerHTML = `Eres como la electrónica que elegí estudiar: a veces misteriosa, siempre esencial y llena de sorpresas. Tus pensamientos son como impulsos eléctricos que encienden mi curiosidad, tu energía transmite ganas de seguir adelante, y tu capacidad de reinventarte en cada circunstancia me inspira profundamente. Así como los componentes de un circuito, tus sueños, tus logros y hasta tus “errores” se integran para crear algo único e irrepetible.`;
-        electricText.style.opacity = 1;
-        btnRayo.classList.add('hide');
-        btnHeartRayo.classList.remove('hide');
-      }, 350);
+
+    window.onload = ()=> {
+      btnsGroup.style.display = "none";
+      playGame();
     };
-    btnHeartRayo.onclick = () => {
-      electricText.style.opacity = 0;
-      setTimeout(()=>{
-        electricText.innerHTML = `Gracias por ser esa chispa de motivación en mi camino, por enseñarme que la vida no es solo ciencia o lógica, sino también emoción, adaptación y conexión. Eres la mejor prueba de que, incluso entre resistencias y obstáculos, quienes saben conectar con los demás pueden encender cualquier universo.`;
-        electricText.style.opacity = 1;
-        btnHeartRayo.classList.add('hide');
-        elecNav.classList.remove('hide');
-      }, 350);
-    };
-    // --- Navegación PAG 12 nav ---
-    backTo11.onclick = () => {
-      slide12.style.display='none';
-      reflectionSlide.style.display='flex';
-      document.body.style.background = "linear-gradient(120deg, #f6ffe5 7%, #bceda1 37%, #aaf0c3 90%)";
-    };
-    gotoSlide13.onclick = () => {
-      slide12.style.display='none';
-      slide13.style.display='flex';
-      window.scrollTo(0,0);
-      document.body.style.background = "linear-gradient(120deg,#fff7e0 22%, #dbefff 65%, #a6e3e9 94%)";
+  </script>
+</body>
+</html>
