@@ -12,7 +12,7 @@
       overflow: hidden;
     }
     .hide { display: none !important; }
-    /* ----- PAGINA ELECTRICIDAD ----- */
+    /* ----- ELECTRICIDAD ----- */
     #slide12 {
       position: absolute;
       top: 0; left: 0; width: 100vw; height: 100vh;
@@ -74,8 +74,8 @@
       text-align: right;
     }
     @keyframes pulseHint {
-      0%   { color: #1571d6; filter: brightness(1.1);}
-      100% { color: #0c2162; filter: brightness(1.25);}
+      0%   { color: #1571d6;}
+      100% { color: #0c2162;}
     }
     #slide12 .electric-btn {
       background: linear-gradient(99deg, #137bf5 50%, #ffd700 100%);
@@ -100,8 +100,8 @@
       box-shadow: 0 4px 20px #ffd33394;
     }
     @keyframes btnShine {
-      0% { box-shadow: 0 6px 32px #1297f667, 0 2px 16px #ffd50057; filter: none; }
-      100% { box-shadow: 0 4px 44px #e8f6ff, 0 1px 50px #ffe88299; filter: brightness(1.1);}
+      0% { box-shadow: 0 6px 32px #1297f667, 0 2px 16px #ffd50057; }
+      100% { box-shadow: 0 4px 44px #e8f6ff, 0 1px 50px #ffe88299; }
     }
     #slide12 .btn-heart-electric {
       margin-top: 12px;
@@ -149,7 +149,7 @@
       background: linear-gradient(90deg, #ffd700 25%, #137bf5 118%);
       color: #137bf5;
     }
-    /* -------- PAGINA 13: Final -------- */
+    /* -------- PAGINA 13 -------- */
     #slide13 {
       display: none;
       position: absolute;
@@ -318,7 +318,10 @@
       color: #D16BA5;
     }
     #siNoGame .btn-center { display:flex; justify-content:center; gap:30px; align-items:center;padding-bottom:10px;}
-    @media (max-width:500px){ #siNoGame .juego-container{padding:14vw 2vw;} #siNoGame .pregunta-animada{font-size:1em;} }
+    @media (max-width:500px){
+      #siNoGame .juego-container{padding:14vw 2vw;}
+      #siNoGame .pregunta-animada{font-size:1em;}
+    }
   </style>
 </head>
 <body>
@@ -371,7 +374,7 @@ Hay algo mágico en la electrónica: la manera en que transforma energía, conec
   </section>
 
   <script>
-    // ----- DIAPO ELECTRICIDAD -----
+    // Electricidad secuencia
     const slide12 = document.getElementById('slide12');
     const electricText = document.getElementById('electricText');
     const btnRayo = document.getElementById('btnRayo');
@@ -379,13 +382,12 @@ Hay algo mágico en la electrónica: la manera en que transforma energía, conec
     const elecNav = document.getElementById('elecNav');
     const gotoSlide13 = document.getElementById('gotoSlide13');
     const pulseHint = document.getElementById('pulseHint');
-    // ----- DIAPO 13 -----
+    // Central y SI/NO
     const slide13 = document.getElementById('slide13');
     const toElec = document.getElementById('toElec');
     const irSiNoGame = document.getElementById('irSiNoGame');
-    // ----- DIAPO 14: JUEGO SI/NO -----
     const siNoGame = document.getElementById('siNoGame');
-    // -- elementos internos
+    // -- elementos internos juego SI/NO
     const preguntaDiv = document.getElementById('pregunta');
     const botoneraDiv = document.getElementById('botonera');
     const mensajeFinal = document.getElementById('mensajeFinal');
@@ -395,7 +397,7 @@ Hay algo mágico en la electrónica: la manera en que transforma energía, conec
     let btnSiguiente = document.getElementById('btnSiguiente');
     let btnVolver = document.getElementById('btnVolver');
 
-    // ------ Electricidad ------
+    // Electricidad
     btnRayo.onclick = () => {
       electricText.style.opacity = 0;
       setTimeout(()=>{
@@ -484,11 +486,12 @@ Hay algo mágico en la electrónica: la manera en que transforma energía, conec
         mensajeFinal.style.display = 'none';
         btnFinales.style.display = 'none';
         const btnSiUltimo = document.getElementById('btnSiUltimo');
-        btnSiUltimo.onclick = handleSi;
+        btnSiUltimo.onclick = function() {
+          window.location.href = "index5.html";
+        };
         contadorNo++;
       }
     }
-
     // Botones finales Siguiente y Volver
     btnFinales.addEventListener('click', e => {
       if (e.target === btnSiguiente) window.location.href = "index5.html";
