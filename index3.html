@@ -12,8 +12,7 @@
       overflow: hidden;
     }
     .hide { display: none !important; }
-
-    /* ----- PAG 10: JUEGO ----- */
+    /* --- Juego -------- */
     #gameBlock { width: 100vw; min-height: 100vh; display: flex; flex-direction: column; align-items: center; }
     h1 {
       margin: 30px 0 8px 0;
@@ -25,7 +24,7 @@
       animation: rainbowPulse 3s infinite alternate cubic-bezier(.67,0,.32,1.3);
     }
     @keyframes rainbowPulse {
-      0% { color: #f9436e; text-shadow: 0 2px 12px #ffb6b988, 0 1px 20px #fff6;}
+      0%   { color: #f9436e; text-shadow: 0 2px 12px #ffb6b988, 0 1px 20px #fff6;}
       100% { color: #fdbe27; text-shadow: 0 2px 24px #a3cef166, 0 3px 30px #fff9;}
     }
     #scorePanel { text-align: center; margin-bottom: 2px;}
@@ -64,7 +63,7 @@
       user-select: none;
     }
     @keyframes bounce { 0% {transform: scale(1) rotate(-15deg);} 100% {transform: scale(1.09) rotate(10deg);} }
-    /* --- Mensaje de victoria/derrota, alineado a la izquierda --- */
+    /* --- Mensaje JUEGO izquierdo animado --- */
     #msgWrap {
       width: 100%;
       display: flex;
@@ -87,9 +86,7 @@
       letter-spacing: 0.01em;
       opacity: 0;
       transform: translateX(-45px);
-      transition:
-        opacity 0.7s cubic-bezier(.33,.7,.32,1.11),
-        transform 0.8s cubic-bezier(.38,1.25,.6,1.12);
+      transition: opacity 0.7s cubic-bezier(.33,.7,.32,1.11), transform 0.8s cubic-bezier(.38,1.25,.6,1.12);
       animation: msgAppear 1.09s both;
       animation-delay: 0.20s;
     }
@@ -99,7 +96,7 @@
       box-shadow: 0 5px 31px #ffb6b977, 0 2px 24px #fde68a4b;
     }
     @keyframes msgAppear {
-      0% { opacity:0; transform: translateX(-35px);}
+      0%   { opacity:0; transform: translateX(-35px);}
       100% { opacity:1; transform: translateX(0) scale(1.01);}
     }
     #buttons-group {
@@ -128,91 +125,29 @@
       color: #ffe066;
     }
 
-    /* ----- PAG 11: REFLEXION ----- */
-    #reflectionSlide {
-      display: none;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      min-width: 100vw;
-      position: absolute;
-      top: 0; left: 0;
-      width: 100vw; height: 100vh;
-      background: url('https://images.unsplash.com/photo-1465101178521-c7aebf1a8496?auto=format&fit=crop&w=1400&q=80') center center no-repeat;
-      background-size: cover;
-      animation: upFade 1.2s 0.18s both;
-      z-index: 100;
-      flex-direction: column;
-    }
-    @keyframes upFade {
-      0% { opacity: 0; filter: blur(5px) brightness(1.08);}
-      90% { filter: blur(0) brightness(1);}
-      100% { opacity: 1;}
-    }
-    .center-box {
-      background: rgba(255,255,255,0.94);
-      box-shadow: 0 16px 44px #b8e2af55, 0 2px 48px #78937a17;
-      border-radius: 28px;
-      max-width: 660px;
-      padding: 52px 42px 36px 42px;
-      text-align: center;
-      animation: fadeScaleIn 1.6s cubic-bezier(.41,.8,.36,1.05) both;
-      margin: auto;
-    }
-    @keyframes fadeScaleIn {
-      0% { opacity: 0; transform: scale(0.95);}
-      100% { opacity: 1; transform: scale(1);}
-    }
-    .center-box h2 {
-      font-size: 2.1em;
-      color: #267266;
-      font-weight: bold;
-      letter-spacing: 0.03em;
-      margin-bottom: 18px;
-      text-shadow: 0 2px 14px #ffffffcc;
-      animation: greenPulse 3s infinite alternate;
-    }
-    @keyframes greenPulse {
-      0% { color: #267266; text-shadow: 0 1px 12px #beeed7cc;}
-      100% { color: #6bcf84; text-shadow: 0 3px 32px #8be9a0cc, 0 1px 33px #ffffff69;}
-    }
-    .center-box p {
-      font-size: 1.19em;
-      color: #214d3c;
-      line-height: 1.68;
-      letter-spacing: 0.01em;
-      animation: textRise 1.65s 0.18s both;
-      white-space: pre-line;
-      margin: 0 0 24px 0;
-      text-shadow: 0 3px 22px #beeed788, 0 1px 16px #eee7;
-    }
-    @keyframes textRise {
-      0% { opacity:0; transform: translateY(40px);}
-      100%{opacity: 1; transform: translateY(0);}
-    }
-    .center-box .btns-reflection {
-      margin-top: 28px;
-      display: flex;
-      gap: 25px;
-      justify-content: center;
-    }
-    .center-box .btns-reflection button {
-      padding: 11px 30px;
-      font-size: 1.07em;
-      color: #fff;
-      background: linear-gradient(90deg,#71b97a, #7ee0c7 80%);
-      border: none;
-      border-radius: 18px;
-      font-family: inherit;
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow: 0 3px 16px #79dfb688;
-      transition: background 0.2s, color 0.18s;
-    }
-    .center-box .btns-reflection button:hover {
-      background: linear-gradient(90deg, #7ee0c7,#71b97a 75%);
-      color: #267266;
-    }
+    /* --- PAG 11 (Reflexión) --- */
+    #reflectionSlide { display:none; align-items:center; justify-content:center; min-height:100vh; min-width:100vw;
+      position:absolute; top:0; left:0; width:100vw; height:100vh;
+      background:url('https://images.unsplash.com/photo-1465101178521-c7aebf1a8496?auto=format&fit=crop&w=1400&q=80') center center no-repeat;
+      background-size:cover; animation:upFade 1.2s 0.18s both; z-index:100; flex-direction:column;}
+    @keyframes upFade { 0%{opacity:0; filter:blur(5px) brightness(1.08);} 90%{filter:blur(0) brightness(1);} 100%{opacity:1;} }
+    .center-box { background:rgba(255,255,255,0.94); box-shadow:0 16px 44px #b8e2af55, 0 2px 48px #78937a17;
+      border-radius:28px; max-width:660px; padding:52px 42px 36px 42px; text-align:center;
+      animation:fadeScaleIn 1.6s cubic-bezier(.41,.8,.36,1.05) both; margin:auto;}
+    @keyframes fadeScaleIn { 0%{opacity:0; transform:scale(0.95);} 100%{opacity:1; transform:scale(1);} }
+    .center-box h2 { font-size:2.1em; color:#267266; font-weight:bold; letter-spacing:0.03em; margin-bottom:18px;
+      text-shadow:0 2px 14px #ffffffcc; animation:greenPulse 3s infinite alternate;}
+    @keyframes greenPulse { 0%{color:#267266; text-shadow:0 1px 12px #beeed7cc;} 100%{color:#6bcf84; text-shadow:0 3px 32px #8be9a0cc, 0 1px 33px #ffffff69;} }
+    .center-box p { font-size:1.19em; color:#214d3c; line-height: 1.68; letter-spacing:0.01em;
+      animation: textRise 1.65s 0.18s both; white-space: pre-line; margin:0 0 24px 0;
+      text-shadow:0 3px 22px #beeed788, 0 1px 16px #eee7;}
+    @keyframes textRise { 0%{opacity:0; transform:translateY(40px);} 100%{opacity:1; transform:translateY(0);} }
+    .center-box .btns-reflection { margin-top:28px; display:flex; gap:25px; justify-content:center;}
+    .center-box .btns-reflection button { padding:11px 30px; font-size:1.07em; color:#fff;
+      background:linear-gradient(90deg,#71b97a, #7ee0c7 80%);
+      border:none; border-radius:18px; font-family:inherit; font-weight:600; cursor:pointer;
+      box-shadow:0 3px 16px #79dfb688; transition:background 0.2s, color 0.18s;}
+    .center-box .btns-reflection button:hover { background:linear-gradient(90deg, #7ee0c7,#71b97a 75%); color:#267266;}
 
     /* ----- PAG 12: ELECTRICIDAD ----- */
     #slide12 {
@@ -288,16 +223,9 @@
       box-shadow: 0 4px 20px #ffd33394;
     }
     @keyframes btnShine {
-      0% {
-        box-shadow: 0 6px 32px #1297f667, 0 2px 16px #ffd50057;
-        filter: none;
-      }
-      100% {
-        box-shadow: 0 4px 44px #e8f6ff, 0 1px 50px #ffe88299;
-        filter: brightness(1.1);
-      }
+      0% { box-shadow: 0 6px 32px #1297f667, 0 2px 16px #ffd50057; filter: none; }
+      100% { box-shadow: 0 4px 44px #e8f6ff, 0 1px 50px #ffe88299; filter: brightness(1.1); }
     }
-    /* Corazón naranja + rayo */
     #slide12 .btn-heart-electric {
       margin-top: 12px;
       background: linear-gradient(85deg, #fff3e1 30%, #fdad36 65%, #ffd566 105%);
@@ -317,10 +245,7 @@
     #slide12 .btn-heart-electric:active {
       background: linear-gradient(95deg, #ffd566, #fdad36 90%);
     }
-    @keyframes pulseHeart {
-      from { filter: brightness(1);}
-      to { filter:brightness(1.17);}
-    }
+    @keyframes pulseHeart { from { filter: brightness(1);} to { filter:brightness(1.17);} }
     #slide12 .btns-next {
       margin-top: 34px;
       display: flex;
@@ -505,7 +430,6 @@ Hay algo mágico en la electrónica: la manera en que transforma energía, conec
     const reflectionSlide = document.getElementById('reflectionSlide');
     const backToGame = document.getElementById('backToGame');
     const goTo12 = document.getElementById('goTo12');
-    // Para las siguientes páginas
     const slide12 = document.getElementById('slide12');
     const electricText = document.getElementById('electricText');
     const btnRayo = document.getElementById('btnRayo');
@@ -674,25 +598,3 @@ Hay algo mágico en la electrónica: la manera en que transforma energía, conec
       slide13.style.display='flex';
       window.scrollTo(0,0);
       document.body.style.background = "linear-gradient(120deg,#fff7e0 22%, #dbefff 65%, #a6e3e9 94%)";
-    };
-    // --- Navegación PAG 13 ---
-    toElec.onclick = () => {
-      slide13.style.display='none';
-      slide12.style.display='flex';
-      document.body.style.background = "#21294a";
-    };
-    continue13.onclick = () => {
-      alert('¡Fin de la secuencia eléctrica! Aquí puedes enlazar la siguiente parte.');
-    };
-    window.onload = ()=> {
-      // Muestra solo la página del juego
-      gameBlock.classList.remove('hide');
-      reflectionSlide.style.display = "none";
-      slide12.style.display = 'none';
-      slide13.style.display = 'none';
-      document.body.style.background = "linear-gradient(120deg, #fde68a 0%, #ffb6b9 45%, #a3cef1 100%)";
-      playGame();
-    };
-  </script>
-</body>
-</html>
