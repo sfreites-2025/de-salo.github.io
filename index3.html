@@ -70,8 +70,6 @@
     @keyframes bounce { 0% {transform: scale(1) rotate(-15deg);} 100% {transform: scale(1.09) rotate(10deg);} }
     #scorePanel { text-align: center; margin-bottom: 2px;}
     #scorePanel span { font-weight: bold; color: #26355d; font-size: 1.3em; text-shadow: 0 2px 14px #fff4; transition: color 0.3s; }
-
-    /* --- Mensaje de victoria/derrota, alineado a la izquierda --- */
     #msgWrap {
       width: 100%;
       display: flex;
@@ -94,12 +92,9 @@
       letter-spacing: 0.01em;
       opacity: 0;
       transform: translateX(-45px);
-      transition: 
-        opacity 0.7s cubic-bezier(.33,.7,.32,1.11),
-        transform 0.8s cubic-bezier(.38,1.25,.6,1.12);
+      transition: opacity 0.7s cubic-bezier(.33,.7,.32,1.11), transform 0.8s cubic-bezier(.38,1.25,.6,1.12);
       animation: msgAppear 1.09s both;
       animation-delay: 0.20s;
-      /* prettier look */
     }
     .msg-active { 
       opacity: 1 !important;
@@ -110,8 +105,6 @@
       0% { opacity:0; transform: translateX(-35px);}
       100% { opacity:1; transform: translateX(0) scale(1.01);}
     }
-
-    /* --- Botones juego --- */
     #buttons-group {
       margin-top: 20px;
       display: none;
@@ -137,8 +130,6 @@
       background: linear-gradient(90deg,#ffb6b9,#f9436e);
       color: #ffe066;
     }
-
-    /* --- Diapositiva Reflexión --- */
     #reflectionSlide {
       display: none;
       align-items: center;
@@ -417,7 +408,7 @@ La vida la podemos relacionar con un juego, incluso este momento en que lees est
       playGame(); // reinicia juego
     };
     continueBtn.onclick = () => {
-      alert('Aquí puedes enlazar la siguiente sección/final/URL 😊');
+      window.location.href = "index4.html";
     }
     window.onload = ()=> {
       btnsGroup.style.display = "none";
