@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Index2 - Páginas 6 y 7</title>
+  <title>Index2 - Páginas 6, 7 y 8</title>
   <style>
     body, html {
       margin: 0; padding: 0; height: 100%;
@@ -12,7 +12,7 @@
       color: black;
     }
 
-    /* Contenedores comunes */
+    /* Contenedores de diapositiva */
     .slide {
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
@@ -41,21 +41,18 @@
       line-height: 1.6;
       font-size: 1.15em;
       background: rgba(255 255 255 / 0.85);
-      max-width: 600px;
       box-sizing: border-box;
     }
-
     @keyframes fadeSlideIn {
       to {
         opacity: 1;
         text-shadow: 0 0 6px #f6336e55, 1px 1px 3px #00000055;
       }
     }
-
     h1 {
       margin-top: 0;
       font-weight: 700;
-      font-size: 2.5em;
+      font-size: 2.3em;
       letter-spacing: 0.02em;
       margin-bottom: 0.8em;
       animation: colorPulse 4s infinite alternate ease-in-out;
@@ -74,11 +71,9 @@
       text-align: right;
     }
     #slide6 .text-container {
-      /* override for page 6 */
       max-width: 600px;
       background: rgba(255 255 255 / 0.85);
       border-radius: 20px;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.25);
       animation-delay: 0.3s;
       text-align: right;
     }
@@ -99,14 +94,8 @@
       animation-delay: 0.3s;
       text-align: left;
     }
-    /* Animación título página 7 */
     #slide7 h1 {
-      margin-top: 0;
-      margin-bottom: 1rem;
-      font-size: 2.5em;
-      font-weight: 700;
       color: #f9d342;
-      letter-spacing: 0.02em;
       text-shadow: 0 0 12px #f9d342cc;
       animation: glowPulse 4s infinite alternate ease-in-out;
     }
@@ -119,6 +108,59 @@
         color: #fffd9a;
         text-shadow: 0 0 20px #fffd9aaa, 0 0 40px #fffbaaaa;
       }
+    }
+
+    /* --- Página 8 (graduación) --- */
+    #slide8 {
+      background: url('https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=1400&q=80') no-repeat center center fixed;
+      background-size: cover;
+      justify-content: center;
+      align-items: center;
+      color: #222;
+      text-align: center;
+    }
+    #slide8 .text-container {
+      max-width: 750px;
+      margin: 0 auto;
+      background: rgba(255,255,255,0.93);
+      text-align: center;
+      box-shadow: 0 12px 32px 0 #fd5e5319, 0 2px 48px rgba(60,60,90,0.12);
+      border-radius: 25px;
+      padding: 46px 34px 40px 34px;
+      opacity: 0;
+      transform: scale(0.97);
+      animation: centerFadeScaleIn 1.3s forwards cubic-bezier(.63,-0.01,.38,1.16);
+      animation-delay: 0.4s;
+      animation-fill-mode: forwards;
+      backdrop-filter: blur(2px);
+    }
+    @keyframes centerFadeScaleIn {
+      to {
+        opacity: 1;
+        transform: scale(1);
+        box-shadow: 0 12px 32px 0 #fd5e5348, 0 2px 48px rgba(60,60,90,0.18);
+      }
+    }
+    #slide8 h1 {
+      color: #18407c;
+      font-size: 2.35em;
+      margin-bottom: 1.1em;
+      letter-spacing: 0.03em;
+      font-weight: bold;
+      animation: gradPulse 4s infinite alternate;
+      text-shadow: 0 2px 12px #fff;
+    }
+    @keyframes gradPulse {
+      0% { color: #18407c; text-shadow: 0 0 10px #f9d34234; }
+      100% { color: #fd5e53; text-shadow: 0 0 30px #fd5e5388, 0 2px 24px #fff8; }
+    }
+    #slide8 p {
+      font-size: 1.17em;
+      color: #2d2a35;
+      line-height: 1.79;
+      white-space: pre-line;
+      text-shadow: 0 4px 18px #fff8;
+      margin-bottom: 1.7em;
     }
 
     /* Botones comunes */
@@ -139,14 +181,15 @@
     button:hover {
       background: linear-gradient(90deg, #f6336e, #fecfe9);
     }
-
     .buttons-container {
       margin-top: 2rem;
       display: flex;
       justify-content: flex-end;
+      flex-wrap: wrap;
     }
+    /* Botones centrados en página 8 */
+    #slide8 .buttons-container { justify-content: center; }
 
-    /* Responsive */
     @media(max-width: 720px){
       body {
         padding: 20px;
@@ -156,7 +199,8 @@
         justify-content: center !important;
       }
       #slide6 .text-container,
-      #slide7 .text-container {
+      #slide7 .text-container,
+      #slide8 .text-container {
         max-width: 100%;
         text-align: center !important;
       }
@@ -180,11 +224,11 @@
     <div class="text-container">
       <h1>Reflexiones y Recuerdos</h1>
       <p>
-        Hay ciudades que despiertan anhelos y noches que se convierten en recuerdos imborrables, pero nada se compara con lo que dicta aquella melodía, después de soñarte y de revivirte muchísimas veces, me di cuenta de que aunque no entienda del todo mi corazón siempre elegirá seguir tus pasos dondequiera que estés.
+Hay ciudades que despiertan anhelos y noches que se convierten en recuerdos imborrables, pero nada se compara con lo que dicta aquella melodía, después de soñarte y de revivirte muchísimas veces, me di cuenta de que aunque no entienda del todo mi corazón siempre elegirá seguir tus pasos dondequiera que estés.
 
-        Nadie puede prometer el mañana por eso elijo amarte como si todas las noches fueran la última vez que pudiera recordarte y guardar tu luz entre mis memorias más profundas.
+Nadie puede prometer el mañana por eso elijo amarte como si todas las noches fueran la última vez que pudiera recordarte y guardar tu luz entre mis memorias más profundas.
 
-        If the world were to end, I'd want to be by your side. I'd want to hold you just for a moment and die with a smile. To live forever with your memory and be able to die in peace, knowing I could walk in heaven.
+If the world were to end, I'd want to be by your side. I'd want to hold you just for a moment and die with a smile. To live forever with your memory and be able to die in peace, knowing I could walk in heaven.
       </p>
       <div class="buttons-container">
         <button id="toSlide5" onclick="window.location.href='index.html'">← Volver al inicio</button>
@@ -198,36 +242,71 @@
     <div class="text-container">
       <h1>Esfuerzo y dedicación sin límites</h1>
       <p>
-        El esfuerzo es la clave para alcanzar cualquier meta en la vida. La dedicación constante, la perseverancia y la voluntad férrea nos impulsan más allá de los límites que creemos tener.
-        
-        No importa cuán difícil sea el camino, cada paso perseverante construye el camino al éxito y a la realización personal.
+El esfuerzo es la clave para alcanzar cualquier meta en la vida. La dedicación constante, la perseverancia y la voluntad férrea nos impulsan más allá de los límites que creemos tener.
 
-        El compromiso con nuestros sueños es lo que realmente mueve montañas y transforma imposibles en conquistas palpables.
+No importa cuán difícil sea el camino, cada paso perseverante construye el camino al éxito y a la realización personal.
 
-        Recuerda siempre: no existen límites para quien trabaja con pasión y entrega total.
+El compromiso con nuestros sueños es lo que realmente mueve montañas y transforma imposibles en conquistas palpables.
+
+Recuerda siempre: no existen límites para quien trabaja con pasión y entrega total.
       </p>
       <div class="buttons-container">
         <button id="backTo6">← Volver</button>
-        <button onclick="alert('Aquí puedes implementar la siguiente página')">Siguiente →</button>
+        <button id="toSlide8">Siguiente →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Página 8 (Graduación) -->
+  <section id="slide8" class="slide" role="main" aria-label="Octava diapositiva, graduación">
+    <div class="text-container">
+      <h1>¡Felicidades, graduada!</h1>
+      <p>
+Pero no todo tiene que ser del pasado claramente, hoy celebras mucho más que un logro académico; celebras cada desvelo, cada reto superado y cada línea de código que te acercó un poco más a tus sueños. Llevas en tus manos el resultado de tu esfuerzo y una mente preparada para crear, innovar y transformar el mundo desde la informática.
+
+Verte avanzar, enfrentando cada problema con lógica, paciencia y dedicación, demuestra tu capacidad para reinventarte y salir adelante sin detenerte ante las dificultades. Eres prueba de que la pasión por aprender abre puertas y que, incluso en los momentos más complejos, tu determinación no conoce límites.
+
+Hoy comienza una nueva etapa y no puedo evitar sentir orgullo y admiración por la persona en la que te has convertido. Siempre serás esa inspiración silenciosa para seguir aprendiendo y creciendo, dentro y fuera de cualquier sala de computadoras.
+      </p>
+      <div class="buttons-container">
+        <button id="backTo7">← Volver</button>
       </div>
     </div>
   </section>
 
   <script>
+    // Referencias a cada slide
     const slide6 = document.getElementById('slide6');
     const slide7 = document.getElementById('slide7');
-    const toSlide7Btn = document.getElementById('toSlide7');
-    const backTo6Btn = document.getElementById('backTo6');
+    const slide8 = document.getElementById('slide8');
 
+    const toSlide7Btn = document.getElementById('toSlide7');
+    const toSlide8Btn = document.getElementById('toSlide8');
+    const backTo6Btn = document.getElementById('backTo6');
+    const backTo7Btn = document.getElementById('backTo7');
+
+    // Pasa de 6 a 7
     toSlide7Btn.addEventListener('click', () => {
       slide6.classList.remove('active');
       slide7.classList.add('active');
       window.scrollTo(0,0);
     });
-
+    // Vuelve de 7 a 6
     backTo6Btn.addEventListener('click', () => {
       slide7.classList.remove('active');
       slide6.classList.add('active');
+      window.scrollTo(0,0);
+    });
+    // Pasa de 7 a 8
+    toSlide8Btn.addEventListener('click', () => {
+      slide7.classList.remove('active');
+      slide8.classList.add('active');
+      window.scrollTo(0,0);
+    });
+    // Vuelve de 8 a 7
+    backTo7Btn.addEventListener('click', () => {
+      slide8.classList.remove('active');
+      slide7.classList.add('active');
       window.scrollTo(0,0);
     });
   </script>
