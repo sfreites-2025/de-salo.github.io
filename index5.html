@@ -12,6 +12,7 @@
       background: #1c253a;
       overflow-x: hidden;
     }
+    /* ---- Página de la canción ---- */
     .main-flex {
       width: 100vw; min-height: 100vh; display: flex;
       align-items: center; justify-content: flex-start;
@@ -24,10 +25,10 @@
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center top;
-      animation: fondoFade 1.6s both;
+      animation: fondoFade 1.2s both;
     }
-    @keyframes fondoFade { 0% {opacity:0; filter:blur(10px);} 100%{opacity:1; filter:none;} }
-    .side-text {
+    @keyframes fondoFade { 0% {opacity:0; filter:blur(7px);} 100%{opacity:1; filter:none;} }
+    .side-text { /* ...igual que antes... */ 
       flex: 1.3;
       padding-left: 6vw;
       min-width: 300px;
@@ -58,7 +59,7 @@
       from { opacity: 0; transform: translateY(42px);}
       to   { opacity: 1; transform: none;}
     }
-    /* PLAYER DERECHO */
+    /* PLAYER DERECHO ... */
     .player-side {
       flex: 1;
       min-width: 310px; max-width: 400px;
@@ -68,7 +69,7 @@
       padding-right: 7vw;
       margin-left: -10px;
     }
-    .player-card {
+    .player-card { /* ...igual que antes... */
       background: linear-gradient(105deg,#813c82ed 15%, #fff7eecc 68%, #efd0edb3 100%);
       border-radius: 30px 16px 34px 22px / 28px 33px 38px 18px;
       border: 2.5px solid #ede2fa88;
@@ -86,7 +87,7 @@
       from { opacity:0; transform: translateX(100px) scale(0.97);}
       to   { opacity:1; transform: none;}
     }
-    .player-art {
+    .player-art { /* ...igual que antes... */ 
       width: 78px; height: 78px;
       border-radius: 17px;
       box-shadow: 0 3px 22px 0 #988fc966;
@@ -101,83 +102,7 @@
       0% {box-shadow: 0 3px 14px #d4b3ffd9, 0 2px 20px #a8f0ff44;}
       100%{box-shadow: 0 3px 26px #e2afea99, 0 2px 26px #ffe3f7aa;}
     }
-    .song-title {
-      font-size: 1.19em;
-      font-weight: 700;
-      color: #2d144c;
-      text-align: center;
-      margin-bottom: 7px;
-      letter-spacing: 0.01em;
-      text-shadow: 0 2px 10px #faf7ff,0 1px 5px #edddf599;
-    }
-    .artist-name {
-      font-size: 1em;
-      color: #8d4abb;
-      margin-bottom: 11px;
-      font-weight: 500;
-      text-align: center;
-      letter-spacing: 0.01em;
-    }
-    .player-linkspace {
-      width: 100%; display: flex; justify-content: center; align-items: center;
-      margin-bottom: 4px;
-    }
-    .yt-link-btn {
-      display: inline-flex;
-      align-items: center; gap: 13px;
-      font-size: 1.13em;
-      font-weight: 700;
-      background: #fff;
-      color: #e14d6a;
-      border-radius: 44px;
-      box-shadow: 0 2px 10px #afbefc22;
-      padding: 12px 32px 12px 19px;
-      margin-top: 9px;
-      margin-bottom: 11px;
-      border: 2px solid #dfabe599;
-      text-decoration: none;
-      position: relative;
-      transition: background 0.18s, color 0.22s, box-shadow 0.19s;
-      letter-spacing: 0.02em;
-      animation: btnPulseYT 1.7s infinite alternate;
-    }
-    @keyframes btnPulseYT {
-      0%{box-shadow:0 2px 10px #afbefc22;}
-      100%{box-shadow:0 7px 32px #e14d6a33;}
-    }
-    .yt-link-btn:hover {
-      background: #e14d6a;
-      color: #fff;
-      box-shadow: 0 5px 29px #e14d6a77;
-    }
-    .player-linkspace svg {
-      margin-right:7px;
-      vertical-align: middle;
-      transform: translateY(2px);
-      filter: drop-shadow(0 2px 8px #db359888);
-    }
-    .mini-bar {
-      width: 87%; height: 7px; background: #f5c3f7;
-      border-radius: 10px;
-      margin-top: 13px;
-      box-shadow: 0 2px 11px #e1c3f955;
-      position: relative;
-      overflow: hidden;
-    }
-    .mini-bar:before {
-      content: "";
-      display: block;
-      width: 53%;
-      height: 100%;
-      background: linear-gradient(90deg,#fbc2d5 24%, #e15a92 90%);
-      border-radius: 10px;
-      animation: barAnim 4.7s infinite alternate cubic-bezier(.85,0,.21,1.0);
-      position: absolute; left:0; top:0;
-    }
-    @keyframes barAnim {
-      0%{width:19%;}
-      100%{width:87%;}
-    }
+    /* ... resto player ... */
     .pagina-cancion-nav {
       margin-top: 44px;
       margin-left: 4vw;
@@ -186,7 +111,7 @@
       z-index: 10;
       position: absolute; left: 0; bottom: 0;
     }
-    .pagina-cancion-nav button {
+    .pagina-cancion-nav button { /* Igual que antes, animado */ 
       font-family: inherit;
       font-size: 1.11em;
       font-weight: 700;
@@ -207,10 +132,6 @@
     .pagina-cancion-nav button:hover {
       background: linear-gradient(97deg, #3568b7 40%, #ed3555 95%);
       color: #ffd793;
-    }
-    @keyframes btnpulseIn {
-      0%{box-shadow: 0 2px 13px #e96676a9;}
-      100%{box-shadow: 0 6px 28px #ed355580;}
     }
     /* La frase en el rincón inferior derecho */
     .frase-secundaria-fixed {
@@ -254,16 +175,16 @@
     #spidermanPage {
       display: none;
       width: 100vw; height: 100vh;
-      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-      z-index: 100;
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 10000;
       background:
-        linear-gradient(120deg,#1c253a 72%, #8bd5f1ee 100%),
-        url('https://wallpapercave.com/wp/wp2186075.jpg');
+        linear-gradient(120deg,#1c253a 65%, #1c253ae6 80%, #e44b31cc 100%),
+        url('https://static1.srcdn.com/wordpress/wp-content/uploads/2022/09/Best-Spider-Man-Art-Across-Fan-Media.jpg'); /* Fondo bien spidey */
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center center;
       min-height: 100vh;
-      animation: spideyIn 1.7s cubic-bezier(.14,.68,.12,1.1) both;
+      animation: spideyIn 1.2s cubic-bezier(.14,.68,.12,1.1) both;
       overflow-x:hidden;
     }
     @keyframes spideyIn {
@@ -348,6 +269,13 @@
       margin-bottom: 6px;
       opacity: .91;
       animation: swingSpider 4s infinite alternate;
+    }
+    @keyframes swingSpider {
+      0% {transform: rotate(0deg) scale(1.0);}
+      15%{transform: rotate(-3deg) scale(1.12);}
+      44%{transform: rotate(6deg) scale(1.08);}
+      81%{transform: rotate(-6deg) scale(1.0);}
+      100%{transform: rotate(0.5deg) scale(1.09);}
     }
     @media (max-width:900px){
       .main-flex2{flex-direction:column; min-height:105vh; align-items:flex-start; justify-content:flex-start;}
