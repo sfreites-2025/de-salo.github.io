@@ -28,7 +28,7 @@
       animation: fondoFade 1.2s both;
     }
     @keyframes fondoFade { 0% {opacity:0; filter:blur(7px);} 100%{opacity:1; filter:none;} }
-    .side-text { /* ...igual que antes... */ 
+    .side-text {
       flex: 1.3;
       padding-left: 6vw;
       min-width: 300px;
@@ -59,7 +59,6 @@
       from { opacity: 0; transform: translateY(42px);}
       to   { opacity: 1; transform: none;}
     }
-    /* PLAYER DERECHO ... */
     .player-side {
       flex: 1;
       min-width: 310px; max-width: 400px;
@@ -69,7 +68,7 @@
       padding-right: 7vw;
       margin-left: -10px;
     }
-    .player-card { /* ...igual que antes... */
+    .player-card {
       background: linear-gradient(105deg,#813c82ed 15%, #fff7eecc 68%, #efd0edb3 100%);
       border-radius: 30px 16px 34px 22px / 28px 33px 38px 18px;
       border: 2.5px solid #ede2fa88;
@@ -87,7 +86,7 @@
       from { opacity:0; transform: translateX(100px) scale(0.97);}
       to   { opacity:1; transform: none;}
     }
-    .player-art { /* ...igual que antes... */ 
+    .player-art {
       width: 78px; height: 78px;
       border-radius: 17px;
       box-shadow: 0 3px 22px 0 #988fc966;
@@ -102,16 +101,64 @@
       0% {box-shadow: 0 3px 14px #d4b3ffd9, 0 2px 20px #a8f0ff44;}
       100%{box-shadow: 0 3px 26px #e2afea99, 0 2px 26px #ffe3f7aa;}
     }
-    /* ... resto player ... */
+    .player-linkspace {
+      width: 100%; display: flex; justify-content: center; align-items: center;
+      margin-bottom: 4px;
+    }
+    .yt-link-btn {
+      display: inline-flex;
+      align-items: center; gap: 13px;
+      font-size: 1.13em;
+      font-weight: 700;
+      background: #fff;
+      color: #e14d6a;
+      border-radius: 44px;
+      box-shadow: 0 2px 10px #afbefc22;
+      padding: 12px 32px 12px 19px;
+      margin-top: 9px; margin-bottom: 11px;
+      border: 2px solid #dfabe599;
+      text-decoration: none;
+      transition: background 0.18s, color 0.22s, box-shadow 0.19s;
+      letter-spacing: 0.02em;
+      animation: btnPulseYT 1.7s infinite alternate;
+    }
+    @keyframes btnPulseYT {
+      0%{box-shadow:0 2px 10px #afbefc22;}
+      100%{box-shadow:0 7px 32px #e14d6a33;}
+    }
+    .yt-link-btn:hover {
+      background: #e14d6a;
+      color: #fff;
+      box-shadow: 0 5px 29px #e14d6a77;
+    }
+    .mini-bar {
+      width: 87%; height: 7px; background: #f5c3f7;
+      border-radius: 10px;
+      margin-top: 13px;
+      box-shadow: 0 2px 11px #e1c3f955;
+      position: relative;
+      overflow: hidden;
+    }
+    .mini-bar:before {
+      content: "";
+      display: block;
+      width: 53%; height: 100%;
+      background: linear-gradient(90deg,#fbc2d5 24%, #e15a92 90%);
+      border-radius: 10px;
+      animation: barAnim 4.7s infinite alternate cubic-bezier(.85,0,.21,1.0);
+      position: absolute; left:0; top:0;
+    }
+    @keyframes barAnim {
+      0%{width:19%;}
+      100%{width:87%;}
+    }
     .pagina-cancion-nav {
-      margin-top: 44px;
-      margin-left: 4vw;
-      display: flex;
-      align-items: center; gap: 28px;
+      margin-top: 44px; margin-left: 4vw;
+      display: flex; align-items: center; gap: 28px;
       z-index: 10;
       position: absolute; left: 0; bottom: 0;
     }
-    .pagina-cancion-nav button { /* Igual que antes, animado */ 
+    .pagina-cancion-nav button {
       font-family: inherit;
       font-size: 1.11em;
       font-weight: 700;
@@ -121,11 +168,8 @@
       border: none;
       border-radius: 23px;
       box-shadow: 0 2px 13px #e96676a9, 0 2px 19px #3662a099;
-      cursor: pointer;
-      outline: none;
-      min-width: 124px;
-      margin-bottom: 36px;
-      letter-spacing: 0.03em;
+      cursor: pointer; outline: none; min-width: 124px;
+      margin-bottom: 36px; letter-spacing: 0.03em;
       animation: btnpulseIn 1.2s infinite alternate;
       transition: background 0.25s, color 0.19s, box-shadow 0.18s;
     }
@@ -133,23 +177,17 @@
       background: linear-gradient(97deg, #3568b7 40%, #ed3555 95%);
       color: #ffd793;
     }
-    /* La frase en el rincón inferior derecho */
+    /* Frase secundaria inferior derecha */
     .frase-secundaria-fixed {
       position: fixed;
-      right: 2vw;
-      bottom: 22px;
+      right: 2vw; bottom: 22px;
       font-size: 1em;
-      color: #8f4ca6;
-      font-style: italic;
-      opacity: 0.7;
+      color: #8f4ca6; font-style: italic; opacity: 0.7;
       background: rgba(255,255,255,0.72);
       padding: 9px 23px 7px 18px;
       border-radius: 20px 24px 22px 17px;
       text-shadow: 0 2px 10px #fff, 0 1px 12px #a3bdfa66;
-      letter-spacing: 0.015em;
-      z-index: 7777;
-      filter: blur(0px);
-      box-shadow: 0 2px 15px #e7d6f1a0;
+      letter-spacing: 0.015em; z-index: 7777; box-shadow: 0 2px 15px #e7d6f1a0;
       animation: slideUp 1.8s 1.9s both, susurroFlash 2.1s 2.2s infinite alternate;
       pointer-events: none;
     }
@@ -157,11 +195,11 @@
       0% {transform: translateY(60px); opacity:0;}
       100%{transform:none; opacity:0.73;}
     }
-    @media (max-width:850px){
-      .main-flex{flex-direction:column; align-items:flex-start; min-height:100vh; gap:0;}
+    @media (max-width:900px){
+      .main-flex{flex-direction:column; align-items:flex-start; min-height:100vh;}
       .side-text {padding-left:5vw; margin-top: 48px; padding-right:7vw; }
       .player-side{padding-right:0; margin-left:0; height:auto; padding-bottom:41px;}
-      .pagina-cancion-nav{ position:static; flex-direction:row; margin:44px 0 0 0; justify-content:center;}
+      .pagina-cancion-nav{ position:static; margin:44px 0 0 0; justify-content:center;}
     }
     @media (max-width:580px){
       .main-flex{flex-direction:column; min-width:0;}
@@ -171,20 +209,19 @@
     @media (max-width:750px){
       .frase-secundaria-fixed{right: 6vw; bottom: 14px; font-size:0.96em;}
     }
-    /* -- SpiderMan PAGE -- */
+
+    /* SpiderMan PAGE */
     #spidermanPage {
       display: none;
-      width: 100vw; height: 100vh;
-      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-      z-index: 10000;
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      z-index: 1000;
       background:
-        linear-gradient(120deg,#1c253a 65%, #1c253ae6 80%, #e44b31cc 100%),
-        url('https://static1.srcdn.com/wordpress/wp-content/uploads/2022/09/Best-Spider-Man-Art-Across-Fan-Media.jpg'); /* Fondo bien spidey */
-      background-repeat: no-repeat;
+        linear-gradient(120deg,#1c253ae9 65%, #ea354d88 100%),
+        url('https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=1200&q=80');
       background-size: cover;
-      background-position: center center;
+      background-position: center;
       min-height: 100vh;
-      animation: spideyIn 1.2s cubic-bezier(.14,.68,.12,1.1) both;
+      animation: spideyIn 1s cubic-bezier(.14,.68,.12,1.1) both;
       overflow-x:hidden;
     }
     @keyframes spideyIn {
@@ -205,25 +242,19 @@
     }
     .btns-nav2 {
       margin-top: 40px;
-      display: flex;
-      gap: 28px;
-      flex-direction: row;
-      align-items: center;
-      margin-left: 24px;
+      display: flex; gap: 28px;
+      flex-direction: row; align-items: center; margin-left: 24px;
     }
     .btns-nav2 button {
-      font-family: inherit;
-      font-size: 1.08em;
-      font-weight: 700;
+      font-family: inherit; font-size: 1.08em; font-weight: 700;
       padding: 15px 36px;
       background: linear-gradient(110deg, #ed3555 18%, #3568b7 100%);
       color: #fff; border: none;
       border-radius: 23px;
       box-shadow: 0 2px 13px #e96676a9, 0 2px 19px #3662a099;
       cursor: pointer; min-width: 112px; outline: none;
+      letter-spacing: 0.03em; animation: btnpulseIn 1.2s infinite alternate;
       transition: background 0.25s, color 0.18s, box-shadow 0.21s;
-      letter-spacing: 0.03em;
-      animation: btnpulseIn 1.2s infinite alternate;
     }
     .btns-nav2 button:hover {
       background: linear-gradient(100deg,#3568b7,#ed3555 80%);
@@ -270,13 +301,6 @@
       opacity: .91;
       animation: swingSpider 4s infinite alternate;
     }
-    @keyframes swingSpider {
-      0% {transform: rotate(0deg) scale(1.0);}
-      15%{transform: rotate(-3deg) scale(1.12);}
-      44%{transform: rotate(6deg) scale(1.08);}
-      81%{transform: rotate(-6deg) scale(1.0);}
-      100%{transform: rotate(0.5deg) scale(1.09);}
-    }
     @media (max-width:900px){
       .main-flex2{flex-direction:column; min-height:105vh; align-items:flex-start; justify-content:flex-start;}
       .side-left2{padding-left:3vw; margin-bottom:38px;}
@@ -295,7 +319,6 @@
 <body>
   <!-- PRIMERA PAGINA: CANCIÓN DE REIK -->
   <div class="main-flex" id="paginaCancion">
-    <!-- Mensaje izquierda -->
     <div class="side-text">
       <div class="mensaje-principal">
 Hay canciones que parecen escritas para nombrar lo que sentimos, por más que pase el tiempo, que cambien las estaciones o los destinos, nada, nadie y nunca podrá borrar lo que dejaste en mí. En cada latido, en cada silencio, tus huellas siguen vivas y llenas de luz. Si alguna vez dudé de lo que era amar, contigo lo aprendí: que no existen imposibles cuando el corazón se aferra a un momento, a una persona, a un recuerdo tan profundo, tan único.
@@ -306,7 +329,6 @@ Ahora comprendo que no importa cuán lejos estén nuestros caminos, porque hay c
         <button id="cancionSiguiente">Siguiente →</button>
       </div>
     </div>
-    <!-- Player derecha -->
     <div class="player-side">
       <div class="player-card">
         <div class="player-art"></div>
@@ -359,17 +381,16 @@ Like Spider-Man swinging fearlessly through the city, you face every challenge w
   </div>
 
   <script>
-    // Botón para avanzar a Spiderman
+    // Avanzar a Spiderman
     document.getElementById('cancionSiguiente').onclick = function(){
       document.getElementById('paginaCancion').style.display = "none";
-      document.getElementById('spidermanPage').style.display = "";
+      document.getElementById('spidermanPage').style.display = "block";
     };
-    // Botón regresar en Spiderman (vuelve a la canción)
+    // Regresar (vuelve a la canción)
     document.getElementById('spideyRegresar').onclick = function(){
       document.getElementById('spidermanPage').style.display = "none";
-      document.getElementById('paginaCancion').style.display = "";
+      document.getElementById('paginaCancion').style.display = "flex";
     };
-    // Botón siguiente: va a index6.html
     document.getElementById('spideySiguiente').onclick = function(){
       window.location.href = "index6.html";
     };
