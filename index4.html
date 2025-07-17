@@ -17,7 +17,6 @@
       position: absolute;
       top: 0; left: 0; width: 100vw; height: 100vh;
       display: flex; align-items: center; justify-content: flex-end;
-      /* Nuevo fondo de electricidad atractivo y llamativo */
       background: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1400&q=80') center center no-repeat;
       background-size: cover;
       z-index: 12;
@@ -63,7 +62,6 @@
       from {opacity: 0; transform: translateY(55px);}
       to   {opacity: 1; transform: translateY(0);}
     }
-    /* --- Texto para pulsar --- */
     .pulse-hint {
       color: #1571d6;
       font-size: 1.1em;
@@ -213,16 +211,114 @@
       background: linear-gradient(90deg,#75c37f 15%, #214d3c 80%);
       color: #fff8d4;
     }
-    @media (max-width: 950px) {
-      #slide12 .content-electric {max-width:95vw;padding:24px 5vw;}
-      #slide13 .center-msg {padding:32px 5vw;}
+
+    /* --- NUEVA PAGINA: Juego SI/NO --- */
+    #siNoGame {
+      display: none;
+      position: absolute;
+      left: 0; top: 0; width: 100vw; height: 100vh;
+      min-height: 100vh; min-width: 100vw;
+      z-index: 150;
+      background: linear-gradient(120deg, #fff4a3 0%, #e5d6ff 60%, #c1e7f8 100%);
+      display: flex; align-items: center; justify-content: center;
+      animation: fadeIn 1.1s;
     }
-    @media (max-width: 600px) {
-      #slide12 {padding-right: 0;}
-      #slide12 .content-electric {margin-right:0;padding:14px 3vw;}
-      #slide13 .center-msg {padding:20px 5vw;}
-      #slide13 .bigtext {font-size:1.1em;}
+    @keyframes fadeIn { from{opacity:0; filter:blur(7px);} to{opacity:1;filter:none;} }
+    #siNoGame .juego-container {
+      background: rgba(255,255,255,0.86);
+      box-shadow: 0 10px 44px #fbc07541, 0 2px 44px #bdbfff33;
+      border-radius: 36px;
+      padding: 56px 44px 44px 44px;
+      max-width: 430px;
+      min-width: 240px;
+      width: 90vw;
+      text-align: center;
+      position: relative;
+      animation: popin 1s cubic-bezier(.4,2,.1,1);
     }
+    @keyframes popin { 0%{opacity:0; transform:scale(0.93);} 100%{opacity:1; transform:scale(1);} }
+    #siNoGame .pregunta-animada {
+      font-size: 1.35em;
+      font-weight: bold;
+      color: #40348F;
+      line-height: 1.3;
+      margin-bottom: 36px;
+      min-height: 60px;
+      letter-spacing: 0.01em;
+      animation: preguntaColor 1.7s infinite alternate;
+      text-shadow: 0 4px 20px #f7e5bf55,0 1px 14px #ad96ffd0;
+    }
+    @keyframes preguntaColor {
+      0% { color: #40348F;}
+      100% { color: #D16BA5;}
+    }
+    #siNoGame .btns-si-no {
+      display: flex;
+      gap: 35px;
+      justify-content: center;
+      margin-bottom:18px;
+      margin-top: 15px;
+      flex-wrap: wrap;
+    }
+    #siNoGame .btns-si-no button {
+      font-family: inherit;
+      font-size: 1.13em;
+      font-weight: 600;
+      padding: 13px 35px;
+      background: linear-gradient(102deg,#b8a8fe 10%, #fac075 98%);
+      color: #6531b1;
+      border: none;
+      border-radius: 22px;
+      box-shadow: 0 3px 18px #b8a8feb7,0 1px 13px #fac075a2;
+      cursor: pointer;
+      transition: background 0.2s, color 0.1s, box-shadow 0.19s;
+      margin-bottom: 5px;
+      outline: none;
+      animation: btnPulse 1.7s infinite alternate;
+    }
+    #siNoGame .btns-si-no button:hover {
+      background: linear-gradient(100deg,#fac075,#b8a8fe 75%);
+      color: #d97706;
+    }
+    @keyframes btnPulse {
+      0% {box-shadow: 0 3px 18px #b8a8feb7,0 1px 13px #fac075a2;}
+      100% {box-shadow: 0 5px 30px #fac075ba,0 3px 23px #b8a8fecc;}
+    }
+    #siNoGame .mensaje-final {
+      font-size: 1.23em;
+      color: #ef4444;
+      font-weight: 600;
+      margin: 35px 0 28px 0;
+      animation: fadeZoom 1.1s;
+      white-space: pre-line;
+      min-height: 68px;
+      text-shadow: 0 2px 10px #f2b49d33, 0 3px 33px #ffeab8;
+    }
+    @keyframes fadeZoom {
+      0% {opacity:0; transform: scale(0.91);}
+      100% {opacity:1; transform: scale(1);}
+    }
+    #siNoGame .btn-siguiente, #siNoGame .btn-volver {
+      font-family: inherit;
+      font-size: 1.09em;
+      padding: 12px 33px;
+      margin: 7px 16px 0 16px;
+      border-radius: 20px;
+      border: none;
+      background: linear-gradient(95deg,#fac075,#b8a8fe 80%);
+      color: #40348F;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 2px 12px #ad96ff66;
+      transition: background 0.22s, color 0.18s;
+      outline: none;
+    }
+    #siNoGame .btn-siguiente:hover, #siNoGame .btn-volver:hover {
+      background: linear-gradient(92deg,#b8a8fe,#fac075 90%);
+      color: #D16BA5;
+    }
+    #siNoGame .btn-center { display:flex; justify-content:center; gap:30px; align-items:center;padding-bottom:10px;}
+    @media (max-width:500px){ #siNoGame .juego-container{padding:14vw 2vw;} #siNoGame .pregunta-animada{font-size:1em;} }
   </style>
 </head>
 <body>
@@ -244,6 +340,7 @@ Hay algo mágico en la electrónica: la manera en que transforma energía, conec
       </div>
     </div>
   </section>
+
   <!-- PAGINA 13: Final central -->
   <section id="slide13" class="hide">
     <div class="center-msg">
@@ -252,44 +349,72 @@ Hay algo mágico en la electrónica: la manera en que transforma energía, conec
       </div>
       <div class="btns-next13">
         <button id="toElec">⟵ Volver</button>
-        <button id="continue13">Siguiente →</button>
+        <button id="irSiNoGame">Siguiente →</button>
       </div>
     </div>
   </section>
+
+  <!-- PAGINA 14: Juego SI/NO -->
+  <section id="siNoGame" class="hide">
+    <div class="juego-container">
+      <div id="pregunta" class="pregunta-animada">¿Aun me quieres? Porque yo a ti sí</div>
+      <div class="btns-si-no" id="botonera">
+        <button id="btnSi">Sí</button>
+        <button id="btnNo">No</button>
+      </div>
+      <div class="mensaje-final" id="mensajeFinal" style="display:none;"></div>
+      <div class="btn-center" id="btnFinales" style="display:none;">
+        <button class="btn-volver" id="btnVolver">⟵ Regresar</button>
+        <button class="btn-siguiente" id="btnSiguiente">Siguiente →</button>
+      </div>
+    </div>
+  </section>
+
   <script>
-    // Elec slide control
+    // ----- DIAPO ELECTRICIDAD -----
     const slide12 = document.getElementById('slide12');
     const electricText = document.getElementById('electricText');
     const btnRayo = document.getElementById('btnRayo');
     const btnHeartRayo = document.getElementById('btnHeartRayo');
     const elecNav = document.getElementById('elecNav');
     const gotoSlide13 = document.getElementById('gotoSlide13');
+    const pulseHint = document.getElementById('pulseHint');
+    // ----- DIAPO 13 -----
     const slide13 = document.getElementById('slide13');
     const toElec = document.getElementById('toElec');
-    const continue13 = document.getElementById('continue13');
-    const pulseHint = document.getElementById('pulseHint');
+    const irSiNoGame = document.getElementById('irSiNoGame');
+    // ----- DIAPO 14: JUEGO SI/NO -----
+    const siNoGame = document.getElementById('siNoGame');
+    // -- elementos internos
+    const preguntaDiv = document.getElementById('pregunta');
+    const botoneraDiv = document.getElementById('botonera');
+    const mensajeFinal = document.getElementById('mensajeFinal');
+    const btnFinales = document.getElementById('btnFinales');
+    let btnSi = document.getElementById('btnSi');
+    let btnNo = document.getElementById('btnNo');
+    let btnSiguiente = document.getElementById('btnSiguiente');
+    let btnVolver = document.getElementById('btnVolver');
 
-    let step = 0;
+    // ------ Electricidad ------
     btnRayo.onclick = () => {
       electricText.style.opacity = 0;
       setTimeout(()=>{
-        electricText.innerHTML = `Eres como la electrónica que elegí estudiar: a veces misteriosa, siempre esencial y llena de sorpresas. Tus pensamientos son como impulsos eléctricos que encienden mi curiosidad, tu energía transmite ganas de seguir adelante, y tu capacidad de reinventarte en cada circunstancia me inspira profundamente. Así como los componentes de un circuito, tus sueños, tus logros y hasta tus “errores” se integran para crear algo único e irrepetible.`;
+        electricText.innerHTML =
+        `Eres como la electrónica que elegí estudiar: a veces misteriosa, siempre esencial y llena de sorpresas. Tus pensamientos son como impulsos eléctricos que encienden mi curiosidad, tu energía transmite ganas de seguir adelante, y tu capacidad de reinventarte en cada circunstancia me inspira profundamente. Así como los componentes de un circuito, tus sueños, tus logros y hasta tus “errores” se integran para crear algo único e irrepetible.`;
         electricText.style.opacity = 1;
         btnRayo.classList.add('hide');
         btnHeartRayo.classList.remove('hide');
         pulseHint.classList.add('hide');
-        step = 1;
       }, 360);
     };
-
     btnHeartRayo.onclick = () => {
       electricText.style.opacity = 0;
       setTimeout(()=>{
-        electricText.innerHTML = `Gracias por ser esa chispa de motivación en mi camino, por enseñarme que la vida no es solo ciencia o lógica, sino también emoción, adaptación y conexión. Eres la mejor prueba de que, incluso entre resistencias y obstáculos, quienes saben conectar con los demás pueden encender cualquier universo.`;
+        electricText.innerHTML =
+        `Gracias por ser esa chispa de motivación en mi camino, por enseñarme que la vida no es solo ciencia o lógica, sino también emoción, adaptación y conexión. Eres la mejor prueba de que, incluso entre resistencias y obstáculos, quienes saben conectar con los demás pueden encender cualquier universo.`;
         electricText.style.opacity = 1;
         btnHeartRayo.classList.add('hide');
         elecNav.classList.remove('hide');
-        step = 2;
       }, 350);
     };
     gotoSlide13.onclick = () => {
@@ -303,12 +428,82 @@ Hay algo mágico en la electrónica: la manera en que transforma energía, conec
       slide12.classList.remove('hide');
       document.body.style.background = "#21294a";
     };
-    continue13.onclick = () => {
-      alert('¡Aquí puedes enlazar la última parte o agradecimiento!');
+    irSiNoGame.onclick = () => {
+      slide13.classList.add('hide');
+      siNoGame.classList.remove('hide');
+      window.scrollTo(0,0);
+      document.body.style.background = "linear-gradient(120deg, #fff4a3 0%, #e5d6ff 60%, #c1e7f8 100%)";
+      iniciarJuegoSiNo();
     };
+
+    // ------ JUEGO SI/NO ------
+    let preguntasNo = [
+      "¿Segura?",
+      "¿Segura de que estas segura?",
+      "¿Segura de que estas segura de que estas segura?",
+      "¿Segura de que estas segura de que estas segura de que estas segura?",
+      "Vamos a seguir aquí todo el día hasta que digas que sí xd",
+      "¿De verdadita verdadita que nu?",
+      "Entiendo... Bueno pero yo a ti sí te quiero así mucho muchito, ¿Ultima oportunidad de quererme?",
+      "De pana que no me quieres nadita :(, ¿Entonces nadita?"
+    ];
+    let contadorNo = 0;
+    function iniciarJuegoSiNo() {
+      preguntaDiv.style.display = '';
+      preguntaDiv.textContent = "¿Aun me quieres? Porque yo a ti sí";
+      botoneraDiv.style.display = '';
+      botoneraDiv.innerHTML = `
+        <button id="btnSi">Sí</button>
+        <button id="btnNo">No</button>
+      `;
+      mensajeFinal.style.display = 'none';
+      btnFinales.style.display = 'none';
+      contadorNo = 0;
+
+      btnSi = document.getElementById('btnSi');
+      btnNo = document.getElementById('btnNo');
+
+      btnSi.onclick = handleSi;
+      btnNo.onclick = handleNo;
+    }
+    function handleSi() {
+      preguntaDiv.style.display = 'none';
+      botoneraDiv.style.display = 'none';
+      mensajeFinal.style.display = '';
+      mensajeFinal.textContent = "Lo sabiaaaa, pero siendo sinceros, yo aun te quiero, te quiero bastante...";
+      btnFinales.style.display = 'flex';
+    }
+    function handleNo() {
+      if (contadorNo < preguntasNo.length) {
+        preguntaDiv.textContent = preguntasNo[contadorNo];
+        contadorNo++;
+      } else if (contadorNo === preguntasNo.length) {
+        preguntaDiv.textContent = "Me sabe a verguis, claro que me quiere todavía, y lo sabessss ^^";
+        botoneraDiv.innerHTML =
+          `<button id="btnSiUltimo">Sí</button>`;
+        mensajeFinal.style.display = 'none';
+        btnFinales.style.display = 'none';
+        const btnSiUltimo = document.getElementById('btnSiUltimo');
+        btnSiUltimo.onclick = handleSi;
+        contadorNo++;
+      }
+    }
+
+    // Botones finales Siguiente y Volver
+    btnFinales.addEventListener('click', e => {
+      if (e.target === btnSiguiente) window.location.href = "index5.html";
+      if (e.target === btnVolver) {
+        siNoGame.classList.add('hide');
+        slide13.classList.remove('hide');
+        document.body.style.background = "linear-gradient(120deg,#fff7e0 22%, #dbefff 65%, #a6e3e9 94%)";
+      }
+    });
+
+    // Inicialización
     window.onload = () => {
       slide12.classList.remove('hide');
       slide13.classList.add('hide');
+      siNoGame.classList.add('hide');
       electricText.style.opacity = 1;
       btnRayo.classList.remove('hide');
       btnHeartRayo.classList.add('hide');
