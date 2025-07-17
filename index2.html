@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Index2 - Páginas 6, 7 y 8</title>
+  <title>Index2 - Páginas 6, 7, 8 y 9</title>
   <style>
     body, html {
       margin: 0; padding: 0; height: 100%;
@@ -30,37 +30,38 @@
     .slide .text-container {
       border-radius: 20px;
       padding: 30px 40px;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.22);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.20);
       animation: fadeSlideIn 1.5s forwards cubic-bezier(.4,.7,.3,1.05);
       opacity: 0;
-      animation-delay: 0.25s;
+      animation-delay: 0.22s;
       animation-fill-mode: forwards;
-      font-weight: 400;
-      line-height: 1.6;
-      font-size: 1.15em;
       background: rgba(255 255 255 / 0.85);
       box-sizing: border-box;
+      font-weight: 400;
+      font-size: 1em;
+      line-height: 1.6;
+      letter-spacing: 0.01em;
     }
     @keyframes fadeSlideIn {
       to {
         opacity: 1;
-        text-shadow: 0 0 6px #f6336e28, 1px 1px 3px #0002;
+        text-shadow: 0 0 7px #fd5e53a9, 2px 2px 3px #4441;
       }
     }
     h1 {
       margin-top: 0;
       font-weight: 700;
-      font-size: 2.3em;
+      font-size: 2.1em;
       letter-spacing: 0.02em;
       margin-bottom: 0.8em;
       animation: colorPulse 4s infinite alternate ease-in-out;
     }
     @keyframes colorPulse {
       0% { color: #444; text-shadow: none; }
-      100% { color: #fd5e53; text-shadow: 0 0 20px #fd5e53aa; }
+      100% { color: #fd5e53; text-shadow: 0 0 18px #fd5e5375,0 2px 10px #fff6; }
     }
 
-    /* --- Página 6 --- */
+    /* Página 6 */
     #slide6 {
       background: url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1400&q=80') no-repeat center center fixed;
       background-size: cover;
@@ -68,12 +69,9 @@
       color: black;
       text-align: right;
     }
-    #slide6 .text-container {
-      max-width: 600px;
-      text-align: right;
-    }
+    #slide6 .text-container { max-width: 600px; text-align: right; }
 
-    /* --- Página 7 --- */
+    /* Página 7 */
     #slide7 {
       background: url('https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=1400&q=80') no-repeat center center fixed;
       background-size: cover;
@@ -96,8 +94,7 @@
       0% { color: #f9d342; text-shadow: 0 0 12px #f9d342cc; }
       100% { color: #fffd9a; text-shadow: 0 0 20px #fffd9aaa, 0 0 40px #fffbaaaa; }
     }
-
-    /* --- Página 8 --- */
+    /* Página 8 */
     #slide8 {
       background: url('https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=1400&q=80') no-repeat center center fixed;
       background-size: cover;
@@ -107,70 +104,110 @@
     }
     #slide8 .text-container {
       max-width: 670px;
-      background: rgba(255,255,255,0.95);
-      margin: 0;
-      text-align: left;
-      box-shadow: 0 12px 32px 0 #fd5e5318, 0 2px 48px rgba(60,60,90,0.12);
+      background: rgba(255,255,255,0.96);
+      box-shadow: 0 12px 32px 0 #fd5e5313, 0 2px 48px rgba(60,60,90,0.12);
       border-radius: 24px;
       padding: 44px 38px 40px 38px;
-      opacity: 0;
       transform: translateX(-40px) scale(0.98);
       animation: leftFadeScaleIn 1.2s forwards cubic-bezier(.41,.8,.36,1.05);
       animation-delay: 0.33s;
-      animation-fill-mode: forwards;
-      backdrop-filter: blur(2px);
       color: #312b38;
-      line-height: 1.72;
-      font-size: 1em; /* Texto más pequeño */
-      letter-spacing: 0.01em;
+      font-size: 1em;
     }
     @keyframes leftFadeScaleIn {
       to {
         opacity: 1;
         transform: translateX(0) scale(1);
-        box-shadow: 0 12px 32px 0 #fd5e5348, 0 2px 48px rgba(60,60,90,0.19);
+        box-shadow: 0 12px 32px 0 #fd5e534f, 0 2px 48px rgba(60,60,90,0.19);
       }
     }
     #slide8 h1 {
       color: #26355d;
-      font-size: 2.3em;
+      font-size: 2.2em;
       margin-bottom: 1.1em;
       letter-spacing: 0.03em;
       font-weight: bold;
       animation: gradPulse 4s infinite alternate;
-      text-shadow: 0 2px 14px #fff9;
+      text-shadow: 0 2px 14px #fff8;
     }
     @keyframes gradPulse {
-      0% { color: #26355d; text-shadow: 0 0 10px #f9d34224; }
-      100% { color: #fd5e53; text-shadow: 0 0 30px #fd5e5344, 0 2px 24px #fff5; }
+      0% { color: #26355d; text-shadow: 0 0 10px #f9d34222; }
+      100% { color: #fd5e53; text-shadow: 0 0 18px #fd5e5344, 0 2px 17px #fff4; }
     }
-    #slide8 p {
-      margin-bottom: 1.8em;
+    /* Página 9 */
+    #slide9 {
+      background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1400&q=80') no-repeat center center fixed;
+      /* Imagen alegre, picnic, luz y naturaleza */
+      background-size: cover;
+      justify-content: flex-end;
+      color: #2d2438;
+      text-align: right;
+    }
+    #slide9 .text-container {
+      max-width: 570px;
+      background: rgba(255,255,255,0.88);
+      box-shadow: 0 10px 30px 0 #ffd70040, 0 2px 24px rgba(80,180,90,0.11);
+      margin-right: 0;
+      margin-left: auto;
+      text-align: right;
+      padding: 40px 35px 36px 40px;
+      border-radius: 22px;
+      color: #2d2438;
+      font-size: 1em;
+      transform: translateX(50px) scale(0.97);
+      opacity: 0;
+      animation: rightFadeScaleIn 1.18s forwards cubic-bezier(.21,.72,.36,1.10);
+      animation-delay: 0.35s;
+      animation-fill-mode: forwards;
+      backdrop-filter: blur(2px);
+    }
+    #slide9 h1 {
+      color: #f9b242;
+      font-size: 2.18em;
+      margin-bottom: 1.07em;
+      letter-spacing: 0.023em;
+      font-weight: bold;
+      text-shadow: 0 2px 14px #fff7,0 0 30px #ffe9a0aa;
+      animation: alegriaPulse 3.9s infinite alternate cubic-bezier(.61,0,.4,1.1);
+    }
+    @keyframes alegriaPulse {
+      0%   { color: #f9b242; text-shadow: 0 0 15px #fff7, 0 8px 15px #ffd93c11;}
+      100% { color: #fd5e53; text-shadow: 0 3px 26px #fffccc88, 0 0 24px #fd5e53bb;}
+    }
+    @keyframes rightFadeScaleIn {
+      to {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+        box-shadow: 0 14px 36px 0 #fde0a8fa, 0 2px 44px rgba(253,94,83,0.18);
+      }
+    }
+    #slide9 p {
+      font-size: 1em;
+      line-height: 1.55;
       white-space: pre-line;
-      text-shadow: 0 4px 18px #fff4;
-      color: #2d2a35;
-      line-height: 1.6;
-      font-size: 1em; /* Texto más pequeño */
+      text-shadow: 0 2px 14px #fff3, 1px 1px 5px #ffeccc44;
+      margin-bottom: 1.2em;
       letter-spacing: 0.01em;
     }
-
-    /* --- Botones --- */
+    /* Botones */
     button {
       font-family: "Times New Roman", Times, serif;
       border: none;
       border-radius: 25px;
       padding: 12px 30px;
-      font-size: 1.1em;
+      font-size: 1.05em;
       cursor: pointer;
       user-select: none;
-      box-shadow: 0 4px 10px rgba(253, 94, 83, 0.4);
-      background: linear-gradient(90deg, #fd5e53 0%, #ffb6b9 100%);
-      color: white;
+      box-shadow: 0 4px 10px rgba(253, 94, 83, 0.29);
+      background: linear-gradient(90deg, #ffe066 10%, #fd5e53 90%);
+      color: #2d2a35;
+      font-weight: 600;
       transition: background 0.3s;
       margin: 0 10px 0 0;
     }
     button:hover {
-      background: linear-gradient(90deg, #f6336e, #fecfe9);
+      background: linear-gradient(95deg, #fd5e53 30%, #ffe066 90%);
+      color: #694;
     }
     .buttons-container {
       margin-top: 2rem;
@@ -179,12 +216,13 @@
       flex-wrap: wrap;
     }
     #slide8 .buttons-container { justify-content: flex-start; }
-
+    #slide9 .buttons-container { justify-content: flex-end; }
     @media(max-width: 900px){
       .slide { padding: 12px; }
-      #slide6 .text-container, #slide7 .text-container, #slide8 .text-container {
+      #slide6 .text-container, #slide7 .text-container, #slide8 .text-container, #slide9 .text-container {
         max-width: 100%;
         text-align: center !important;
+        margin: 0 auto;
       }
       .buttons-container {
         justify-content: center !important;
@@ -255,17 +293,34 @@ Hoy comienza una nueva etapa y no puedo evitar sentir orgullo y admiración por 
     </div>
   </section>
 
+  <!-- Página 9 (Alegría/ánimo, texto derecha) -->
+  <section id="slide9" class="slide" role="main" aria-label="Novena diapositiva, alegría y buenos deseos">
+    <div class="text-container">
+      <h1>Tu luz, mi alegría</h1>
+      <p>
+"Hay pocas cosas tan bellas como presenciar el resplandor genuino de alguien a quien alguna vez amé profundamente. Me alegra verte brillar de la forma en la que brillas; de corazón, me hace feliz verte bien, crecer y conquistar los sueños que alguna vez compartiste conmigo. Saber que avanzas me llena de orgullo, no importa la distancia ni el tiempo: tu felicidad, tu luz y ese brillo tan tuyo siempre me arrancan una sonrisa sincera. Ojalá sigas creciendo y descubriéndote a ti misma, porque verte bien es una de esas pequeñas grandes alegrías que la vida me ha regalado."
+      </p>
+      <div class="buttons-container">
+        <button id="backTo8">← Volver</button>
+        <button id="goToIndex3">Siguiente →</button>
+      </div>
+    </div>
+  </section>
+
   <script>
     // Referencias a cada slide
     const slide6 = document.getElementById('slide6');
     const slide7 = document.getElementById('slide7');
     const slide8 = document.getElementById('slide8');
+    const slide9 = document.getElementById('slide9');
 
     const toSlide7Btn = document.getElementById('toSlide7');
     const toSlide8Btn = document.getElementById('toSlide8');
+    const toSlide9Btn = document.getElementById('toSlide9');
     const backTo6Btn = document.getElementById('backTo6');
     const backTo7Btn = document.getElementById('backTo7');
-    const toSlide9Btn = document.getElementById('toSlide9');
+    const backTo8Btn = document.getElementById('backTo8');
+    const goToIndex3Btn = document.getElementById('goToIndex3');
 
     // De 6 a 7
     toSlide7Btn.addEventListener('click', () => {
@@ -291,12 +346,22 @@ Hoy comienza una nueva etapa y no puedo evitar sentir orgullo y admiración por 
       slide7.classList.add('active');
       window.scrollTo(0,0);
     });
-    // Botón siguiente en página 8 (puedes personalizar su función después)
-    if (toSlide9Btn) {
-      toSlide9Btn.addEventListener('click', () => {
-        alert('Aquí puedes enlazar la página 9 o cualquier acción que quieras.');
-      });
-    }
+    // De 8 a 9
+    toSlide9Btn.addEventListener('click', () => {
+      slide8.classList.remove('active');
+      slide9.classList.add('active');
+      window.scrollTo(0,0);
+    });
+    // De 9 a 8
+    backTo8Btn.addEventListener('click', () => {
+      slide9.classList.remove('active');
+      slide8.classList.add('active');
+      window.scrollTo(0,0);
+    });
+    // Página FINAL: lleva a index3.html
+    goToIndex3Btn.addEventListener('click', () => {
+      window.location.href = 'index3.html';
+    });
   </script>
 </body>
 </html>
