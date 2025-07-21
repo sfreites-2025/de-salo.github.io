@@ -16,7 +16,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 32px;
+    gap: 40px;
   }
   @keyframes gradientBG {
     0% {background-position: 0% 50%;}
@@ -24,7 +24,7 @@
     100% {background-position: 0% 50%;}
   }
 
-  /* Contenedor de la vela */
+  /* Vela virtual */
   .candle-container {
     position: relative;
     width: 120px;
@@ -108,12 +108,12 @@
   }
   .glow {
     position: absolute;
-    width: 40em;
-    height: 40em;
+    width: 400px;
+    height: 400px;
     background-color: orangered;
     border-radius: 50%;
-    top: -150em;
-    left: -180em;
+    top: -150px;
+    left: -180px;
     filter: blur(100px);
     animation: blink 100ms infinite;
     z-index: 1;
@@ -121,27 +121,25 @@
   @keyframes blink {
     to { filter: blur(100px) opacity(0.8); }
   }
-
-  /* Ocultar vela cuando esté apagada */
+  /* Ocultar vela cuando esta apagada */
   .hidden {
     display: none;
   }
-
-  /* Botones */
+  /* Botones navegación */
   #btns-nav {
     display: flex;
-    gap: 32px;
+    gap: 30px;
   }
   button {
     background: linear-gradient(110deg, #7ae0ea 12%, #fd558e 88%);
     color: #6d1472;
     border: none;
-    border-radius: 11px;
-    padding: 12px 38px;
+    border-radius: 12px;
+    padding: 14px 38px;
     font-family: 'Times New Roman', serif;
     font-weight: 700;
     font-size: 1.15em;
-    box-shadow: 0 1px 16px #5ff5fc42;
+    box-shadow: 0 2px 18px #5ff5fc42;
     letter-spacing: 0.03em;
     cursor: pointer;
     transition: background 0.25s, color 0.22s, box-shadow 0.22s;
@@ -150,16 +148,14 @@
   button:hover {
     background: linear-gradient(112deg, #fd558e, #7ae0ea 86%);
     color: #ea20b8;
-    box-shadow: 0 6px 30px #ff5ea4cc;
+    box-shadow: 0 8px 30px #ff5ea4cc;
   }
-
-  /* Toggle Switch */
+  /* Toggle switch */
   .switch {
     position: relative;
     display: inline-block;
     width: 60px;
     height: 34px;
-    margin-bottom: 0;
     vertical-align: middle;
   }
   .switch input {
@@ -189,52 +185,40 @@
   input:checked + .slider:before {
     transform: translateX(26px);
   }
-
-  /* Label for toggle */
-  #toggle-label {
-    font-size: 1.2em;
+  label.toggle-label {
     font-family: 'Times New Roman', serif;
+    font-size: 1.2em;
     margin-right: 12px;
-    vertical-align: middle;
+    cursor: pointer;
     user-select: none;
+    vertical-align: middle;
   }
-
-  /* Container for toggle control */
-  #toggle-container {
+  .toggle-container {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
+    justify-content: center;
   }
 </style>
 </head>
 <body>
 
-  <!-- Burbujas animadas fondo -->
-  <div class="bubble bubble1"></div>
-  <div class="bubble bubble2"></div>
-  <div class="bubble bubble3"></div>
-  <div class="bubble bubble4"></div>
-  <div class="bubble bubble5"></div>
-
-  <!-- Contenedor principal para vela -->
-  <div class="candle-container hidden" id="vela">
-    <div class="candle" role="img" aria-label="Vela encendida con llama animada">
-      <span class="glow"></span>
-      <div class="thread"></div>
-      <div class="flames"></div>
-    </div>
-  </div>
-
-  <!-- Controles de encender/apagar vela -->
-  <div id="toggle-container">
-    <label id="toggle-label" for="toggleVela">Encender Vela</label>
+  <div class="toggle-container">
+    <label for="toggleVela" class="toggle-label">Encender Vela Virtual</label>
     <label class="switch">
       <input type="checkbox" id="toggleVela" aria-checked="false" aria-label="Encender o apagar vela virtual">
       <span class="slider"></span>
     </label>
   </div>
 
-  <!-- Botones Navegación -->
+  <div class="candle-container hidden" id="vela" aria-live="polite" aria-atomic="true" role="img" aria-label="Vela animada encendida">
+    <div class="candle">
+      <span class="glow"></span>
+      <div class="thread"></div>
+      <div class="flames"></div>
+    </div>
+  </div>
+
   <div id="btns-nav">
     <button id="btnRegresar">Regresar</button>
     <button id="btnSiguiente">Siguiente →</button>
@@ -259,7 +243,6 @@
   btnRegresar.addEventListener('click', () => {
     window.history.back();
   });
-
   btnSiguiente.addEventListener('click', () => {
     window.location.href = 'index11.html';
   });
