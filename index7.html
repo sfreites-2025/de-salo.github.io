@@ -12,6 +12,7 @@
       font-family: "Times New Roman", Times, serif;
       background: radial-gradient(circle at 60% 40%, #ffe5e5 0%, #c6eaff 60%, #fff 100%);
       overflow: hidden;
+      color: #311b92;
     }
     canvas {
       display: block;
@@ -27,7 +28,6 @@
       font-size: 2.3em; font-weight: bold;
       color: #901fa8; letter-spacing: 0.04em;
       text-shadow: 0 3px 12px #fff8, 0 1.5px 10px #81d0ec8f;
-      font-family: "Times New Roman", Times, serif;
       user-select: none;
       animation: fadeHeader 2s;
     }
@@ -46,8 +46,6 @@
       border: 2.7px solid #b16ded8c;
       mix-blend-mode: lighten;
       z-index: 30;
-      transition: box-shadow 0.17s, background 0.3s;
-      pointer-events: none;
       animation: kaleidoPulse 1.2s infinite alternate;
     }
     @keyframes kaleidoPulse {
@@ -59,7 +57,7 @@
       width: 88px; height: 88px;
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      font-size: 2.6em;
+      font-size: 2.3em;
       font-family: "Times New Roman", Times, serif;
       cursor: pointer;
       box-shadow: 0 4px 29px #ff9ab955, 0 1.1px 17px #65c9ef60;
@@ -67,6 +65,8 @@
       animation: floatBub 4.4s infinite alternate cubic-bezier(.56,.13,.71,1.17);
       background: radial-gradient(circle at 60% 60%, #fff 30%, #e2e1fc 100%);
       user-select: none;
+      color: #6a0dad;
+      font-weight: bold;
     }
     @keyframes floatBub {
       0% { transform: translateY(0px);}
@@ -74,10 +74,11 @@
     }
     .bubble.revealed { opacity: 0; pointer-events: none; transition: opacity 1s; }
     .reveal-modal {
-      position: fixed; z-index: 10001;
-      left: 0; top: 0; width: 100vw; height: 100vh;
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
       background: rgba(255,255,255,0.91);
-      display: flex; align-items: center; justify-content: center;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      z-index: 10001;
       animation: popIn 0.45s cubic-bezier(.4,2,.22,1.07);
     }
     @keyframes popIn {
@@ -87,19 +88,19 @@
     }
     .modal-card {
       min-width: 310px; max-width: 80vw; min-height: 220px;
-      background: linear-gradient(125deg,#fff3e8 70%,#d6f5fc 100%);
+      background: linear-gradient(130deg,#fff0fa 67%, #c1fff0 100%);
       border-radius: 42px;
-      box-shadow: 0 8px 38px #f9a6fd44, 0 2px 22px #cbe8fd99;
-      border: 2.5px solid #d0b6fd88;
-      padding: 41px 34px 27px 34px;
+      box-shadow: 0 4px 32px #ffb2f8d0, 0 2px 33px #a3fcffbc;
+      padding: 44px 30px 33px 30px;
       text-align: center;
-      font-family: "Times New Roman", Times, serif;
-      animation: cardPop 0.72s;
       color: #902aba;
+      font-family: "Times New Roman", Times, serif;
+      animation: cardPop 0.85s cubic-bezier(.4,2,.22,1.07) both;
     }
     @keyframes cardPop {
-      0%{ opacity: 0; transform: scale(0.88);}
-      100%{ opacity: 1; transform: none;}
+      0% {opacity:0; transform: scale(0.8);}
+      70%{opacity: .76;}
+      100%{opacity:1;  transform: scale(1);}
     }
     .modal-emoji {
       font-size: 3em;
@@ -113,26 +114,24 @@
     }
     .modal-text {
       font-size: 1.23em;
-      font-family: "Times New Roman", Times, serif;
-      margin-bottom: 17px;
-      line-height: 1.5;
+      margin-bottom: 24px;
+      letter-spacing: 0.02em;
       color: #741b7c;
+      white-space: pre-wrap;
     }
     .close-btn {
       background: linear-gradient(99deg,#7ae0ea,#fd558e 85%);
       color: #5c128b;
-      font-size: 1.09em;
       font-weight: bold;
       font-family: "Times New Roman", Times, serif;
       padding: 13px 44px;
       border-radius: 16px;
       border: none;
-      margin-top: 12px;
-      margin-bottom: 3px;
       box-shadow: 0 1px 13px #f198ff33;
       letter-spacing: 0.03em;
       cursor: pointer;
       animation: btnpulseIn 1.3s infinite alternate;
+      outline: none;
     }
     .final-msg {
       font-size: 1.44em;
@@ -147,193 +146,130 @@
     }
     @keyframes finalAp {
       from { opacity: 0; transform: translateY(40px);}
-      to   { opacity: 1; transform: none;}
+      to { opacity: 1; transform: none;}
     }
-    @media (max-width:700px){
-      .modal-card{min-width:unset;max-width:98vw;padding:3vw;}
-      .main-message-card{padding:4vw;}
+    @keyframes btnpulseIn {
+      0% { box-shadow: 0 2px 13px #aebaff75;}
+      100% { box-shadow: 0 6px 26px #ffe4faaf;}
+    }
+    @media (max-width: 700px) {
+      .modal-card {
+        min-width: unset;
+        max-width: 96vw;
+        padding: 3vw;
+      }
     }
   </style>
 </head>
 <body>
-  <canvas id="bg-canvas"></canvas>
   <div class="header">Caleidoscopio de Emociones</div>
   <div id="kaleidoscope"></div>
+  
   <script>
-    // Emociones y frases, puedes editar libremente
+    // Datos con textos dados y emojis arbitrarios bonitos para cada texto
     const bubbleData = [
-      {emoji:'😊', color:'#FBE6A2', msg:'Ese día reímos hasta dolernos la panza.'},
-      {emoji:'🥰', color:'#FFB2C5', msg:'Nada reemplaza un buen abrazo tuyo.'},
-      {emoji:'😲', color:'#B8E0EA', msg:'¡Siempre supiste sorprenderme!'},
-      {emoji:'🤗', color:'#BBFFBC', msg:'Gracias por ser apoyo en todo momento.'},
-      {emoji:'🎶', color:'#B3B1FE', msg:'Hay canciones que me llevan a ti.'},
-      {emoji:'✨', color:'#F6D3FF', msg:'Lo cotidiano contigo siempre fue especial.'},
-      {emoji:'💪', color:'#FFD1A6', msg:'Supiste ser fuerte por los dos muchas veces.'},
-      {emoji:'🌈', color:'#C7FDE3', msg:'Hoy, todo puede mejorar. Confía.'},
-      {emoji:'😌', color:'#BBE6D9', msg:'Tu presencia me trajo calma.'}
+      { emoji: '🤗', msg: "Nada reemplaza un buen abrazo tuyo" },
+      { emoji: '🎉', msg: "Siempre buscaste formas de sorprenderme" },
+      { emoji: '🤝', msg: "Gracias por ser un apoyo fundamental en mi vida" },
+      { emoji: '🎵', msg: "Hay canciones como lo son 506 de Morat, que me llevan a ti" },
+      { emoji: '🌅', msg: "Lo cotidiano contigo siempre fue especial" },
+      { emoji: '💪', msg: "Supiste ser fuerte por los dos muchas veces" },
+      { emoji: '😌', msg: "Tu presencia en mi vida me trajo calma" },
+      { emoji: '✨', msg: "Nunca nada fue perfecto, pero sí fue único" },
+      { emoji: '🤗', msg: "Muchas veces te necesité y estuviste ahí" },
+      { emoji: '🌟', msg: "Rebasaste mis expectativas cada día más" },
+      { emoji: '❤️', msg: "Amaste como nunca lo habías hecho" },
+      { emoji: '🍷', msg: "Jamás te olvidaré, mi copita" }
     ];
 
-    // Fondo: burbujas flotantes suaves
-    const canvas = document.getElementById('bg-canvas');
-    const ctx = canvas.getContext('2d');
-    let bgBubbles = [];
-    function resizeCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
+    // Crear kaleidoscopio
+    const kaleido = document.createElement('div');
+    kaleido.id = 'kaleidoscope';
+    document.body.appendChild(kaleido);
 
-    function createBgBubbles() {
-      bgBubbles = [];
-      for(let i=0;i<17;i++){
-        bgBubbles.push({
-          x: Math.random()*canvas.width,
-          y: Math.random()*canvas.height,
-          r: 44 + Math.random()*52,
-          color: `rgba(${180+Math.floor(Math.random()*60)},${160+Math.floor(Math.random()*60)},${255-Math.floor(Math.random()*50)},.18)`,
-          v: .15 + Math.random()*.23
-        });
-      }
-    }
-    function animateBg() {
-      ctx.clearRect(0,0,canvas.width,canvas.height);
-      for(let bub of bgBubbles){
-        ctx.beginPath();
-        ctx.arc(bub.x, bub.y,bub.r,0,2*Math.PI);
-        ctx.fillStyle = bub.color;
-        ctx.shadowColor = "#fde2fa";
-        ctx.shadowBlur = 18;
-        ctx.fill();
-        ctx.shadowBlur = 0;
-        bub.y -= bub.v;
-        if(bub.y + bub.r < 0) {
-          bub.x = Math.random()*canvas.width;
-          bub.y = canvas.height + bub.r;
-        }
-      }
-      requestAnimationFrame(animateBg);
-    }
-    createBgBubbles();
-    animateBg();
-
-    // Caleidoscopio/foco que sigue mouse o dedo
-    const kaleido = document.getElementById('kaleidoscope');
-    let kaleidoX = window.innerWidth/2, kaleidoY = window.innerHeight/2;
-    function updateKaleidoPos(x,y){
-      kaleido.style.left = (x-60)+"px";
-      kaleido.style.top = (y-60)+"px";
-      kaleidoX = x; kaleidoY = y;
+    function updateKaleidoPos(x, y) {
+      kaleido.style.left = (x - 60) + 'px';
+      kaleido.style.top = (y - 60) + 'px';
     }
     document.addEventListener('mousemove', e => updateKaleidoPos(e.clientX, e.clientY));
-    document.addEventListener('touchmove', e => {
+    document.addEventListener('touchmove', e => { 
       if(e.touches && e.touches[0]) updateKaleidoPos(e.touches[0].clientX, e.touches[0].clientY);
     });
     updateKaleidoPos(window.innerWidth/2, window.innerHeight/2);
 
-    // Burbujas principales
-    let revealed = [];
+    // Render de burbujas
+    const bubbles = [];
     function renderBubbles() {
-      for(let i=0; i<bubbleData.length; i++) {
+      for(let i = 0; i < bubbleData.length; i++) {
         const div = document.createElement('div');
         div.className = 'bubble';
-        div.innerHTML = bubbleData[i].emoji;
-        // colores personalizados animados
-        div.style.background = `radial-gradient(circle,${bubbleData[i].color} 40%,#fff8 100%)`;
-        const angle = 2*Math.PI * i/bubbleData.length + Math.random()*Math.PI/10;
-        const centerX = window.innerWidth/2 + Math.cos(angle)*210+Math.random()*70-35;
-        const centerY = window.innerHeight/2 + Math.sin(angle)*160+Math.random()*60-25;
-        div.style.left = (centerX-44)+"px"; div.style.top = (centerY-44)+"px";
-        div.dataset.idx = i;
+        div.textContent = bubbleData[i].emoji;
+        const angle = 2 * Math.PI * i / bubbleData.length + Math.random() * 0.15;
+        const centerX = window.innerWidth / 2 + Math.cos(angle) * 210 + Math.random() * 60 - 30;
+        const centerY = window.innerHeight / 2 + Math.sin(angle) * 160 + Math.random() * 55 - 25;
+        div.style.left = (centerX - 44) + 'px';
+        div.style.top = (centerY - 44) + 'px';
+        div.dataset.index = i;
         document.body.appendChild(div);
-        div.addEventListener('mouseenter', () => {highlightBubble(div);});
-        div.addEventListener('mouseleave', () => div.style.transform='scale(1)');
-        div.addEventListener('click', () => {showModal(i, div);});
+        bubbles.push(div);
+        div.addEventListener('mouseenter', () => {
+          div.style.transform = 'scale(1.22) rotate(-2deg)';
+          div.style.boxShadow = '0 6px 24px #fff8,0 4px 38px #ffbebb9a';
+        });
+        div.addEventListener('mouseleave', () => {
+          div.style.transform = 'scale(1)';
+          div.style.boxShadow = '';
+        });
+        div.addEventListener('click', () => showModal(i, div));
       }
     }
-    function highlightBubble(div){
-      div.style.transform = "scale(1.22) rotate(-2deg)";
-      div.style.boxShadow = "0 6px 24px #fff8,0 4px 38px #ffbebb9a";
-    }
 
-    // Detecta si caleidoscopio (mouse) sobre una burbuja
-    document.addEventListener('mousemove', function(e){
-      document.querySelectorAll('.bubble:not(.revealed)').forEach(bub=>{
-        const r = 44;
-        const bx = bub.offsetLeft+44, by = bub.offsetTop+44;
-        const dist = Math.hypot(bx-e.clientX, by-e.clientY);
-        if(dist<60) highlightBubble(bub);
-        else bub.style.transform="scale(1)";
-      });
-    });
+    let revealed = [];
 
-    // Mostrar mensaje y animación (modal)
-    function showModal(idx, divBubble){
-      if(revealed.includes(idx)) return;
+    function showModal(idx, bubble) {
+      if (revealed.includes(idx)) return;
       revealed.push(idx);
-      divBubble.classList.add('revealed');
-      // Animación de confeti
-      for(let i=0;i<9;i++) spawnConfetti(kaleidoX, kaleidoY);
-      // Crear modal
-      let modal = document.createElement('div');
-      modal.className = "reveal-modal";
+      bubble.classList.add('revealed');
+      // Crear y mostrar modal
+      const modal = document.createElement('div');
+      modal.className = 'reveal-modal';
       modal.innerHTML = `
         <div class="modal-card">
           <span class="modal-emoji">${bubbleData[idx].emoji}</span>
           <div class="modal-text">${bubbleData[idx].msg}</div>
-          <button class="close-btn">${revealed.length<bubbleData.length
+          <button class="close-btn">${revealed.length < bubbleData.length 
             ? `Faltan (${bubbleData.length - revealed.length})`
             : '¡Ver mensaje final!'}</button>
         </div>
       `;
       document.body.appendChild(modal);
-      modal.querySelector('.close-btn').onclick = ()=>{
+      modal.querySelector('.close-btn').onclick = () => {
         modal.remove();
-        if(revealed.length === bubbleData.length) showFinalMsg();
-      }
+        if (revealed.length === bubbleData.length) showFinalMessage();
+      };
     }
 
-    // Confeti animado
-    function spawnConfetti(x, y){
-      let conf = document.createElement('div');
-      conf.style.position = "fixed";
-      conf.style.left = (x-18+Math.random()*46)+"px";
-      conf.style.top = (y-18+Math.random()*26)+"px";
-      conf.style.fontSize = (24+Math.random()*20)+"px";
-      conf.style.pointerEvents = "none";
-      conf.style.opacity = 1;
-      conf.style.transition = "all 1.4s cubic-bezier(.63,1.2,.37,1)";
-      conf.style.zIndex = 9000;
-      conf.innerHTML = ["💟","🦋","💫","✨","💖","🌈"][Math.floor(Math.random()*6)];
-      document.body.appendChild(conf);
-      setTimeout(()=>{
-        conf.style.transform = `translateY(-${90+Math.random()*80}px) scale(${1+Math.random()}) rotate(${Math.random()*190-80}deg)`;
-        conf.style.opacity = 0;
-      },80);
-      setTimeout(()=>conf.remove(),1500);
-    }
-
-    // Mensaje final
-    function showFinalMsg(){
-      let div = document.createElement('div');
-      div.className = "reveal-modal";
-      div.innerHTML = `
-        <div class="modal-card" style="padding:40px 20px 30px 20px;">
+    function showFinalMessage() {
+      const finalModal = document.createElement('div');
+      finalModal.className = 'reveal-modal';
+      finalModal.innerHTML = `
+        <div class="modal-card" style="padding: 40px 20px 30px 20px;">
           <div class="final-msg">
             Gracias por explorar este caleidoscopio.<br>
             Cada emoción, cada recuerdo... los llevas contigo.<br>
-            <span style="font-size:1.44em; color:#f764bd">💖</span>
+            <span style="font-size:1.44em; color:#f764bd;">💖</span>
           </div>
           <button class="close-btn">Jugar de nuevo</button>
         </div>
       `;
-      document.body.appendChild(div);
-      div.querySelector('.close-btn').onclick = ()=>{ 
-        div.remove();
-        document.querySelectorAll('.bubble').forEach(b => b.remove());
+      document.body.appendChild(finalModal);
+      finalModal.querySelector('.close-btn').onclick = () => {
+        finalModal.remove();
         revealed = [];
-        renderBubbles();
-      }
+        bubbles.forEach(b => {
+          b.classList.remove('revealed');
+        });
+      };
     }
 
     renderBubbles();
