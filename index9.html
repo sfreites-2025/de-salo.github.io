@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Bienvenida y Semáforo Interactivo</title>
+<title>Semáforo Interactivo</title>
 <style>
   body {
     margin: 0; padding: 0;
@@ -24,7 +24,8 @@
     50% { background-position: 100% 50%;}
     100% { background-position: 0% 50%;}
   }
-  /* Semi transparente burbujas flotantes de fondo */
+
+  /* Burbujas animadas de fondo */
   .bubble {
     position: absolute;
     border-radius: 50%;
@@ -42,7 +43,8 @@
     0% {transform: translateY(0);}
     100% {transform: translateY(-80vh);}
   }
-  /* Semáforo al lado izquierdo */
+
+  /* Semáforo a la izquierda */
   .container-semaforo {
     display: flex;
     align-items: center;
@@ -129,6 +131,7 @@
     0% { text-shadow: 0 0 10px #4eff75, 0 0 25px #4eff75aa; transform: translate(-50%, -55%) scale(1); }
     100% { text-shadow: 0 0 16px #2ceb37, 0 0 32px #2ceb37cc; transform: translate(-50%, -55%) scale(1.12); }
   }
+
   /* Controles centrados a la derecha */
   #controls {
     background: rgba(25,25,25,0.86);
@@ -165,46 +168,49 @@
     cursor: pointer;
     accent-color: #ff2c2c;
   }
-  /* Contenedor mensaje con estilo y animación */
+  /* Mensaje centrado en pantalla */
   #message-container {
-    position: absolute;
-    right: 50px;
+    position: fixed;
     top: 50%;
-    transform: translateY(-50%);
-    width: 300px;
-    background: rgba(255, 255, 255, 0.9);
-    padding: 25px;
+    left: 50%;
+    transform: translate(-50%, -50%) translateX(20px);
+    width: 350px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 30px;
     border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.3);
     text-align: center;
     font-family: 'Times New Roman', Times, serif;
-    font-size: 1.15em;
-    line-height: 1.4;
+    font-size: 1.2em;
+    line-height: 1.5;
     opacity: 0;
     transition: opacity 0.8s ease, transform 0.8s ease;
-    z-index: 2;
+    z-index: 100;
     pointer-events: none;
+    user-select: none;
+    white-space: pre-wrap;
   }
   #message-container.visible {
     opacity: 1;
-    transform: translateY(-50%) translateX(0);
+    transform: translate(-50%, -50%) translateX(0);
+    pointer-events: auto;
   }
   #message-container.rojo-text {
     color: #a52345;
-    border: 2px solid #ff2c2c;
+    border: 3px solid #ff2c2c;
     background: linear-gradient(135deg, #fce4ec, #f8bbd0);
   }
   #message-container.amarillo-text {
     color: #b78c00;
-    border: 2px solid #ffd93b;
+    border: 3px solid #ffd93b;
     background: linear-gradient(135deg, #fffde7, #fff9c4);
   }
   #message-container.verde-text {
     color: #2e7d32;
-    border: 2px solid #37d04e;
+    border: 3px solid #37d04e;
     background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
   }
-  /* Modal bienvenida */
+  /* Modal de bienvenida */
   #welcome-modal {
     position: fixed;
     inset: 0;
@@ -216,30 +222,31 @@
   }
   #welcome-content {
     background: #fff;
-    padding: 2.5em 3em;
+    padding: 3em 3.5em;
     border-radius: 20px;
-    max-width: 380px;
+    max-width: 420px;
     text-align: center;
     font-family: 'Times New Roman', Times, serif;
-    box-shadow: 0 6px 26px #af6d9ecc;
+    box-shadow: 0 8px 32px #af6d9ecc;
   }
   #welcome-content h2 {
     margin: 0 0 20px 0;
     color: #824085;
-    font-size: 1.8em;
+    font-size: 2em;
   }
   #welcome-content button {
     font-family: 'Times New Roman', Times, serif;
     background: linear-gradient(99deg,#7ae0ea,#fd558e 85%);
     color: #5c128b;
     font-weight: bold;
-    padding: 12px 44px;
-    border-radius: 15px;
+    padding: 14px 52px;
+    border-radius: 16px;
     border: none;
-    box-shadow: 0 2px 18px #f179f766;
+    box-shadow: 0 3px 22px #f179f766;
     letter-spacing: 0.03em;
     cursor: pointer;
-    font-size: 1.1em;
+    font-size: 1.2em;
+    margin-top: 18px;
   }
   #welcome-content button:hover {
     background: linear-gradient(120deg,#fd558e,#7ae0ea 85%);
@@ -248,14 +255,15 @@
 </style>
 </head>
 <body>
-  <!-- Fondo burbujas -->
+
+  <!-- Burbujas flotantes de fondo -->
   <div class="bubble bubble1"></div>
   <div class="bubble bubble2"></div>
   <div class="bubble bubble3"></div>
   <div class="bubble bubble4"></div>
   <div class="bubble bubble5"></div>
 
-  <!-- Semáforo -->
+  <!-- Semáforo al lado izquierdo -->
   <div class="container-semaforo" aria-label="Semáforo de tráfico con control">
     <div class="semaforo" role="region" aria-live="polite" aria-atomic="true">
       <div id="rojo" class="luz rojo" aria-label="Corazón rojo apagado"></div>
@@ -264,11 +272,11 @@
     </div>
   </div>
 
-  <!-- Controles -->
+  <!-- Control de selección de colores -->
   <div id="controls" aria-label="Selecciona qué luz encender">
     <h1>Elija el color del semáforo a encender</h1>
     <label>
-      <input type="radio" name="luz" value="rojo" checked>
+      <input type="radio" name="luz" value="rojo">
       Luz Roja
     </label>
     <label>
@@ -281,10 +289,10 @@
     </label>
   </div>
 
-  <!-- Mensaje animado a la derecha -->
+  <!-- Mensaje animado en el centro -->
   <div id="message-container" role="region" aria-live="polite" aria-atomic="true"></div>
 
-  <!-- Modal Bienvenida -->
+  <!-- Modal de bienvenida -->
   <div id="welcome-modal" role="dialog" aria-modal="true" aria-labelledby="welcome-title" aria-describedby="welcome-desc">
     <div id="welcome-content">
       <h2 id="welcome-title">Bienvenido al Semáforo xd</h2>
@@ -299,6 +307,8 @@
   const verde = document.getElementById('verde');
   const messageContainer = document.getElementById('message-container');
   const radios = document.querySelectorAll('input[name="luz"]');
+  const welcomeModal = document.getElementById('welcome-modal');
+  const btnAccept = document.getElementById('btnAccept');
 
   const mensajes = {
     rojo: {
@@ -324,45 +334,50 @@ No se trata de olvidar ni de borrar lo vivido sino de saber que todo ese camino 
   }
 
   function actualizarLuzSeleccionada() {
-    const seleccion = document.querySelector('input[name="luz"]:checked').value;
+    const seleccion = document.querySelector('input[name="luz"]:checked');
+    if (!seleccion) {
+      // No hay seleccion, apagar todo y ocultar mensaje
+      apagarLuces();
+      messageContainer.textContent = '';
+      messageContainer.className = '';
+      messageContainer.style.opacity = '0';
+      messageContainer.style.pointerEvents = 'none';
+      return;
+    }
+    const valor = seleccion.value;
+
     apagarLuces();
+    if (valor === 'rojo') rojo.classList.add('on');
+    else if (valor === 'amarillo') amarillo.classList.add('on');
+    else if (valor === 'verde') verde.classList.add('on');
 
-    if (seleccion === 'rojo') rojo.classList.add('on');
-    else if (seleccion === 'amarillo') amarillo.classList.add('on');
-    else if (seleccion === 'verde') verde.classList.add('on');
-
-    // Mostrar mensaje con animación
-    const mensajeData = mensajes[seleccion];
+    const mensajeData = mensajes[valor];
     messageContainer.className = ''; // reset clases
-    messageContainer.classList.add(mensajeData.class, 'visible');
+    messageContainer.classList.add(mensajeData.class);
 
-    // Resetear animación para forzar reactivación
+    // Animar mensaje
     messageContainer.style.opacity = '0';
-    messageContainer.style.transform = 'translateY(-50%) translateX(20px)';
+    messageContainer.style.pointerEvents = 'none';
+    messageContainer.style.transform = 'translate(-50%, -50%) translateX(20px)';
     setTimeout(() => {
       messageContainer.textContent = mensajeData.text;
       messageContainer.style.opacity = '1';
-      messageContainer.style.transform = 'translateY(-50%) translateX(0)';
+      messageContainer.style.pointerEvents = 'auto';
+      messageContainer.style.transform = 'translate(-50%, -50%) translateX(0)';
     }, 50);
   }
 
   radios.forEach(radio => {
+    radio.checked = false; // comienzan sin marcar
     radio.addEventListener('change', actualizarLuzSeleccionada);
   });
 
-  // Inicializar con ningún botón activo y luces apagadas (como pediste)
-  apagarLuces();
-  messageContainer.textContent = '';
-  messageContainer.style.opacity = '0';
-
-  // Modal bienvenida
-  const welcomeModal = document.getElementById('welcome-modal');
-  const btnAccept = document.getElementById('btnAccept');
-
+  // Modal botón aceptar
   btnAccept.addEventListener('click', () => {
     welcomeModal.style.display = 'none';
-    // Al cerrar modal activamos por defecto luz roja y su mensaje
-    radios[0].checked = true;
+    // Al cerrar modal, activa rojo y su mensaje
+    const luzRojo = document.querySelector('input[name="luz"][value="rojo"]');
+    luzRojo.checked = true;
     actualizarLuzSeleccionada();
   });
 
