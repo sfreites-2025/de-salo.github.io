@@ -3,16 +3,53 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Semáforo con Corazones</title>
+<title>Semáforo con control y posición derecha</title>
 <style>
   body {
     margin: 0; padding: 0;
     height: 100vh;
     background: #222;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     font-family: 'Times New Roman', serif;
+    display: flex;
+    flex-direction: row;
+  }
+  /* CONTENEDOR CONTROLES */
+  #controls {
+    width: 220px;
+    background: #111;
+    color: #eee;
+    padding: 24px 20px;
+    font-size: 1.12em;
+    box-shadow: inset -6px 0 14px #552233bb;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    border-top-left-radius: 16px;
+    border-bottom-left-radius: 16px;
+  }
+  #controls label {
+    cursor: pointer;
+    user-select: none;
+  }
+  #controls input[type="checkbox"] {
+    width: 20px; height: 20px;
+    margin-right: 12px;
+    vertical-align: middle;
+    cursor: pointer;
+  }
+
+  /* CONTENEDOR SEMÁFORO */
+  .container-semaforo {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 40px;
+    height: 100vh;
   }
   .semaforo {
     background: black;
@@ -24,6 +61,8 @@
     flex-direction: column;
     gap: 18px;
     align-items: center;
+    margin-left: auto;
+    margin-right: 24px;
   }
   .luz {
     width: 90px;
@@ -38,7 +77,8 @@
     transition: background-color 0.6s, box-shadow 0.6s;
     position: relative;
   }
-  /* Corazón rojo */
+
+  /* Luz roja con corazón */
   .luz.rojo.on {
     background-color: transparent;
     box-shadow: none;
@@ -67,7 +107,7 @@
     }
   }
 
-  /* Corazón amarillo */
+  /* Luz amarilla con corazón */
   .luz.amarillo.on {
     background-color: transparent;
     box-shadow: none;
@@ -96,7 +136,7 @@
     }
   }
 
-  /* Corazón verde */
+  /* Luz verde con corazón */
   .luz.verde.on {
     background-color: transparent;
     box-shadow: none;
@@ -127,17 +167,38 @@
 </style>
 </head>
 <body>
-  <div class="semaforo" aria-label="Semáforo de tráfico con corazones" role="region">
-    <div id="rojo" class="luz rojo" aria-live="polite" aria-atomic="true" aria-label="Corazón rojo apagado"></div>
-    <div id="amarillo" class="luz amarillo" aria-live="polite" aria-atomic="true" aria-label="Corazón amarillo apagado"></div>
-    <div id="verde" class="luz verde" aria-live="polite" aria-atomic="true" aria-label="Corazón verde apagado"></div>
+  <div id="controls" aria-label="Controles de encendido de luces del semáforo">
+    <h2>Control de luces</h2>
+    <label>
+      <input type="checkbox" id="chkRojo" checked>
+      Luz Roja
+    </label>
+    <label>
+      <input type="checkbox" id="chkAmarillo" checked>
+      Luz Amarilla
+    </label>
+    <label>
+      <input type="checkbox" id="chkVerde" checked>
+      Luz Verde
+    </label>
   </div>
-
+  <div class="container-semaforo" aria-label="Semáforo de tráfico con control">
+    <div class="semaforo" role="region" aria-live="polite" aria-atomic="true">
+      <div id="rojo" class="luz rojo" aria-label="Corazón rojo apagado"></div>
+      <div id="amarillo" class="luz amarillo" aria-label="Corazón amarillo apagado"></div>
+      <div id="verde" class="luz verde" aria-label="Corazón verde apagado"></div>
+    </div>
+  </div>
 <script>
   const rojo = document.getElementById('rojo');
   const amarillo = document.getElementById('amarillo');
   const verde = document.getElementById('verde');
 
+  const chkRojo = document.getElementById('chkRojo');
+  const chkAmarillo = document.getElementById('chkAmarillo');
+  const chkVerde = document.getElementById('chkVerde');
+
+  // Ciclo estados del semáforo
   const estados = [
     {rojo: true, amarillo: false, verde: false},
     {rojo: true, amarillo: true, verde: false},
@@ -149,20 +210,38 @@
 
   function actualizarSemaforo() {
     const estado = estados[indice];
-    rojo.classList.toggle('on', estado.rojo);
-    rojo.setAttribute('aria-label', estado.rojo ? 'Corazón rojo encendido' : 'Corazón rojo apagado');
-    amarillo.classList.toggle('on', estado.amarillo);
-    amarillo.setAttribute('aria-label', estado.amarillo ? 'Corazón amarillo encendido' : 'Corazón amarillo apagado');
-    verde.classList.toggle('on', estado.verde);
-    verde.setAttribute('aria-label', estado.verde ? 'Corazón verde encendido' : 'Corazón verde apagado');
 
-    let delay = 3000;
-    if (indice === 1 || indice === 3) delay = 1500;
+    // Solo activa la luz si su checkbox está seleccionado
+    rojo.classList.toggle('on', estado.rojo && chkRojo.checked);
+    rojo.setAttribute('aria-label', (estado.rojo && chkRojo.checked) ? 'Corazón rojo encendido' : 'Corazón rojo apagado');
+
+    amarillo.classList.toggle('on', estado.amarillo && chkAmarillo.checked);
+    amarillo.setAttribute('aria-label', (estado.amarillo && chkAmarillo.checked) ? 'Corazón amarillo encendido' : 'Corazón amarillo apagado');
+
+    verde.classList.toggle('on', estado.verde && chkVerde.checked);
+    verde.setAttribute('aria-label', (estado.verde && chkVerde.checked) ? 'Corazón verde encendido' : 'Corazón verde apagado');
+
+    // Duración según estado
+    let delay = 3000; // rojo y verde 3s
+    if (indice === 1 || indice === 3) delay = 1500; // amarillo 1.5s
 
     indice = (indice + 1) % estados.length;
     setTimeout(actualizarSemaforo, delay);
   }
 
+  // Actualiza cuando cambian los checkboxes para reflejar inmediatamente
+  [chkRojo, chkAmarillo, chkVerde].forEach(chk => {
+    chk.addEventListener('change', () => {
+      // Forzar actualización inmediata del semáforo (sin cambiar estado)
+      // Mostramos luz si checkbox activo y estado actual la indica
+      const estadoActual = estados[(indice + estados.length - 1) % estados.length];
+      rojo.classList.toggle('on', estadoActual.rojo && chkRojo.checked);
+      amarillo.classList.toggle('on', estadoActual.amarillo && chkAmarillo.checked);
+      verde.classList.toggle('on', estadoActual.verde && chkVerde.checked);
+    });
+  });
+
+  // Inicia ciclo
   actualizarSemaforo();
 </script>
 </body>
