@@ -3,160 +3,267 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Vela Virtual</title>
+<title>Vela Virtual con Control y Navegación</title>
 <style>
   body {
-    margin: 0;
+    margin: 0; padding: 0;
     height: 100vh;
+    background: linear-gradient(-45deg, #f9cedb, #a3e0f7, #d3c9fc, #fae6b1);
+    background-size: 400% 400%;
+    animation: gradientBG 16s ease-in-out infinite;
+    font-family: 'Times New Roman', serif;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: #000; /* Fondo oscuro para que la vela resalte */
-    overflow: hidden; /* Asegura que no haya barras de desplazamiento */
+    gap: 32px;
+  }
+  @keyframes gradientBG {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
   }
 
+  /* Contenedor de la vela */
   .candle-container {
-    /* Contenedor principal de la vela */
     position: relative;
-    width: 15em; /* Tamaño base para la vela */
-    height: 30em;
-    font-size: 7px; /* Unidad base para dimensionar la vela y sus partes */
-    transform: scale(1.5); /* Ajustar el tamaño general de la vela */
+    width: 120px;
+    height: 240px;
   }
-
   .candle {
-    /* El cuerpo de la vela */
-    width: 15em;
-    height: 30em;
-    background: linear-gradient(
-      orange,
-      darkorange,
-      sienna,
-      saddlebrown 50%,
-      rgba(0, 0, 0, 0.6)
-    );
-    box-shadow:
-      inset 2em -3em 5em rgba(0, 0, 0, 0.4),
-      inset -2em 0 5em rgba(0, 0, 0, 0.4);
-    border-radius: 10em / 4em; /* Forma cilíndrica con tapa redondeada */
     position: relative;
-    display: flex;
-    justify-content: center;
-    top: 10em; /* Eleva la vela ligeramente */
+    width: 80px;
+    height: 160px;
+    margin: 0 auto;
+    border-radius: 40px / 100px;
+    background: linear-gradient(orange, darkorange, sienna, saddlebrown 50%, rgba(0,0,0,0.6));
+    box-shadow:
+      inset 20px -30px 50px rgba(0,0,0,0.4),
+      inset -20px 0 50px rgba(0,0,0,0.4);
   }
-
   .candle::before {
-    /* Efecto de cera derretida en la parte superior */
     content: '';
     position: absolute;
-    width: inherit;
-    height: 5em;
-    border: 0.2em solid darkorange;
-    border-radius: 50%; /* Borde circular */
+    width: 100%;
+    height: 40px;
+    top: -20px;
+    border: 6px solid darkorange;
+    border-radius: 50%;
+    background: radial-gradient(#444, orange, saddlebrown, sienna, darkorange);
+    filter: opacity(0.75);
     box-sizing: border-box;
-    background: radial-gradient(
-      #444,
-      orange,
-      saddlebrown,
-      sienna,
-      darkorange
-    );
-    filter: opacity(0.7);
   }
-
   .thread {
-    /* La mecha de la vela */
     position: absolute;
-    width: 0.6em;
-    height: 3.6em;
-    top: -1.8em; /* Posición de la mecha sobre la cera */
-    background: linear-gradient(
-      #111,
-      black,
-      orange 90%
-    );
-    border-radius: 40% 40% 0 0; /* Forma de la mecha */
-    z-index: 2; /* Asegura que la mecha esté sobre la cera */
+    width: 8px;
+    height: 48px;
+    top: -36px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(#111, black, orange 90%);
+    border-radius: 50% 50% 0 0;
+    z-index: 2;
   }
-
   .flames {
-    /* Contenedor de las llamas */
     position: absolute;
-    width: 2.4em; /* Ancho base de la llama */
-    height: 6em; /* Altura base de la llama */
-    top: -4.8em; /* Posición de la llama sobre la mecha */
+    width: 40px;
+    height: 80px;
+    top: -80px;
     left: 50%;
     transform: translateX(-50%);
     pointer-events: none;
-    z-index: 3; /* Asegura que la llama esté sobre la mecha */
+    z-index: 3;
   }
-
   .flames::before {
-    /* Llama principal (más grande y naranja) */
     content: '';
     position: absolute;
-    width: inherit;
-    height: 6em;
-    background-color: royalblue; /* Color base de la llama, se superpone con gradiente */
-    border-radius: 50% 50% 35% 35%; /* Forma de gota de la llama */
-    border: 0.2em solid dodgerblue; /* Borde de la llama */
-    box-sizing: border-box;
-    filter: opacity(0.7); /* Transparencia */
-    /* Animación de movimiento y parpadeo */
+    width: 100%;
+    height: 80px;
+    top: 0;
+    border-radius: 50% 50% 35% 35%;
+    background-color: orange;
+    border: 4px solid orangered;
+    filter: opacity(0.7) drop-shadow(0 0 10px orangered);
     animation: flameMove 3s ease-in-out infinite, flameFlicker 3s ease-in-out infinite;
   }
-
   .flames::after {
-    /* Llama interior (más pequeña y blanca/transparente) */
     content: '';
     position: absolute;
-    width: 1.4em; /* Ancho de la llama interior */
-    height: 3em; /* Altura de la llama interior */
-    top: 0.4em; /* Posición dentro de la llama principal */
-    left: 0.3em;
+    width: 28px;
+    height: 60px;
+    top: 8px;
+    left: 6px;
     border-radius: 50% 50% 20% 20%;
-    background: linear-gradient(white 60%, transparent); /* Gradiente blanco a transparente */
-    box-shadow: 0 -0.6em 1em darkorange; /* Sombra que simula el brillo */
-    /* Animación de movimiento y parpadeo */
+    background: linear-gradient(white 60%, transparent);
+    box-shadow: 0 -10px 16px darkorange;
     animation: flameMove 3s ease-in-out infinite, flameFlicker 3s ease-in-out infinite;
   }
-
-  /* Animaciones de la llama */
   @keyframes flameMove {
     0%, 100% { transform: rotate(3deg); }
     50% { transform: rotate(-3deg); }
   }
-
   @keyframes flameFlicker {
-    0%, 100% { height: 3em; top: 0.4em; opacity: 1;}
-    50% { height: 3.5em; top: 0.2em; opacity: 0.9;}
+    0%, 100% { height: 60px; top: 8px; opacity: 1; }
+    50% { height: 65px; top: 6px; opacity: 0.9; }
   }
-
   .glow {
-    /* Efecto de brillo alrededor de la llama */
     position: absolute;
-    width: 10em;
-    height: 18em;
+    width: 40em;
+    height: 40em;
     background-color: orangered;
     border-radius: 50%;
-    top: -17em; /* Posición del brillo */
-    filter: blur(6em); /* Desenfoque para crear el efecto de brillo */
-    animation: blink 100ms infinite; /* Parpadeo rápido del brillo */
-    z-index: 1; /* Detrás de la llama pero sobre la cera */
+    top: -150em;
+    left: -180em;
+    filter: blur(100px);
+    animation: blink 100ms infinite;
+    z-index: 1;
+  }
+  @keyframes blink {
+    to { filter: blur(100px) opacity(0.8); }
   }
 
-  @keyframes blink {
-    to { filter: blur(6em) opacity(0.8); }
+  /* Ocultar vela cuando esté apagada */
+  .hidden {
+    display: none;
+  }
+
+  /* Botones */
+  #btns-nav {
+    display: flex;
+    gap: 32px;
+  }
+  button {
+    background: linear-gradient(110deg, #7ae0ea 12%, #fd558e 88%);
+    color: #6d1472;
+    border: none;
+    border-radius: 11px;
+    padding: 12px 38px;
+    font-family: 'Times New Roman', serif;
+    font-weight: 700;
+    font-size: 1.15em;
+    box-shadow: 0 1px 16px #5ff5fc42;
+    letter-spacing: 0.03em;
+    cursor: pointer;
+    transition: background 0.25s, color 0.22s, box-shadow 0.22s;
+    outline: none;
+  }
+  button:hover {
+    background: linear-gradient(112deg, #fd558e, #7ae0ea 86%);
+    color: #ea20b8;
+    box-shadow: 0 6px 30px #ff5ea4cc;
+  }
+
+  /* Toggle Switch */
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    margin-bottom: 0;
+    vertical-align: middle;
+  }
+  .switch input {
+    opacity: 0;
+    width: 0; height: 0;
+  }
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    inset: 0;
+    background-color: #ccc;
+    border-radius: 34px;
+    transition: 0.4s;
+  }
+  .slider:before {
+    content: "";
+    position: absolute;
+    height: 26px; width: 26px;
+    left: 4px; bottom: 4px;
+    background-color: white;
+    border-radius: 50%;
+    transition: 0.4s;
+  }
+  input:checked + .slider {
+    background-color: #7ae0ea;
+  }
+  input:checked + .slider:before {
+    transform: translateX(26px);
+  }
+
+  /* Label for toggle */
+  #toggle-label {
+    font-size: 1.2em;
+    font-family: 'Times New Roman', serif;
+    margin-right: 12px;
+    vertical-align: middle;
+    user-select: none;
+  }
+
+  /* Container for toggle control */
+  #toggle-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
 </style>
 </head>
 <body>
-  <div class="candle-container">
-    <div class="candle">
+
+  <!-- Burbujas animadas fondo -->
+  <div class="bubble bubble1"></div>
+  <div class="bubble bubble2"></div>
+  <div class="bubble bubble3"></div>
+  <div class="bubble bubble4"></div>
+  <div class="bubble bubble5"></div>
+
+  <!-- Contenedor principal para vela -->
+  <div class="candle-container hidden" id="vela">
+    <div class="candle" role="img" aria-label="Vela encendida con llama animada">
       <span class="glow"></span>
       <div class="thread"></div>
       <div class="flames"></div>
     </div>
   </div>
+
+  <!-- Controles de encender/apagar vela -->
+  <div id="toggle-container">
+    <label id="toggle-label" for="toggleVela">Encender Vela</label>
+    <label class="switch">
+      <input type="checkbox" id="toggleVela" aria-checked="false" aria-label="Encender o apagar vela virtual">
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <!-- Botones Navegación -->
+  <div id="btns-nav">
+    <button id="btnRegresar">Regresar</button>
+    <button id="btnSiguiente">Siguiente →</button>
+  </div>
+
+<script>
+  const toggleVela = document.getElementById('toggleVela');
+  const vela = document.getElementById('vela');
+  const btnRegresar = document.getElementById('btnRegresar');
+  const btnSiguiente = document.getElementById('btnSiguiente');
+
+  toggleVela.addEventListener('change', () => {
+    if (toggleVela.checked) {
+      vela.classList.remove('hidden');
+      toggleVela.setAttribute('aria-checked', 'true');
+    } else {
+      vela.classList.add('hidden');
+      toggleVela.setAttribute('aria-checked', 'false');
+    }
+  });
+
+  btnRegresar.addEventListener('click', () => {
+    window.history.back();
+  });
+
+  btnSiguiente.addEventListener('click', () => {
+    window.location.href = 'index11.html';
+  });
+</script>
+
 </body>
 </html>
