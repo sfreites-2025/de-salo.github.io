@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Semáforo con control de duración</title>
+<title>Semáforo con Selección de Luz y Mensajes</title>
 <style>
   body {
     margin: 0; padding: 0;
@@ -47,8 +47,7 @@
     transition: background-color 0.6s, box-shadow 0.6s;
     position: relative;
   }
-
-  /* Corazones en luces */
+  /* Corazones animados */
   .luz.rojo.on {
     background-color: transparent;
     box-shadow: none;
@@ -65,7 +64,6 @@
     0% { text-shadow: 0 0 8px #ff4c4c, 0 0 20px #ff6b6b; transform: translate(-50%, -55%) scale(1); }
     100% { text-shadow: 0 0 14px #ff5c5c, 0 0 28px #ff8787; transform: translate(-50%, -55%) scale(1.12); }
   }
-
   .luz.amarillo.on {
     background-color: transparent;
     box-shadow: none;
@@ -82,7 +80,6 @@
     0% { text-shadow: 0 0 10px #ffeb7b, 0 0 25px #ffeb7baa; transform: translate(-50%, -55%) scale(1); }
     100% { text-shadow: 0 0 16px #fff156, 0 0 32px #fff156bb; transform: translate(-50%, -55%) scale(1.12); }
   }
-
   .luz.verde.on {
     background-color: transparent;
     box-shadow: none;
@@ -112,8 +109,8 @@
     gap: 20px;
     border-radius: 20px;
     margin: auto;
-    text-align: center;
     max-width: 320px;
+    text-align: center;
     user-select: none;
   }
   #controls h2 {
@@ -127,25 +124,20 @@
     justify-content: flex-start;
     gap: 12px;
   }
-  #controls input[type="checkbox"] {
+  #controls input[type="radio"] {
     width: 22px; height: 22px;
     cursor: pointer;
     accent-color: #ff2c2c;
   }
-  #controls input[type="number"] {
-    width: 80px;
-    padding: 4px 8px;
-    border-radius: 6px;
-    border: none;
-    font-size: 1em;
-    margin-left: 12px;
-    text-align: center;
-  }
-  #controls .control-row {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
+  #message {
+    margin-top: 25px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.14em;
+    color: #f4d1db;
+    text-shadow: 0 1px 4px #a52345;
+    min-height: 70px;
+    transition: opacity 0.6s ease;
+    user-select: none;
   }
 </style>
 </head>
@@ -158,99 +150,68 @@
     </div>
   </div>
 
-  <div id="controls" aria-label="Controles de encendido y duración de luces del semáforo">
-    <h2>Control de Luces y Duración (segundos)</h2>
-
-    <label class="control-row">
-      <input type="checkbox" id="chkRojo" checked>
+  <div id="controls" aria-label="Selecciona qué luz encender">
+    <h2>Selecciona la luz a encender</h2>
+    <label>
+      <input type="radio" name="luz" value="rojo" checked>
       Luz Roja
-      <input type="number" id="timeRojo" min="1" max="99" value="3" aria-label="Duración luz roja en segundos">
     </label>
-
-    <label class="control-row">
-      <input type="checkbox" id="chkAmarillo" checked>
+    <label>
+      <input type="radio" name="luz" value="amarillo">
       Luz Amarilla
-      <input type="number" id="timeAmarillo" min="1" max="99" value="1.5" step="0.1" aria-label="Duración luz amarilla en segundos">
     </label>
-
-    <label class="control-row">
-      <input type="checkbox" id="chkVerde" checked>
+    <label>
+      <input type="radio" name="luz" value="verde">
       Luz Verde
-      <input type="number" id="timeVerde" min="1" max="99" value="3" aria-label="Duración luz verde en segundos">
     </label>
+    <div id="message" aria-live="polite" aria-atomic="true"></div>
   </div>
 
 <script>
   const rojo = document.getElementById('rojo');
   const amarillo = document.getElementById('amarillo');
   const verde = document.getElementById('verde');
+  const messageDiv = document.getElementById('message');
 
-  const chkRojo = document.getElementById('chkRojo');
-  const chkAmarillo = document.getElementById('chkAmarillo');
-  const chkVerde = document.getElementById('chkVerde');
+  const radios = document.querySelectorAll('input[name="luz"]');
 
-  const timeRojo = document.getElementById('timeRojo');
-  const timeAmarillo = document.getElementById('timeAmarillo');
-  const timeVerde = document.getElementById('timeVerde');
+  const mensajes = {
+    rojo: "Precaución: detente y espera con el corazón.",
+    amarillo: "Atento: la luz está cambiando, precaución.",
+    verde: "Ve: el camino está despejado, sigue con alegría."
+  };
 
-  // Estados del semáforo: rojo, rojo+amarillo, verde, amarillo
-  const estados = [
-    {rojo: true, amarillo: false, verde: false},
-    {rojo: true, amarillo: true, verde: false},
-    {rojo: false, amarillo: false, verde: true},
-    {rojo: false, amarillo: true, verde: false}
-  ];
+  function apagarLuces() {
+    rojo.classList.remove('on');
+    amarillo.classList.remove('on');
+    verde.classList.remove('on');
+  }
 
-  let indice = 0;
+  function actualizarLuzSeleccionada() {
+    const seleccion = document.querySelector('input[name="luz"]:checked').value;
+    apagarLuces();
 
-  function getDuracionEstado(idx) {
-    // Retorna el tiempo en milisegundos según estado del índice,
-    // usando los valores ingresados por el usuario o valores por defecto.
-    switch(idx) {
-      case 0: return (parseFloat(timeRojo.value) || 3) * 1000;
-      case 1: {
-        // cuando rojo + amarillo, usa máximo entre rojo y amarillo para mantener visible ambos
-        const rojoT = parseFloat(timeRojo.value) || 3;
-        const amarilloT = parseFloat(timeAmarillo.value) || 1.5;
-        return Math.max(rojoT, amarilloT) * 1000;
-      }
-      case 2: return (parseFloat(timeVerde.value) || 3) * 1000;
-      case 3: return (parseFloat(timeAmarillo.value) || 1.5) * 1000;
-      default: return 3000;
+    if (seleccion === 'rojo') {
+      rojo.classList.add('on');
+    } else if (seleccion === 'amarillo') {
+      amarillo.classList.add('on');
+    } else if (seleccion === 'verde') {
+      verde.classList.add('on');
     }
+    // Mostrar mensaje ejemplo
+    messageDiv.style.opacity = '0';
+    setTimeout(() => {
+      messageDiv.textContent = mensajes[seleccion];
+      messageDiv.style.opacity = '1';
+    }, 300);
   }
 
-  function actualizarSemaforo() {
-    const estado = estados[indice];
-
-    rojo.classList.toggle('on', estado.rojo && chkRojo.checked);
-    rojo.setAttribute('aria-label', (estado.rojo && chkRojo.checked) ? 'Corazón rojo encendido' : 'Corazón rojo apagado');
-
-    amarillo.classList.toggle('on', estado.amarillo && chkAmarillo.checked);
-    amarillo.setAttribute('aria-label', (estado.amarillo && chkAmarillo.checked) ? 'Corazón amarillo encendido' : 'Corazón amarillo apagado');
-
-    verde.classList.toggle('on', estado.verde && chkVerde.checked);
-    verde.setAttribute('aria-label', (estado.verde && chkVerde.checked) ? 'Corazón verde encendido' : 'Corazón verde apagado');
-
-    // Leer duración dinámica
-    let delay = getDuracionEstado(indice);
-    indice = (indice + 1) % estados.length;
-    setTimeout(actualizarSemaforo, delay);
-  }
-
-  // Al cambiar checkbox o input actualiza el semáforo inmediatamente
-  function actualizarVisual() {
-    const estadoActual = estados[(indice + estados.length - 1) % estados.length];
-    rojo.classList.toggle('on', estadoActual.rojo && chkRojo.checked);
-    amarillo.classList.toggle('on', estadoActual.amarillo && chkAmarillo.checked);
-    verde.classList.toggle('on', estadoActual.verde && chkVerde.checked);
-  }
-
-  [chkRojo, chkAmarillo, chkVerde, timeRojo, timeAmarillo, timeVerde].forEach(elem => {
-    elem.addEventListener('input', actualizarVisual);
+  radios.forEach(radio => {
+    radio.addEventListener('change', actualizarLuzSeleccionada);
   });
 
-  actualizarSemaforo();
+  // Inicializa mostrando la luz roja y su mensaje
+  actualizarLuzSeleccionada();
 </script>
 </body>
 </html>
