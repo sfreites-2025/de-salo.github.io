@@ -172,52 +172,46 @@
     right: 30px;
   }
 
-  /* Estilos para el mensaje */
+  /* Contenedor mensaje alineado a la izquierda */
   #message-abuelo {
-    position: absolute;
-    bottom: 120px; /* Ajustado para que esté arriba del botón Siguiente */
-    left: 50%;
-    transform: translateX(-50%);
-    width: 380px; /* Ancho fijo para controlar el texto */
+    position: fixed;
+    bottom: 120px;
+    left: 30px;
+    max-width: 350px;
     padding: 20px;
     background: rgba(255, 255, 255, 0.9);
     border-radius: 15px;
     box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-    text-align: center;
-    font-size: 0.95em; /* Letra más pequeña */
+    text-align: left;
+    font-size: 0.95em;
     color: #4a0033;
     line-height: 1.4;
-    overflow: hidden; /* Oculta el texto hasta que se anime */
+    overflow: hidden;
     border: 2px solid #ff70b3;
-    opacity: 0; /* Inicialmente invisible */
-    animation: fadeInMessage 1s ease-out forwards 1s; /* Animación de aparición */
+    opacity: 0;
+    animation: fadeInMessage 1s ease-out forwards 1s;
   }
 
   #message-abuelo p {
     margin: 0;
     font-size: 0.98em;
-    overflow: hidden; /* Necesario para la animación de máquina de escribir */
-    border-right: .15em solid orange; /* Cursor parpadeante */
-    white-space: nowrap; /* Mantiene el texto en una sola línea hasta que se anime */
-    letter-spacing: .05em; /* Espaciado entre letras */
+    overflow: hidden;
+    border-right: .15em solid orange;
+    white-space: nowrap;
+    letter-spacing: .05em;
     animation: 
-      typing 6s steps(80, end) forwards, /* Animación de escritura */
-      blink-caret .75s step-end infinite; /* Animación de cursor */
+      typing 6s steps(110, end) forwards,
+      blink-caret .75s step-end infinite;
   }
 
-  /* Animación de fade in para el contenedor del mensaje */
   @keyframes fadeInMessage {
     from { opacity: 0; }
     to { opacity: 1; }
   }
-
-  /* Animación de máquina de escribir */
   @keyframes typing {
     from { width: 0 }
     to { width: 100% }
   }
-
-  /* Animación de cursor parpadeante */
   @keyframes blink-caret {
     from, to { border-color: transparent }
     50% { border-color: orange; }
@@ -234,7 +228,7 @@
   </div>
 
   <div id="message-abuelo" aria-live="polite" aria-atomic="true">
-    <p>Hay despedidas en la vida que duelen hasta el fondo del alma, y perder a un abuelo es una de esas experiencias que marcan para siempre. Los abuelos tienen la magia de convertir los días comunes en historias llenas de sabiduría, ternura y risas. Tu abuelo no solo fue un pilar en la familia, sino un ejemplo silencioso de generosidad, esfuerzo y lealtad. Deja detrás de sí huellas imborrables. Recuerda que ninguna ausencia es total mientras el recuerdo se mantenga vivo, el tiempo aliviará poco a poco el dolor, y el corazón aprenderá a transformar la tristeza en gratitud. Siempre te acompañare en esta perdida</p>
+    <p>Hay despedidas en la vida que duelen hasta el fondo del alma, y perder a un abuelo es una de esas experiencias que marcan para siempre. Los abuelos tienen la magia de convertir los días comunes en historias llenas de sabiduría, ternura y risas. Tu abuelo no solo fue un pilar en la familia, sino un ejemplo silencioso de generosidad, esfuerzo y lealtad. Deja detrás de sí huellas imborrables. Recuerda que ninguna ausencia es total mientras el recuerdo se mantenga vivo, el tiempo aliviará poco a poco el dolor, y el corazón aprenderá a transformar la tristeza en gratitud. Siempre te acompañaré en esta pérdida</p>
   </div>
 
   <button id="btnRegresar" class="nav-button" type="button">Regresar</button>
