@@ -9,10 +9,13 @@
     margin: 0;
     height: 100vh;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     background: #000; /* Fondo oscuro para que la vela resalte */
-    overflow: hidden; /* Asegura que no haya barras de desplazamiento */
+    overflow: hidden; /* Evita barras de desplazamiento */
+    gap: 30px;
+    font-family: 'Times New Roman', serif;
   }
 
   .candle-container {
@@ -97,9 +100,9 @@
     position: absolute;
     width: inherit;
     height: 6em;
-    background-color: royalblue; /* Color base de la llama, se superpone con gradiente */
+    background-color: orange;
     border-radius: 50% 50% 35% 35%; /* Forma de gota de la llama */
-    border: 0.2em solid dodgerblue; /* Borde de la llama */
+    border: 0.2em solid orangered; /* Borde de la llama */
     box-sizing: border-box;
     filter: opacity(0.7); /* Transparencia */
     /* Animación de movimiento y parpadeo */
@@ -148,15 +151,59 @@
   @keyframes blink {
     to { filter: blur(6em) opacity(0.8); }
   }
+
+  /* Botones regresay siguiente ubicados debajo */
+  #btns-nav {
+    display: flex;
+    gap: 40px;
+  }
+  button {
+    background: linear-gradient(110deg, #7ae0ea 12%, #fd558e 88%);
+    color: #6d1472;
+    border: none;
+    border-radius: 12px;
+    padding: 14px 44px;
+    font-family: 'Times New Roman', serif;
+    font-weight: 700;
+    font-size: 1.15em;
+    box-shadow: 0 2px 18px #5ff5fc42;
+    letter-spacing: 0.03em;
+    cursor: pointer;
+    transition: background 0.25s, color 0.22s, box-shadow 0.22s;
+    outline: none;
+  }
+  button:hover {
+    background: linear-gradient(112deg, #fd558e, #7ae0ea 86%);
+    color: #ea20b8;
+    box-shadow: 0 8px 30px #ff5ea4cc;
+  }
 </style>
 </head>
 <body>
-  <div class="candle-container">
+  <div class="candle-container" role="img" aria-label="Vela animada encendida">
     <div class="candle">
       <span class="glow"></span>
       <div class="thread"></div>
       <div class="flames"></div>
     </div>
   </div>
+
+  <div id="btns-nav" aria-label="Navegación">
+    <button id="btnRegresar" type="button">Regresar</button>
+    <button id="btnSiguiente" type="button">Siguiente →</button>
+  </div>
+
+<script>
+  const btnRegresar = document.getElementById('btnRegresar');
+  const btnSiguiente = document.getElementById('btnSiguiente');
+
+  btnRegresar.addEventListener('click', () => {
+    window.history.back();
+  });
+
+  btnSiguiente.addEventListener('click', () => {
+    window.location.href = 'index11.html';
+  });
+</script>
 </body>
 </html>
