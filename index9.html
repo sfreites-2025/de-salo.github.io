@@ -3,17 +3,49 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Semáforo con Selección y Mensajes</title>
+<title>Semáforo con Selección y Fondo Animado</title>
 <style>
   body {
     margin: 0; padding: 0;
     height: 100vh;
-    background: #222;
+    width: 100vw;
     font-family: 'Times New Roman', serif;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    /* Fondo gradiente animado: colores suaves que se mezclan */
+    background: linear-gradient(-45deg, #f9cedb, #a3e0f7, #d3c9fc, #fae6b1);
+    background-size: 400% 400%;
+    animation: gradientBG 16s ease-in-out infinite;
+    overflow: hidden;
+    position: relative;
   }
+  @keyframes gradientBG {
+    0% { background-position: 0% 50%;}
+    50% { background-position: 100% 50%;}
+    100% { background-position: 0% 50%;}
+  }
+
+  /* Partículas animadas: pequeñas burbujas que flotan */
+  .bubble {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.25;
+    pointer-events: none;
+    animation: floatBub 12s linear infinite;
+    z-index: 0;
+  }
+  .bubble1 { width: 80px; height: 80px; left: 10vw; top: 70vh; background: #ffd6e7; animation-duration: 15s;}
+  .bubble2 { width: 70px; height: 70px; left: 20vw; top: 50vh; background: #b3f8fd; animation-delay: 2s;}
+  .bubble3 { width: 120px; height: 120px; left: 70vw; top: 80vh; background: #e6fcd7; animation-duration: 18s; animation-delay: 4s;}
+  .bubble4 { width: 55px; height: 55px; left: 80vw; top: 30vh; background: #eed7ff; animation-duration: 13s; animation-delay: 7s;}
+  .bubble5 { width: 100px; height: 100px; left: 40vw; top: 85vh; background: #fdebcc; animation-duration: 15s; animation-delay: 8s;}
+
+  @keyframes floatBub {
+    0% {transform: translateY(0);}
+    100% {transform: translateY(-80vh);}
+  }
+
   /* Contenedor semáforo a la izquierda */
   .container-semaforo {
     display: flex;
@@ -22,13 +54,14 @@
     padding-left: 40px;
     height: 100vh;
     flex-shrink: 0;
+    z-index: 2;
   }
   .semaforo {
-    background: black;
+    background: rgba(30, 30, 35, 0.93);
     border-radius: 30px;
     width: 120px;
     padding: 20px 0;
-    box-shadow: 0 0 15px #000;
+    box-shadow: 0 0 19px #a859bf77, 0 0 7px #ec638722;
     display: flex;
     flex-direction: column;
     gap: 18px;
@@ -40,14 +73,14 @@
     border-radius: 50%;
     border: 3.5px solid #111;
     background-color: #222;
-    box-shadow: inset 0 6px 12px #0008;
+    box-shadow: 0 0 10px #0007, inset 0 6px 12px #0008;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     transition: background-color 0.6s, box-shadow 0.6s;
   }
-  /* Corazones animados para cada luz */
+  /* Corazones animados */
   .luz.rojo.on {
     background-color: transparent;
     box-shadow: none;
@@ -61,10 +94,9 @@
     position: absolute; top: 50%; left: 50%; transform: translate(-50%, -55%);
   }
   @keyframes pulseHeartRed {
-    0% { text-shadow: 0 0 8px #ff4c4c, 0 0 20px #ff6b6b; transform: translate(-50%, -55%) scale(1); }
-    100% { text-shadow: 0 0 14px #ff5c5c, 0 0 28px #ff8787; transform: translate(-50%, -55%) scale(1.12); }
+    0% { text-shadow: 0 0 8px #ff4c4c, 0 0 20px #ff6b6b; transform: translate(-50%, -55%) scale(1);}
+    100% { text-shadow: 0 0 14px #ff5c5c, 0 0 28px #ff8787; transform: translate(-50%, -55%) scale(1.12);}
   }
-
   .luz.amarillo.on {
     background-color: transparent;
     box-shadow: none;
@@ -78,10 +110,9 @@
     position: absolute; top: 50%; left: 50%; transform: translate(-50%, -55%);
   }
   @keyframes pulseHeartYellow {
-    0% { text-shadow: 0 0 10px #ffeb7b, 0 0 25px #ffeb7baa; transform: translate(-50%, -55%) scale(1); }
-    100% { text-shadow: 0 0 16px #fff156, 0 0 32px #fff156bb; transform: translate(-50%, -55%) scale(1.12); }
+    0% { text-shadow: 0 0 10px #ffeb7b, 0 0 25px #ffeb7baa; transform: translate(-50%, -55%) scale(1);}
+    100% { text-shadow: 0 0 16px #fff156, 0 0 32px #fff156bb; transform: translate(-50%, -55%) scale(1.12);}
   }
-
   .luz.verde.on {
     background-color: transparent;
     box-shadow: none;
@@ -95,17 +126,17 @@
     position: absolute; top: 50%; left: 50%; transform: translate(-50%, -55%);
   }
   @keyframes pulseHeartGreen {
-    0% { text-shadow: 0 0 10px #4eff75, 0 0 25px #4eff75aa; transform: translate(-50%, -55%) scale(1); }
-    100% { text-shadow: 0 0 16px #2ceb37, 0 0 32px #2ceb37cc; transform: translate(-50%, -55%) scale(1.12); }
+    0% { text-shadow: 0 0 10px #4eff75, 0 0 25px #4eff75aa; transform: translate(-50%, -55%) scale(1);}
+    100% { text-shadow: 0 0 16px #2ceb37, 0 0 32px #2ceb37cc; transform: translate(-50%, -55%) scale(1.12);}
   }
 
-  /* Controles en centro */
+  /* Controles centrados */
   #controls {
-    background: #111;
+    background: rgba(25,25,25,0.86);
     color: #eee;
     padding: 30px 25px;
     font-size: 1.15em;
-    box-shadow: 0 0 20px #000, inset 0 0 10px #552233bb;
+    box-shadow: 0 0 20px #91e6ff45, 0 0 10px #552233aa inset;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -114,6 +145,7 @@
     max-width: 320px;
     text-align: center;
     user-select: none;
+    z-index: 2;
   }
   #controls h2 {
     margin-top: 0;
@@ -125,6 +157,7 @@
     align-items: center;
     justify-content: flex-start;
     gap: 12px;
+    font-size: 1.02em;
   }
   #controls input[type="radio"] {
     width: 22px; height: 22px;
@@ -134,7 +167,7 @@
   #message {
     margin-top: 25px;
     font-family: 'Times New Roman', Times, serif;
-    font-size: 1.14em;
+    font-size: 1.17em;
     color: #f4d1db;
     text-shadow: 0 1px 4px #a52345;
     min-height: 110px;
@@ -145,6 +178,13 @@
 </style>
 </head>
 <body>
+  <!-- Burbujas animadas fondo -->
+  <div class="bubble bubble1"></div>
+  <div class="bubble bubble2"></div>
+  <div class="bubble bubble3"></div>
+  <div class="bubble bubble4"></div>
+  <div class="bubble bubble5"></div>
+
   <div class="container-semaforo" aria-label="Semáforo de tráfico con control">
     <div class="semaforo" role="region" aria-live="polite" aria-atomic="true">
       <div id="rojo" class="luz rojo" aria-label="Corazón rojo apagado"></div>
