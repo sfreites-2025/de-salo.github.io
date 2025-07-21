@@ -3,30 +3,26 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Semáforo con Selección y Fondo Animado</title>
+<title>Bienvenida al Semáforo xd</title>
 <style>
   body {
     margin: 0; padding: 0;
     height: 100vh;
-    width: 100vw;
+    background: linear-gradient(135deg, #f9cedb, #a3e0f7, #d3c9fc, #fae6b1);
+    background-size: 400% 400%;
+    animation: gradientBG 16s ease-in-out infinite;
     font-family: 'Times New Roman', serif;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* Fondo gradiente animado: colores suaves que se mezclan */
-    background: linear-gradient(-45deg, #f9cedb, #a3e0f7, #d3c9fc, #fae6b1);
-    background-size: 400% 400%;
-    animation: gradientBG 16s ease-in-out infinite;
     overflow: hidden;
-    position: relative;
   }
   @keyframes gradientBG {
     0% { background-position: 0% 50%;}
     50% { background-position: 100% 50%;}
     100% { background-position: 0% 50%;}
   }
-
-  /* Partículas animadas: pequeñas burbujas que flotan */
+  /* Partículas de fondo animadas */
   .bubble {
     position: absolute;
     border-radius: 50%;
@@ -40,13 +36,12 @@
   .bubble3 { width: 120px; height: 120px; left: 70vw; top: 80vh; background: #e6fcd7; animation-duration: 18s; animation-delay: 4s;}
   .bubble4 { width: 55px; height: 55px; left: 80vw; top: 30vh; background: #eed7ff; animation-duration: 13s; animation-delay: 7s;}
   .bubble5 { width: 100px; height: 100px; left: 40vw; top: 85vh; background: #fdebcc; animation-duration: 15s; animation-delay: 8s;}
-
   @keyframes floatBub {
     0% {transform: translateY(0);}
     100% {transform: translateY(-80vh);}
   }
 
-  /* Contenedor semáforo a la izquierda */
+  /* Semáforo izquierda */
   .container-semaforo {
     display: flex;
     align-items: center;
@@ -55,9 +50,10 @@
     height: 100vh;
     flex-shrink: 0;
     z-index: 2;
+    position: relative;
   }
   .semaforo {
-    background: rgba(30, 30, 35, 0.93);
+    background: rgba(30,30,35,0.9);
     border-radius: 30px;
     width: 120px;
     padding: 20px 0;
@@ -80,7 +76,7 @@
     position: relative;
     transition: background-color 0.6s, box-shadow 0.6s;
   }
-  /* Corazones animados */
+  /* Corazones animados para las luces */
   .luz.rojo.on {
     background-color: transparent;
     box-shadow: none;
@@ -92,10 +88,6 @@
     text-shadow: 0 0 8px #ff4c4c, 0 0 20px #ff6b6b;
     animation: pulseHeartRed 1.5s infinite alternate ease-in-out;
     position: absolute; top: 50%; left: 50%; transform: translate(-50%, -55%);
-  }
-  @keyframes pulseHeartRed {
-    0% { text-shadow: 0 0 8px #ff4c4c, 0 0 20px #ff6b6b; transform: translate(-50%, -55%) scale(1);}
-    100% { text-shadow: 0 0 14px #ff5c5c, 0 0 28px #ff8787; transform: translate(-50%, -55%) scale(1.12);}
   }
   .luz.amarillo.on {
     background-color: transparent;
@@ -109,10 +101,6 @@
     animation: pulseHeartYellow 1.5s infinite alternate ease-in-out;
     position: absolute; top: 50%; left: 50%; transform: translate(-50%, -55%);
   }
-  @keyframes pulseHeartYellow {
-    0% { text-shadow: 0 0 10px #ffeb7b, 0 0 25px #ffeb7baa; transform: translate(-50%, -55%) scale(1);}
-    100% { text-shadow: 0 0 16px #fff156, 0 0 32px #fff156bb; transform: translate(-50%, -55%) scale(1.12);}
-  }
   .luz.verde.on {
     background-color: transparent;
     box-shadow: none;
@@ -125,12 +113,20 @@
     animation: pulseHeartGreen 1.5s infinite alternate ease-in-out;
     position: absolute; top: 50%; left: 50%; transform: translate(-50%, -55%);
   }
+  @keyframes pulseHeartRed {
+    0% {text-shadow: 0 0 8px #ff4c4c,0 0 20px #ff6b6b;transform: translate(-50%, -55%) scale(1);}
+    100% {text-shadow: 0 0 14px #ff5c5c,0 0 28px #ff8787;transform: translate(-50%, -55%) scale(1.12);}
+  }
+  @keyframes pulseHeartYellow {
+    0% {text-shadow: 0 0 10px #ffeb7b, 0 0 25px #ffeb7baa; transform: translate(-50%, -55%) scale(1);}
+    100% {text-shadow: 0 0 16px #fff156, 0 0 32px #fff156bb; transform: translate(-50%, -55%) scale(1.12);}
+  }
   @keyframes pulseHeartGreen {
-    0% { text-shadow: 0 0 10px #4eff75, 0 0 25px #4eff75aa; transform: translate(-50%, -55%) scale(1);}
-    100% { text-shadow: 0 0 16px #2ceb37, 0 0 32px #2ceb37cc; transform: translate(-50%, -55%) scale(1.12);}
+    0% {text-shadow: 0 0 10px #4eff75, 0 0 25px #4eff75aa; transform: translate(-50%, -55%) scale(1);}
+    100% {text-shadow: 0 0 16px #2ceb37, 0 0 32px #2ceb37cc; transform: translate(-50%, -55%) scale(1.12);}
   }
 
-  /* Controles centrados */
+  /* Controles centrados a la derecha */
   #controls {
     background: rgba(25,25,25,0.86);
     color: #eee;
@@ -141,15 +137,17 @@
     flex-direction: column;
     gap: 20px;
     border-radius: 20px;
-    margin: auto;
+    margin: auto 50px auto auto;
     max-width: 320px;
     text-align: center;
     user-select: none;
+    position: relative;
     z-index: 2;
   }
-  #controls h2 {
+  #controls h1 {
     margin-top: 0;
     color: #ffd93b;
+    font-size: 1.9em;
   }
   #controls label {
     cursor: pointer;
@@ -157,7 +155,7 @@
     align-items: center;
     justify-content: flex-start;
     gap: 12px;
-    font-size: 1.02em;
+    font-size: 1.05em;
   }
   #controls input[type="radio"] {
     width: 22px; height: 22px;
@@ -167,10 +165,10 @@
   #message {
     margin-top: 25px;
     font-family: 'Times New Roman', Times, serif;
-    font-size: 1.17em;
+    font-size: 1.14em;
     color: #f4d1db;
     text-shadow: 0 1px 4px #a52345;
-    min-height: 110px;
+    min-height: 120px;
     transition: opacity 0.6s ease;
     user-select: none;
     white-space: pre-wrap;
@@ -178,7 +176,7 @@
 </style>
 </head>
 <body>
-  <!-- Burbujas animadas fondo -->
+  <!-- Burbujas animadas -->
   <div class="bubble bubble1"></div>
   <div class="bubble bubble2"></div>
   <div class="bubble bubble3"></div>
@@ -187,14 +185,14 @@
 
   <div class="container-semaforo" aria-label="Semáforo de tráfico con control">
     <div class="semaforo" role="region" aria-live="polite" aria-atomic="true">
-      <div id="rojo" class="luz rojo" aria-label="Corazón rojo apagado"></div>
-      <div id="amarillo" class="luz amarillo" aria-label="Corazón amarillo apagado"></div>
-      <div id="verde" class="luz verde" aria-label="Corazón verde apagado"></div>
+      <div id="rojo" class="luz rojo" aria-label="Corazón rojo apagado" tabindex="0" role="button" aria-pressed="false"></div>
+      <div id="amarillo" class="luz amarillo" aria-label="Corazón amarillo apagado" tabindex="0" role="button" aria-pressed="false"></div>
+      <div id="verde" class="luz verde" aria-label="Corazón verde apagado" tabindex="0" role="button" aria-pressed="false"></div>
     </div>
   </div>
 
   <div id="controls" aria-label="Selecciona qué luz encender">
-    <h2>Selecciona la luz a encender</h2>
+    <h1>Bienvenida al Semáforo xd</h1>
     <label>
       <input type="radio" name="luz" value="rojo" checked>
       Luz Roja
@@ -215,7 +213,6 @@
   const amarillo = document.getElementById('amarillo');
   const verde = document.getElementById('verde');
   const messageDiv = document.getElementById('message');
-
   const radios = document.querySelectorAll('input[name="luz"]');
 
   const mensajes = {
@@ -228,8 +225,11 @@ No se trata de olvidar ni de borrar lo vivido sino de saber que todo ese camino 
 
   function apagarLuces() {
     rojo.classList.remove('on');
+    rojo.setAttribute('aria-pressed', 'false');
     amarillo.classList.remove('on');
+    amarillo.setAttribute('aria-pressed', 'false');
     verde.classList.remove('on');
+    verde.setAttribute('aria-pressed', 'false');
   }
 
   function actualizarLuzSeleccionada() {
@@ -238,12 +238,15 @@ No se trata de olvidar ni de borrar lo vivido sino de saber que todo ese camino 
 
     if (seleccion === 'rojo') {
       rojo.classList.add('on');
+      rojo.setAttribute('aria-pressed', 'true');
     } else if (seleccion === 'amarillo') {
       amarillo.classList.add('on');
+      amarillo.setAttribute('aria-pressed', 'true');
     } else if (seleccion === 'verde') {
       verde.classList.add('on');
+      verde.setAttribute('aria-pressed', 'true');
     }
-    // Mostrar mensaje con suavidad
+    // Mostrar mensaje con animación suave
     messageDiv.style.opacity = '0';
     setTimeout(() => {
       messageDiv.textContent = mensajes[seleccion];
@@ -255,8 +258,17 @@ No se trata de olvidar ni de borrar lo vivido sino de saber que todo ese camino 
     radio.addEventListener('change', actualizarLuzSeleccionada);
   });
 
-  // Inicializa mostrando la luz roja y su mensaje
+  // Inicialización con luz roja
   actualizarLuzSeleccionada();
+
+  // Mostrar mensaje también si se hace click en la luz roja
+  rojo.addEventListener('click', () => {
+    // Selecciona la radio roja si no está seleccionada
+    if (!document.querySelector('input[name="luz"][value="rojo"]').checked) {
+      document.querySelector('input[name="luz"][value="rojo"]').checked = true;
+      actualizarLuzSeleccionada();
+    }
+  });
 </script>
 </body>
 </html>
