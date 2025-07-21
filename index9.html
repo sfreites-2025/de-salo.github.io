@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Semáforo con Corazón Rojo</title>
+<title>Semáforo con Corazones</title>
 <style>
   body {
     margin: 0; padding: 0;
@@ -38,7 +38,7 @@
     transition: background-color 0.6s, box-shadow 0.6s;
     position: relative;
   }
-  /* Corazón rojo en lugar de círculo rojo */
+  /* Corazón rojo */
   .luz.rojo.on {
     background-color: transparent;
     box-shadow: none;
@@ -50,46 +50,87 @@
     text-shadow:
       0 0 8px #ff4c4c,
       0 0 20px #ff6b6b;
-    animation: pulseHeart 1.5s infinite alternate ease-in-out;
+    animation: pulseHeartRed 1.5s infinite alternate ease-in-out;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -55%);
   }
-  @keyframes pulseHeart {
+  @keyframes pulseHeartRed {
     0% {
-      text-shadow:
-        0 0 8px #ff4c4c,
-        0 0 20px #ff6b6b;
+      text-shadow: 0 0 8px #ff4c4c, 0 0 20px #ff6b6b;
       transform: translate(-50%, -55%) scale(1);
     }
     100% {
-      text-shadow:
-        0 0 14px #ff5c5c,
-        0 0 28px #ff8787;
+      text-shadow: 0 0 14px #ff5c5c, 0 0 28px #ff8787;
       transform: translate(-50%, -55%) scale(1.12);
     }
   }
 
+  /* Corazón amarillo */
   .luz.amarillo.on {
-    background-color: #ffea28;
-    box-shadow:
-      0 0 35px #fff960,
-      inset 0 0 30px #fff576;
+    background-color: transparent;
+    box-shadow: none;
   }
+  .luz.amarillo.on::before {
+    content: '💛';
+    font-size: 64px;
+    color: #ffd93b;
+    text-shadow:
+      0 0 10px #ffeb7b,
+      0 0 25px #ffeb7baa;
+    animation: pulseHeartYellow 1.5s infinite alternate ease-in-out;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -55%);
+  }
+  @keyframes pulseHeartYellow {
+    0% {
+      text-shadow: 0 0 10px #ffeb7b, 0 0 25px #ffeb7baa;
+      transform: translate(-50%, -55%) scale(1);
+    }
+    100% {
+      text-shadow: 0 0 16px #fff156, 0 0 32px #fff156bb;
+      transform: translate(-50%, -55%) scale(1.12);
+    }
+  }
+
+  /* Corazón verde */
   .luz.verde.on {
-    background-color: #13c54a;
-    box-shadow:
-      0 0 35px #4fff73,
-      inset 0 0 25px #90ff99;
+    background-color: transparent;
+    box-shadow: none;
+  }
+  .luz.verde.on::before {
+    content: '💚';
+    font-size: 64px;
+    color: #37d04e;
+    text-shadow:
+      0 0 10px #4eff75,
+      0 0 25px #4eff75aa;
+    animation: pulseHeartGreen 1.5s infinite alternate ease-in-out;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -55%);
+  }
+  @keyframes pulseHeartGreen {
+    0% {
+      text-shadow: 0 0 10px #4eff75, 0 0 25px #4eff75aa;
+      transform: translate(-50%, -55%) scale(1);
+    }
+    100% {
+      text-shadow: 0 0 16px #2ceb37, 0 0 32px #2ceb37cc;
+      transform: translate(-50%, -55%) scale(1.12);
+    }
   }
 </style>
 </head>
 <body>
-  <div class="semaforo" aria-label="Semáforo de tráfico con corazón rojo" role="region">
+  <div class="semaforo" aria-label="Semáforo de tráfico con corazones" role="region">
     <div id="rojo" class="luz rojo" aria-live="polite" aria-atomic="true" aria-label="Corazón rojo apagado"></div>
-    <div id="amarillo" class="luz amarillo" aria-live="polite" aria-atomic="true" aria-label="Luz amarilla apagada"></div>
-    <div id="verde" class="luz verde" aria-live="polite" aria-atomic="true" aria-label="Luz verde apagada"></div>
+    <div id="amarillo" class="luz amarillo" aria-live="polite" aria-atomic="true" aria-label="Corazón amarillo apagado"></div>
+    <div id="verde" class="luz verde" aria-live="polite" aria-atomic="true" aria-label="Corazón verde apagado"></div>
   </div>
 
 <script>
@@ -111,9 +152,9 @@
     rojo.classList.toggle('on', estado.rojo);
     rojo.setAttribute('aria-label', estado.rojo ? 'Corazón rojo encendido' : 'Corazón rojo apagado');
     amarillo.classList.toggle('on', estado.amarillo);
-    amarillo.setAttribute('aria-label', estado.amarillo ? 'Luz amarilla encendida' : 'Luz amarilla apagada');
+    amarillo.setAttribute('aria-label', estado.amarillo ? 'Corazón amarillo encendido' : 'Corazón amarillo apagado');
     verde.classList.toggle('on', estado.verde);
-    verde.setAttribute('aria-label', estado.verde ? 'Luz verde encendida' : 'Luz verde apagada');
+    verde.setAttribute('aria-label', estado.verde ? 'Corazón verde encendido' : 'Corazón verde apagado');
 
     let delay = 3000;
     if (indice === 1 || indice === 3) delay = 1500;
