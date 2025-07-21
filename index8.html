@@ -21,9 +21,9 @@
       background: #fff5f5;
       box-shadow: 0 14px 36px rgba(183, 92, 92, 0.2), 0 2px 20px #c6eaff44;
       border-radius: 32px;
-      padding: 45px 44px 35px 54px;
+      padding: 45px 44px 60px 54px;
       position: relative;
-      overflow: hidden;
+      overflow-y: auto;
       color: #7a3a3a;
       font-size: 1.36rem;
       line-height: 1.62;
@@ -31,11 +31,12 @@
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
+      box-sizing: border-box;
     }
     #notebook::before {
       content: '';
       position: absolute;
-      top: 35px; left: 36px; right: 36px; bottom: 40px;
+      top: 35px; left: 36px; right: 36px; bottom: 60px;
       background:
         repeating-linear-gradient(
           to bottom,
@@ -74,21 +75,52 @@
       font-weight: 500;
       text-shadow: 0 1px 4px #fbe5e5;
       min-height: 210px;
-      text-align: left;
       margin-top: 45px;
       margin-bottom: 24px;
       padding-right: 10px;
+      font-family: 'Times New Roman', Times, serif;
     }
     #content.visible {
       opacity: 1;
+    }
+    #decorations {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      margin-bottom: 28px;
+      user-select: none;
+      position: relative;
+      z-index: 3;
+    }
+    .decor {
+      font-size: 2.6em;
+      animation: floatUpDown 3s ease-in-out infinite alternate;
+      cursor: default;
+      color: #c14c71;
+      text-shadow: 0 1px 8px #ffb6cea1;
+      transition: transform 0.3s ease;
+    }
+    .decor:nth-child(even) {
+      animation-delay: 1.5s;
+      color: #8e3a78;
+      text-shadow: 0 1px 10px #d78caeab;
+    }
+    .decor:hover {
+      transform: scale(1.3) rotate(10deg);
+      color: #ff5599;
+      text-shadow: 0 0 25px #ff5999cc;
+    }
+    @keyframes floatUpDown {
+      from { transform: translateY(0); }
+      to { transform: translateY(-14px); }
     }
     #note-footer {
       color: #be5780;
       font-size: 1.18em;
       text-align: right;
       opacity: .76;
-      margin-top: 16px;
-      margin-bottom: 8px;
+      margin-top: auto;
+      margin-bottom: 22px;
       letter-spacing: 0.02em;
       font-family: 'Times New Roman', Times, serif;
       animation: footerIn 2s cubic-bezier(.62,1.17,.12,.99);
@@ -97,42 +129,32 @@
       0% {opacity:0; transform: translateY(22px);}
       100%{opacity:.76; transform:none;}
     }
-    .fade-anim {
-      animation: fadeStar 7s infinite alternate;
+    #buttons-container {
+      display: flex;
+      gap: 22px;
+      justify-content: center;
+      margin-bottom: 15px;
     }
-    @keyframes fadeStar {
-      from { opacity: 0.14;}
-      to { opacity: 0.58;}
+    button {
+      font-family: 'Times New Roman', Times, serif;
+      background: linear-gradient(99deg, #fd558e 10%, #7ae0ea 100%);
+      color: #6d1472;
+      border: none;
+      padding: 12px 34px;
+      border-radius: 9px;
+      font-size: 1.17em;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 1px 16px #5ff5fc42;
+      transition: background 0.25s, color 0.22s, box-shadow 0.22s;
+      letter-spacing: 0.03em;
+      outline: none;
+      min-width: 120px;
     }
-    .notebook-heart {
-      position: absolute;
-      bottom: 28px; left: 43px;
-      font-size: 1.7em;
-      opacity: .37;
-      z-index: 2;
-      text-shadow: 0 1px 10px #ff8be655;
-      animation: bounceHeart 3s infinite alternate-reverse;
-    }
-    @keyframes bounceHeart {
-      0% { transform: translateY(0);}
-      33% { transform: translateY(-6px);}
-      66% { transform: scale(1.12);}
-      100% { transform: translateY(0);}
-    }
-    .bloom {
-      position: absolute;
-      width: 34px;
-      height: 34px;
-      z-index: 3;
-      pointer-events: none;
-      opacity: .21;
-      animation: flowerAnim 9s infinite linear;
-      left: 90%;
-      top: 87%;
-    }
-    @keyframes flowerAnim {
-      0% {filter: blur(0) brightness(0.9);}
-      100% {filter: blur(2px) brightness(1.1); transform: rotate(270deg);}
+    button:hover {
+      background: linear-gradient(112deg,#7ae0ea,#fd558e 86%);
+      color: #ea20b8;
+      box-shadow: 0 6px 30px #ff5ea4cc;
     }
   </style>
 </head>
@@ -141,16 +163,20 @@
     <div id="ornament" class="fade-anim">🌸✨</div>
     <div id="paperclip">📎</div>
     <div id="content"></div>
-    <div class="notebook-heart">💌</div>
-    <svg class="bloom" viewBox="0 0 64 64">
-      <circle cx="32" cy="32" r="15" fill="#fcb6d7" />
-      <ellipse cx="32" cy="16" rx="7" ry="14" fill="#b9e3ef" />
-      <ellipse cx="48" cy="32" rx="7" ry="14" fill="#fdf1cf" />
-      <ellipse cx="32" cy="48" rx="7" ry="14" fill="#fee0ef" />
-      <ellipse cx="16" cy="32" rx="7" ry="14" fill="#e5d3fc" />
-    </svg>
+    <div id="decorations">
+      <div class="decor" title="Flor">🌺</div>
+      <div class="decor" title="Corazón">❤️</div>
+      <div class="decor" title="Mariposa">🦋</div>
+      <div class="decor" title="Estrella">✨</div>
+      <div class="decor" title="Rosa">🌹</div>
+    </div>
+    <div id="buttons-container">
+      <button id="btnRegresar">Regresar</button>
+      <button id="btnSiguiente">Siguiente →</button>
+    </div>
     <div id="note-footer"></div>
   </div>
+
   <script>
     const phrases = [
       'Quisiera volver a verte,\ncaminar juntos sin prisa y sin miedo.',
@@ -167,6 +193,9 @@
 
     const contentDiv = document.getElementById('content');
     const footerDiv = document.getElementById('note-footer');
+    const btnRegresar = document.getElementById('btnRegresar');
+    const btnSiguiente = document.getElementById('btnSiguiente');
+
     let idx = 0;
 
     function showPhrase(i) {
@@ -188,11 +217,18 @@
       showPhrase(idx);
     }
 
-    // Primera frase al cargar
+    // Inicializar con primera frase
     showPhrase(idx);
 
-    // Cambia cada 5 s
+    // Cambia cada 5 segundos
     setInterval(nextPhrase, 5000);
+
+    btnRegresar.onclick = () => {
+      window.history.back();
+    };
+    btnSiguiente.onclick = () => {
+      window.location.href = 'index9.html';
+    };
   </script>
 </body>
 </html>
