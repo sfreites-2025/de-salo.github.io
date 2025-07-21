@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Semáforo con Selección de Luz y Mensajes</title>
+<title>Semáforo con Selección y Mensajes</title>
 <style>
   body {
     margin: 0; padding: 0;
@@ -14,7 +14,7 @@
     justify-content: space-between;
     align-items: center;
   }
-  /* Contenedor Semáforo (izquierda) */
+  /* Contenedor semáforo a la izquierda */
   .container-semaforo {
     display: flex;
     align-items: center;
@@ -44,10 +44,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background-color 0.6s, box-shadow 0.6s;
     position: relative;
+    transition: background-color 0.6s, box-shadow 0.6s;
   }
-  /* Corazones animados */
+  /* Corazones animados para cada luz */
   .luz.rojo.on {
     background-color: transparent;
     box-shadow: none;
@@ -64,6 +64,7 @@
     0% { text-shadow: 0 0 8px #ff4c4c, 0 0 20px #ff6b6b; transform: translate(-50%, -55%) scale(1); }
     100% { text-shadow: 0 0 14px #ff5c5c, 0 0 28px #ff8787; transform: translate(-50%, -55%) scale(1.12); }
   }
+
   .luz.amarillo.on {
     background-color: transparent;
     box-shadow: none;
@@ -80,6 +81,7 @@
     0% { text-shadow: 0 0 10px #ffeb7b, 0 0 25px #ffeb7baa; transform: translate(-50%, -55%) scale(1); }
     100% { text-shadow: 0 0 16px #fff156, 0 0 32px #fff156bb; transform: translate(-50%, -55%) scale(1.12); }
   }
+
   .luz.verde.on {
     background-color: transparent;
     box-shadow: none;
@@ -97,7 +99,7 @@
     100% { text-shadow: 0 0 16px #2ceb37, 0 0 32px #2ceb37cc; transform: translate(-50%, -55%) scale(1.12); }
   }
 
-  /* Controles centrados */
+  /* Controles en centro */
   #controls {
     background: #111;
     color: #eee;
@@ -135,9 +137,10 @@
     font-size: 1.14em;
     color: #f4d1db;
     text-shadow: 0 1px 4px #a52345;
-    min-height: 70px;
+    min-height: 110px;
     transition: opacity 0.6s ease;
     user-select: none;
+    white-space: pre-wrap;
   }
 </style>
 </head>
@@ -176,7 +179,9 @@
   const radios = document.querySelectorAll('input[name="luz"]');
 
   const mensajes = {
-    rojo: "Precaución: detente y espera con el corazón.",
+    rojo: `A veces, el corazón necesita parar, como ese momento en el que el semáforo se pone en rojo.
+Es una señal para hacer una pausa, respirar y contemplar el camino recorrido.
+No se trata de olvidar ni de borrar lo vivido sino de saber que todo ese camino fue el mejor camino.`,
     amarillo: "Atento: la luz está cambiando, precaución.",
     verde: "Ve: el camino está despejado, sigue con alegría."
   };
@@ -198,7 +203,7 @@
     } else if (seleccion === 'verde') {
       verde.classList.add('on');
     }
-    // Mostrar mensaje ejemplo
+    // Mostrar mensaje con suavidad
     messageDiv.style.opacity = '0';
     setTimeout(() => {
       messageDiv.textContent = mensajes[seleccion];
