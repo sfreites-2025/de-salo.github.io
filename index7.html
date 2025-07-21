@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recuerdos Especiales - Para ti</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ffebee;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            color: #d32f2f;
+        }
+        
+        #game-container {
+            width: 80%;
+            max-width: 600px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        h1 {
+            color: #c2185b;
+            margin-bottom: 30px;
+        }
+        
+        #memory-maze {
+            width: 100%;
+            height: 300px;
+            background-color: #f8bbd0;
+            border-radius: 10px;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        #player {
+            width: 20px;
+            height: 20px;
+            background-color: #e91e63;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            transition: all 0.3s;
+        }
+        
+        .memory {
+            width: 40px;
+            height: 40px;
+            background-color: #fce4ec;
+            border: 2px dashed #c2185b;
+            border-radius: 50%;
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .memory:hover {
+            transform: scale(1.1);
+            background-color: #f48fb1;
+        }
+        
+        #controls {
+            margin: 20px 0;
+        }
+        
+        button {
+            background-color: #e91e63;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0 5px;
+            transition: all 0.3s;
+        }
+        
+        button:hover {
+            background-color: #c2185b;
+        }
+        
+        #message {
+            min-height: 50px;
+            margin: 20px 0;
+            padding: 10px;
+            background-color: #fce4ec;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        #final-message {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(233, 30, 99, 0.9);
+            color: white;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 15px;
+            z-index: 10;
+        }
+        
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            color: #e91e63;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <h1>Laberinto de Recuerdos</h1>
+        
+        <div id="memory-maze">
+            <div id="player"></div>
+            <!-- Los recuerdos se generarán dinámicamente -->
+        </div>
+        
+        <div id="controls">
+            <button id="up-btn">↑</button><br>
+            <button id="left-btn">←</button>
+            <button id="right-btn">→</button><br>
+            <button id="down-btn">↓</button>
+        </div>
+        
+        <div id="message">
+            Mueve el corazón rosa para encontrar nuestros recuerdos especiales...
+        </div>
+        
+        <div id="final-message">
+            <h2>Gracias por jugar</h2>
+            <p>Aunque las cosas hayan cambiado, estos momentos siempre serán especiales.</p>
+            <p>Te deseo lo mejor.</p>
+            <button id="restart-btn">Volver a jugar</button>
+        </div>
+    </div>
+
+    <script>
+        // Memoria de momentos especiales (personalizados según lo pedido)
+        const memories = [
+            {x: 50, y: 50, emoji: "❤️", message: "Nuestro primer beso... qué nervios sentía"},
+            {x: 400, y: 80, emoji: "🍳", message: "Ese día que cocinamos juntos y todo salió delicioso"},
+            {x: 200, y: 150, emoji: "🎬", message: "Cuando fuimos al cine y nos reímos toda la película"},
+            {x: 350, y: 200, emoji: "🌇", message: "El atardecer que vi reflejado en tus ojos"},
+            {x: 100, y: 250, emoji: "🤣", message: "Tus bromas que siempre me hacían reír"},
+            {x: 450, y: 100, emoji: "⚽", message: "Nuestra primera vez juntos en una cancha de fútbol"},
+            {x: 300, y: 50, emoji: "🎶", message: "506 de Morat, la canción que siempre asociaré contigo..."},
+            {x: 150, y: 100, emoji: "🌳", message: "Los días en que íbamos a parques a pasar tiempo juntos"},
+            {x: 400, y: 200, emoji: "✨", message: "Tu belleza irradiando destellos de luz que me dejaban sin palabras"}
+        ];
+        
+        const player = document.getElementById('player');
+        const maze = document.getElementById('memory-maze');
+        const messageDiv = document.getElementById('message');
+        const finalMessage = document.getElementById('final-message');
+        const restartBtn = document.getElementById('restart-btn');
+        
+        let playerX = 10;
+        let playerY = 270;
+        let foundMemories = [];
+        
+        // Crear los recuerdos en el laberinto
+        function createMemories() {
+            memories.forEach((memory, index) => {
+                const memoryElement = document.createElement('div');
+                memoryElement.className = 'memory';
+                memoryElement.style.left = `${memory.x}px`;
+                memoryElement.style.top = `${memory.y}px`;
+                memoryElement.textContent = memory.emoji;
+                memoryElement.dataset.index = index;
+                
+                memoryElement.addEventListener('click', () => {
+                    if (!foundMemories.includes(index)) {
+                        foundMemories.push(index);
+                        messageDiv.textContent = memory.message;
+                        memoryElement.style.backgroundColor = '#f8bbd0';
+                        
+                        // Crear corazones flotantes
+                        createHearts(5);
+                        
+                        // Verificar si se encontraron todos los recuerdos
+                        if (foundMemories.length === memories.length) {
+                            setTimeout(() => {
+                                finalMessage.style.display = 'flex';
+                            }, 1500);
+                        }
+                    }
+                });
+                
+                maze.appendChild(memoryElement);
+            });
+        }
+        
+        // Crear corazones flotantes
+        function createHearts(count) {
+            for (let i = 0; i < count; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = '❤️';
+                heart.style.left = `${Math.random() * 100}%`;
+                heart.style.top = `${Math.random() * 100}%`;
+                heart.style.animationDelay = `${Math.random() * 2}s`;
+                maze.appendChild(heart);
+                
+                // Eliminar después de la animación
+                setTimeout(() => {
+                    heart.remove();
+                }, 3000);
+            }
+        }
+        
+        // Movimiento del jugador
+        function movePlayer(dx, dy) {
+            const newX = playerX + dx;
+            const newY = playerY + dy;
+            
+            // Limitar el movimiento dentro del laberinto
+            if (newX >= 0 && newX <= maze.offsetWidth - 30 && 
+                newY >= 0 && newY <= maze.offsetHeight - 30) {
+                playerX = newX;
+                playerY = newY;
+                player.style.left = `${playerX}px`;
+                player.style.top = `${playerY}px`;
+            }
+        }
+        
+        // Eventos de botones
+        document.getElementById('up-btn').addEventListener('click', () => movePlayer(0, -20));
+        document.getElementById('down-btn').addEventListener('click', () => movePlayer(0, 20));
+        document.getElementById('left-btn').addEventListener('click', () => movePlayer(-20, 0));
+        document.getElementById('right-btn').addEventListener('click', () => movePlayer(20, 0));
+        
+        // Teclado
+        document.addEventListener('keydown', (e) => {
+            switch(e.key) {
+                case 'ArrowUp': movePlayer(0, -20); break;
+                case 'ArrowDown': movePlayer(0, 20); break;
+                case 'ArrowLeft': movePlayer(-20, 0); break;
+                case 'ArrowRight': movePlayer(20, 0); break;
+            }
+        });
+        
+        // Reiniciar juego
+        restartBtn.addEventListener('click', () => {
+            foundMemories = [];
+            playerX = 10;
+            playerY = 270;
+            player.style.left = `${playerX}px`;
+            player.style.top = `${playerY}px`;
+            messageDiv.textContent = 'Mueve el corazón rosa para encontrar nuestros recuerdos especiales...';
+            finalMessage.style.display = 'none';
+            
+            // Limpiar y recrear recuerdos
+            document.querySelectorAll('.memory').forEach(m => m.remove());
+            createMemories();
+        });
+        
+        // Inicializar juego
+        createMemories();
+    </script>
+</body>
+</html>
