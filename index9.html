@@ -25,7 +25,7 @@
     100% { background-position: 0% 50%;}
   }
 
-  /* Burbujas animadas de fondo */
+  /* Burbujas de fondo animadas */
   .bubble {
     position: absolute;
     border-radius: 50%;
@@ -131,7 +131,6 @@
     0% { text-shadow: 0 0 10px #4eff75, 0 0 25px #4eff75aa; transform: translate(-50%, -55%) scale(1); }
     100% { text-shadow: 0 0 16px #2ceb37, 0 0 32px #2ceb37cc; transform: translate(-50%, -55%) scale(1.12); }
   }
-
   /* Controles centrados a la derecha */
   #controls {
     background: rgba(25,25,25,0.86);
@@ -168,26 +167,25 @@
     cursor: pointer;
     accent-color: #ff2c2c;
   }
-  /* Mensaje centrado en pantalla */
+  /* Mensaje centrado */
   #message-container {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) translateX(20px);
-    width: 350px;
+    max-width: 380px;
     background: rgba(255, 255, 255, 0.95);
     padding: 30px;
     border-radius: 15px;
     box-shadow: 0 12px 30px rgba(0,0,0,0.3);
     text-align: center;
     font-family: 'Times New Roman', Times, serif;
-    font-size: 1.2em;
+    font-size: 1.15em;
     line-height: 1.5;
     opacity: 0;
     transition: opacity 0.8s ease, transform 0.8s ease;
     z-index: 100;
     pointer-events: none;
-    user-select: none;
     white-space: pre-wrap;
   }
   #message-container.visible {
@@ -210,7 +208,7 @@
     border: 3px solid #37d04e;
     background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
   }
-  /* Modal de bienvenida */
+  /* Modal bienvenida */
   #welcome-modal {
     position: fixed;
     inset: 0;
@@ -272,7 +270,7 @@
     </div>
   </div>
 
-  <!-- Control de selección de colores -->
+  <!-- Control selección -->
   <div id="controls" aria-label="Selecciona qué luz encender">
     <h1>Elija el color del semáforo a encender</h1>
     <label>
@@ -289,10 +287,10 @@
     </label>
   </div>
 
-  <!-- Mensaje animado en el centro -->
+  <!-- Mensaje en centro -->
   <div id="message-container" role="region" aria-live="polite" aria-atomic="true"></div>
 
-  <!-- Modal de bienvenida -->
+  <!-- Modal bienvenida -->
   <div id="welcome-modal" role="dialog" aria-modal="true" aria-labelledby="welcome-title" aria-describedby="welcome-desc">
     <div id="welcome-content">
       <h2 id="welcome-title">Bienvenido al Semáforo xd</h2>
@@ -318,7 +316,7 @@ No se trata de olvidar ni de borrar lo vivido sino de saber que todo ese camino 
       class: 'rojo-text'
     },
     amarillo: {
-      text: "Atento: la luz está cambiando, precaución.",
+      text: `El semáforo amarillo nos recuerda que estamos en una transición, un espacio entre lo que fue y lo que podría ser. Es el momento para observar el panorama con atención, para no apresurarse ni quedarse inmóvil por completo. Es la oportunidad de sanar a nuestro ritmo, de decidir con serenidad y sin prisa cuál será el siguiente paso.`,
       class: 'amarillo-text'
     },
     verde: {
@@ -336,7 +334,6 @@ No se trata de olvidar ni de borrar lo vivido sino de saber que todo ese camino 
   function actualizarLuzSeleccionada() {
     const seleccion = document.querySelector('input[name="luz"]:checked');
     if (!seleccion) {
-      // No hay seleccion, apagar todo y ocultar mensaje
       apagarLuces();
       messageContainer.textContent = '';
       messageContainer.className = '';
@@ -352,10 +349,9 @@ No se trata de olvidar ni de borrar lo vivido sino de saber que todo ese camino 
     else if (valor === 'verde') verde.classList.add('on');
 
     const mensajeData = mensajes[valor];
-    messageContainer.className = ''; // reset clases
+    messageContainer.className = '';
     messageContainer.classList.add(mensajeData.class);
 
-    // Animar mensaje
     messageContainer.style.opacity = '0';
     messageContainer.style.pointerEvents = 'none';
     messageContainer.style.transform = 'translate(-50%, -50%) translateX(20px)';
@@ -368,20 +364,16 @@ No se trata de olvidar ni de borrar lo vivido sino de saber que todo ese camino 
   }
 
   radios.forEach(radio => {
-    radio.checked = false; // comienzan sin marcar
+    radio.checked = false; // Empieza sin seleccion
     radio.addEventListener('change', actualizarLuzSeleccionada);
   });
 
-  // Modal botón aceptar
   btnAccept.addEventListener('click', () => {
     welcomeModal.style.display = 'none';
-    // Al cerrar modal, activa rojo y su mensaje
-    const luzRojo = document.querySelector('input[name="luz"][value="rojo"]');
-    luzRojo.checked = true;
+    radios[0].checked = true; // Seleccion roja por defecto al cerrar modal
     actualizarLuzSeleccionada();
   });
 
-  // Mostrar modal al cargar
   window.addEventListener('load', () => {
     welcomeModal.style.display = 'flex';
   });
