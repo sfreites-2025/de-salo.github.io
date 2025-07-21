@@ -9,13 +9,13 @@
     margin: 0;
     height: 100vh;
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Para apilar la vela y los botones */
     align-items: center;
     justify-content: center;
     background: #000; /* Fondo oscuro para que la vela resalte */
     overflow: hidden; /* Evita barras de desplazamiento */
-    gap: 30px;
     font-family: 'Times New Roman', serif;
+    position: relative; /* Para posicionar los botones absolutos */
   }
 
   .candle-container {
@@ -25,6 +25,7 @@
     height: 30em;
     font-size: 7px; /* Unidad base para dimensionar la vela y sus partes */
     transform: scale(1.5); /* Ajustar el tamaño general de la vela */
+    margin-bottom: 50px; /* Espacio para que los botones no se superpongan */
   }
 
   .candle {
@@ -152,12 +153,10 @@
     to { filter: blur(6em) opacity(0.8); }
   }
 
-  /* Botones regresay siguiente ubicados debajo */
-  #btns-nav {
-    display: flex;
-    gap: 40px;
-  }
-  button {
+  /* Posicionamiento de los botones en las esquinas */
+  .nav-button {
+    position: absolute;
+    bottom: 30px; /* Distancia desde el borde inferior */
     background: linear-gradient(110deg, #7ae0ea 12%, #fd558e 88%);
     color: #6d1472;
     border: none;
@@ -171,11 +170,18 @@
     cursor: pointer;
     transition: background 0.25s, color 0.22s, box-shadow 0.22s;
     outline: none;
+    z-index: 10; /* Para que estén sobre la vela si se superponen */
   }
-  button:hover {
+  .nav-button:hover {
     background: linear-gradient(112deg, #fd558e, #7ae0ea 86%);
     color: #ea20b8;
     box-shadow: 0 8px 30px #ff5ea4cc;
+  }
+  #btnRegresar {
+    left: 30px; /* Distancia desde el borde izquierdo */
+  }
+  #btnSiguiente {
+    right: 30px; /* Distancia desde el borde derecho */
   }
 </style>
 </head>
@@ -188,10 +194,8 @@
     </div>
   </div>
 
-  <div id="btns-nav" aria-label="Navegación">
-    <button id="btnRegresar" type="button">Regresar</button>
-    <button id="btnSiguiente" type="button">Siguiente →</button>
-  </div>
+  <button id="btnRegresar" class="nav-button" type="button">Regresar</button>
+  <button id="btnSiguiente" class="nav-button" type="button">Siguiente →</button>
 
 <script>
   const btnRegresar = document.getElementById('btnRegresar');
@@ -202,7 +206,7 @@
   });
 
   btnSiguiente.addEventListener('click', () => {
-    window.location.href = 'index11.html';
+    window.location.href = 'index11.html'; // Redirecciona a index11.html
   });
 </script>
 </body>
