@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Semáforo con control y posición derecha</title>
+<title>Semáforo con control y posición izquierda</title>
 <style>
   body {
     margin: 0; padding: 0;
@@ -11,45 +11,17 @@
     background: #222;
     font-family: 'Times New Roman', serif;
     display: flex;
-    flex-direction: row;
+    justify-content: space-between; /* Espacio entre semáforo y controles */
+    align-items: center;
   }
-  /* CONTENEDOR CONTROLES */
-  #controls {
-    width: 220px;
-    background: #111;
-    color: #eee;
-    padding: 24px 20px;
-    font-size: 1.12em;
-    box-shadow: inset -6px 0 14px #552233bb;
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-    position: fixed;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    border-top-left-radius: 16px;
-    border-bottom-left-radius: 16px;
-  }
-  #controls label {
-    cursor: pointer;
-    user-select: none;
-  }
-  #controls input[type="checkbox"] {
-    width: 20px; height: 20px;
-    margin-right: 12px;
-    vertical-align: middle;
-    cursor: pointer;
-  }
-
-  /* CONTENEDOR SEMÁFORO */
+  /* CONTENEDOR SEMÁFORO - Posición Izquierda */
   .container-semaforo {
-    flex-grow: 1;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    padding-left: 40px;
+    justify-content: flex-start; /* Alinea a la izquierda */
+    padding-left: 40px; /* Margen para que no toque el borde */
     height: 100vh;
+    flex-shrink: 0; /* No permite que se encoja */
   }
   .semaforo {
     background: black;
@@ -61,8 +33,6 @@
     flex-direction: column;
     gap: 18px;
     align-items: center;
-    margin-left: auto;
-    margin-right: 24px;
   }
   .luz {
     width: 90px;
@@ -78,97 +48,88 @@
     position: relative;
   }
 
-  /* Luz roja con corazón */
-  .luz.rojo.on {
-    background-color: transparent;
-    box-shadow: none;
+  /* CONTROLES - Posición Central */
+  #controls {
+    background: #111;
+    color: #eee;
+    padding: 30px 25px;
+    font-size: 1.15em;
+    box-shadow: 0 0 20px #000, inset 0 0 10px #552233bb;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border-radius: 20px;
+    margin: auto; /* Centra el div en el espacio restante */
+    text-align: center;
   }
+  #controls h2 {
+    margin-top: 0;
+    color: #ffd93b;
+  }
+  #controls label {
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  #controls input[type="checkbox"] {
+    width: 22px; height: 22px;
+    margin-right: 15px;
+    vertical-align: middle;
+    cursor: pointer;
+    accent-color: #ff2c2c; /* Color del checkbox */
+  }
+
+  /* Estilos de Corazones y Animaciones */
+  .luz.rojo.on { background-color: transparent; box-shadow: none; }
   .luz.rojo.on::before {
-    content: '❤️';
-    font-size: 64px;
-    color: #ff2c2c;
-    text-shadow:
-      0 0 8px #ff4c4c,
-      0 0 20px #ff6b6b;
+    content: '❤️'; font-size: 64px; color: #ff2c2c;
+    text-shadow: 0 0 8px #ff4c4c, 0 0 20px #ff6b6b;
     animation: pulseHeartRed 1.5s infinite alternate ease-in-out;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -55%);
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -55%);
   }
   @keyframes pulseHeartRed {
-    0% {
-      text-shadow: 0 0 8px #ff4c4c, 0 0 20px #ff6b6b;
-      transform: translate(-50%, -55%) scale(1);
-    }
-    100% {
-      text-shadow: 0 0 14px #ff5c5c, 0 0 28px #ff8787;
-      transform: translate(-50%, -55%) scale(1.12);
-    }
+    0% { text-shadow: 0 0 8px #ff4c4c, 0 0 20px #ff6b6b; transform: translate(-50%, -55%) scale(1); }
+    100% { text-shadow: 0 0 14px #ff5c5c, 0 0 28px #ff8787; transform: translate(-50%, -55%) scale(1.12); }
   }
 
-  /* Luz amarilla con corazón */
-  .luz.amarillo.on {
-    background-color: transparent;
-    box-shadow: none;
-  }
+  .luz.amarillo.on { background-color: transparent; box-shadow: none; }
   .luz.amarillo.on::before {
-    content: '💛';
-    font-size: 64px;
-    color: #ffd93b;
-    text-shadow:
-      0 0 10px #ffeb7b,
-      0 0 25px #ffeb7baa;
+    content: '💛'; font-size: 64px; color: #ffd93b;
+    text-shadow: 0 0 10px #ffeb7b, 0 0 25px #ffeb7baa;
     animation: pulseHeartYellow 1.5s infinite alternate ease-in-out;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -55%);
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -55%);
   }
   @keyframes pulseHeartYellow {
-    0% {
-      text-shadow: 0 0 10px #ffeb7b, 0 0 25px #ffeb7baa;
-      transform: translate(-50%, -55%) scale(1);
-    }
-    100% {
-      text-shadow: 0 0 16px #fff156, 0 0 32px #fff156bb;
-      transform: translate(-50%, -55%) scale(1.12);
-    }
+    0% { text-shadow: 0 0 10px #ffeb7b, 0 0 25px #ffeb7baa; transform: translate(-50%, -55%) scale(1); }
+    100% { text-shadow: 0 0 16px #fff156, 0 0 32px #fff156bb; transform: translate(-50%, -55%) scale(1.12); }
   }
 
-  /* Luz verde con corazón */
-  .luz.verde.on {
-    background-color: transparent;
-    box-shadow: none;
-  }
+  .luz.verde.on { background-color: transparent; box-shadow: none; }
   .luz.verde.on::before {
-    content: '💚';
-    font-size: 64px;
-    color: #37d04e;
-    text-shadow:
-      0 0 10px #4eff75,
-      0 0 25px #4eff75aa;
+    content: '💚'; font-size: 64px; color: #37d04e;
+    text-shadow: 0 0 10px #4eff75, 0 0 25px #4eff75aa;
     animation: pulseHeartGreen 1.5s infinite alternate ease-in-out;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -55%);
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -55%);
   }
   @keyframes pulseHeartGreen {
-    0% {
-      text-shadow: 0 0 10px #4eff75, 0 0 25px #4eff75aa;
-      transform: translate(-50%, -55%) scale(1);
-    }
-    100% {
-      text-shadow: 0 0 16px #2ceb37, 0 0 32px #2ceb37cc;
-      transform: translate(-50%, -55%) scale(1.12);
-    }
+    0% { text-shadow: 0 0 10px #4eff75, 0 0 25px #4eff75aa; transform: translate(-50%, -55%) scale(1); }
+    100% { text-shadow: 0 0 16px #2ceb37, 0 0 32px #2ceb37cc; transform: translate(-50%, -55%) scale(1.12); }
   }
 </style>
 </head>
 <body>
+  <div class="container-semaforo" aria-label="Semáforo de tráfico con control">
+    <div class="semaforo" role="region" aria-live="polite" aria-atomic="true">
+      <div id="rojo" class="luz rojo" aria-label="Corazón rojo apagado"></div>
+      <div id="amarillo" class="luz amarillo" aria-label="Corazón amarillo apagado"></div>
+      <div id="verde" class="luz verde" aria-label="Corazón verde apagado"></div>
+    </div>
+  </div>
+
   <div id="controls" aria-label="Controles de encendido de luces del semáforo">
-    <h2>Control de luces</h2>
+    <h2>Control de Luces</h2>
     <label>
       <input type="checkbox" id="chkRojo" checked>
       Luz Roja
@@ -182,13 +143,6 @@
       Luz Verde
     </label>
   </div>
-  <div class="container-semaforo" aria-label="Semáforo de tráfico con control">
-    <div class="semaforo" role="region" aria-live="polite" aria-atomic="true">
-      <div id="rojo" class="luz rojo" aria-label="Corazón rojo apagado"></div>
-      <div id="amarillo" class="luz amarillo" aria-label="Corazón amarillo apagado"></div>
-      <div id="verde" class="luz verde" aria-label="Corazón verde apagado"></div>
-    </div>
-  </div>
 <script>
   const rojo = document.getElementById('rojo');
   const amarillo = document.getElementById('amarillo');
@@ -198,7 +152,6 @@
   const chkAmarillo = document.getElementById('chkAmarillo');
   const chkVerde = document.getElementById('chkVerde');
 
-  // Ciclo estados del semáforo
   const estados = [
     {rojo: true, amarillo: false, verde: false},
     {rojo: true, amarillo: true, verde: false},
@@ -211,7 +164,6 @@
   function actualizarSemaforo() {
     const estado = estados[indice];
 
-    // Solo activa la luz si su checkbox está seleccionado
     rojo.classList.toggle('on', estado.rojo && chkRojo.checked);
     rojo.setAttribute('aria-label', (estado.rojo && chkRojo.checked) ? 'Corazón rojo encendido' : 'Corazón rojo apagado');
 
@@ -221,19 +173,15 @@
     verde.classList.toggle('on', estado.verde && chkVerde.checked);
     verde.setAttribute('aria-label', (estado.verde && chkVerde.checked) ? 'Corazón verde encendido' : 'Corazón verde apagado');
 
-    // Duración según estado
-    let delay = 3000; // rojo y verde 3s
-    if (indice === 1 || indice === 3) delay = 1500; // amarillo 1.5s
+    let delay = 3000;
+    if (indice === 1 || indice === 3) delay = 1500;
 
     indice = (indice + 1) % estados.length;
     setTimeout(actualizarSemaforo, delay);
   }
 
-  // Actualiza cuando cambian los checkboxes para reflejar inmediatamente
   [chkRojo, chkAmarillo, chkVerde].forEach(chk => {
     chk.addEventListener('change', () => {
-      // Forzar actualización inmediata del semáforo (sin cambiar estado)
-      // Mostramos luz si checkbox activo y estado actual la indica
       const estadoActual = estados[(indice + estados.length - 1) % estados.length];
       rojo.classList.toggle('on', estadoActual.rojo && chkRojo.checked);
       amarillo.classList.toggle('on', estadoActual.amarillo && chkAmarillo.checked);
@@ -241,7 +189,6 @@
     });
   });
 
-  // Inicia ciclo
   actualizarSemaforo();
 </script>
 </body>
