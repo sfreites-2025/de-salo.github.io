@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Deseo Volverte a Ver</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
+    body {
+      margin: 0; padding: 0;
+      background: linear-gradient(135deg, #f4e9e9, #f0d6d6);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Courgette', cursive;
+      overflow: hidden;
+    }
+    #notebook {
+      width: 90vw; max-width: 600px;
+      height: 80vh;
+      background: #fff5f5;
+      box-shadow: 0 12px 32px rgba(183, 92, 92, 0.4);
+      border-radius: 32px;
+      padding: 40px 35px 45px 45px;
+      box-sizing: border-box;
+      position: relative;
+      overflow: hidden;
+      color: #7a3a3a;
+      font-size: 1.46rem;
+      line-height: 1.58;
+      white-space: pre-line;
+    }
+    /* Líneas de papel */
+    #notebook::before {
+      content: '';
+      position: absolute;
+      top: 50px; left: 40px; right: 40px; bottom: 50px;
+      background:
+        repeating-linear-gradient(
+          to bottom,
+          transparent,
+          transparent 22px,
+          #e7baba 22px,
+          #e7baba 23px
+        );
+      pointer-events: none;
+      border-radius: 20px;
+      z-index: 0;
+    }
+    #content {
+      position: relative;
+      z-index: 1;
+      opacity: 0;
+      transition: opacity 1.2s ease;
+      font-weight: 500;
+      text-shadow: 0 1px 3px #fbe5e5;
+    }
+    #content.visible {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <div id="notebook">
+    <div id="content"></div>
+  </div>
+
+  <script>
+    const phrases = [
+      "Quisiera volver a verte,\ncaminar juntos sin prisa y sin miedo.",
+      "Desearía escribirte de nuevo,\npalabras que reflejen lo que nunca pude decir.",
+      "Extraño esos días contigo,\ndonde simplemente bastaba tu presencia.",
+      "Vuelvo a soñar con ser parte\n de tu vida, con compartir cada instante.",
+      "Que este deseo no sea solo un susurro\n, sino un camino hacia un reencuentro.",
+      "El tiempo puede pasar, las palabras pueden perderse,\npero mi anhelo por ti permanece intacto.",
+      "Solo quisiera decirte una vez más:\nme importas y quiero estar ahí.",
+      "Espero, con paciencia y esperanza,\nque nuestros caminos se crucen otra vez."
+    ];
+
+    const contentDiv = document.getElementById('content');
+    let index = 0;
+
+    function showPhrase(i) {
+      contentDiv.classList.remove('visible');
+      setTimeout(() => {
+        contentDiv.textContent = phrases[i];
+        contentDiv.classList.add('visible');
+      }, 600);
+    }
+
+    function nextPhrase() {
+      index++;
+      if (index >= phrases.length) {
+        index = 0; // reinicia para repetir
+      }
+      showPhrase(index);
+    }
+
+    // Primera frase al cargar
+    showPhrase(index);
+
+    // Cambia frase cada 5 segundos
+    setInterval(nextPhrase, 5000);
+  </script>
+</body>
+</html>
