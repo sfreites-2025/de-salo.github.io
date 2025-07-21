@@ -10,97 +10,188 @@
       margin: 0; padding: 0;
       background: linear-gradient(135deg, #f4e9e9, #f0d6d6);
       height: 100vh;
+      overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
       font-family: 'Courgette', cursive;
-      overflow: hidden;
     }
     #notebook {
-      width: 90vw; max-width: 600px;
-      height: 80vh;
+      width: 92vw; max-width: 660px; height: 82vh;
       background: #fff5f5;
-      box-shadow: 0 12px 32px rgba(183, 92, 92, 0.4);
+      box-shadow: 0 14px 36px rgba(183, 92, 92, 0.2), 0 2px 20px #c6eaff44;
       border-radius: 32px;
-      padding: 40px 35px 45px 45px;
-      box-sizing: border-box;
+      padding: 45px 44px 35px 54px;
       position: relative;
       overflow: hidden;
       color: #7a3a3a;
-      font-size: 1.46rem;
-      line-height: 1.58;
+      font-size: 1.36rem;
+      line-height: 1.62;
       white-space: pre-line;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
     }
-    /* Líneas de papel */
     #notebook::before {
       content: '';
       position: absolute;
-      top: 50px; left: 40px; right: 40px; bottom: 50px;
+      top: 35px; left: 36px; right: 36px; bottom: 40px;
       background:
         repeating-linear-gradient(
           to bottom,
           transparent,
-          transparent 22px,
-          #e7baba 22px,
-          #e7baba 23px
+          transparent 23px,
+          #e7baba 23px,
+          #e7baba 24px
         );
       pointer-events: none;
       border-radius: 20px;
       z-index: 0;
     }
+    #ornament {
+      position: absolute;
+      top: 18px; right: 38px;
+      font-size: 2.4em;
+      opacity: 0.25;
+      z-index: 2;
+      pointer-events: none;
+      text-shadow: 0 2px 12px #e68fc655;
+    }
+    #paperclip {
+      position: absolute;
+      left: 30px; top: 20px;
+      font-size: 2.3em;
+      transform: rotate(-9deg);
+      opacity: 0.33;
+      z-index: 2;
+      text-shadow: 0 2px 16px #6a89cc33;
+    }
     #content {
       position: relative;
-      z-index: 1;
+      z-index: 2;
       opacity: 0;
-      transition: opacity 1.2s ease;
+      transition: opacity 1.19s cubic-bezier(.6,.1,.33,1);
       font-weight: 500;
-      text-shadow: 0 1px 3px #fbe5e5;
+      text-shadow: 0 1px 4px #fbe5e5;
+      min-height: 210px;
+      text-align: left;
+      margin-top: 45px;
+      margin-bottom: 24px;
+      padding-right: 10px;
     }
     #content.visible {
       opacity: 1;
+    }
+    #note-footer {
+      color: #be5780;
+      font-size: 1.18em;
+      text-align: right;
+      opacity: .76;
+      margin-top: 16px;
+      margin-bottom: 8px;
+      letter-spacing: 0.02em;
+      font-family: 'Times New Roman', Times, serif;
+      animation: footerIn 2s cubic-bezier(.62,1.17,.12,.99);
+    }
+    @keyframes footerIn {
+      0% {opacity:0; transform: translateY(22px);}
+      100%{opacity:.76; transform:none;}
+    }
+    .fade-anim {
+      animation: fadeStar 7s infinite alternate;
+    }
+    @keyframes fadeStar {
+      from { opacity: 0.14;}
+      to { opacity: 0.58;}
+    }
+    .notebook-heart {
+      position: absolute;
+      bottom: 28px; left: 43px;
+      font-size: 1.7em;
+      opacity: .37;
+      z-index: 2;
+      text-shadow: 0 1px 10px #ff8be655;
+      animation: bounceHeart 3s infinite alternate-reverse;
+    }
+    @keyframes bounceHeart {
+      0% { transform: translateY(0);}
+      33% { transform: translateY(-6px);}
+      66% { transform: scale(1.12);}
+      100% { transform: translateY(0);}
+    }
+    .bloom {
+      position: absolute;
+      width: 34px;
+      height: 34px;
+      z-index: 3;
+      pointer-events: none;
+      opacity: .21;
+      animation: flowerAnim 9s infinite linear;
+      left: 90%;
+      top: 87%;
+    }
+    @keyframes flowerAnim {
+      0% {filter: blur(0) brightness(0.9);}
+      100% {filter: blur(2px) brightness(1.1); transform: rotate(270deg);}
     }
   </style>
 </head>
 <body>
   <div id="notebook">
+    <div id="ornament" class="fade-anim">🌸✨</div>
+    <div id="paperclip">📎</div>
     <div id="content"></div>
+    <div class="notebook-heart">💌</div>
+    <svg class="bloom" viewBox="0 0 64 64">
+      <circle cx="32" cy="32" r="15" fill="#fcb6d7" />
+      <ellipse cx="32" cy="16" rx="7" ry="14" fill="#b9e3ef" />
+      <ellipse cx="48" cy="32" rx="7" ry="14" fill="#fdf1cf" />
+      <ellipse cx="32" cy="48" rx="7" ry="14" fill="#fee0ef" />
+      <ellipse cx="16" cy="32" rx="7" ry="14" fill="#e5d3fc" />
+    </svg>
+    <div id="note-footer"></div>
   </div>
-
   <script>
     const phrases = [
-      "Quisiera volver a verte,\ncaminar juntos sin prisa y sin miedo.",
-      "Desearía escribirte de nuevo,\npalabras que reflejen lo que nunca pude decir.",
+      'Quisiera volver a verte,\ncaminar juntos sin prisa y sin miedo.',
+      'Desearía escribirte de nuevo,\npm que reflejen lo que nunca pude decir.',
       "Extraño esos días contigo,\ndonde simplemente bastaba tu presencia.",
-      "Vuelvo a soñar con ser parte\n de tu vida, con compartir cada instante.",
-      "Que este deseo no sea solo un susurro\n, sino un camino hacia un reencuentro.",
-      "El tiempo puede pasar, las palabras pueden perderse,\npero mi anhelo por ti permanece intacto.",
-      "Solo quisiera decirte una vez más:\nme importas y quiero estar ahí.",
-      "Espero, con paciencia y esperanza,\nque nuestros caminos se crucen otra vez."
+      'Vuelvo a soñar con ser parte\nde tu vida, con compartir cada instante.',
+      "A veces me descubro pensando\nen cómo sería volver a construir memorias juntos.",
+      "El tiempo podrá avanzar,\npero el sentimiento sincero de querer estar en tu vida permanece.",
+      "Me gustaría encontrar la manera de acercarme nuevamente,\nde ofrecerte presencia y amor verdadero.",
+      "Este corazón aún guarda la esperanza de que un día,\npodamos escribir un nuevo capítulo juntos."
     ];
 
+    const finalFooter = "No importa cuánto pase, siempre tendrás un lugar especial en mí.";
+
     const contentDiv = document.getElementById('content');
-    let index = 0;
+    const footerDiv = document.getElementById('note-footer');
+    let idx = 0;
 
     function showPhrase(i) {
       contentDiv.classList.remove('visible');
       setTimeout(() => {
         contentDiv.textContent = phrases[i];
         contentDiv.classList.add('visible');
-      }, 600);
+        if (i === phrases.length - 1) {
+          footerDiv.textContent = finalFooter;
+        } else {
+          footerDiv.textContent = "";
+        }
+      }, 650);
     }
 
     function nextPhrase() {
-      index++;
-      if (index >= phrases.length) {
-        index = 0; // reinicia para repetir
-      }
-      showPhrase(index);
+      idx++;
+      if (idx >= phrases.length) idx = 0;
+      showPhrase(idx);
     }
 
     // Primera frase al cargar
-    showPhrase(index);
+    showPhrase(idx);
 
-    // Cambia frase cada 5 segundos
+    // Cambia cada 5 s
     setInterval(nextPhrase, 5000);
   </script>
 </body>
