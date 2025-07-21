@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Semáforo Interactivo</title>
+<title>Bienvenida y Semáforo Interactivo</title>
 <style>
   body {
     margin: 0; padding: 0;
@@ -24,8 +24,7 @@
     50% { background-position: 100% 50%;}
     100% { background-position: 0% 50%;}
   }
-
-  /* Partículas de fondo animadas */
+  /* Semi transparente burbujas flotantes de fondo */
   .bubble {
     position: absolute;
     border-radius: 50%;
@@ -43,8 +42,7 @@
     0% {transform: translateY(0);}
     100% {transform: translateY(-80vh);}
   }
-
-  /* Semáforo a la izquierda */
+  /* Semáforo al lado izquierdo */
   .container-semaforo {
     display: flex;
     align-items: center;
@@ -53,6 +51,7 @@
     height: 100vh;
     flex-shrink: 0;
     z-index: 2;
+    position: relative;
   }
   .semaforo {
     background: rgba(30, 30, 35, 0.93);
@@ -78,42 +77,59 @@
     position: relative;
     transition: background-color 0.6s, box-shadow 0.6s;
   }
-  /* Corazones animados para las luces */
-  .luz.rojo.on { background-color: transparent; box-shadow: none; }
+  /* Corazones animados para luces */
+  .luz.rojo.on {
+    background-color: transparent;
+    box-shadow: none;
+  }
   .luz.rojo.on::before {
-    content: '❤️'; font-size: 64px; color: #ff2c2c;
+    content: '❤️';
+    font-size: 64px;
+    color: #ff2c2c;
     text-shadow: 0 0 8px #ff4c4c, 0 0 20px #ff6b6b;
     animation: pulseHeartRed 1.5s infinite alternate ease-in-out;
-    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -55%);
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -55%);
   }
   @keyframes pulseHeartRed {
-    0% {text-shadow: 0 0 8px #ff4c4c,0 0 20px #ff6b6b;transform: translate(-50%, -55%) scale(1);}
-    100% {text-shadow: 0 0 14px #ff5c5c,0 0 28px #ff8787;transform: translate(-50%, -55%) scale(1.12);}
+    0% { text-shadow: 0 0 8px #ff4c4c, 0 0 20px #ff6b6b; transform: translate(-50%, -55%) scale(1); }
+    100% { text-shadow: 0 0 14px #ff5c5c, 0 0 28px #ff8787; transform: translate(-50%, -55%) scale(1.12); }
   }
-  .luz.amarillo.on { background-color: transparent; box-shadow: none; }
+  .luz.amarillo.on {
+    background-color: transparent;
+    box-shadow: none;
+  }
   .luz.amarillo.on::before {
-    content: '💛'; font-size: 64px; color: #ffd93b;
+    content: '💛';
+    font-size: 64px;
+    color: #ffd93b;
     text-shadow: 0 0 10px #ffeb7b, 0 0 25px #ffeb7baa;
     animation: pulseHeartYellow 1.5s infinite alternate ease-in-out;
-    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -55%);
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -55%);
   }
   @keyframes pulseHeartYellow {
-    0% {text-shadow: 0 0 10px #ffeb7b, 0 0 25px #ffeb7baa; transform: translate(-50%, -55%) scale(1);}
-    100% {text-shadow: 0 0 16px #fff156, 0 0 32px #fff156bb; transform: translate(-50%, -55%) scale(1.12);}
+    0% { text-shadow: 0 0 10px #ffeb7b, 0 0 25px #ffeb7baa; transform: translate(-50%, -55%) scale(1); }
+    100% { text-shadow: 0 0 16px #fff156, 0 0 32px #fff156bb; transform: translate(-50%, -55%) scale(1.12); }
   }
-  .luz.verde.on { background-color: transparent; box-shadow: none; }
+  .luz.verde.on {
+    background-color: transparent;
+    box-shadow: none;
+  }
   .luz.verde.on::before {
-    content: '💚'; font-size: 64px; color: #37d04e;
+    content: '💚';
+    font-size: 64px;
+    color: #37d04e;
     text-shadow: 0 0 10px #4eff75, 0 0 25px #4eff75aa;
     animation: pulseHeartGreen 1.5s infinite alternate ease-in-out;
-    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -55%);
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -55%);
   }
   @keyframes pulseHeartGreen {
-    0% {text-shadow: 0 0 10px #4eff75, 0 0 25px #4eff75aa; transform: translate(-50%, -55%) scale(1);}
-    100% {text-shadow: 0 0 16px #2ceb37, 0 0 32px #2ceb37cc; transform: translate(-50%, -55%) scale(1.12);}
+    0% { text-shadow: 0 0 10px #4eff75, 0 0 25px #4eff75aa; transform: translate(-50%, -55%) scale(1); }
+    100% { text-shadow: 0 0 16px #2ceb37, 0 0 32px #2ceb37cc; transform: translate(-50%, -55%) scale(1.12); }
   }
-
-  /* Controles (panel de radio buttons) - Centrados horizontalmente */
+  /* Controles centrados a la derecha */
   #controls {
     background: rgba(25,25,25,0.86);
     color: #eee;
@@ -124,10 +140,11 @@
     flex-direction: column;
     gap: 20px;
     border-radius: 20px;
-    margin: auto; /* Centra el panel de controles */
+    margin: auto 50px auto auto;
     max-width: 320px;
     text-align: center;
     user-select: none;
+    position: relative;
     z-index: 2;
   }
   #controls h1 {
@@ -148,14 +165,13 @@
     cursor: pointer;
     accent-color: #ff2c2c;
   }
-
-  /* Contenedor del mensaje (flotando a la derecha) */
+  /* Contenedor mensaje con estilo y animación */
   #message-container {
     position: absolute;
-    right: 50px; /* Distancia del borde derecho */
+    right: 50px;
     top: 50%;
     transform: translateY(-50%);
-    width: 300px; /* Ancho fijo para el mensaje */
+    width: 300px;
     background: rgba(255, 255, 255, 0.9);
     padding: 25px;
     border-radius: 15px;
@@ -167,37 +183,79 @@
     opacity: 0;
     transition: opacity 0.8s ease, transform 0.8s ease;
     z-index: 2;
-    pointer-events: none; /* Para que no bloquee clics si no tiene un botón */
+    pointer-events: none;
   }
   #message-container.visible {
     opacity: 1;
     transform: translateY(-50%) translateX(0);
   }
   #message-container.rojo-text {
-    color: #a52345; /* Rojo oscuro */
+    color: #a52345;
     border: 2px solid #ff2c2c;
     background: linear-gradient(135deg, #fce4ec, #f8bbd0);
   }
   #message-container.amarillo-text {
-    color: #b78c00; /* Amarillo oscuro */
+    color: #b78c00;
     border: 2px solid #ffd93b;
     background: linear-gradient(135deg, #fffde7, #fff9c4);
   }
   #message-container.verde-text {
-    color: #2e7d32; /* Verde oscuro */
+    color: #2e7d32;
     border: 2px solid #37d04e;
     background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+  }
+  /* Modal bienvenida */
+  #welcome-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+  #welcome-content {
+    background: #fff;
+    padding: 2.5em 3em;
+    border-radius: 20px;
+    max-width: 380px;
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    box-shadow: 0 6px 26px #af6d9ecc;
+  }
+  #welcome-content h2 {
+    margin: 0 0 20px 0;
+    color: #824085;
+    font-size: 1.8em;
+  }
+  #welcome-content button {
+    font-family: 'Times New Roman', Times, serif;
+    background: linear-gradient(99deg,#7ae0ea,#fd558e 85%);
+    color: #5c128b;
+    font-weight: bold;
+    padding: 12px 44px;
+    border-radius: 15px;
+    border: none;
+    box-shadow: 0 2px 18px #f179f766;
+    letter-spacing: 0.03em;
+    cursor: pointer;
+    font-size: 1.1em;
+  }
+  #welcome-content button:hover {
+    background: linear-gradient(120deg,#fd558e,#7ae0ea 85%);
+    color: white;
   }
 </style>
 </head>
 <body>
-  <!-- Burbujas animadas -->
+  <!-- Fondo burbujas -->
   <div class="bubble bubble1"></div>
   <div class="bubble bubble2"></div>
   <div class="bubble bubble3"></div>
   <div class="bubble bubble4"></div>
   <div class="bubble bubble5"></div>
 
+  <!-- Semáforo -->
   <div class="container-semaforo" aria-label="Semáforo de tráfico con control">
     <div class="semaforo" role="region" aria-live="polite" aria-atomic="true">
       <div id="rojo" class="luz rojo" aria-label="Corazón rojo apagado"></div>
@@ -206,6 +264,7 @@
     </div>
   </div>
 
+  <!-- Controles -->
   <div id="controls" aria-label="Selecciona qué luz encender">
     <h1>Elija el color del semáforo a encender</h1>
     <label>
@@ -222,7 +281,17 @@
     </label>
   </div>
 
-  <div id="message-container"></div>
+  <!-- Mensaje animado a la derecha -->
+  <div id="message-container" role="region" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Modal Bienvenida -->
+  <div id="welcome-modal" role="dialog" aria-modal="true" aria-labelledby="welcome-title" aria-describedby="welcome-desc">
+    <div id="welcome-content">
+      <h2 id="welcome-title">Bienvenido al Semáforo xd</h2>
+      <p id="welcome-desc">Selecciona un color para encender la luz y ver su mensaje asociado.</p>
+      <button id="btnAccept">¡Comenzar!</button>
+    </div>
+  </div>
 
 <script>
   const rojo = document.getElementById('rojo');
@@ -258,35 +327,49 @@ No se trata de olvidar ni de borrar lo vivido sino de saber que todo ese camino 
     const seleccion = document.querySelector('input[name="luz"]:checked').value;
     apagarLuces();
 
-    if (seleccion === 'rojo') {
-      rojo.classList.add('on');
-    } else if (seleccion === 'amarillo') {
-      amarillo.classList.add('on');
-    } else if (seleccion === 'verde') {
-      verde.classList.add('on');
-    }
+    if (seleccion === 'rojo') rojo.classList.add('on');
+    else if (seleccion === 'amarillo') amarillo.classList.add('on');
+    else if (seleccion === 'verde') verde.classList.add('on');
 
-    // Mostrar mensaje en el contenedor derecho
+    // Mostrar mensaje con animación
     const mensajeData = mensajes[seleccion];
-    messageContainer.classList.remove('rojo-text', 'amarillo-text', 'verde-text');
-    messageContainer.classList.add(mensajeData.class);
+    messageContainer.className = ''; // reset clases
+    messageContainer.classList.add(mensajeData.class, 'visible');
 
-    // Animación de entrada del mensaje
+    // Resetear animación para forzar reactivación
     messageContainer.style.opacity = '0';
-    messageContainer.style.transform = 'translateY(-50%) translateX(20px)'; // Empieza un poco a la derecha
+    messageContainer.style.transform = 'translateY(-50%) translateX(20px)';
     setTimeout(() => {
       messageContainer.textContent = mensajeData.text;
-      messageContainer.classList.add('visible'); // Activa la animación de visibilidad
-      messageContainer.style.transform = 'translateY(-50%) translateX(0)'; // Vuelve a su posición
-    }, 300);
+      messageContainer.style.opacity = '1';
+      messageContainer.style.transform = 'translateY(-50%) translateX(0)';
+    }, 50);
   }
 
   radios.forEach(radio => {
     radio.addEventListener('change', actualizarLuzSeleccionada);
   });
 
-  // Inicializa mostrando la luz roja y su mensaje
-  actualizarLuzSeleccionada();
+  // Inicializar con ningún botón activo y luces apagadas (como pediste)
+  apagarLuces();
+  messageContainer.textContent = '';
+  messageContainer.style.opacity = '0';
+
+  // Modal bienvenida
+  const welcomeModal = document.getElementById('welcome-modal');
+  const btnAccept = document.getElementById('btnAccept');
+
+  btnAccept.addEventListener('click', () => {
+    welcomeModal.style.display = 'none';
+    // Al cerrar modal activamos por defecto luz roja y su mensaje
+    radios[0].checked = true;
+    actualizarLuzSeleccionada();
+  });
+
+  // Mostrar modal al cargar
+  window.addEventListener('load', () => {
+    welcomeModal.style.display = 'flex';
+  });
 </script>
 </body>
 </html>
