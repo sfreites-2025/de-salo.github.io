@@ -3,30 +3,26 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Vela Virtual y Mensaje de Recuerdo</title>
+<title>Vela Virtual y Mensajes</title>
 <style>
   body {
     margin: 0;
     height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     background: #000;
-    overflow: hidden;
     font-family: 'Times New Roman', serif;
     position: relative;
+    overflow: hidden;
   }
 
+  /* Vela centrada vertical y horizontalmente */
   .candle-container {
-    position: relative;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1.5);
     width: 15em;
     height: 30em;
-    font-size: 7px;
-    transform: scale(1.5);
-    margin-bottom: 50px;
   }
-
   .candle {
     width: 15em;
     height: 30em;
@@ -46,7 +42,6 @@
     justify-content: center;
     top: 10em;
   }
-
   .candle::before {
     content: '';
     position: absolute;
@@ -64,7 +59,6 @@
     );
     filter: opacity(0.7);
   }
-
   .thread {
     position: absolute;
     width: 0.6em;
@@ -78,7 +72,6 @@
     border-radius: 40% 40% 0 0;
     z-index: 2;
   }
-
   .flames {
     position: absolute;
     width: 2.4em;
@@ -89,7 +82,6 @@
     pointer-events: none;
     z-index: 3;
   }
-
   .flames::before {
     content: '';
     position: absolute;
@@ -102,7 +94,6 @@
     filter: opacity(0.7);
     animation: flameMove 3s ease-in-out infinite, flameFlicker 3s ease-in-out infinite;
   }
-
   .flames::after {
     content: '';
     position: absolute;
@@ -115,17 +106,14 @@
     box-shadow: 0 -0.6em 1em darkorange;
     animation: flameMove 3s ease-in-out infinite, flameFlicker 3s ease-in-out infinite;
   }
-
   @keyframes flameMove {
     0%, 100% { transform: rotate(3deg); }
     50% { transform: rotate(-3deg); }
   }
-
   @keyframes flameFlicker {
     0%, 100% { height: 3em; top: 0.4em; opacity: 1;}
     50% { height: 3.5em; top: 0.2em; opacity: 0.9;}
   }
-
   .glow {
     position: absolute;
     width: 10em;
@@ -137,13 +125,13 @@
     animation: blink 100ms infinite;
     z-index: 1;
   }
-
   @keyframes blink {
     to { filter: blur(6em) opacity(0.8); }
   }
 
-  .nav-button {
-    position: absolute;
+  /* Botones posicionado en esquinas inferiores */
+  #btnRegresar, #btnSiguiente {
+    position: fixed;
     bottom: 30px;
     background: linear-gradient(110deg, #7ae0ea 12%, #fd558e 88%);
     color: #6d1472;
@@ -158,22 +146,18 @@
     cursor: pointer;
     transition: background 0.25s, color 0.22s, box-shadow 0.22s;
     outline: none;
-    z-index: 10;
+    z-index: 20;
   }
-  .nav-button:hover {
+  #btnRegresar:hover, #btnSiguiente:hover {
     background: linear-gradient(112deg, #fd558e, #7ae0ea 86%);
     color: #ea20b8;
     box-shadow: 0 8px 30px #ff5ea4cc;
   }
-  #btnRegresar {
-    left: 30px;
-  }
-  #btnSiguiente {
-    right: 30px;
-  }
+  #btnRegresar { left: 30px; }
+  #btnSiguiente { right: 30px; }
 
-  /* Contenedor mensaje alineado a la izquierda, con fade-in suave */
-  #message-abuelo {
+  /* Mensaje izquierdo, fade-in suave */
+  #message-izquierda {
     position: fixed;
     bottom: 120px;
     left: 30px;
@@ -189,6 +173,27 @@
     border: 2px solid #ff70b3;
     opacity: 0;
     animation: fadeInMessage 2s ease-out forwards 0.5s;
+    font-family: 'Times New Roman', serif;
+  }
+
+  /* Mensaje derecho, fade-in suave */
+  #message-derecha {
+    position: fixed;
+    bottom: 120px;
+    right: 30px;
+    max-width: 360px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    text-align: left;
+    font-size: 0.95em;
+    color: #4a0033;
+    line-height: 1.4;
+    border: 2px solid #ff70b3;
+    opacity: 0;
+    animation: fadeInMessage 2s ease-out forwards 0.5s;
+    font-family: 'Times New Roman', serif;
   }
 
   @keyframes fadeInMessage {
@@ -198,6 +203,7 @@
 </style>
 </head>
 <body>
+
   <div class="candle-container" role="img" aria-label="Vela animada encendida">
     <div class="candle">
       <span class="glow"></span>
@@ -206,19 +212,29 @@
     </div>
   </div>
 
-  <div id="message-abuelo" aria-live="polite" aria-atomic="true">
-    Hay despedidas en la vida que duelen hasta el fondo del alma, y perder a un abuelo es una de esas experiencias que marcan para siempre. Los abuelos tienen la magia de convertir los días comunes en historias llenas de sabiduría, ternura y risas. Tu abuelo no solo fue un pilar en la familia, sino un ejemplo silencioso de generosidad, esfuerzo y lealtad. Deja detrás de sí huellas imborrables. Recuerda que ninguna ausencia es total mientras el recuerdo se mantenga vivo, el tiempo aliviará poco a poco el dolor, y el corazón aprenderá a transformar la tristeza en gratitud. Siempre te acompañaré en esta pérdida.
+  <div id="message-izquierda" aria-live="polite" aria-atomic="true">
+    Existen adioses en la vida que duelen hasta el fondo del alma, y perder a un abuelo es una de esas experiencias que marcan para siempre. Los abuelos tienen la magia de convertir los días comunes en historias llenas de sabiduría, ternura y risas. Tu abuelo no solo fue un pilar en la familia, sino un ejemplo silencioso de generosidad, esfuerzo y lealtad. Deja detrás de sí huellas imborrables. Recuerda que ninguna ausencia es total mientras el recuerdo se mantenga vivo, el tiempo aliviará poco a poco el dolor, y el corazón aprenderá a transformar la tristeza en gratitud. Siempre te acompañaré en esta pérdida.
   </div>
 
-  <button id="btnRegresar" class="nav-button" type="button">Regresar</button>
-  <button id="btnSiguiente" class="nav-button" type="button">Siguiente →</button>
+  <div id="message-derecha" aria-live="polite" aria-atomic="true">
+    Hay despedidas que llegan demasiado pronto, dejando una sensación de incredulidad y un hueco difícil de llenar. Saber que Slater ya no está entre nosotros me conmocionó profundamente, especialmente por lo breve que fue su paso por la vida, pero no por ello menos intenso o significativo. Aunque la tristeza hoy sea grande, el recuerdo de Slater será siempre una luz delicada en el corazón de quienes lo quisieron. Tú, su familia, sus amigos, incluyéndome a mí, esta vela virtual encendida es por él y por tu abuelo, se va a mantener encendida siempre haciendo memoria a sus vidas, y a las alegrías que nos dieron, estoy junto a ti en estas circunstancias, espero tengan un descanso eterno y honorable.
+  </div>
+
+  <button id="btnRegresar" type="button" aria-label="Botón regresar">Regresar</button>
+  <button id="btnSiguiente" type="button" aria-label="Botón siguiente">Siguiente →</button>
 
 <script>
   const btnRegresar = document.getElementById('btnRegresar');
   const btnSiguiente = document.getElementById('btnSiguiente');
 
-  btnRegresar.addEventListener('click', () => window.history.back());
-  btnSiguiente.addEventListener('click', () => window.location.href = 'index11.html');
+  btnRegresar.addEventListener('click', () => {
+    window.history.back();
+  });
+
+  btnSiguiente.addEventListener('click', () => {
+    window.location.href = 'index11.html';
+  });
 </script>
+
 </body>
 </html>
