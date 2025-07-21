@@ -96,6 +96,10 @@
       color: #902aba;
       font-family: "Times New Roman", Times, serif;
       animation: cardPop 0.85s cubic-bezier(.4,2,.22,1.07) both;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
     @keyframes cardPop {
       0% {opacity:0; transform: scale(0.8);}
@@ -119,7 +123,11 @@
       color: #741b7c;
       white-space: pre-wrap;
     }
-    .close-btn {
+    .modal-buttons {
+      display: flex;
+      gap: 18px;
+    }
+    .btn {
       background: linear-gradient(99deg,#7ae0ea,#fd558e 85%);
       color: #5c128b;
       font-weight: bold;
@@ -132,14 +140,21 @@
       cursor: pointer;
       animation: btnpulseIn 1.3s infinite alternate;
       outline: none;
+      user-select: none;
+      font-size: 1.1em;
+      transition: background 0.3s, box-shadow 0.3s;
+    }
+    .btn:hover {
+      background: linear-gradient(100deg,#fd558e,#7ae0ea 85%);
+      box-shadow: 0 6px 25px #fd558e88;
+      color: #fff;
     }
     .final-msg {
       font-size: 1.44em;
       color: #4d2671;
       font-weight: 600;
       letter-spacing: 0.02em;
-      margin-top: 15px;
-      margin-bottom: 0;
+      margin: 0 0 15px 0;
       text-align: center;
       animation: finalAp 1.7s both;
       font-family: "Times New Roman", Times, serif;
@@ -158,6 +173,15 @@
         max-width: 96vw;
         padding: 3vw;
       }
+      .modal-buttons {
+        flex-direction: column;
+        gap: 12px;
+      }
+      .btn {
+        padding: 12px 30px;
+        width: 100%;
+        font-size: 1.15em;
+      }
     }
   </style>
 </head>
@@ -166,7 +190,6 @@
   <div id="kaleidoscope"></div>
   
   <script>
-    // Datos con textos dados y emojis arbitrarios bonitos para cada texto
     const bubbleData = [
       { emoji: '🤗', msg: "Nada reemplaza un buen abrazo tuyo" },
       { emoji: '🎉', msg: "Siempre buscaste formas de sorprenderme" },
@@ -182,11 +205,10 @@
       { emoji: '🍷', msg: "Jamás te olvidaré, mi copita" }
     ];
 
-    // Crear kaleidoscopio
+    // Caleidoscopio setup
     const kaleido = document.createElement('div');
     kaleido.id = 'kaleidoscope';
     document.body.appendChild(kaleido);
-
     function updateKaleidoPos(x, y) {
       kaleido.style.left = (x - 60) + 'px';
       kaleido.style.top = (y - 60) + 'px';
@@ -197,9 +219,12 @@
     });
     updateKaleidoPos(window.innerWidth/2, window.innerHeight/2);
 
-    // Render de burbujas
-    const bubbles = [];
+    let bubbles = [];
+    let revealed = [];
+
     function renderBubbles() {
+      bubbles.forEach(b => b.remove());
+      bubbles = [];
       for(let i = 0; i < bubbleData.length; i++) {
         const div = document.createElement('div');
         div.className = 'bubble';
@@ -221,31 +246,37 @@
           div.style.boxShadow = '';
         });
         div.addEventListener('click', () => showModal(i, div));
+        if (revealed.includes(i)) {
+          div.classList.add('revealed');
+        }
       }
     }
-
-    let revealed = [];
 
     function showModal(idx, bubble) {
       if (revealed.includes(idx)) return;
       revealed.push(idx);
       bubble.classList.add('revealed');
-      // Crear y mostrar modal
       const modal = document.createElement('div');
       modal.className = 'reveal-modal';
       modal.innerHTML = `
         <div class="modal-card">
           <span class="modal-emoji">${bubbleData[idx].emoji}</span>
           <div class="modal-text">${bubbleData[idx].msg}</div>
-          <button class="close-btn">${revealed.length < bubbleData.length 
+          <div class="modal-buttons">
+            <button class="btn close-btn">${revealed.length < bubbleData.length 
             ? `Faltan (${bubbleData.length - revealed.length})`
             : '¡Ver mensaje final!'}</button>
+          </div>
         </div>
       `;
       document.body.appendChild(modal);
       modal.querySelector('.close-btn').onclick = () => {
-        modal.remove();
-        if (revealed.length === bubbleData.length) showFinalMessage();
+        if (revealed.length === bubbleData.length) {
+          modal.remove();
+          showFinalMessage();
+        } else {
+          modal.remove();
+        }
       };
     }
 
@@ -259,16 +290,20 @@
             Cada emoción, cada recuerdo... los llevas contigo.<br>
             <span style="font-size:1.44em; color:#f764bd;">💖</span>
           </div>
-          <button class="close-btn">Jugar de nuevo</button>
+          <div class="modal-buttons" style="margin-top:10px;">
+            <button class="btn" id="btnRegresar">Regresar</button>
+            <button class="btn" id="btnSiguiente">Siguiente →</button>
+          </div>
         </div>
       `;
       document.body.appendChild(finalModal);
-      finalModal.querySelector('.close-btn').onclick = () => {
+      document.getElementById('btnRegresar').onclick = () => {
         finalModal.remove();
         revealed = [];
-        bubbles.forEach(b => {
-          b.classList.remove('revealed');
-        });
+        renderBubbles();
+      };
+      document.getElementById('btnSiguiente').onclick = () => {
+        window.location.href = 'index8.html';
       };
     }
 
