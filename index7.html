@@ -1,465 +1,342 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Recuerdos Especiales - Para ti</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Caleidoscopio de Emociones</title>
   <style>
     body {
-      font-family: 'Times New Roman', Times, serif;
-      background: linear-gradient(120deg, #FFDEE9 0%, #B5FFFC 100%);
-      min-height: 100vh;
-      margin: 0;
-      padding: 0;
-      color: #311b92;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      overflow-x: hidden;
-      transition: background 1s;
-      animation: bgFadeIn 1.8s;
-    }
-    @keyframes bgFadeIn {
-      from {opacity: 0;}
-      to {opacity: 1;}
-    }
-
-    #game-container {
-      width: 85vw; max-width: 650px;
-      background: rgba(255, 252, 255, 0.99);
-      border-radius: 32px;
-      box-shadow: 0 8px 48px 0 #41e9ed44, 0 1px 75px #ffdeecb8;
-      padding: 32px 5vw 32px 5vw;
-      text-align: center;
-      position: relative;
-      overflow: visible;
-      min-height: 650px;
-      margin: 4vh 0 4vh 0;
-      z-index: 1;
-      border: 2px solid #aef3fc88;
-    }
-
-    h1 {
-      color: #9c27b0;
-      font-size: 2em;
-      letter-spacing: 0.03em;
-      margin-bottom: 32px;
-      font-weight: 700;
-      text-shadow: 0 3px 12px #fff1fa, 0 2px 10px #d1c3ff3a;
-    }
-
-    #memory-maze {
-      width: 100%; max-width: 560px; min-width: 320px;
-      height: 340px; background: linear-gradient(120deg,#fdc3f4 0%, #a9f6fc 100%);
-      border-radius: 22px;
-      margin: 24px auto 20px auto;
-      position: relative;
-      box-shadow: 0 4px 26px #41e9ed52,0 2px 22px #ea4faf37;
+      margin: 0; padding: 0;
+      min-height: 100vh; width: 100vw;
+      box-sizing: border-box;
+      font-family: "Times New Roman", Times, serif;
+      background: radial-gradient(circle at 60% 40%, #ffe5e5 0%, #c6eaff 60%, #fff 100%);
       overflow: hidden;
-      border: 2.5px solid #b1eafd;
-      transition: box-shadow 0.7s;
-      animation: mazePulse 3s infinite alternate;
     }
-    @keyframes mazePulse {
-      from { box-shadow: 0 4px 26px #41e9ed48;}
-      to { box-shadow: 0 5px 42px #ffc8e7af, 0 2px 42px #a2f3fd77;}
-    }
-    #player {
-      width: 28px; height: 28px;
-      background: radial-gradient(circle at 25% 30%, #ff59ac 80%, #f857ae 100%);
-      border-radius: 50%;
-      position: absolute;
-      bottom: 10px; left: 10px;
-      box-shadow: 0 2px 13px #ff9ada81, 0 0 44px #e3cdff57;
-      border: 2.5px solid #f5f3ffca;
-      z-index: 4;
-      display:flex; align-items:center; justify-content:center;
-      transition: box-shadow 0.6s;
-      animation: playerFloat 2.8s infinite alternate cubic-bezier(.41,.8,.51,1.09);
-    }
-    @keyframes playerFloat {
-      0% {box-shadow: 0 2px 13px #ff9ada81, 0 0 18px #ffe4f7;}
-      100% {box-shadow: 0 8px 38px #ee43a085, 0 0 54px #bbefff90;}
-    }
-    #player:after {
-      content: "💗";
-      font-size: 1.27em;
-      position: absolute; left:4.2px; top:-2.5px;
-      pointer-events:none;
-    }
-
-    .memory {
-      width: 44px; height: 44px;
-      background: linear-gradient(140deg,#befff7 15% 65%, #ffcbf0 100%);
-      border: 2.6px dashed #bf5af2f0;
-      border-radius: 50%;
-      position: absolute;
-      display: flex;
-      align-items: center; justify-content: center;
-      font-size: 26px;
-      cursor: pointer;
-      box-shadow: 0 2px 11px #ea4ffa5a, 0 2px 24px #6be7e944;
-      filter: drop-shadow(0 2px 5px #ffb5ee33);
-      transition: transform 0.33s, background 0.24s;
-      animation: memoryPop 2s infinite alternate;
-      z-index: 2;
-      user-select: none;
-    }
-    @keyframes memoryPop {
-      from {transform: scale(1);}
-      to   {transform: scale(1.07);}
-    }
-    .memory:hover {
-      transform: scale(1.26) rotate(-2deg);
-      background: linear-gradient(120deg, #fff5f7, #f8bbff 79%, #befcff 100%);
-      z-index: 5;
-      box-shadow: 0 2px 22px #e3aeffad;
-    }
-
-    #controls {
-      margin: 20px 0 10px 0;
-      user-select: none;
-    }
-    button {
-      font-family: 'Times New Roman', Times, serif;
-      background: linear-gradient(99deg, #fd558e 10%, #7ae0ea 100%);
-      color: #6d1472;
-      border: none;
-      padding: 10px 28px;
-      border-radius: 9px;
-      font-size: 1.19em;
-      font-weight: 700;
-      cursor: pointer;
-      margin: 7px 9px 6px 9px;
-      box-shadow: 0 1px 16px #5ff5fc42;
-      transition: background 0.19s, color 0.22s, box-shadow 0.18s;
-      letter-spacing: 0.03em;
-      outline: none;
-      border: 1.2px solid #ddf6fdcc;
-      min-width:56px;
-      animation: btnpulseIn 1.7s infinite alternate;
-    }
-    button:hover {
-      background: linear-gradient(112deg,#7ae0ea,#fd558e 86%);
-      color: #ea20b8;
-    }
-    @keyframes btnpulseIn {
-      0%{box-shadow: 0 2px 13px #aebaff75;}
-      100%{box-shadow: 0 6px 26px #ffe4faaf;}
-    }
-    #message {
-      min-height: 54px;
-      margin: 25px 0 15px 0;
-      padding: 12px 10px 9px 10px;
-      background: linear-gradient(90deg, #ffebfb 70%, #fff7ee 100%);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.14em;
-      color: #9626b2;
-      font-family: 'Times New Roman', Times, serif;
-      box-shadow: 0 2px 18px #eebeff33;
-      animation: msgIntro 2.3s cubic-bezier(.71,1.8,.41,.97) both;
-    }
-    @keyframes msgIntro {
-      0% {opacity: 0; transform: translateY(36px);}
-      100%{opacity:1; transform:none;}
-    }
-
-    .memory-card-modal {
+    canvas {
+      display: block;
       position: fixed;
-      top:0; left:0; width: 100vw; height: 100vh;
-      background: rgba(186,245,255,0.85);
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      z-index: 10000;
-      animation: fadeModalIn 0.5s;
-    }
-    @keyframes fadeModalIn {
-      from { opacity: 0; }
-      to   { opacity: 1; }
-    }
-
-    .memory-popup {
-      background: linear-gradient(130deg,#fff0fa 67%, #c1fff0 100%);
-      border-radius: 24px;
-      box-shadow: 0 4px 32px #ffb2f8d0, 0 2px 33px #a3fcffbc;
-      padding: 44px 30px 33px 30px;
-      min-width: 270px;
-      max-width: 90vw;
-      text-align: center;
-      animation: popInMem 0.85s cubic-bezier(.4,2,.22,1.07) both;
-    }
-    @keyframes popInMem {
-      0% {opacity:0; transform: scale(0.8);}
-      70%{opacity: .76; }
-      100%{opacity:1;  transform: scale(1);}
-    }
-    .memory-popup img {
-      width: 112px; height: 112px;
-      object-fit: cover;
-      border-radius: 21px;
-      box-shadow: 0 2px 14px #eee0fd9d, 0 2px 18px #fc7bc52a;
-      border: 2px solid #ff55c8a6;
-      margin-bottom: 23px;
-      animation: imgPulse 3s infinite alternate;
-    }
-    @keyframes imgPulse {
-      from { box-shadow: 0 1px 16px #ffe3fa44;}
-      to { box-shadow: 0 5px 33px #b1ebffd5;}
-    }
-    .memory-popup .memo-message {
-      color: #9b2587;
-      font-size: 1.16em;
-      margin-bottom: 24px; margin-top: 9px;
-      font-family: 'Times New Roman', Times, serif;
-      letter-spacing: 0.01em;
-    }
-
-    .memory-popup .faltan-btn {
-      margin-top: 3px;
-      background: linear-gradient(99deg,#ffbcda,#8cf5ff 89%);
-      color: #7c228b;
-      font-size: 1.1em;
-      font-family: 'Times New Roman', Times, serif;
-      font-weight: 700;
-      border: 1.5px solid #ff7efd72;
-      box-shadow: 0 1px 10px #f198ff33;
-      padding: 11px 38px;
-      border-radius: 14px;
-      animation: btnpulseIn 1.2s infinite alternate;
-    }
-
-    #final-message {
-      display: none;
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(255, 190, 245, 0.96);
-      color: #a7138a;
-      font-family: 'Times New Roman', Times, serif;
-      flex-direction: column; align-items: center; justify-content: center;
-      border-radius: 25px;
-      z-index: 10;
-      font-size: 1.36em;
-      animation: finalFadeIn 1s;
-    }
-    @keyframes finalFadeIn {
-      from {opacity: 0;}
-      to   {opacity: 1;}
-    }
-    #final-message h2 {
-      font-size: 2.1em;
-      letter-spacing: 0.03em;
-      margin-bottom: 4px;
-    }
-    #final-message p {
-      margin: 8px 0;
-      color: #6c2a71;
-      font-size: 1.15em;
-    }
-    #final-message button {
-      margin-top: 24px;
-      padding: 13px 38px;
-      background: linear-gradient(99deg,#f3a1ff,#bcf6ff 89%);
-      color: #7c228b;
-      font-size: 1.1em;
-      font-family: 'Times New Roman', Times, serif;
-      font-weight: 700;
-    }
-    .heart {
-      position: absolute;
-      font-size: 22px;
-      color: #e92d82;
-      animation: float 3s ease-in-out infinite;
-      user-select:none;
+      left: 0; top: 0;
+      width: 100vw; height: 100vh;
+      z-index: 1;
       pointer-events: none;
-      z-index: 8;
     }
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-20px) scale(1.1);}
+    .header {
+      position: absolute; z-index: 10;
+      left: 0; right: 0; top: 4vw; text-align: center;
+      font-size: 2.3em; font-weight: bold;
+      color: #901fa8; letter-spacing: 0.04em;
+      text-shadow: 0 3px 12px #fff8, 0 1.5px 10px #81d0ec8f;
+      font-family: "Times New Roman", Times, serif;
+      user-select: none;
+      animation: fadeHeader 2s;
+    }
+    @keyframes fadeHeader {
+      from { opacity: 0; filter: blur(10px);}
+      to { opacity: 1; filter: none;}
+    }
+    #kaleidoscope {
+      pointer-events: none;
+      position: fixed;
+      left: 0; top: 0;
+      width: 120px; height: 120px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(180,250,255,0.65) 55%, rgba(210,140,255,0.13) 100%);
+      box-shadow: 0 0 30px 20px #ed7ae2bb, 0 0 80px 40px #a6f6ffa9;
+      border: 2.7px solid #b16ded8c;
+      mix-blend-mode: lighten;
+      z-index: 30;
+      transition: box-shadow 0.17s, background 0.3s;
+      pointer-events: none;
+      animation: kaleidoPulse 1.2s infinite alternate;
+    }
+    @keyframes kaleidoPulse {
+      0% { box-shadow: 0 0 30px 18px #ed7ae180; }
+      100% { box-shadow: 0 0 35px 30px #a6f6ffa3; }
+    }
+    .bubble {
+      position: absolute; z-index: 3;
+      width: 88px; height: 88px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.6em;
+      font-family: "Times New Roman", Times, serif;
+      cursor: pointer;
+      box-shadow: 0 4px 29px #ff9ab955, 0 1.1px 17px #65c9ef60;
+      transition: transform 0.2s, box-shadow 0.25s;
+      animation: floatBub 4.4s infinite alternate cubic-bezier(.56,.13,.71,1.17);
+      background: radial-gradient(circle at 60% 60%, #fff 30%, #e2e1fc 100%);
+      user-select: none;
+    }
+    @keyframes floatBub {
+      0% { transform: translateY(0px);}
+      100% { transform: translateY(-22px) scale(1.07);}
+    }
+    .bubble.revealed { opacity: 0; pointer-events: none; transition: opacity 1s; }
+    .reveal-modal {
+      position: fixed; z-index: 10001;
+      left: 0; top: 0; width: 100vw; height: 100vh;
+      background: rgba(255,255,255,0.91);
+      display: flex; align-items: center; justify-content: center;
+      animation: popIn 0.45s cubic-bezier(.4,2,.22,1.07);
+    }
+    @keyframes popIn {
+      0% { opacity: 0; transform: scale(0.8);}
+      70%{ opacity:.86;}
+      100%{ opacity: 1; transform: scale(1);}
+    }
+    .modal-card {
+      min-width: 310px; max-width: 80vw; min-height: 220px;
+      background: linear-gradient(125deg,#fff3e8 70%,#d6f5fc 100%);
+      border-radius: 42px;
+      box-shadow: 0 8px 38px #f9a6fd44, 0 2px 22px #cbe8fd99;
+      border: 2.5px solid #d0b6fd88;
+      padding: 41px 34px 27px 34px;
+      text-align: center;
+      font-family: "Times New Roman", Times, serif;
+      animation: cardPop 0.72s;
+      color: #902aba;
+    }
+    @keyframes cardPop {
+      0%{ opacity: 0; transform: scale(0.88);}
+      100%{ opacity: 1; transform: none;}
+    }
+    .modal-emoji {
+      font-size: 3em;
+      margin-bottom: 13px;
+      display: block;
+      animation: emojiPulse 1.5s infinite alternate;
+    }
+    @keyframes emojiPulse {
+      0% { filter: blur(0); }
+      100% { filter: blur(1.5px) brightness(1.2);}
+    }
+    .modal-text {
+      font-size: 1.23em;
+      font-family: "Times New Roman", Times, serif;
+      margin-bottom: 17px;
+      line-height: 1.5;
+      color: #741b7c;
+    }
+    .close-btn {
+      background: linear-gradient(99deg,#7ae0ea,#fd558e 85%);
+      color: #5c128b;
+      font-size: 1.09em;
+      font-weight: bold;
+      font-family: "Times New Roman", Times, serif;
+      padding: 13px 44px;
+      border-radius: 16px;
+      border: none;
+      margin-top: 12px;
+      margin-bottom: 3px;
+      box-shadow: 0 1px 13px #f198ff33;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      animation: btnpulseIn 1.3s infinite alternate;
+    }
+    .final-msg {
+      font-size: 1.44em;
+      color: #4d2671;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      margin-top: 15px;
+      margin-bottom: 0;
+      text-align: center;
+      animation: finalAp 1.7s both;
+      font-family: "Times New Roman", Times, serif;
+    }
+    @keyframes finalAp {
+      from { opacity: 0; transform: translateY(40px);}
+      to   { opacity: 1; transform: none;}
+    }
+    @media (max-width:700px){
+      .modal-card{min-width:unset;max-width:98vw;padding:3vw;}
+      .main-message-card{padding:4vw;}
     }
   </style>
 </head>
 <body>
-  <div id="game-container">
-    <h1>Laberinto de Recuerdos</h1>
-    <div id="memory-maze">
-      <div id="player"></div>
-      <!-- Los recuerdos se generarán dinámicamente -->
-    </div>
-    <div id="controls">
-      <button id="up-btn">↑</button><br>
-      <button id="left-btn">←</button>
-      <button id="right-btn">→</button><br>
-      <button id="down-btn">↓</button>
-    </div>
-    <div id="message">
-      Mueve el corazón rosa para encontrar nuestros recuerdos especiales...
-    </div>
-    <div id="final-message">
-      <h2>Gracias por jugar</h2>
-      <p>Aunque las cosas hayan cambiado, estos momentos siempre serán especiales.</p>
-      <p>Te deseo lo mejor.</p>
-      <button id="restart-btn">Volver a jugar</button>
-    </div>
-  </div>
-  <!-- Modal de recuerdo (se genera dinámicamente) -->
+  <canvas id="bg-canvas"></canvas>
+  <div class="header">Caleidoscopio de Emociones</div>
+  <div id="kaleidoscope"></div>
   <script>
-    // Recuerdos con imágenes relacionadas
-    const memories = [
-        {x: 50, y: 50, emoji: "❤️", message: "Nuestro primer beso... qué nervios sentía", img: "https://i.ibb.co/BTQZDR5/beso-pareja.jpg"},
-        {x: 400, y: 80, emoji: "🍳", message: "Ese día que cocinamos juntos y todo salió delicioso", img: "https://i.ibb.co/51hp1tQ/cocinando.jpg"},
-        {x: 200, y: 150, emoji: "🎬", message: "Cuando fuimos al cine y nos reímos toda la película", img: "https://i.ibb.co/XCmmThn/cine.jpg"},
-        {x: 350, y: 200, emoji: "🌇", message: "El atardecer que vi reflejado en tus ojos", img: "https://i.ibb.co/Dw2x53q/atardecer.jpg"},
-        {x: 100, y: 250, emoji: "🤣", message: "Tus bromas que siempre me hacían reír", img: "https://i.ibb.co/tx3J3J9/risa.jpg"},
-        {x: 450, y: 100, emoji: "⚽", message: "Nuestra primera vez juntos en una cancha de fútbol", img: "https://i.ibb.co/YcjHyLh/futbol.jpg"},
-        {x: 300, y: 50, emoji: "🎶", message: "506 de Morat, la canción que siempre asociaré contigo...", img: "https://i.ibb.co/Wsf1dhQ/musica.jpg"},
-        {x: 150, y: 100, emoji: "🌳", message: "Los días en que íbamos a parques a pasar tiempo juntos", img: "https://i.ibb.co/vx0nK72/parque.jpg"},
-        {x: 400, y: 200, emoji: "✨", message: "Tu belleza irradiando destellos de luz que me dejaban sin palabras", img: "https://i.ibb.co/16TWW22/destellos.jpg"}
+    // Emociones y frases, puedes editar libremente
+    const bubbleData = [
+      {emoji:'😊', color:'#FBE6A2', msg:'Ese día reímos hasta dolernos la panza.'},
+      {emoji:'🥰', color:'#FFB2C5', msg:'Nada reemplaza un buen abrazo tuyo.'},
+      {emoji:'😲', color:'#B8E0EA', msg:'¡Siempre supiste sorprenderme!'},
+      {emoji:'🤗', color:'#BBFFBC', msg:'Gracias por ser apoyo en todo momento.'},
+      {emoji:'🎶', color:'#B3B1FE', msg:'Hay canciones que me llevan a ti.'},
+      {emoji:'✨', color:'#F6D3FF', msg:'Lo cotidiano contigo siempre fue especial.'},
+      {emoji:'💪', color:'#FFD1A6', msg:'Supiste ser fuerte por los dos muchas veces.'},
+      {emoji:'🌈', color:'#C7FDE3', msg:'Hoy, todo puede mejorar. Confía.'},
+      {emoji:'😌', color:'#BBE6D9', msg:'Tu presencia me trajo calma.'}
     ];
 
-    const player = document.getElementById('player');
-    const maze = document.getElementById('memory-maze');
-    const messageDiv = document.getElementById('message');
-    const finalMessage = document.getElementById('final-message');
-    const restartBtn = document.getElementById('restart-btn');
-
-    let playerX = 10;
-    let playerY = 270;
-    let foundMemories = [];
-
-    // Crear los recuerdos en el laberinto
-    function createMemories() {
-      memories.forEach((memory, index) => {
-        const memoryElement = document.createElement('div');
-        memoryElement.className = 'memory';
-        memoryElement.style.left = `${memory.x}px`;
-        memoryElement.style.top = `${memory.y}px`;
-        memoryElement.innerText = memory.emoji;
-        memoryElement.dataset.index = index;
-        maze.appendChild(memoryElement);
-      });
+    // Fondo: burbujas flotantes suaves
+    const canvas = document.getElementById('bg-canvas');
+    const ctx = canvas.getContext('2d');
+    let bgBubbles = [];
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
     }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
 
-    // Chequear colisión jugador con memorias
-    function checkMemoriesCollision() {
-      document.querySelectorAll('.memory').forEach(mem => {
-        const idx = parseInt(mem.dataset.index);
-        if (foundMemories.includes(idx)) return;
-        const rectA = mem.getBoundingClientRect();
-        const rectB = player.getBoundingClientRect();
-        // simple colisión rectangular
-        if (rectA.left < rectB.right && rectA.right > rectB.left &&
-            rectA.top < rectB.bottom && rectA.bottom > rectB.top) {
-          showMemoryPopup(idx);
+    function createBgBubbles() {
+      bgBubbles = [];
+      for(let i=0;i<17;i++){
+        bgBubbles.push({
+          x: Math.random()*canvas.width,
+          y: Math.random()*canvas.height,
+          r: 44 + Math.random()*52,
+          color: `rgba(${180+Math.floor(Math.random()*60)},${160+Math.floor(Math.random()*60)},${255-Math.floor(Math.random()*50)},.18)`,
+          v: .15 + Math.random()*.23
+        });
+      }
+    }
+    function animateBg() {
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      for(let bub of bgBubbles){
+        ctx.beginPath();
+        ctx.arc(bub.x, bub.y,bub.r,0,2*Math.PI);
+        ctx.fillStyle = bub.color;
+        ctx.shadowColor = "#fde2fa";
+        ctx.shadowBlur = 18;
+        ctx.fill();
+        ctx.shadowBlur = 0;
+        bub.y -= bub.v;
+        if(bub.y + bub.r < 0) {
+          bub.x = Math.random()*canvas.width;
+          bub.y = canvas.height + bub.r;
         }
-      });
+      }
+      requestAnimationFrame(animateBg);
+    }
+    createBgBubbles();
+    animateBg();
+
+    // Caleidoscopio/foco que sigue mouse o dedo
+    const kaleido = document.getElementById('kaleidoscope');
+    let kaleidoX = window.innerWidth/2, kaleidoY = window.innerHeight/2;
+    function updateKaleidoPos(x,y){
+      kaleido.style.left = (x-60)+"px";
+      kaleido.style.top = (y-60)+"px";
+      kaleidoX = x; kaleidoY = y;
+    }
+    document.addEventListener('mousemove', e => updateKaleidoPos(e.clientX, e.clientY));
+    document.addEventListener('touchmove', e => {
+      if(e.touches && e.touches[0]) updateKaleidoPos(e.touches[0].clientX, e.touches[0].clientY);
+    });
+    updateKaleidoPos(window.innerWidth/2, window.innerHeight/2);
+
+    // Burbujas principales
+    let revealed = [];
+    function renderBubbles() {
+      for(let i=0; i<bubbleData.length; i++) {
+        const div = document.createElement('div');
+        div.className = 'bubble';
+        div.innerHTML = bubbleData[i].emoji;
+        // colores personalizados animados
+        div.style.background = `radial-gradient(circle,${bubbleData[i].color} 40%,#fff8 100%)`;
+        const angle = 2*Math.PI * i/bubbleData.length + Math.random()*Math.PI/10;
+        const centerX = window.innerWidth/2 + Math.cos(angle)*210+Math.random()*70-35;
+        const centerY = window.innerHeight/2 + Math.sin(angle)*160+Math.random()*60-25;
+        div.style.left = (centerX-44)+"px"; div.style.top = (centerY-44)+"px";
+        div.dataset.idx = i;
+        document.body.appendChild(div);
+        div.addEventListener('mouseenter', () => {highlightBubble(div);});
+        div.addEventListener('mouseleave', () => div.style.transform='scale(1)');
+        div.addEventListener('click', () => {showModal(i, div);});
+      }
+    }
+    function highlightBubble(div){
+      div.style.transform = "scale(1.22) rotate(-2deg)";
+      div.style.boxShadow = "0 6px 24px #fff8,0 4px 38px #ffbebb9a";
     }
 
-    // Mostrar tarjeta del recuerdo (modal)
-    function showMemoryPopup(idx) {
-      foundMemories.push(idx);
+    // Detecta si caleidoscopio (mouse) sobre una burbuja
+    document.addEventListener('mousemove', function(e){
+      document.querySelectorAll('.bubble:not(.revealed)').forEach(bub=>{
+        const r = 44;
+        const bx = bub.offsetLeft+44, by = bub.offsetTop+44;
+        const dist = Math.hypot(bx-e.clientX, by-e.clientY);
+        if(dist<60) highlightBubble(bub);
+        else bub.style.transform="scale(1)";
+      });
+    });
 
-      const mem = memories[idx];
-      // Crea modal
+    // Mostrar mensaje y animación (modal)
+    function showModal(idx, divBubble){
+      if(revealed.includes(idx)) return;
+      revealed.push(idx);
+      divBubble.classList.add('revealed');
+      // Animación de confeti
+      for(let i=0;i<9;i++) spawnConfetti(kaleidoX, kaleidoY);
+      // Crear modal
       let modal = document.createElement('div');
-      modal.className = 'memory-card-modal';
+      modal.className = "reveal-modal";
       modal.innerHTML = `
-        <div class="memory-popup">
-          <img src="${mem.img}" alt="recuerdo">
-          <div class="memo-message">${mem.message}</div>
-          <button class="faltan-btn">${foundMemories.length < memories.length ? 
-            `Faltan (${memories.length-foundMemories.length})` : '¡Todos los recuerdos encontrados!'}
-          </button>
+        <div class="modal-card">
+          <span class="modal-emoji">${bubbleData[idx].emoji}</span>
+          <div class="modal-text">${bubbleData[idx].msg}</div>
+          <button class="close-btn">${revealed.length<bubbleData.length
+            ? `Faltan (${bubbleData.length - revealed.length})`
+            : '¡Ver mensaje final!'}</button>
         </div>
       `;
       document.body.appendChild(modal);
-
-      // Corazones animados al descubrir
-      createHearts(8);
-
-      // Botón cerrar modal
-      modal.querySelector('.faltan-btn').onclick = () => {
+      modal.querySelector('.close-btn').onclick = ()=>{
         modal.remove();
-        if (foundMemories.length === memories.length) {
-          setTimeout(() => { finalMessage.style.display = 'flex'; }, 900);
-        }
-      }
-      messageDiv.textContent = mem.message;
-      // Visualmente también "desactiva" el recuerdo en el laberinto
-      document.querySelector(`.memory[data-index="${idx}"]`).style.opacity = 0.2;
-      document.querySelector(`.memory[data-index="${idx}"]`).style.pointerEvents = 'none';
-    }
-
-    // Crear corazones flotantes animados
-    function createHearts(count) {
-      for (let i = 0; i < count; i++) {
-        const heart = document.createElement('div');
-        heart.className = 'heart';
-        heart.innerHTML = '💖';
-        heart.style.left = `${5 + Math.random() * 91}%`;
-        heart.style.top = `${15 + Math.random() * 60}%`;
-        heart.style.fontSize = `${18 + Math.random() * 19}px`;
-        heart.style.animationDuration = `${2.9 + Math.random()}s`;
-        heart.style.animationDelay = `${Math.random() * 2}s`;
-        maze.appendChild(heart);
-        setTimeout(() => {
-          heart.remove();
-        }, 3000);
+        if(revealed.length === bubbleData.length) showFinalMsg();
       }
     }
 
-    // Movimiento del jugador
-    function movePlayer(dx, dy) {
-      const newX = playerX + dx;
-      const newY = playerY + dy;
-      if (newX >= 0 && newX <= maze.offsetWidth - 28 &&
-          newY >= 0 && newY <= maze.offsetHeight - 28) {
-        playerX = newX;
-        playerY = newY;
-        player.style.left = `${playerX}px`;
-        player.style.top = `${playerY}px`;
-        setTimeout(checkMemoriesCollision, 50); // Check después de mover
+    // Confeti animado
+    function spawnConfetti(x, y){
+      let conf = document.createElement('div');
+      conf.style.position = "fixed";
+      conf.style.left = (x-18+Math.random()*46)+"px";
+      conf.style.top = (y-18+Math.random()*26)+"px";
+      conf.style.fontSize = (24+Math.random()*20)+"px";
+      conf.style.pointerEvents = "none";
+      conf.style.opacity = 1;
+      conf.style.transition = "all 1.4s cubic-bezier(.63,1.2,.37,1)";
+      conf.style.zIndex = 9000;
+      conf.innerHTML = ["💟","🦋","💫","✨","💖","🌈"][Math.floor(Math.random()*6)];
+      document.body.appendChild(conf);
+      setTimeout(()=>{
+        conf.style.transform = `translateY(-${90+Math.random()*80}px) scale(${1+Math.random()}) rotate(${Math.random()*190-80}deg)`;
+        conf.style.opacity = 0;
+      },80);
+      setTimeout(()=>conf.remove(),1500);
+    }
+
+    // Mensaje final
+    function showFinalMsg(){
+      let div = document.createElement('div');
+      div.className = "reveal-modal";
+      div.innerHTML = `
+        <div class="modal-card" style="padding:40px 20px 30px 20px;">
+          <div class="final-msg">
+            Gracias por explorar este caleidoscopio.<br>
+            Cada emoción, cada recuerdo... los llevas contigo.<br>
+            <span style="font-size:1.44em; color:#f764bd">💖</span>
+          </div>
+          <button class="close-btn">Jugar de nuevo</button>
+        </div>
+      `;
+      document.body.appendChild(div);
+      div.querySelector('.close-btn').onclick = ()=>{ 
+        div.remove();
+        document.querySelectorAll('.bubble').forEach(b => b.remove());
+        revealed = [];
+        renderBubbles();
       }
     }
 
-    // Botones de dirección
-    document.getElementById('up-btn').addEventListener('click', () => movePlayer(0, -22));
-    document.getElementById('down-btn').addEventListener('click', () => movePlayer(0, 22));
-    document.getElementById('left-btn').addEventListener('click', () => movePlayer(-22, 0));
-    document.getElementById('right-btn').addEventListener('click', () => movePlayer(22, 0));
-
-    // Control con flechas
-    document.addEventListener('keydown', (e) => {
-      switch(e.key) {
-        case 'ArrowUp': movePlayer(0, -22); break;
-        case 'ArrowDown': movePlayer(0, 22); break;
-        case 'ArrowLeft': movePlayer(-22, 0); break;
-        case 'ArrowRight': movePlayer(22, 0); break;
-      }
-    });
-
-    // Reiniciar juego
-    restartBtn.addEventListener('click', () => {
-      foundMemories = [];
-      playerX = 10; playerY = 270;
-      player.style.left = `${playerX}px`;
-      player.style.top = `${playerY}px`;
-      messageDiv.textContent = 'Mueve el corazón rosa para encontrar nuestros recuerdos especiales...';
-      finalMessage.style.display = 'none';
-      document.querySelectorAll('.memory').forEach(m => m.remove());
-      createMemories();
-    });
-
-    // Crear el laberinto al empezar
-    createMemories();
-    // Empezar con el jugador en posición y todo limpio
-    player.style.left = `${playerX}px`;
-    player.style.top = `${playerY}px`;
-
+    renderBubbles();
   </script>
 </body>
 </html>
