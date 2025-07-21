@@ -1,78 +1,116 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Página Abstracta y de Reflexión</title>
   <style>
-    html, body {
-      margin: 0; padding: 0; min-height: 100vh; width: 100vw;
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      width: 100vw;
       font-family: "Times New Roman", Times, serif;
       /* Nuevo fondo abstracto con degradado y formas sutiles */
       background: linear-gradient(135deg, #f0f8ff 0%, #e0e8f7 40%, #c8d8f0 100%);
       min-height: 100vh;
       height: 100vh;
       overflow-x: hidden;
-      animation: pageIn 1.5s cubic-bezier(.2,.8,.2,1) both;
+      animation: pageIn 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
     }
     @keyframes pageIn {
-      0% {opacity: 0; filter: blur(5px); transform: translateY(20px);}
-      100%{opacity: 1; filter: none; transform: translateY(0);}
+      0% {
+        opacity: 0;
+        filter: blur(5px);
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        filter: none;
+        transform: translateY(0);
+      }
     }
     .main-flex2 {
-      width: 100vw; min-height: 100vh;
+      width: 100vw;
+      min-height: 100vh;
       display: flex;
-      align-items: center; justify-content: space-between;
-      position: relative; z-index: 2;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      z-index: 2;
       padding: 0 2vw 0 2vw;
       animation: mainFade 1s 0.3s both;
     }
     @keyframes mainFade {
-      0% {opacity: 0; transform: translateY(60px);}
-      100%{opacity: 1; transform: none;}
+      0% {
+        opacity: 0;
+        transform: translateY(60px);
+      }
+      100% {
+        opacity: 1;
+        transform: none;
+      }
     }
     .side-left2 {
-      flex: 1.1; min-width: 82px;
-      display: flex; flex-direction: column; align-items: flex-start; justify-content: center;
+      flex: 1.1;
+      min-width: 82px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
     }
     .btns-nav2 {
       margin-top: 40px;
-      display: flex; gap: 28px;
-      flex-direction: row; align-items: center; margin-left: 24px;
+      display: flex;
+      gap: 28px;
+      flex-direction: row;
+      align-items: center;
+      margin-left: 24px;
     }
     .btns-nav2 button {
       font-family: inherit;
       font-size: 1.08em;
       font-weight: 700;
       padding: 15px 36px;
-      background: linear-gradient(110deg, #6a5acdf0 18%, #8a2be2d0 100%); /* Colores más suaves */
-      color: #fff; border: none;
+      background: linear-gradient(110deg, #6a5acdf0 18%, #8a2be2d0 100%);
+      color: #fff;
+      border: none;
       border-radius: 23px;
       box-shadow: 0 2px 13px #8e7bc9a9, 0 2px 19px #a062e099;
-      cursor: pointer; min-width: 112px; outline: none;
+      cursor: pointer;
+      min-width: 112px;
+      outline: none;
       transition: background 0.25s, color 0.18s, box-shadow 0.21s;
       letter-spacing: 0.03em;
       animation: btnpulseIn 1.2s infinite alternate;
     }
     .btns-nav2 button:hover {
-      background: linear-gradient(100deg,#8a2be2,#6a5acdf0 80%);
+      background: linear-gradient(100deg, #8a2be2, #6a5acdf0 80%);
       color: #e0f0ff;
       box-shadow: 0 4px 19px #8a2be266, 0 2px 28px #6a5acdaf;
     }
     @keyframes btnpulseIn {
-      0% {box-shadow: 0 2px 13px #8e7bc9a9;}
-      100% {box-shadow: 0 6px 28px #a062e080;}
+      0% {
+        box-shadow: 0 2px 13px #8e7bc9a9;
+      }
+      100% {
+        box-shadow: 0 6px 28px #a062e080;
+      }
     }
-    .main-message-card { /* Se renombra de spidey-message2 */
-      display: flex; flex-direction: column; align-items: flex-end; justify-content: center;
+    .main-message-card {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: center;
       flex: 2;
       min-width: 340px;
       max-width: 640px;
       padding-right: 5vw;
       z-index: 10;
     }
-    .msg-card { /* Se renombra de msg-card2 y se quita el :before de spiderman */
-      background: linear-gradient(99deg, #e3f0ff 80%, #d6b8f070 100%); /* Degradado más suave */
+    .msg-card {
+      background: linear-gradient(99deg, #e3f0ff 80%, #d6b8f070 100%);
       border-radius: 38px 17px 30px 18px / 28px 34px 38px 21px;
       box-shadow: 0 8px 44px #8a2be242, 0 2px 44px #6a5acde6;
       padding: 48px 42px 38px 45px;
@@ -85,27 +123,60 @@
       letter-spacing: 0.01em;
       text-align: right;
       white-space: pre-line;
-      animation: slideInMsg 1.26s cubic-bezier(.43,.91,.27,1.01) both;
+      animation: slideInMsg 1.26s cubic-bezier(0.43, 0.91, 0.27, 1.01) both;
       opacity: 0;
       animation-delay: 0.48s;
     }
     @keyframes slideInMsg {
-      0% {opacity: 0; transform: translateX(70px) scale(0.94);}
-      60% {opacity: .85;}
-      100% {opacity: 1; transform: translateX(0) scale(1);}
+      0% {
+        opacity: 0;
+        transform: translateX(70px) scale(0.94);
+      }
+      60% {
+        opacity: 0.85;
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+      }
     }
-    @media (max-width:900px){
-      .main-flex2{flex-direction:column; min-height:105vh; align-items:flex-start; justify-content:flex-start;}
-      .side-left2{padding-left:3vw; margin-bottom:38px;}
-      .main-message-card{align-items:center; padding-right:2vw;}
-      .msg-card{text-align:center; min-width:unset; max-width:97vw;}
-      .btns-nav2{margin:24px auto 0 auto;}
+    @media (max-width: 900px) {
+      .main-flex2 {
+        flex-direction: column;
+        min-height: 105vh;
+        align-items: flex-start;
+        justify-content: flex-start;
+      }
+      .side-left2 {
+        padding-left: 3vw;
+        margin-bottom: 38px;
+      }
+      .main-message-card {
+        align-items: center;
+        padding-right: 2vw;
+      }
+      .msg-card {
+        text-align: center;
+        min-width: unset;
+        max-width: 97vw;
+      }
+      .btns-nav2 {
+        margin: 24px auto 0 auto;
+      }
     }
-    @media (max-width:600px){
-      .main-flex2{padding:0;}
-      .side-left2{padding-left:4vw;}
-      .main-message-card{padding-right:2vw;}
-      .msg-card{padding:24px 2vw;}
+    @media (max-width: 600px) {
+      .main-flex2 {
+        padding: 0;
+      }
+      .side-left2 {
+        padding-left: 4vw;
+      }
+      .main-message-card {
+        padding-right: 2vw;
+      }
+      .msg-card {
+        padding: 24px 2vw;
+      }
     }
   </style>
 </head>
@@ -119,15 +190,19 @@
     </div>
     <div class="main-message-card">
       <div class="msg-card">
-En el camino de la vida, cada encuentro es un eco, cada momento, una melodía. Hay quienes dejan una huella imborrable, no por su fuerza, sino por la sutilidad de su luz. Es un recordatorio de que la belleza reside en lo inesperado, y la fortaleza, en la capacidad de seguir adelante, transformando cada desafío en una oportunidad para florecer.
+Sometimes I think about Spider-Man and how, even with the weight of the world on his shoulders, he never gives up on what he loves or on the people who matter to him.
+
+With great power comes great responsibility, but I’ve learned from you that real strength is not just about saving the world—it’s about never letting go of your dreams, protecting your heart, and helping others even when it’s hard.
+
+Like Spider-Man swinging fearlessly through the city, you face every challenge with courage and kindness. Knowing you has taught me that being a hero isn’t about having superpowers; it’s about having the bravery to keep going, no matter the obstacle.
       </div>
     </div>
   </div>
   <script>
-    document.getElementById('btnRegresar').onclick = function(){
+    document.getElementById('btnRegresar').onclick = function () {
       window.location.href = "index5.html";
     };
-    document.getElementById('btnSiguiente').onclick = function(){
+    document.getElementById('btnSiguiente').onclick = function () {
       alert('¡Fin de la aventura! O el inicio de una nueva...');
     };
   </script>
