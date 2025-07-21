@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Semáforo</title>
+<style>
+  body {
+    margin: 0; padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #222;
+    font-family: 'Times New Roman', serif;
+  }
+  .semaforo {
+    background: black;
+    border-radius: 30px;
+    width: 120px;
+    padding: 20px 0;
+    box-shadow: 0 0 15px #000;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    align-items: center;
+  }
+  .luz {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: 3.5px solid #111;
+    background-color: #222;
+    box-shadow: inset 0 6px 12px #0008;
+    transition: background-color 0.6s, box-shadow 0.6s;
+  }
+  .luz.rojo.on {
+    background-color: #ff2c2c;
+    box-shadow:
+      0 0 30px #ff4c4c,
+      inset 0 0 25px #ff6b6b;
+  }
+  .luz.amarillo.on {
+    background-color: #ffea28;
+    box-shadow:
+      0 0 35px #fff960,
+      inset 0 0 30px #fff576;
+  }
+  .luz.verde.on {
+    background-color: #13c54a;
+    box-shadow:
+      0 0 35px #4fff73,
+      inset 0 0 25px #90ff99;
+  }
+</style>
+</head>
+<body>
+  <div class="semaforo" aria-label="Semáforo de tráfico" role="region">
+    <div id="rojo" class="luz rojo" aria-live="polite" aria-atomic="true" aria-label="Luz roja apagada"></div>
+    <div id="amarillo" class="luz amarillo" aria-live="polite" aria-atomic="true" aria-label="Luz amarilla apagada"></div>
+    <div id="verde" class="luz verde" aria-live="polite" aria-atomic="true" aria-label="Luz verde apagada"></div>
+  </div>
+
+<script>
+  const rojo = document.getElementById('rojo');
+  const amarillo = document.getElementById('amarillo');
+  const verde = document.getElementById('verde');
+
+  // Estados posibles: 0=rojo, 1=rojo+amarillo (opcional), 2=verde, 3=amarillo
+  // Para simplificar, ciclo: rojo (3s) → amarillo (1.5s) → verde (3s) → amarillo (1.5s) → rojo ...
+  const estados = [
+    {rojo: true, amarillo: false, verde: false},
+    {rojo: true, amarillo: true, verde: false},
+    {rojo: false, amarillo: false, verde: true},
+    {rojo: false, amarillo: true, verde: false}
+  ];
+
+  let indice = 0;
+
+  function actualizarSemaforo() {
+    const estado = estados[indice];
+    rojo.classList.toggle('on', estado.rojo);
+    rojo.setAttribute('aria-label', estado.rojo ? 'Luz roja encendida' : 'Luz roja apagada');
+    amarillo.classList.toggle('on', estado.amarillo);
+    amarillo.setAttribute('aria-label', estado.amarillo ? 'Luz amarilla encendida' : 'Luz amarilla apagada');
+    verde.classList.toggle('on', estado.verde);
+    verde.setAttribute('aria-label', estado.verde ? 'Luz verde encendida' : 'Luz verde apagada');
+
+    // Ajusta la duración según el paso
+    let delay = 3000; // default 3s bandera
+    if(indice === 1 || indice === 3) delay = 1500; // amarillo más corto
+
+    indice = (indice + 1) % estados.length;
+    setTimeout(actualizarSemaforo, delay);
+  }
+
+  // Inicializar ciclo
+  actualizarSemaforo();
+</script>
+</body>
+</html>
