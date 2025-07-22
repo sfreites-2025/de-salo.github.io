@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Me Rehúso - Mensaje Personal con Animaciones Laterales</title>
+<title>Me Rehúso - Mensaje Personal con Link a Canción</title>
 <style>
   body {
     margin: 0;
@@ -60,6 +60,7 @@
   .delay-6 { animation-delay: 3.8s; }
   .delay-7 { animation-delay: 4.5s; }
   .delay-8 { animation-delay: 5.2s; }
+
   @keyframes fadeInUp {
     from {
       opacity: 0;
@@ -154,7 +155,47 @@
   #btnRegresar { left: 30px; }
   #btnSiguiente { right: 30px; }
 
-  /* Responsive */
+  /* Link canción en esquina superior derecha */
+  .song-link {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    background: linear-gradient(45deg, #fb3d81, #7ae0ea);
+    padding: 10px 16px;
+    border-radius: 24px;
+    font-weight: 700;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.95em;
+    letter-spacing: 0.04em;
+    box-shadow: 0 0 12px #fb3d81cc;
+    cursor: pointer;
+    text-decoration: none;
+    user-select: none;
+    overflow: hidden;
+  }
+  /* Animación pulso suave para el botón */
+  .song-link:hover {
+    animation: pulseScale 1.2s infinite alternate ease-in-out;
+  }
+  @keyframes pulseScale {
+    0% { transform: scale(1); box-shadow: 0 0 12px #fb3d81cc; }
+    100% { transform: scale(1.08); box-shadow: 0 0 24px #fd558ecc; }
+  }
+
+  /* Icono musical animado dentro del enlace */
+  .song-link .icon {
+    margin-left: 8px;
+    display: inline-block;
+    animation: wiggle 2.5s ease-in-out infinite;
+  }
+  @keyframes wiggle {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(15deg); }
+    75% { transform: rotate(-15deg); }
+  }
+
+  /* Responsive adjustments */
   @media (max-width: 520px) {
     .card {
       padding: 24px 24px 36px 24px;
@@ -166,14 +207,21 @@
       padding: 12px 22px;
     }
     .side-animation {
-      display: none; /* Ocultar animación lateral en móvil para no saturar */
+      display: none; /* Ocultar animaciones laterales en móvil */
+    }
+    .song-link {
+      font-size: 0.85em;
+      padding: 8px 12px;
+      top: 10px;
+      right: 10px;
+      border-radius: 18px;
     }
   }
 </style>
 </head>
 <body>
 
-  <!-- Animación musical lateral izquierda -->
+  <!-- Animaciones laterales musicales -->
   <div class="side-animation side-left" aria-hidden="true">
     <div class="note">🎵</div>
     <div class="note">🎶</div>
@@ -182,7 +230,6 @@
     <div class="note">🎤</div>
   </div>
 
-  <!-- Animación musical lateral derecha -->
   <div class="side-animation side-right" aria-hidden="true">
     <div class="note">🎼</div>
     <div class="note">🎤</div>
@@ -190,6 +237,13 @@
     <div class="note">🎵</div>
     <div class="note">🎶</div>
   </div>
+
+  <!-- Enlace a la canción con animación -->
+  <a href="https://www.youtube.com/watch?v=aDCcLQto5BM&pp=0gcJCfwAo7VqN5tD" target="_blank" rel="noopener noreferrer" 
+     class="song-link" aria-label="Escuchar Me Rehúso en YouTube">
+    Escuchar “Me Rehúso” 
+    <span class="icon" aria-hidden="true">🎧</span>
+  </a>
 
   <main class="card" role="main" aria-label="Mensaje personal basado en la canción Me Rehúso">
     <p class="fadeIn delay-1">Quiero ser <span class="highlight">completamente honesto contigo</span> y hablarte desde lo más sencillo de mi corazón, sin filtros, sin adornos y sin vueltas.</p>
