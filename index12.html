@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Me Rehúso - Mensaje Personal con Link a Spotify</title>
+<title>Me Rehúso - Mensaje Personal con Link Estilo Spotify a YouTube</title>
 <style>
   body {
     margin: 0;
@@ -60,7 +60,6 @@
   .delay-6 { animation-delay: 3.8s; }
   .delay-7 { animation-delay: 4.5s; }
   .delay-8 { animation-delay: 5.2s; }
-
   @keyframes fadeInUp {
     from {
       opacity: 0;
@@ -71,8 +70,7 @@
       transform: translateY(0);
     }
   }
-
-  /* Animaciones laterales de notas musicales verticales */
+  /* Animaciones laterales musicales verticales */
   .side-animation {
     position: fixed;
     top: 20vh;
@@ -92,7 +90,6 @@
     right: 30px;
     align-items: flex-end;
   }
-  /* Nota musical estilo */
   .note {
     font-size: 1.7em;
     color: #fb3d81cc;
@@ -105,13 +102,11 @@
   .side-right .note {
     color: #ff8fc7cc;
   }
-  /* Animaciones escalonadas para que no se muevan todas juntas */
   .note:nth-child(1) { animation-delay: 0s; }
   .note:nth-child(2) { animation-delay: 2s; }
   .note:nth-child(3) { animation-delay: 4s; }
   .note:nth-child(4) { animation-delay: 1s; }
   .note:nth-child(5) { animation-delay: 3s; }
-
   @keyframes floatDown {
     0% {
       transform: translateY(-50px) scale(1);
@@ -126,7 +121,6 @@
       opacity: 0;
     }
   }
-
   /* Botones navegación */
   .nav-button {
     position: fixed;
@@ -154,59 +148,56 @@
   }
   #btnRegresar { left: 30px; }
   #btnSiguiente { right: 30px; }
-
-  /* Link estilo Spotify en esquina superior derecha */
-  .spotify-link {
+  /* Spotify style small card linking to YouTube */
+  .youtube-spotify-link {
     position: fixed;
     top: 16px;
     right: 16px;
-    background: #1DB954;
-    padding: 10px 16px;
-    border-radius: 24px;
-    font-weight: 700;
-    color: white;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.95em;
-    letter-spacing: 0.04em;
-    box-shadow: 0 0 12px #1DB954dd;
-    cursor: pointer;
-    user-select: none;
+    background: #191414;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.8);
     display: flex;
     align-items: center;
+    padding: 6px 12px;
     text-decoration: none;
+    color: white;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9em;
+    letter-spacing: 0.04em;
+    cursor: pointer;
     transition: box-shadow 0.3s ease, transform 0.3s ease;
     z-index: 20;
   }
-  .spotify-link:hover {
-    box-shadow: 0 0 28px #1ed760ee;
-    transform: scale(1.05);
+  .youtube-spotify-link:hover {
+    box-shadow: 0 6px 20px #ff0000cc;
+    transform: scale(1.07);
   }
-  .spotify-link svg {
-    margin-right: 8px;
-    vertical-align: middle;
+  .youtube-spotify-link svg {
+    width: 22px;
+    height: 22px;
+    margin-right: 10px;
+    fill: #ff0000;
   }
   @media (max-width: 520px) {
-    .spotify-link {
-      font-size: 0.85em;
-      padding: 8px 14px;
+    .youtube-spotify-link {
+      font-size: 0.8em;
+      padding: 5px 10px;
       top: 10px;
       right: 10px;
-      border-radius: 20px;
+      border-radius: 10px;
     }
-    .spotify-link svg {
-      height: 16px;
-      width: 16px;
-      margin-right: 6px;
+    .youtube-spotify-link svg {
+      width: 18px;
+      height: 18px;
+      margin-right: 8px;
     }
-    .side-animation {
-      display: none; /* Ocultar animaciones laterales en móvil */
-    }
+    .side-animation { display: none; }
   }
 </style>
 </head>
 <body>
 
-  <!-- Animaciones laterales musicales -->
   <div class="side-animation side-left" aria-hidden="true">
     <div class="note">🎵</div>
     <div class="note">🎶</div>
@@ -223,13 +214,14 @@
     <div class="note">🎶</div>
   </div>
 
-  <!-- Link estilo Spotify en esquina superior derecha -->
-  <a href="https://open.spotify.com/track/7aerOQQZmIfuF9veAr6BnY" target="_blank" rel="noopener noreferrer"
-     class="spotify-link" aria-label="Escuchar Me Rehúso en Spotify">
-    <svg role="img" aria-hidden="true" height="20" width="20" viewBox="0 0 168 168" fill="white" xmlns="http://www.w3.org/2000/svg">
-      <path d="M84 0a84 84 0 1 0 0 168 84 84 0 0 0 0-168zm38.8 121.4a6.4 6.4 0 0 1-8.8 2.1c-24-14.7-54.2-18.1-89.8-9.9a6.4 6.4 0 0 1-3.7-12.4c39-11.5 73.3-7.7 100.4 11.2a6.4 6.4 0 0 1 2.1 8.9zm12.4-23.4a8 8 0 0 1-11 2.6c-27-16.3-68.3-21.1-100.2-11.5a8 8 0 1 1-4.6-15.3c37.6-11.3 83-6.2 114.3 13.2a7.95 7.95 0 0 1 1.5 11zm.8-26.1a9.6 9.6 0 0 1-13.2 3.1c-30.6-18.2-81-19.8-111.2-10.7a9.6 9.6 0 1 1-5.4-18.4c35.5-10.5 91-9.2 126.7 12a9.6 9.6 0 0 1 3.1 13.1z"/>
+  <!-- Link estilo "Spotify card" pero que abre YouTube -->
+  <a href="https://www.youtube.com/watch?v=aDCcLQto5BM&pp=0gcJCfwAo7VqN5tD" target="_blank" rel="noopener noreferrer"
+     class="youtube-spotify-link" aria-label="Ver Me Rehúso en YouTube">
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M10 15l5.19-3L10 9v6z"></path>
+      <path d="M19.6 4.2c-1.05-.4-5.72-.4-5.72-.4s-4.66 0-5.72.4A3 3 0 0 0 5.2 7.86C5 8.89 5 12 5 12s0 3.11.2 4.14a3 3 0 0 0 1.96 2.19c1.05.4 5.72.4 5.72.4s4.66 0 5.72-.4a3 3 0 0 0 1.96-2.19c.2-1.03.2-4.14.2-4.14s0-3.11-.2-4.14a3 3 0 0 0-1.96-2.19z" fill="none" stroke="#FF0000" stroke-width="1.5"/>
     </svg>
-    Escuchar en Spotify
+    Ver en YouTube
   </a>
 
   <main class="card" role="main" aria-label="Mensaje personal basado en la canción Me Rehúso">
