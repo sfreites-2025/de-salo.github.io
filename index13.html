@@ -1,255 +1,230 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Campo de Flores Hermosas</title>
-  <style>
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background: linear-gradient(to top, #e6fad7 0%, #f8faff 70%);
-      overflow: hidden;
-      position: relative;
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Campo de Flores Hermosas</title>
+<style>
+  /* Fondo cielo y pradera */
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: linear-gradient(to top, #a9d18e 0%, #e6f3d8 60%, #c6e4f7 100%);
+    overflow-x: hidden;
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .field {
+    position: relative;
+    width: 95vw;
+    max-width: 900px;
+    height: 500px;
+    background: linear-gradient(to top, #5ba642 0%, #a5d37a 60%, transparent 90%);
+    border-radius: 28px;
+    box-shadow: 0 8px 40px rgba(91,166,66,0.35);
+    overflow: hidden;
+  }
+
+  /* Flor base */
+  .flower {
+    position: absolute;
+    bottom: 0;
+    width: var(--size, 35px);
+    height: auto;
+    animation: sway var(--duration, 5s) ease-in-out infinite alternate;
+    transform-origin: center bottom;
+  }
+  @keyframes sway {
+    0% { transform: rotate(calc(var(--init-rot, 0deg) - 5deg)); }
+    100% { transform: rotate(calc(var(--init-rot, 0deg) + 5deg)); }
+  }
+
+  /* Flor SVG con colores variados */
+  .flower svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Varias posiciones y tamaños para simular campo abundante */
+  /* Usamos :nth-child para repartir algunas posiciones y colores */
+
+  .field .flower:nth-child(odd) {
+    filter: drop-shadow(0 0 2px rgba(0,0,0,0.15));
+    --duration: 6s;
+  }
+  .field .flower:nth-child(even) {
+    filter: drop-shadow(0 0 2px rgba(0,0,0,0.1));
+    --duration: 4.5s;
+  }
+
+  /* Generamos posiciones personalizadas */
+  /* Para mayor cantidad, puedes copiar estos bloques dentro de .field */
+
+  .flower1 { left: 2%;  --size: 38px; --init-rot: 2deg;}
+  .flower2 { left: 7%;  --size: 27px; --init-rot: -4deg;}
+  .flower3 { left: 12%; --size: 32px; --init-rot: 1deg;}
+  .flower4 { left: 18%; --size: 40px; --init-rot: 3deg;}
+  .flower5 { left: 24%; --size: 30px; --init-rot: -3deg;}
+  .flower6 { left: 30%; --size: 35px; --init-rot: 5deg;}
+  .flower7 { left: 36%; --size: 26px; --init-rot: 0deg;}
+  .flower8 { left: 42%; --size: 39px; --init-rot: -5deg;}
+  .flower9 { left: 48%; --size: 33px; --init-rot: 2deg;}
+  .flower10 { left: 54%;--size: 36px; --init-rot: -2deg;}
+  .flower11 { left: 60%;--size: 28px; --init-rot: 3deg;}
+  .flower12 { left: 66%;--size: 31px; --init-rot: -3deg;}
+  .flower13 { left: 72%;--size: 37px; --init-rot: 4deg;}
+  .flower14 { left: 78%;--size: 30px; --init-rot: -1deg;}
+  .flower15 { left: 84%;--size: 25px; --init-rot: 2deg;}
+  .flower16 { left: 90%;--size: 36px; --init-rot: -4deg;}
+  .flower17 { left: 95%;--size: 33px; --init-rot: 1deg;}
+
+  /* Segunda fila, detrás, más pequeña y translúcida */
+  .field .flower.row2 {
+    bottom: 10%;
+    opacity: 0.7;
+    --size: 22px;
+    animation-duration: 7s;
+  }
+  .flower18 { left: 5%; }
+  .flower19 { left: 14%; }
+  .flower20 { left: 23%; }
+  .flower21 { left: 32%; }
+  .flower22 { left: 41%; }
+  .flower23 { left: 50%; }
+  .flower24 { left: 59%; }
+  .flower25 { left: 68%; }
+  .flower26 { left: 77%; }
+  .flower27 { left: 86%; }
+  .flower28 { left: 94%; }
+
+  /* Tercera fila, al fondo, aún más pequeña y difusa */
+  .field .flower.row3 {
+    bottom: 18%;
+    opacity: 0.5;
+    --size: 18px;
+    animation-duration: 9s;
+  }
+  .flower29 { left: 9%; }
+  .flower30 { left: 20%; }
+  .flower31 { left: 28%; }
+  .flower32 { left: 37%; }
+  .flower33 { left: 46%; }
+  .flower34 { left: 55%; }
+  .flower35 { left: 64%; }
+  .flower36 { left: 73%; }
+  .flower37 { left: 82%; }
+  .flower38 { left: 91%; }
+
+  /* Flor SVG ejemplo: tulipán */
+  /* Puedes cambiar el SVG por otros tipos de flores si lo deseas */
+
+  /* Vamos a usar tres variaciones de estilo SVG para simular variedad */
+
+  /* Flor tipo tulipán color rosado */
+  .tulipan1 svg path {
+    fill: #fc4a9a;
+  }
+  /* Flor tipo tulipán naranja */
+  .tulipan2 svg path {
+    fill: #ff8c42;
+  }
+  /* Flor tipo girasol */
+  .girasol svg circle {
+    fill: #ffe066;
+  }
+  .girasol svg path {
+    fill: #f0a500;
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .field {
+      height: 400px;
     }
-    .sky {
-      position: absolute;
-      width: 100vw;
-      height: 55vh;
-      background: linear-gradient(to bottom, #b8e6fd 0%, #eaf6ff 100%);
-      left: 0;
-      top: 0;
-      z-index: 1;
-    }
-    .ground {
-      position: absolute;
-      width: 100vw;
-      height: 55vh;
-      background: linear-gradient(to top, #a5d37a 10%, #effbdd 100%);
-      left: 0;
-      top: 45vh;
-      z-index: 2;
-    }
-    .flower-field {
-      position: absolute;
-      top: 40vh;
-      left: 0;
-      width: 100vw;
-      height: 60vh;
-      pointer-events: none;
-      z-index: 3;
-    }
-    .flower {
-      position: absolute;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      animation: swayZa 5s infinite alternate cubic-bezier(.6,.1,.6,.95);
-      opacity: 0.96;
-      transform: scale(var(--sz,1));
-    }
-    @keyframes swayZa {
-      to { transform: scale(var(--sz,1)) rotate(var(--rot,0deg)) translateY(-12px);}
-    }
-    .stem {
-      width: 7px; height: 55px;
-      background: linear-gradient(#68b85b 80%, #205e42 100%);
-      border-radius: 9px;
-      margin: 0 auto;
-    }
-    .center {
-      width: 17px; height: 17px;
-      border-radius: 50%;
-      margin: -9px auto 0 auto;
-      position: relative;
-      box-shadow: 0 2px 7px #ba841b55;
-    }
-    /* Colores de centros */
-    .c1 { background: #ffc168; }
-    .c2 { background: #f9a062; }
-    .c3 { background: #fff967; }
-    .c4 { background: #fbbcda; }
-    .c5 { background: #a2e3df; }
-    /* Pétalos */
-    .petal {
-      position: absolute;
-      top: 1.5px; left: 50%;
-      width: 26px; height: 18px;
-      border-radius: 70% 80% 60% 65% / 70% 70% 60% 80%;
-      transform-origin: 0 52%;
-      opacity: 0.93;
-      box-shadow: 0 1px 4px #0002;
-    }
-    .p1 { background: #ff7bbd; }
-    .p2 { background: #ffd6e6; }
-    .p3 { background: #fae378; }
-    .p4 { background: #95e8fc; }
-    .p5 { background: #b8e98c;}
-    .p6 { background: #fab9fe;}
-    .p7 { background: #ffe7a7; }
-    .p8 { background: #f8a674; }
-    .daisy-center { background: #fff967; box-shadow: 0 0 12px #e0d02055; }
-    .daisy-petal {
-      width: 22px; height: 13px;
-      border-radius: 43% 70% 60% 80% / 60% 80% 65% 70%;
-      background: #fffdeb;
-      position: absolute;
-      top: 3px; left: 50%;
-      transform-origin: 0 60%;
-      opacity: .96;
-      box-shadow: 0 1px 3px #c4be8e28;
-    }
-    /* Animación de pétalos voladores */
-    .floating-petal {
-      position: absolute;
-      bottom: 70px;
-      width: 24px; height: 14px;
-      opacity: 0.75;
-      z-index: 7;
-      animation: floatPetal 15s linear infinite;
-    }
-    @keyframes floatPetal {
-      0% {transform: translateY(0) scale(1) rotate(0deg);}
-      20% {opacity: 1;}
-      80% {opacity: 1;}
-      100% {transform: translateY(-88vh) scale(1.05) rotate(90deg); opacity: 0;}
-    }
-    /* Responsive */
-    @media (max-width: 600px) {
-      .flower-field { height: 80vh; }
-      .ground { top: 52vh; height: 60vh;}
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
-  <div class="sky"></div>
-  <div class="ground"></div>
-  <div class="flower-field">
-    <!-- Flores grandes variadas -->
-    <div class="flower" style="left:7%; bottom:5%; --sz:1.29; --rot:7deg;">
-      <div class="stem"></div>
-      <div class="center c1"></div>
-      <div class="petal p1" style="transform:rotate(0deg)"></div>
-      <div class="petal p4" style="transform:rotate(72deg)"></div>
-      <div class="petal p8" style="transform:rotate(144deg)"></div>
-      <div class="petal p2" style="transform:rotate(216deg)"></div>
-      <div class="petal p3" style="transform:rotate(288deg)"></div>
-    </div>
-    <div class="flower" style="left:16%; bottom:18%; --sz:1.35; --rot:20deg;">
-      <div class="stem"></div>
-      <div class="center c3"></div>
-      <div class="petal p3" style="transform:rotate(0deg)"></div>
-      <div class="petal p4" style="transform:rotate(72deg)"></div>
-      <div class="petal p5" style="transform:rotate(144deg)"></div>
-      <div class="petal p7" style="transform:rotate(216deg)"></div>
-      <div class="petal p2" style="transform:rotate(288deg)"></div>
-    </div>
-    <div class="flower" style="left:29%; bottom:6%; --sz:1; --rot:-8deg;">
-      <div class="stem"></div>
-      <div class="center c2"></div>
-      <div class="petal p8" style="transform:rotate(0deg)"></div>
-      <div class="petal p1" style="transform:rotate(60deg)"></div>
-      <div class="petal p2" style="transform:rotate(120deg)"></div>
-      <div class="petal p7" style="transform:rotate(180deg)"></div>
-      <div class="petal p6" style="transform:rotate(240deg)"></div>
-      <div class="petal p5" style="transform:rotate(300deg)"></div>
-    </div>
-    <div class="flower" style="left:43%; bottom:19%; --sz:1.1; --rot:25deg;">
-      <div class="stem"></div>
-      <div class="center c4"></div>
-      <div class="petal p4" style="transform:rotate(0deg)"></div>
-      <div class="petal p6" style="transform:rotate(60deg)"></div>
-      <div class="petal p8" style="transform:rotate(120deg)"></div>
-      <div class="petal p7" style="transform:rotate(180deg)"></div>
-      <div class="petal p1" style="transform:rotate(240deg)"></div>
-      <div class="petal p2" style="transform:rotate(300deg)"></div>
-    </div>
-    <div class="flower" style="left:64%; bottom:8%; --sz:.97; --rot:17deg;">
-      <div class="stem"></div>
-      <div class="center c5"></div>
-      <div class="petal p4" style="transform:rotate(0deg)"></div>
-      <div class="petal p3" style="transform:rotate(72deg)"></div>
-      <div class="petal p5" style="transform:rotate(144deg)"></div>
-      <div class="petal p8" style="transform:rotate(216deg)"></div>
-      <div class="petal p7" style="transform:rotate(288deg)"></div>
-    </div>
-    <div class="flower" style="left:74%; bottom:18%; --sz:1.2; --rot:-9deg;">
-      <div class="stem"></div>
-      <div class="center c2"></div>
-      <div class="petal p6" style="transform:rotate(0deg)"></div>
-      <div class="petal p4" style="transform:rotate(60deg)"></div>
-      <div class="petal p5" style="transform:rotate(120deg)"></div>
-      <div class="petal p1" style="transform:rotate(180deg)"></div>
-      <div class="petal p3" style="transform:rotate(240deg)"></div>
-      <div class="petal p2" style="transform:rotate(300deg)"></div>
-    </div>
-    <div class="flower" style="left:87%; bottom:4%; --sz:1.2; --rot:11deg;">
-      <div class="stem"></div>
-      <div class="center c3"></div>
-      <div class="petal p8" style="transform:rotate(0deg)"></div>
-      <div class="petal p5" style="transform:rotate(60deg)"></div>
-      <div class="petal p1" style="transform:rotate(120deg)"></div>
-      <div class="petal p7" style="transform:rotate(180deg)"></div>
-      <div class="petal p4" style="transform:rotate(240deg)"></div>
-      <div class="petal p3" style="transform:rotate(300deg)"></div>
-    </div>
-    <!-- Margaritas grandes y pequeñas -->
-    <div class="flower" style="left:54%; bottom:14%; --sz:1.19; --rot:13deg;">
-      <div class="stem"></div>
-      <div class="center daisy-center"></div>
-      <div class="daisy-petal" style="transform:rotate(0deg)"></div>
-      <div class="daisy-petal" style="transform:rotate(36deg)"></div>
-      <div class="daisy-petal" style="transform:rotate(72deg)"></div>
-      <div class="daisy-petal" style="transform:rotate(108deg)"></div>
-      <div class="daisy-petal" style="transform:rotate(144deg)"></div>
-      <div class="daisy-petal" style="transform:rotate(180deg)"></div>
-      <div class="daisy-petal" style="transform:rotate(216deg)"></div>
-      <div class="daisy-petal" style="transform:rotate(252deg)"></div>
-      <div class="daisy-petal" style="transform:rotate(288deg)"></div>
-      <div class="daisy-petal" style="transform:rotate(324deg)"></div>
-    </div>
-    <div class="flower" style="left:32%; bottom:16%; --sz:.85; --rot:33deg;">
-      <div class="stem"></div>
-      <div class="center daisy-center"></div>
-      <div class="daisy-petal" style="transform:rotate(0deg)"></div>
-      <div class="daisy-petal" style="transform:rotate(45deg)"></div>
-      <div class="daisy-petal" style="transform:rotate(90deg)"></div>
-      <div class="daisy-petal" style="transform:rotate(135deg)"></div>
-      <div class="daisy-petal" style="background:#fdf0ff; transform:rotate(180deg)"></div>
-      <div class="daisy-petal" style="background:#fff0ee; transform:rotate(225deg)"></div>
-      <div class="daisy-petal" style="transform:rotate(270deg)"></div>
-      <div class="daisy-petal" style="transform:rotate(315deg)"></div>
-    </div>
-    <div class="flower" style="left:20%; bottom:7%; --sz:1.05; --rot:-18deg;">
-      <div class="stem"></div>
-      <div class="center daisy-center"></div>
-      <div class="daisy-petal" style="transform:rotate(0deg)"></div>
-      <div class="daisy-petal" style="transform:rotate(40deg)"></div>
-      <div class="daisy-petal" style="transform:rotate(80deg)"></div>
-      <div class="daisy-petal" style="transform:rotate(120deg)"></div>
-      <div class="daisy-petal" style="transform:rotate(160deg)"></div>
-      <div class="daisy-petal" style="transform:rotate(200deg)"></div>
-      <div class="daisy-petal" style="transform:rotate(240deg)"></div>
-      <div class="daisy-petal" style="transform:rotate(280deg)"></div>
-      <div class="daisy-petal" style="transform:rotate(320deg)"></div>
-    </div>
-    <!-- pétalos volando, muchos, diferentes colores y posiciones -->
-    <div class="floating-petal p2" style="left:11%; animation-delay:2s;"></div>
-    <div class="floating-petal p6" style="left:25%; animation-delay:12s;"></div>
-    <div class="floating-petal p4" style="left:35%; animation-delay:7s;"></div>
-    <div class="floating-petal p3" style="left:64%; animation-delay:1s;"></div>
-    <div class="floating-petal p1" style="left:75%; animation-delay:8s;"></div>
-    <div class="floating-petal p5" style="left:48%; animation-delay:13s;"></div>
-    <div class="floating-petal p3" style="left:85%; animation-delay:5s;"></div>
-    <div class="floating-petal p4" style="left:59%; animation-delay:10s;"></div>
-    <div class="floating-petal p7" style="left:36%; animation-delay:17s;"></div>
-    <div class="floating-petal p2" style="left:61%; animation-delay:14s;"></div>
-    <div class="floating-petal p6" style="left:16%; animation-delay:3s;"></div>
-    <div class="floating-petal p1" style="left:86%; animation-delay:9s;"></div>
-    <div class="floating-petal p5" style="left:5%; animation-delay:0.5s;"></div>
-    <div class="floating-petal p6" style="left:93%; animation-delay:11s;"></div>
-    <div class="floating-petal p7" style="left:57%; animation-delay:6s;"></div>
-    <div class="floating-petal p8" style="left:77%; animation-delay:4s;"></div>
-  </div>
+
+<div class="field" aria-label="Campo lleno de muchas flores hermosas">
+  <!-- Filas de flores -->
+  <!-- Primera fila -->
+  <div class="flower flower1 tulipan1" style="bottom:0;"></div>
+  <div class="flower flower2 tulipan2" style="bottom:0;"></div>
+  <div class="flower flower3 girasol" style="bottom:0;"></div>
+  <div class="flower flower4 tulipan1" style="bottom:0;"></div>
+  <div class="flower flower5 tulipan2" style="bottom:0;"></div>
+  <div class="flower flower6 girasol" style="bottom:0;"></div>
+  <div class="flower flower7 tulipan1" style="bottom:0;"></div>
+  <div class="flower flower8 tulipan2" style="bottom:0;"></div>
+  <div class="flower flower9 girasol" style="bottom:0;"></div>
+  <div class="flower flower10 tulipan1" style="bottom:0;"></div>
+  <div class="flower flower11 tulipan2" style="bottom:0;"></div>
+  <div class="flower flower12 girasol" style="bottom:0;"></div>
+  <div class="flower flower13 tulipan1" style="bottom:0;"></div>
+  <div class="flower flower14 tulipan2" style="bottom:0;"></div>
+  <div class="flower flower15 girasol" style="bottom:0;"></div>
+  <div class="flower flower16 tulipan1" style="bottom:0;"></div>
+  <div class="flower flower17 tulipan2" style="bottom:0;"></div>
+
+  <!-- Segunda fila -->
+  <div class="flower flower18 tulipan2 row2"></div>
+  <div class="flower flower19 girasol row2"></div>
+  <div class="flower flower20 tulipan1 row2"></div>
+  <div class="flower flower21 tulipan2 row2"></div>
+  <div class="flower flower22 girasol row2"></div>
+  <div class="flower flower23 tulipan1 row2"></div>
+  <div class="flower flower24 tulipan2 row2"></div>
+  <div class="flower flower25 girasol row2"></div>
+  <div class="flower flower26 tulipan1 row2"></div>
+  <div class="flower flower27 tulipan2 row2"></div>
+  <div class="flower flower28 girasol row2"></div>
+
+  <!-- Tercera fila -->
+  <div class="flower flower29 tulipan1 row3"></div>
+  <div class="flower flower30 tulipan2 row3"></div>
+  <div class="flower flower31 girasol row3"></div>
+  <div class="flower flower32 tulipan1 row3"></div>
+  <div class="flower flower33 tulipan2 row3"></div>
+  <div class="flower flower34 girasol row3"></div>
+  <div class="flower flower35 tulipan1 row3"></div>
+  <div class="flower flower36 tulipan2 row3"></div>
+  <div class="flower flower37 girasol row3"></div>
+  <div class="flower flower38 tulipan1 row3"></div>
+</div>
+
+<!-- SVG templates for flowers as inline (hidden, reused with use) -->
+<svg style="display:none;">
+  <symbol id="tulipan" viewBox="0 0 64 64" >
+    <path d="M32 0s-8 12-8 28 8 28 8 28 8-12 8-28-8-28-8-28z"/>
+  </symbol>
+  <symbol id="girasol" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="14"/>
+    <path d="M32 2v10M32 54v8M2 32h10M54 32h8M11 11l7 7M46 46l8 8M11 53l7-7M46 18l8-8"/>
+  </symbol>
+</svg>
+
+<script>
+  // Replacing flower divs with embedded SVG for better visuals
+  // Tulipán rosa
+  document.querySelectorAll('.tulipan1').forEach(f => {
+    f.innerHTML = `<svg viewBox="0 0 64 64" width="100%" height="auto" fill="#fc4a9a" xmlns="http://www.w3.org/2000/svg"><path d="M32 0s-8 12-8 28 8 28 8 28 8-12 8-28-8-28-8-28z"/></svg>`;
+  });
+  // Tulipán naranja
+  document.querySelectorAll('.tulipan2').forEach(f => {
+    f.innerHTML = `<svg viewBox="0 0 64 64" width="100%" height="auto" fill="#ff8c42" xmlns="http://www.w3.org/2000/svg"><path d="M32 0s-8 12-8 28 8 28 8 28 8-12 8-28-8-28-8-28z"/></svg>`;
+  });
+  // Girasol amarillo
+  document.querySelectorAll('.girasol').forEach(f => {
+    f.innerHTML = `<svg viewBox="0 0 64 64" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="32" cy="32" r="14" fill="#ffe066"/>
+      <path d="M32 2v10M32 54v8M2 32h10M54 32h8M11 11l7 7M46 46l8 8M11 53l7-7M46 18l8-8" fill="none" stroke="#f0a500" stroke-width="2"/>
+    </svg>`;
+  });
+</script>
 </body>
 </html>
