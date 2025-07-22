@@ -3,230 +3,121 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Campo de Flores Muy Vivo</title>
+  <title>Girasol 3D Animado</title>
   <style>
     body {
-      margin: 0;
-      min-height: 100vh;
-      background: linear-gradient(to top, #a9d18e 0%, #e6f3d8 60%, #c6e4f7 100%);
-      overflow-x: hidden;
-      font-family: 'Montserrat', sans-serif;
+      margin:0;
+      height:100vh;
+      background: linear-gradient(135deg, #ffe066, #f08a5d);
       display: flex;
       justify-content: center;
       align-items: center;
+      perspective: 1000px;
+      font-family: Arial, sans-serif;
     }
-    .field {
+
+    .sunflower {
       position: relative;
-      width: 95vw;
-      max-width: 900px;
-      height: 500px;
-      background: linear-gradient(to top, #5ba642 0%, #a5d37a 55%, transparent 95%);
-      border-radius: 28px;
-      box-shadow: 0 8px 40px rgba(91,166,66,0.35);
-      overflow: hidden;
+      width: 240px;
+      height: 240px;
+      transform-style: preserve-3d;
+      animation: spin 20s linear infinite;
     }
-    /* Flores muy vivas: más movimiento, leve brillo */
-    .flower {
+
+    /* Centro del girasol */
+    .center {
       position: absolute;
-      bottom: 0;
-      width: var(--size, 35px);
-      height: auto;
-      opacity: 0.97;
-      animation:
-        enhancedSway var(--duration, 5s) ease-in-out infinite alternate,
-        shimmer 4s linear infinite alternate;
-      transform-origin: center bottom;
-      z-index: 3;
-    }
-    @keyframes enhancedSway {
-      0% { transform: translateX(0) translateY(0) rotate(calc(var(--init-rot, 0deg) - 7deg)); opacity: 0.93;}
-      50% { transform: translateX(4px) translateY(-8px) rotate(calc(var(--init-rot, 0deg) + 8deg)); opacity: 1;}
-      100% { transform: translateX(-2px) translateY(0) rotate(calc(var(--init-rot, 0deg) - 7deg)); opacity: 0.93;}
-    }
-    @keyframes shimmer {
-      0%,100% {filter: brightness(1);}
-      60% {filter: brightness(1.25);}
-    }
-    /* Flor SVG base */
-    .flower svg {
-      width: 100%;
-      height: auto;
-      display: block;
-      filter: drop-shadow(0 2px 8px rgba(80,40,80,0.07));
-    }
-    .field .flower:nth-child(odd) { --duration: 6s; }
-    .field .flower:nth-child(even) { --duration: 4.3s; }
-    /* Posiciones y tamaños únicas para abundancia */
-    .flower1 { left: 2%;  --size: 38px; --init-rot: 2deg;}
-    .flower2 { left: 7%;  --size: 27px; --init-rot: -4deg;}
-    .flower3 { left: 12%; --size: 32px; --init-rot: 1deg;}
-    .flower4 { left: 18%; --size: 40px; --init-rot: 3deg;}
-    .flower5 { left: 24%; --size: 30px; --init-rot: -3deg;}
-    .flower6 { left: 30%; --size: 35px; --init-rot: 5deg;}
-    .flower7 { left: 36%; --size: 26px; --init-rot: 0deg;}
-    .flower8 { left: 42%; --size: 39px; --init-rot: -5deg;}
-    .flower9 { left: 48%; --size: 33px; --init-rot: 2deg;}
-    .flower10 { left: 54%;--size: 36px; --init-rot: -2deg;}
-    .flower11 { left: 60%;--size: 28px; --init-rot: 3deg;}
-    .flower12 { left: 66%;--size: 31px; --init-rot: -3deg;}
-    .flower13 { left: 72%;--size: 37px; --init-rot: 4deg;}
-    .flower14 { left: 78%;--size: 30px; --init-rot: -1deg;}
-    .flower15 { left: 84%;--size: 25px; --init-rot: 2deg;}
-    .flower16 { left: 90%;--size: 36px; --init-rot: -4deg;}
-    .flower17 { left: 95%;--size: 33px; --init-rot: 1deg;}
-    /* Segunda fila, más detrás y translúcida */
-    .flower.row2 {
-      bottom: 11%;
-      opacity: 0.73;
-      --size: 22px;
-      z-index: 2;
-    }
-    .flower18 { left: 5%; }
-    .flower19 { left: 14%; }
-    .flower20 { left: 23%; }
-    .flower21 { left: 32%; }
-    .flower22 { left: 41%; }
-    .flower23 { left: 50%; }
-    .flower24 { left: 59%; }
-    .flower25 { left: 68%; }
-    .flower26 { left: 77%; }
-    .flower27 { left: 86%; }
-    .flower28 { left: 94%; }
-    /* Tercera fila, aún más difusa */
-    .flower.row3 {
-      bottom: 19%;
-      opacity: 0.5;
-      --size: 16px;
-      z-index: 1;
-    }
-    .flower29 { left: 9%;}
-    .flower30 { left: 20%;}
-    .flower31 { left: 28%;}
-    .flower32 { left: 37%;}
-    .flower33 { left: 46%;}
-    .flower34 { left: 55%;}
-    .flower35 { left: 64%;}
-    .flower36 { left: 73%;}
-    .flower37 { left: 82%;}
-    .flower38 { left: 91%;}
-    /* Variantes SVG color tulipán, girasol */
-    .tulipan1 svg path { fill: #fc4a9a; }
-    .tulipan2 svg path { fill: #ff8c42; }
-    .girasol svg circle { fill: #ffe066;}
-    .girasol svg path { fill: #f0a500;}
-    /* Petalos flotantes animados */
-    .petal-float {
-      position: absolute;
-      bottom: 40px;
-      width: 24px;
-      height: 14px;
+      top: 50%;
+      left: 50%;
+      width: 80px;
+      height: 80px;
+      margin: -40px 0 0 -40px;
+      background: radial-gradient(circle at center, #3e2f12 60%, #6b4b0e 100%);
       border-radius: 50%;
-      opacity: .80;
-      background: linear-gradient(120deg, #fc4a9a 70%, #ffd6e6 100%);
-      z-index: 5;
-      animation: petalFloat 13s linear infinite;
-      filter: drop-shadow(0 0 5px #fc4a9a55);
-      pointer-events: none;
+      box-shadow: inset 0 0 15px #2c1f09;
+      z-index: 10;
     }
-    @keyframes petalFloat {
-      0% { transform: translateX(0) translateY(0) rotate(0deg) scale(1); opacity: 0.9; }
-      50% { opacity: 1; }
-      100% { transform: translateX(var(--float-x, 50px)) translateY(-150vh) rotate(85deg) scale(1.1); opacity: 0; }
+
+    /* Pétalos */
+    .petal {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 60px;
+      height: 140px;
+      margin-left: -30px;
+      margin-top: -120px;
+      background: linear-gradient(180deg, #ffdd57 0%, #f7b733 80%, #e08e0b 100%);
+      border-radius: 50% 50% 50% 50% / 70% 70% 30% 30%;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+      transform-origin: center 120px;
+      filter: drop-shadow(0 2px 2px #d79f0b);
+      animation: petalWiggle 3s ease-in-out infinite;
+      animation-delay: var(--delay);
+      transform-style: preserve-3d;
     }
-    @media (max-width: 600px) {
-      .field { height: 330px; }
+
+    /* Coloca cada pétalo en un ángulo diferente en 3D */
+    /* 20 pétalos distribuidos por 18° de separación */
+    /* Y cada pétalo además en profundidad para efecto 3D en círculo */
+    .petal:nth-child(1)  { --delay: 0s;  transform: rotateY(0deg) translateZ(80px) rotateX(10deg); }
+    .petal:nth-child(2)  { --delay: 0.15s; transform: rotateY(18deg) translateZ(80px) rotateX(10deg);}
+    .petal:nth-child(3)  { --delay: 0.3s; transform: rotateY(36deg) translateZ(80px) rotateX(10deg);}
+    .petal:nth-child(4)  { --delay: 0.45s; transform: rotateY(54deg) translateZ(80px) rotateX(10deg);}
+    .petal:nth-child(5)  { --delay: 0.6s; transform: rotateY(72deg) translateZ(80px) rotateX(10deg);}
+    .petal:nth-child(6)  { --delay: 0.75s; transform: rotateY(90deg) translateZ(80px) rotateX(10deg);}
+    .petal:nth-child(7)  { --delay: 0.9s; transform: rotateY(108deg) translateZ(80px) rotateX(10deg);}
+    .petal:nth-child(8)  { --delay: 1.05s; transform: rotateY(126deg) translateZ(80px) rotateX(10deg);}
+    .petal:nth-child(9)  { --delay: 1.2s; transform: rotateY(144deg) translateZ(80px) rotateX(10deg);}
+    .petal:nth-child(10) { --delay: 1.35s; transform: rotateY(162deg) translateZ(80px) rotateX(10deg);}
+    .petal:nth-child(11) { --delay: 1.5s; transform: rotateY(180deg) translateZ(80px) rotateX(10deg);}
+    .petal:nth-child(12) { --delay: 1.65s; transform: rotateY(198deg) translateZ(80px) rotateX(10deg);}
+    .petal:nth-child(13) { --delay: 1.8s; transform: rotateY(216deg) translateZ(80px) rotateX(10deg);}
+    .petal:nth-child(14) { --delay: 1.95s; transform: rotateY(234deg) translateZ(80px) rotateX(10deg);}
+    .petal:nth-child(15) { --delay: 2.1s; transform: rotateY(252deg) translateZ(80px) rotateX(10deg);}
+    .petal:nth-child(16) { --delay: 2.25s; transform: rotateY(270deg) translateZ(80px) rotateX(10deg);}
+    .petal:nth-child(17) { --delay: 2.4s; transform: rotateY(288deg) translateZ(80px) rotateX(10deg);}
+    .petal:nth-child(18) { --delay: 2.55s; transform: rotateY(306deg) translateZ(80px) rotateX(10deg);}
+    .petal:nth-child(19) { --delay: 2.7s; transform: rotateY(324deg) translateZ(80px) rotateX(10deg);}
+    .petal:nth-child(20) { --delay: 2.85s; transform: rotateY(342deg) translateZ(80px) rotateX(10deg);}
+
+    /* Animación giro del girasol completo */
+    @keyframes spin {
+      from { transform: rotateY(0deg) rotateX(10deg); }
+      to { transform: rotateY(360deg) rotateX(10deg); }
+    }
+
+    /* Pétalos pequeños wiggle */
+    @keyframes petalWiggle {
+      0%, 100% { transform: translateY(0) rotateX(10deg);}
+      50% { transform: translateY(8px) rotateX(15deg);}
     }
   </style>
 </head>
 <body>
-<div class="field" aria-label="Campo lleno de muchas flores hermosas, vivas y animadas">
-  <!-- Fila 1 -->
-  <div class="flower flower1 tulipan1"></div>
-  <div class="flower flower2 tulipan2"></div>
-  <div class="flower flower3 girasol"></div>
-  <div class="flower flower4 tulipan1"></div>
-  <div class="flower flower5 tulipan2"></div>
-  <div class="flower flower6 girasol"></div>
-  <div class="flower flower7 tulipan1"></div>
-  <div class="flower flower8 tulipan2"></div>
-  <div class="flower flower9 girasol"></div>
-  <div class="flower flower10 tulipan1"></div>
-  <div class="flower flower11 tulipan2"></div>
-  <div class="flower flower12 girasol"></div>
-  <div class="flower flower13 tulipan1"></div>
-  <div class="flower flower14 tulipan2"></div>
-  <div class="flower flower15 girasol"></div>
-  <div class="flower flower16 tulipan1"></div>
-  <div class="flower flower17 tulipan2"></div>
-  <!-- Fila 2 -->
-  <div class="flower flower18 tulipan2 row2"></div>
-  <div class="flower flower19 girasol row2"></div>
-  <div class="flower flower20 tulipan1 row2"></div>
-  <div class="flower flower21 tulipan2 row2"></div>
-  <div class="flower flower22 girasol row2"></div>
-  <div class="flower flower23 tulipan1 row2"></div>
-  <div class="flower flower24 tulipan2 row2"></div>
-  <div class="flower flower25 girasol row2"></div>
-  <div class="flower flower26 tulipan1 row2"></div>
-  <div class="flower flower27 tulipan2 row2"></div>
-  <div class="flower flower28 girasol row2"></div>
-  <!-- Fila 3 -->
-  <div class="flower flower29 tulipan1 row3"></div>
-  <div class="flower flower30 tulipan2 row3"></div>
-  <div class="flower flower31 girasol row3"></div>
-  <div class="flower flower32 tulipan1 row3"></div>
-  <div class="flower flower33 tulipan2 row3"></div>
-  <div class="flower flower34 girasol row3"></div>
-  <div class="flower flower35 tulipan1 row3"></div>
-  <div class="flower flower36 tulipan2 row3"></div>
-  <div class="flower flower37 girasol row3"></div>
-  <div class="flower flower38 tulipan1 row3"></div>
-  <!-- Pétalos voladores animados -->
-  <div class="petal-float" style="left:79%; --float-x:-12px; animation-delay:5.73s;"></div>
-  <div class="petal-float" style="left:60%; --float-x:-18px; animation-delay:11.97s;"></div>
-  <div class="petal-float" style="left:9%; --float-x:46px; animation-delay:0.85s;"></div>
-  <div class="petal-float" style="left:56%; --float-x:-48px; animation-delay:11.52s;"></div>
-  <div class="petal-float" style="left:4%; --float-x:9px; animation-delay:8.54s;"></div>
-  <div class="petal-float" style="left:42%; --float-x:-52px; animation-delay:12.51s;"></div>
-  <div class="petal-float" style="left:14%; --float-x:-53px; animation-delay:4.38s;"></div>
-  <div class="petal-float" style="left:39%; --float-x:-60px; animation-delay:5.1s;"></div>
-  <div class="petal-float" style="left:13%; --float-x:36px; animation-delay:7.87s;"></div>
-  <div class="petal-float" style="left:55%; --float-x:49px; animation-delay:11.48s;"></div>
-  <div class="petal-float" style="left:33%; --float-x:-46px; animation-delay:8.31s;"></div>
-  <div class="petal-float" style="left:53%; --float-x:13px; animation-delay:5.34s;"></div>
-  <div class="petal-float" style="left:65%; --float-x:-20px; animation-delay:4.73s;"></div>
-  <div class="petal-float" style="left:5%; --float-x:43px; animation-delay:8.21s;"></div>
-  <div class="petal-float" style="left:78%; --float-x:55px; animation-delay:7.06s;"></div>
-  <div class="petal-float" style="left:56%; --float-x:30px; animation-delay:10.6s;"></div>
-  <div class="petal-float" style="left:13%; --float-x:-12px; animation-delay:1.84s;"></div>
-  <div class="petal-float" style="left:62%; --float-x:-5px; animation-delay:10.49s;"></div>
-  <div class="petal-float" style="left:96%; --float-x:-56px; animation-delay:4.2s;"></div>
-  <div class="petal-float" style="left:39%; --float-x:-22px; animation-delay:11.34s;"></div>
-</div>
-<!-- SVG templates for flowers as inline placeholders -->
-<svg style="display:none;">
-  <symbol id="tulipan" viewBox="0 0 64 64" >
-    <path d="M32 0s-8 12-8 28 8 28 8 28 8-12 8-28-8-28-8-28z"/>
-  </symbol>
-  <symbol id="girasol" viewBox="0 0 64 64">
-    <circle cx="32" cy="32" r="14"/>
-    <path d="M32 2v10M32 54v8M2 32h10M54 32h8M11 11l7 7M46 46l8 8M11 53l7-7M46 18l8-8"/>
-  </symbol>
-</svg>
-<script>
-  // Render flores SVG
-  document.querySelectorAll('.tulipan1').forEach(f => {
-    f.innerHTML = `<svg viewBox="0 0 64 64" width="100%" height="auto" fill="#fc4a9a" xmlns="http://www.w3.org/2000/svg"><path d="M32 0s-8 12-8 28 8 28 8 28 8-12 8-28-8-28-8-28z"/></svg>`;
-  });
-  document.querySelectorAll('.tulipan2').forEach(f => {
-    f.innerHTML = `<svg viewBox="0 0 64 64" width="100%" height="auto" fill="#ff8c42" xmlns="http://www.w3.org/2000/svg"><path d="M32 0s-8 12-8 28 8 28 8 28 8-12 8-28-8-28-8-28z"/></svg>`;
-  });
-  document.querySelectorAll('.girasol').forEach(f => {
-    f.innerHTML = `<svg viewBox="0 0 64 64" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="32" cy="32" r="14" fill="#ffe066"/>
-      <path d="M32 2v10M32 54v8M2 32h10M54 32h8M11 11l7 7M46 46l8 8M11 53l7-7M46 18l8-8" fill="none" stroke="#f0a500" stroke-width="2"/>
-    </svg>`;
-  });
-</script>
+  <div class="sunflower" aria-label="Girasol animado en 3D">
+    <div class="center"></div>
+    <!-- 20 pétalos -->
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+  </div>
 </body>
 </html>
