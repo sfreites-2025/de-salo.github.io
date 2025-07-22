@@ -1,112 +1,89 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Girasol Simple</title>
-  <style>
-    body {
-      background: #f7ffe1;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0;
-    }
-    .girasol-simple {
-      position: relative;
-      width: 180px;
-      height: 320px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-end;
-      user-select: none;
-    }
-    .tallo {
-      width: 16px;
-      height: 120px;
-      background: linear-gradient(to right, #85c965 60%, #4a8941 100%);
-      position: absolute;
-      left: 82px;
-      top: 140px;
-      border-radius: 8px;
-      z-index: 1;
-    }
-    .hoja {
-      position: absolute;
-      width: 55px;
-      height: 28px;
-      background: linear-gradient(60deg, #b3f38c 70%, #77c94d 100%);
-      border-radius: 25px 65px 39px 38px/36px 36px 38px 28px;
-      top: 220px;
-      left: 54px;
-      transform: rotate(-27deg);
-      z-index: 1;
-      opacity: .82;
-    }
-    .hoja.r {
-      left: 103px;
-      transform: scaleX(-1) rotate(-27deg);
-    }
-    .petalo {
-      position: absolute;
-      width: 48px;
-      height: 104px;
-      left: 66px;
-      top: 20px;
-      background: linear-gradient(180deg, #fff676 60%, #ffc12b 100%);
-      border-radius: 55% 65% 69% 67% / 60% 80% 75% 80%;
-      z-index: 2;
-      box-shadow: 0 2px 12px #fc4a9a14;
-      opacity: 0.97;
-      transform-origin: 50% 90%;
-    }
-    /* Distribuir 12 pétalos alrededor del centro */
-    .p1  { transform: rotate(  0deg);}
-    .p2  { transform: rotate( 30deg);}
-    .p3  { transform: rotate( 60deg);}
-    .p4  { transform: rotate( 90deg);}
-    .p5  { transform: rotate(120deg);}
-    .p6  { transform: rotate(150deg);}
-    .p7  { transform: rotate(180deg);}
-    .p8  { transform: rotate(210deg);}
-    .p9  { transform: rotate(240deg);}
-    .p10 { transform: rotate(270deg);}
-    .p11 { transform: rotate(300deg);}
-    .p12 { transform: rotate(330deg);}
-    .centro {
-      position: absolute;
-      left: 69px;
-      top: 62px;
-      width: 42px;
-      height: 42px;
-      background: radial-gradient(circle at 60% 60%, #ffe59f 30%, #ad7430 57%, #714212 100%);
-      border-radius: 50%;
-      border: 4px solid #ffd447;
-      z-index: 3;
-      box-shadow: 0 2px 10px #f5b13d44;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flor 2D</title>
+    <style>
+        .flor {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 50px auto;
+        }
+        
+        /* Centro de la flor */
+        .centro {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background-color: #FFD700;
+            border-radius: 50%;
+            top: 80px;
+            left: 80px;
+            z-index: 10;
+        }
+        
+        /* Pétalos */
+        .petalo {
+            position: absolute;
+            width: 60px;
+            height: 30px;
+            background-color: #FF69B4;
+            border-radius: 50px 50px 0 0;
+            top: 85px;
+            left: 70px;
+            transform-origin: 50% 100%;
+        }
+        
+        /* Tallo */
+        .tallo {
+            position: absolute;
+            width: 8px;
+            height: 150px;
+            background-color: #228B22;
+            top: 200px;
+            left: 96px;
+            z-index: -1;
+        }
+        
+        /* Hoja */
+        .hoja {
+            position: absolute;
+            width: 40px;
+            height: 20px;
+            background-color: #32CD32;
+            border-radius: 0 50px 50px 0;
+            top: 280px;
+            left: 104px;
+            transform: rotate(15deg);
+            z-index: -1;
+        }
+    </style>
 </head>
 <body>
-  <div class="girasol-simple">
-    <div class="petalo p1"></div>
-    <div class="petalo p2"></div>
-    <div class="petalo p3"></div>
-    <div class="petalo p4"></div>
-    <div class="petalo p5"></div>
-    <div class="petalo p6"></div>
-    <div class="petalo p7"></div>
-    <div class="petalo p8"></div>
-    <div class="petalo p9"></div>
-    <div class="petalo p10"></div>
-    <div class="petalo p11"></div>
-    <div class="petalo p12"></div>
-    <div class="centro"></div>
-    <div class="tallo"></div>
-    <div class="hoja"></div>
-    <div class="hoja r"></div>
-  </div>
+    <div class="flor">
+        <!-- Centro -->
+        <div class="centro"></div>
+        
+        <!-- Pétalos (creados con JavaScript) -->
+        
+        <!-- Tallo y hoja -->
+        <div class="tallo"></div>
+        <div class="hoja"></div>
+    </div>
+
+    <script>
+        // Crear pétalos dinámicamente
+        const flor = document.querySelector('.flor');
+        const numPetals = 8;
+        
+        for (let i = 0; i < numPetals; i++) {
+            const petalo = document.createElement('div');
+            petalo.className = 'petalo';
+            petalo.style.transform = `rotate(${i * (360 / numPetals)}deg)`;
+            flor.insertBefore(petalo, document.querySelector('.tallo'));
+        }
+    </script>
 </body>
 </html>
