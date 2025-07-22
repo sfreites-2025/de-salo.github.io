@@ -3,153 +3,154 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Me Rehúso - Diapositiva Creativa</title>
+  <title>Me Rehúso - Diapositiva Especial</title>
   <style>
     body {
       margin: 0;
       min-height: 100vh;
-      background: linear-gradient(135deg, #89ffdb 0%, #fcb6fc 64%, #46bdfc 100%);
+      background: radial-gradient(ellipse at top left, #ffe9ec 30%, #ffe0d9 55%, #b3f8fd 100%), 
+                  linear-gradient(to bottom, #daffe7 60%, #c6d0fc 100%);
       font-family: 'Montserrat', 'Times New Roman', serif;
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: stretch;
       justify-content: center;
     }
-    /* Efecto de olas animadas al fondo */
-    .ocean {
-      position: fixed;
-      left: 0; right: 0; bottom: 0;
-      width: 100vw; height: 22vh;
-      z-index: 1;
-      pointer-events: none;
-    }
-    .wave {
+    /* Decorativos: vinilos y notas musicales */
+    .vinyl-record {
       position: absolute;
-      left: 0;
-      width: 200vw;
-      height: 120px;
-      opacity: 0.7;
-      animation: waveAnimate 28s linear infinite;
-    }
-    .wave2 {
-      opacity: 0.5;
-      animation-duration: 20s;
-      top: 25px;
-      filter: blur(2px);
-    }
-    @keyframes waveAnimate {
-      0% { transform: translateX(0);}
-      100% { transform: translateX(-50vw);}
-    }
-    /* Decoración: notas musicales animadas */
-    .note {
-      position: absolute;
-      color: #fb3d81;
-      font-size: 2.1em;
-      opacity: 0.7;
-      animation: floatNote 7s infinite;
-    }
-    .note1 { left: 12vw; top: 12vh; animation-delay: 0.7s;}
-    .note2 { left: 36vw; top: 17vh; animation-delay: 2.1s;}
-    .note3 { right: 24vw; top: 11vh; animation-delay: 1.4s;}
-    .note4 { left: 75vw; top: 15vh; animation-delay: 0s;}
-    .note5 { left: 58vw; top: 7vh; font-size:2.9em; animation-delay: 2.6s;}
-    @keyframes floatNote {
-      0% { transform: translateY(0) scale(1);}
-      60% { transform: translateY(-28px) scale(1.12);}
-      100% { transform: translateY(0) scale(0.96);}
-    }
-    /* Contenedor ESTILO CARRUSEL/DIAPOSITIVA */
-    .slide-container {
-      position: relative;
-      background: rgba(255,255,255,0.98);
-      box-shadow: 0 8px 28px #56c1f4cc, 0 1px 0 6px #fcb6fc80;
-      border-radius: 24px;
-      max-width: 480px;
-      width: 92vw;
-      padding: 45px 32px 40px 32px;
-      margin: 110px 0 95px 0;
-      text-align: center;
+      top: 40px;
+      left: 32px;
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: radial-gradient(#222 55%, #fff 65%, #fb3d81 100%);
+      box-shadow: 0 8px 32px #fb3d8133;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       z-index: 2;
-      overflow: hidden;
-      border-left: 7px solid #fb3d81;
+      animation: spinVinyl 7s linear infinite;
+    }
+    @keyframes spinVinyl { 100% { transform: rotate(360deg); }}
+
+    .nota-musical {
+      position: absolute; color: #ed3491; font-size: 1.7em; opacity: .54;
+      pointer-events: none; z-index: 2;
+      animation: flotarNota 7s infinite;
+    }
+    .notas1 { left: 20vw; top: 13vh; animation-delay:.7s;}
+    .notas2 { right: 14vw; top: 18vh; animation-delay:1.6s;}
+    .notas3 { left: 64vw; bottom: 12vh; animation-delay:2.7s;}
+    .notas4 { right: 5vw; bottom: 21vh; animation-delay:.5s;}
+    .notas5 { left: 35vw; bottom: 4vh; animation-delay:3.7s;}
+    @keyframes flotarNota {
+      0%   { transform: translateY(0) scale(1);}
+      60%  { transform: translateY(-30px) scale(1.17);}
+      100% { transform: translateY(-60px) scale(0.96);}
     }
 
-    .slide-title {
-      font-family: 'Montserrat', 'Times New Roman', serif;
-      font-weight: 900;
-      font-size: 2.1em;
-      color: #2b5dd6;
-      margin-bottom: 12px;
-      letter-spacing: 0.03em;
-      text-shadow: 0 2px 14px #b2f5fef0;
+    /* Slide estilo postal vertical */
+    .card {
+      background: rgba(255,255,255,0.94);
+      border-radius: 26px 53px 34px 60px/32px 60px 35px 55px;
+      box-shadow: 0 10px 36px #dfbdfc44, 0 0 7px #fb3d813b;
+      max-width: 410px;
+      width: 95vw;
+      margin: 85px auto 120px auto;
+      padding: 48px 38px 38px 38px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 3;
+      border-left: 7px solid #fb3d81;
+      backdrop-filter: blur(2px);
+      animation: entrarCard 1.4s ease;
+      position: relative;
     }
-    .slide-lyric {
-      font-size: 1.04em;
-      color: #ed3491;
+    @keyframes entrarCard {
+      0% { opacity: 0; transform: scale(0.92) translateY(40px);}
+      75%{ opacity:.95; }
+      100%{ opacity:1; transform:none;}
+    }
+    .titulo {
+      font-family:'Montserrat',serif; font-size:2em; color:#3f2088; font-weight:900;
+      margin-bottom: 8px; text-shadow:0 2px 14px #dedcff;
+      letter-spacing: .04em; text-align: center;
+    }
+    .lyric {
+      font-size: 1.07em; font-style:italic; color:#ec1b6d;
       margin-bottom: 20px;
-      font-weight: 500;
-      letter-spacing: 0.02em;
-      animation: appearText 1.4s cubic-bezier(.66,.06,.59,1.14) both;
+      background: linear-gradient(95deg,#e5cfff44,#fcb6fc00);
+      border-radius:12px;
+      padding: 10px 16px 10px 22px;
+      box-shadow: 0 0 12px #fa61ad46 inset;
+      animation: lyricFade 1.3s;
+      text-align: left;
     }
-    @keyframes appearText {
-      0% { opacity:0; transform:scale(0.95);}
-      60%{ opacity:.84; }
-      100% { opacity:1; transform:none;}
+    @keyframes lyricFade {
+      0% { opacity: 0; transform:scale(.95);}
+      100% {opacity: 1; transform:none;}
     }
-    .slide-message {
+    .mensaje {
       font-size: 0.94em;
       color: #2f194c;
-      line-height: 1.68;
-      margin-bottom: 0;
-      font-family: 'Montserrat', 'Times New Roman', serif;
-      font-style: italic;
-      background:linear-gradient(98deg,#ecf2ff 70%,#fcb6fc 102%);
-      border-radius:14px;
-      padding:17px 20px;
-      box-shadow:0 0 12px #ffbbf87a inset;
-      animation: appearText 1.8s cubic-bezier(.66,.06,.59,1.14) 0.55s both;
+      line-height: 1.7;
+      font-family: 'Montserrat','Times New Roman', serif;
+      margin: 0 0 12px 0;
+      text-align: justify;
+      animation: lyricFade 1.5s .45s both;
     }
-
-    /* concentos decorativos */
-    .slide-heartbeat {
+    .hashtag {
+      display: inline-block;
+      color: #e04da1;
+      font-size: 1.1em;
+      background: #fbeff7;
+      border-radius: 7px;
+      padding: 3px 11px;
+      margin-top: 12px;
+      box-shadow:0 2px 9px #fb3d8131;
+      font-weight: 600;
+      letter-spacing: .03em;
+    }
+    /* Nota el corazón animado */
+    .card-heart {
       display:inline-block;
       color:#fd558e;
       font-size:2em;
-      animation: heartbeat 0.9s infinite alternate;
+      animation: heartbeat 1s ease-in-out infinite alternate;
       vertical-align: middle;
-      margin-left: 6px;
-      margin-right: 0;
+      margin-left: 7px;
     }
     @keyframes heartbeat {
-      0% { transform: scale(1); }
-      40%{ transform: scale(1.23);}
-      100%{ transform: scale(1);}
+      to { transform: scale(1.33);}
     }
 
-    /* Audio player bonito */
-    .music-player {
-      margin: 24px 0 10px 0;
+    /* Audio Player Moderno */
+    .music-controls {
+      margin: 10px 0 0 0;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
-    .music-player label {
-      font-size:.94em;
-      color:#225b66;
-      margin-bottom:4px;
-      letter-spacing:.04em;
-      font-weight:600;
+    .music-controls label {
+      font-size:.93em;
+      color:#223b66;
+      margin-bottom:2px;
+      font-weight: 500;
+      letter-spacing:.038em;
     }
     .audio-bar {
-      width: 250px;
-      accent-color: #f770be;
+      width: 210px; max-width:80vw;
+      accent-color: #fa61ad;
       margin-top:8px;
+      border-radius: 12px;
+      border: none;
+      outline:none;
     }
     audio::-webkit-media-controls-panel {
       background: #ffeef6;
-      border-radius: 8px;
+      border-radius: 10px;
       color: #fb3d81;
     }
 
@@ -179,48 +180,42 @@
     }
     #btnRegresar { left: 30px; }
     #btnSiguiente { right: 30px; }
-    @media (max-width:540px){
-      .slide-container{padding:18px 4vw 22px 4vw;margin:65px 0 70px 0;}
-      .slide-title{font-size:1.23em;}
-      .nav-button{font-size:0.99em; padding:10px 13px;}
+    @media (max-width:520px){
+      .card {padding:19px 5vw 19px 5vw; margin:64px 0 55px 0;}
+      .nav-button{font-size: 0.99em; padding:10px 13px;}
+      .vinyl-record {top:6vw; left:8vw; width:45px; height:45px;}
+      #message {font-size:0.91em;}
     }
   </style>
 </head>
 <body>
-  <!-- Olas animadas tipo portada tropical, Danny Ocean style -->
-  <div class="ocean">
-    <svg class="wave" viewBox="0 0 900 130" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0 80Q150 120 300 80t300 0 300 0v50H0z" fill="#fb3d81"/>
-    </svg>
-    <svg class="wave wave2" viewBox="0 0 900 130" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0 110Q180 36 320 92t290 10 290 26v30H0z" fill="#65f1ff"/>
-    </svg>
-  </div>
-  <!-- Notas musicales decorativas -->
-  <span class="note note1">🎶</span>
-  <span class="note note2">🎷</span>
-  <span class="note note3">🎵</span>
-  <span class="note note4">🎤</span>
-  <span class="note note5">🎼</span>
+  <!-- Vinilo decorativo girando -->
+  <div class="vinyl-record"></div>
+  <!-- Notas musicales dispersas -->
+  <span class="nota-musical notas1">🎶</span>
+  <span class="nota-musical notas2">🎷</span>
+  <span class="nota-musical notas3">🎵</span>
+  <span class="nota-musical notas4">🎤</span>
+  <span class="nota-musical notas5">🎼</span>
 
-  <!-- Slide principal -->
-  <section class="slide-container">
-    <h1 class="slide-title">Me Rehúso <span class="slide-heartbeat">💓</span></h1>
-    <div class="slide-lyric">
+  <!-- Diapositiva creativa estilo postal -->
+  <section class="card">
+    <span class="titulo">Me Rehúso <span class="card-heart">💓</span></span>
+    <div class="lyric">
       <em>“Y me rehúso… a darte un último beso, así que guárdalo…”</em>
     </div>
-    <div class="music-player">
-      <label>Presiona para ambientar...</label>
+    <div class="music-controls">
+      <label>Haz sonar la vibra del recuerdo:</label>
       <audio controls class="audio-bar" preload="none">
         <source src="https://cdn.pixabay.com/audio/2023/03/28/audio_128f2b2c24.mp3?filename=latin-lovers-140730.mp3" type="audio/mp3">
         Tu navegador no soporta audio.
       </audio>
     </div>
-    <div class="slide-message">
-      Porque a veces nos toca dejar ir, aunque el corazón se resista a cerrar capítulos. <br>
-      Así como en la canción, prefiero celebrar lo vivido antes que decir adiós. Amar con intensidad, aunque duela, es parte de crecer y sanar.<br><br>
-      <span style="font-weight:500;">Hoy le canto a esos recuerdos, porque aún en la distancia, lo que fue verdadero nunca se olvida.</span><br>
-      <span style="color: #e04da1; font-size:1.15em;">#MeRehúsoASoltar</span>
+    <div class="mensaje">
+      Porque hay momentos en la vida donde el corazón elige recordar y no soltar del todo. Así como en la canción, entre olas y notas de verano, a veces solo queda bailar con los recuerdos, soltar lo que duele y mirar con gratitud el camino compartido.<br>
+      <b>Amar, a veces, también es aprender a dejar ir con ternura y ritmo propio.</b>
+      <br>
+      <span class="hashtag">#MeRehúsoAVoltearAtrás</span>
     </div>
   </section>
 
@@ -228,10 +223,8 @@
   <button id="btnSiguiente" class="nav-button" type="button">Siguiente →</button>
 
   <script>
-    const btnRegresar = document.getElementById('btnRegresar');
-    const btnSiguiente = document.getElementById('btnSiguiente');
-    btnRegresar.addEventListener('click', () => window.history.back());
-    btnSiguiente.addEventListener('click', () => window.location.href = 'index13.html');
+    document.getElementById('btnRegresar').onclick = () => window.history.back();
+    document.getElementById('btnSiguiente').onclick = () => window.location.href = 'index13.html';
   </script>
 </body>
 </html>
