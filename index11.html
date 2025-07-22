@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Un Mensaje para Tu Familia</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(120deg, #fdf6e3 0%, #f8bbd0 70%, #a3e0f7 100%);
+      font-family: 'Times New Roman', serif;
+      position: relative;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Flores animadas */
+    .flower {
+      position: absolute;
+      width: 54px; height: 54px;
+      pointer-events: none;
+      opacity: 0.67;
+      animation: float-flower 14s infinite linear alternate;
+    }
+    .flower1 { left: 10vw; top: 25vh; animation-delay: 0s; }
+    .flower2 { right: 16vw; top: 38vh; animation-delay: 5s; }
+    .flower3 { left: 52vw; bottom: 10vh; animation-delay: 2s; }
+    .flower4 { right: 9vw; bottom: 22vh; animation-delay: 8s; }
+    .flower5 { left: 23vw; top: 70vh; animation-delay: 10s;}
+    @keyframes float-flower {
+      0% { transform: scale(1) rotate(0deg) translateY(0px);}
+      35%{ transform: scale(1.2) rotate(-12deg) translateY(-16px);}
+      60%{ transform: scale(1.1) rotate(15deg) translateY(-24px);}
+      100% { transform: scale(1.1) rotate(14deg) translateY(-44px);}
+    }
+
+    /* Contenedor del mensaje */
+    .container {
+      background: rgba(255,255,255,0.93);
+      border-radius: 24px;
+      box-shadow: 0 6px 32px 0 rgba(195,135,206,0.22), 0 0 0 2.5px #e889b5;
+      padding: 38px 38px 38px 54px;
+      margin: 110px 0 85px 0;
+      max-width: 440px;
+      min-width: 290px;
+      position: relative;
+      animation: bounceIn 1.7s cubic-bezier(.37,1.29,.64,.97) forwards;
+      border-left: 7px solid #ffe091;
+    }
+
+    @keyframes bounceIn {
+      0% { opacity: 0; transform: translateY(100px) scale(0.96);}
+      40% { opacity: 1; transform: translateY(-22px) scale(1.01);}
+      60% { transform: translateY(14px) scale(0.97);}
+      75% { transform: translateY(-4px) scale(1.02);}
+      100% { opacity: 1; transform: none;}
+    }
+
+    .container p {
+      font-size: 1em;
+      color: #624170;
+      line-height: 1.60;
+      letter-spacing: 0.012em;
+      margin: 0;
+      white-space: pre-line;
+    }
+
+    /* Diseño de corazones flotando */
+    .corazon {
+      position: absolute;
+      font-size: 22px;
+      color: #fd558e;
+      animation: floatHeart 5.2s ease-in infinite alternate;
+      filter: blur(0.2px) drop-shadow(0 0 2.5px #e04da1cc);
+      pointer-events: none;
+    }
+    .corazon.c1 { left: 2vw; bottom: 5vh; font-size: 27px; animation-delay: 1s;}
+    .corazon.c2 { left: 99vw; top: 12vh; font-size: 31px; animation-delay: 2s;}
+    .corazon.c3 { right: 18vw; top: 10vh; font-size: 24px; animation-delay: 0s;}
+    .corazon.c4 { left: 50vw; bottom: 12vh; font-size: 23px; animation-delay: 2.8s;}
+    @keyframes floatHeart {
+      0%   { transform: translateY(0) scale(1);}
+      30%  { transform: translateY(-24px) scale(0.95);}
+      50%  { transform: scale(1.14);}
+      100% { transform: translateY(-58px) scale(0.9);}
+    }
+
+    /* Botones navegación */
+    .nav-button {
+      position: fixed;
+      bottom: 30px;
+      background: linear-gradient(110deg, #7ae0ea 12%, #fd558e 88%);
+      color: #6d1472;
+      border: none;
+      border-radius: 12px;
+      padding: 14px 44px;
+      font-family: 'Times New Roman', serif;
+      font-weight: 700;
+      font-size: 1.1em;
+      box-shadow: 0 2px 18px #5ff5fc42;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      transition: background 0.25s, color 0.22s, box-shadow 0.22s;
+      outline: none;
+      z-index: 20;
+    }
+    .nav-button:hover {
+      background: linear-gradient(112deg, #fd558e, #7ae0ea 86%);
+      color: #ea20b8;
+      box-shadow: 0 8px 30px #ff5ea4cc;
+    }
+    #btnRegresar { left: 30px; }
+    #btnSiguiente { right: 30px; }
+    @media (max-width:520px){
+      .container { padding:22px 10px 22px 12px; min-width:0; max-width:97vw;}
+      #message{ font-size:0.93em;}
+      #btnRegresar, #btnSiguiente {font-size: 1em; padding:12px 10px;}
+    }
+  </style>
+</head>
+<body>
+  <!-- Elementos decorativos -->
+  <span class="flower flower1">🌸</span>
+  <span class="flower flower2">🌻</span>
+  <span class="flower flower3">🌼</span>
+  <span class="flower flower4">🌷</span>
+  <span class="flower flower5">💐</span>
+
+  <span class="corazon c1">💖</span>
+  <span class="corazon c2">💗</span>
+  <span class="corazon c3">💞</span>
+  <span class="corazon c4">💝</span>
+
+  <!-- Mensaje principal -->
+  <section class="container" id="message">
+    <p style="font-size:0.95em;">
+      Solo quería decirte lo mucho que significa para mí tu familia. Desde el primer día, me hicieron sentir parte de ellos: tu mamá con su cariño y consejos, tu hermanita Brianna y Valerie con sus risas, tu abuela y tus tías, siempre al pendiente y con una palabra amable. No exagero cuando digo que me sentí como en casa, como si siempre hubiera estado ahí. Pienso en todos y cada uno de ellos, los recuerdo con mucho aprecio y con gratitud. Siempre le pido a Dios que cuide a tu familia, que los proteja adonde vayan, porque de verdad sé que son tu mayor apoyo, tu refugio y tu fuerza.<br><br>
+      Gracias por permitirme compartir momentos con ustedes y sentirme tan bien recibido. Donde sea que estén, deseo que a cada uno la vida les sonría y sigan siendo esa familia tan unida y especial que me tocó conocer.
+    </p>
+  </section>
+
+  <button id="btnRegresar" class="nav-button" type="button">Regresar</button>
+  <button id="btnSiguiente" class="nav-button" type="button">Siguiente →</button>
+
+  <script>
+    const btnRegresar = document.getElementById('btnRegresar');
+    const btnSiguiente = document.getElementById('btnSiguiente');
+    btnRegresar.addEventListener('click', () => window.history.back());
+    btnSiguiente.addEventListener('click', () => window.location.href = 'index12.html');
+  </script>
+</body>
+</html>
