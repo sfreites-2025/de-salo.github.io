@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Me Rehúso - Mensaje Personal</title>
 <style>
-  /* Fondo imagen con filtro oscuro para legibilidad */
+  /* Fondo estilo musical: siluetas de notas musicales difuminadas en degradado oscuro */
   body {
     margin: 0;
     min-height: 100vh;
@@ -15,25 +15,25 @@
     justify-content: center;
     align-items: center;
     padding: 24px;
-    background-image: url("https://i.scdn.co/image/ab67616d0000b273a396d7f42b09620a84e8e199");
-    background-size: cover;
-    background-position: center center;
+    background:
+      radial-gradient(circle at center, rgba(251,61,129,0.25) 0%, rgba(59,26,109,0.9) 90%),
+      url('https://cdn.pixabay.com/photo/2017/04/19/14/57/music-2241189_1280.jpg') no-repeat center center / cover;
     position: relative;
     text-align: justify;
   }
-  /* Overlay semitransparente para mejor contraste */
+
+  /* Overlay semitransparente "musical" para mejorar legibilidad */
   body::before {
     content: "";
     position: fixed;
     inset: 0;
-    background: rgba(55, 18, 63, 0.72);
+    background: rgba(20, 11, 40, 0.7);
     z-index: 0;
   }
 
-  /* Contenedor principal */
   .card {
     position: relative;
-    background: rgba(255 255 255 / 0.1);
+    background: rgba(255 255 255 / 0.14);
     border-radius: 48px 42px 36px 54px / 36px 54px 44px 48px;
     box-shadow: 0 0 40px #fb3d81cc;
     max-width: 680px;
@@ -42,7 +42,9 @@
     z-index: 1;
     user-select: text;
     line-height: 1.5;
-    font-size: 0.85em; /* Letras más pequeñas */
+    font-size: 0.85em;
+    color: #fde8f0;
+    backdrop-filter: blur(14px);
   }
 
   /* Corazón animado */
@@ -50,7 +52,7 @@
     position: absolute;
     top: 26px;
     right: 32px;
-    font-size: 2.8em; /* ligeramente más pequeño para proporción */
+    font-size: 2.8em;
     color: #fb3d81;
     animation: heartbeat 1.2s ease-in-out infinite alternate;
     user-select: none;
@@ -62,13 +64,13 @@
     100% { transform: scale(1.15);}
   }
 
-  /* Resaltados */
+  /* Texto resaltado */
   .highlight {
     color: #ffb3d6;
     font-weight: 700;
   }
 
-  /* Párrafos con fade-in escalonada */
+  /* Aparición con animación */
   .fadeIn {
     opacity: 0;
     animation: fadeInUp 1.3s ease forwards;
@@ -122,11 +124,11 @@
   #btnRegresar { left: 30px; }
   #btnSiguiente { right: 30px; }
 
-  /* Responsivo */
+  /* Responsive */
   @media (max-width: 520px) {
     .card {
       padding: 24px 24px 36px 24px;
-      font-size: 0.75em; /* Ajustamos un poco más para móviles */
+      font-size: 0.75em;
       line-height: 1.4;
     }
     .nav-button {
@@ -143,7 +145,7 @@
 </head>
 <body>
 
-  <main class="card" role="main" aria-label="Mensaje sincero basado en la canción Me Rehúso">
+  <main class="card" role="main" aria-label="Mensaje personalizado basado en la canción Me Rehúso">
     <div class="heart" aria-hidden="true">💓</div>
 
     <p class="fadeIn delay-1">Quiero ser <span class="highlight">completamente honesto contigo</span> y hablarte desde lo más sencillo de mi corazón, sin filtros, sin adornos y sin vueltas.</p>
@@ -172,5 +174,6 @@
     document.getElementById('btnRegresar').onclick = () => window.history.back();
     document.getElementById('btnSiguiente').onclick = () => window.location.href = 'index13.html';
   </script>
+
 </body>
 </html>
