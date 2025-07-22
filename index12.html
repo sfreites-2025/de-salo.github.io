@@ -5,47 +5,44 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Me Rehúso - Mensaje Personal</title>
 <style>
-  /* Fondo degradado inspirado en azul, morado y rojo */
+  /* Fondo imagen con filtro oscuro para legibilidad */
   body {
     margin: 0;
     min-height: 100vh;
-    background: linear-gradient(135deg, #3b1a6d, #5e4b8b, #c73967, #fb3d81);
-    background-size: 400% 400%;
-    animation: gradientShift 20s ease infinite;
     font-family: 'Montserrat', 'Times New Roman', serif;
+    color: #fbeef6;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 24px;
-    color: #fbeef6;
-    overflow-x: hidden;
+    background-image: url("https://i.scdn.co/image/ab67616d0000b273a396d7f42b09620a84e8e199");
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+    text-align: justify;
   }
-  @keyframes gradientShift {
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
+  /* Overlay semitransparente para mejor contraste */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(55, 18, 63, 0.72);
+    z-index: 0;
   }
 
   /* Contenedor principal */
   .card {
-    background: rgba(255 255 255 / 0.12);
+    position: relative;
+    background: rgba(255 255 255 / 0.1);
     border-radius: 48px 42px 36px 54px / 36px 54px 44px 48px;
     box-shadow: 0 0 40px #fb3d81cc;
     max-width: 680px;
     width: 95vw;
     padding: 36px 48px 48px 48px;
-    position: relative;
-    text-align: justify;
-    font-size: 1.12em;
-    line-height: 1.68;
+    z-index: 1;
     user-select: text;
-    color: #fde8f0;
-    backdrop-filter: blur(10px);
-    animation: fadeInCard 1.8s ease forwards;
-  }
-  @keyframes fadeInCard {
-    from {opacity: 0; transform: translateY(40px);}
-    to {opacity: 1; transform: none;}
+    line-height: 1.5;
+    font-size: 0.85em; /* Letras más pequeñas */
   }
 
   /* Corazón animado */
@@ -53,7 +50,7 @@
     position: absolute;
     top: 26px;
     right: 32px;
-    font-size: 3.4em;
+    font-size: 2.8em; /* ligeramente más pequeño para proporción */
     color: #fb3d81;
     animation: heartbeat 1.2s ease-in-out infinite alternate;
     user-select: none;
@@ -75,6 +72,7 @@
   .fadeIn {
     opacity: 0;
     animation: fadeInUp 1.3s ease forwards;
+    margin-bottom: 18px;
   }
   .delay-1 { animation-delay: 0.3s; }
   .delay-2 { animation-delay: 1s; }
@@ -96,7 +94,7 @@
     }
   }
 
-  /* Botones comunes */
+  /* Botones navegación */
   .nav-button {
     position: fixed;
     bottom: 30px;
@@ -104,17 +102,17 @@
     color: #6d1472;
     border: none;
     border-radius: 12px;
-    padding: 14px 42px;
+    padding: 14px 40px;
     font-family: 'Times New Roman', serif;
     font-weight: 700;
-    font-size: 1.12em;
+    font-size: 1.1em;
     box-shadow: 0 2px 18px #5ff5fc42;
     letter-spacing: 0.03em;
     cursor: pointer;
     transition: background 0.25s, color 0.22s, box-shadow 0.22s;
     outline: none;
     user-select: none;
-    z-index: 30;
+    z-index: 10;
   }
   .nav-button:hover {
     background: linear-gradient(112deg, #fd558e, #7ae0ea 86%);
@@ -128,15 +126,15 @@
   @media (max-width: 520px) {
     .card {
       padding: 24px 24px 36px 24px;
-      font-size: 1em;
-      line-height: 1.5;
+      font-size: 0.75em; /* Ajustamos un poco más para móviles */
+      line-height: 1.4;
     }
     .nav-button {
       font-size: 1em;
-      padding: 12px 24px;
+      padding: 12px 22px;
     }
     .heart {
-      font-size: 2.8em;
+      font-size: 2.4em;
       top: 16px;
       right: 24px;
     }
@@ -145,7 +143,7 @@
 </head>
 <body>
 
-  <main class="card" role="main" aria-label="Mensaje personal basado en la canción Me Rehúso">
+  <main class="card" role="main" aria-label="Mensaje sincero basado en la canción Me Rehúso">
     <div class="heart" aria-hidden="true">💓</div>
 
     <p class="fadeIn delay-1">Quiero ser <span class="highlight">completamente honesto contigo</span> y hablarte desde lo más sencillo de mi corazón, sin filtros, sin adornos y sin vueltas.</p>
@@ -174,6 +172,5 @@
     document.getElementById('btnRegresar').onclick = () => window.history.back();
     document.getElementById('btnSiguiente').onclick = () => window.location.href = 'index13.html';
   </script>
-
 </body>
 </html>
