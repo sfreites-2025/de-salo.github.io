@@ -10,12 +10,12 @@
       min-height: 100vh;
       margin: 0;
       display: flex;
-      flex-direction: column; /* Cambiado para permitir contenido + botones */
+      flex-direction: column; /* para juntar cita y botones verticalmente */
       align-items: center;
       justify-content: center;
       font-family: 'Merriweather', 'Georgia', serif;
-      padding: 20px; /* Añadido padding para evitar superposición con botones */
-      padding-bottom: 90px; /* Espacio para los botones de navegación */
+      padding: 20px;
+      padding-bottom: 90px; /* espacio para botones */
     }
     .cita-container {
       background: rgba(255,255,255,0.82);
@@ -27,7 +27,7 @@
       position: relative;
       overflow: hidden;
       z-index: 2;
-      margin-bottom: 20px; /* Espacio entre el contenedor y los botones si los hay */
+      margin-bottom: 20px;
     }
     .cita {
       font-size: 1.26em;
@@ -94,10 +94,9 @@
       0% { transform: rotate(-12deg) scaleX(-1);}
       100% { transform: rotate(8deg) scaleX(-1) translateY(-9px);}
     }
-
-    /* Estilos de los botones de navegación */
+    /* Botones navegación */
     .nav-button {
-      position: fixed; /* Mantiene los botones en la pantalla */
+      position: fixed;
       bottom: 30px;
       background: linear-gradient(110deg, #7ae0ea 12%, #fd558e 88%);
       color: #6d1472;
@@ -113,7 +112,7 @@
       transition: background 0.25s, color 0.22s, box-shadow 0.22s;
       outline: none;
       user-select: none;
-      z-index: 10; /* Asegura que estén por encima de otros elementos */
+      z-index: 10;
     }
     .nav-button:hover {
       background: linear-gradient(112deg, #fd558e, #7ae0ea 86%);
@@ -140,14 +139,12 @@
     <span class="autor">— Salo inspirado en Mario Benedetti</span>
   </div>
 
-  <!-- Botones de Navegación -->
   <button id="btnRegresar" class="nav-button" type="button" aria-label="Regresar a la página anterior">Regresar</button>
-  <button id="btnSiguiente" class="nav-button" type="button" aria-label="Ir a la siguiente página">Siguiente →</button>
+  <button id="btnSiguiente" class="nav-button" type="button" aria-label="Ir a la misma página">Siguiente →</button>
 
   <script>
-    // Script para la funcionalidad de los botones
     document.getElementById('btnRegresar').onclick = () => window.history.back();
-    // Asume que la siguiente página se llama index14.html
+    // Siguiente aquí redirige a index14.html 
     document.getElementById('btnSiguiente').onclick = () => window.location.href = 'index14.html';
   </script>
 </body>
