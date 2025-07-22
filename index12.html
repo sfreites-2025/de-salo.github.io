@@ -61,16 +61,9 @@
   .delay-7 { animation-delay: 4.5s; }
   .delay-8 { animation-delay: 5.2s; }
   @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(32px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(32px);}
+    to { opacity: 1; transform: translateY(0);}
   }
-  /* Animaciones laterales musicales verticales */
   .side-animation {
     position: fixed;
     top: 20vh;
@@ -108,20 +101,10 @@
   .note:nth-child(4) { animation-delay: 1s; }
   .note:nth-child(5) { animation-delay: 3s; }
   @keyframes floatDown {
-    0% {
-      transform: translateY(-50px) scale(1);
-      opacity: 0.7;
-    }
-    50% {
-      transform: translateY(20px) scale(1.15);
-      opacity: 0.95;
-    }
-    100% {
-      transform: translateY(100px) scale(0.85);
-      opacity: 0;
-    }
+    0% { transform: translateY(-50px) scale(1); opacity: 0.7; }
+    50% { transform: translateY(20px) scale(1.15); opacity: 0.95; }
+    100% { transform: translateY(100px) scale(0.85); opacity: 0; }
   }
-  /* Botones navegación */
   .nav-button {
     position: fixed;
     bottom: 30px;
@@ -179,6 +162,40 @@
     margin-right: 10px;
     fill: #ff0000;
   }
+  .invito-msg {
+    position: fixed;
+    top: 54px;
+    right: 21px;
+    background: rgba(34,34,34,0.92);
+    color: #1DB954;
+    padding: 7px 18px 7px 14px;
+    border-radius: 10px;
+    font-weight: 800;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1em;
+    letter-spacing: 0.03em;
+    margin-top: 5px;
+    z-index: 19;
+    box-shadow: 0 2px 18px #16161638;
+    animation: bounceIn 1.2s;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .invito-msg .invito-icon {
+    font-size: 1.25em;
+    animation: pulseIcon 1.7s infinite alternate;
+    margin-top: -1px;
+  }
+  @keyframes pulseIcon {
+    from { transform: scale(1);}
+    to { transform: scale(1.25); color: #25ef73; }
+  }
+  @keyframes bounceIn {
+    0% { transform: scale(0.7) translateY(-22px); opacity: 0;}
+    66% { transform: scale(1.11) translateY(6px); opacity: 1;}
+    100% { transform: scale(1) translateY(0px);}
+  }
   @media (max-width: 520px) {
     .youtube-spotify-link {
       font-size: 0.8em;
@@ -191,6 +208,12 @@
       width: 18px;
       height: 18px;
       margin-right: 8px;
+    }
+    .invito-msg {
+      font-size: .89em;
+      padding: 5px 11px 5px 8px;
+      top: 38px;
+      right: 10px;
     }
     .side-animation { display: none; }
   }
@@ -224,21 +247,20 @@
     Ver en YouTube
   </a>
 
+  <!-- Mensaje animado debajo del link -->
+  <div class="invito-msg">
+    <span class="invito-icon">💚</span>
+    Escúchala reina, la invito
+  </div>
+
   <main class="card" role="main" aria-label="Mensaje personal basado en la canción Me Rehúso">
     <p class="fadeIn delay-1">Quiero ser <span class="highlight">completamente honesto contigo</span> y hablarte desde lo más sencillo de mi corazón, sin filtros, sin adornos y sin vueltas.</p>
-
     <p class="fadeIn delay-2">Sé que la vida nos llevó por caminos distintos, pero todavía hay cosas que me cuesta dejar atrás. Me sigue importando cómo estás, me sigue alegrando verte brillar de esa manera tan tuya, aunque ahora solo pueda hacerlo <span class="highlight">desde la distancia</span>.</p>
-
     <p class="fadeIn delay-3">No puedo mentir, extraño los ratos simples, tus gestos y hasta esos silencios donde no hacía falta decir nada. De verdad, me hace feliz saber que encuentras tu rumbo, que sigues creciendo y que te rodeas de personas y momentos que te hacen bien.</p>
-
     <p class="fadeIn delay-4">No me acostumbro a la idea de desaparecer así porque sí de tu historia. No puedo forzarme a olvidar lo bonito o a dejar de sentir ese cariño tan fuerte.</p>
-
     <p class="fadeIn delay-5">La verdad es que, aunque pase el tiempo, aunque cada uno siga su propio camino, <span class="highlight">me rehúso a dejar de desearte lo mejor, a preocuparme, a admirarte y llevarte conmigo en esos pequeños recuerdos de todos los días</span>.</p>
-
     <p class="fadeIn delay-6">Gracias por darme tanto y por permitir que, al menos por un momento, formara parte de tu vida.</p>
-
     <p class="fadeIn delay-7">Ojalá siempre tengas motivos para sonreír y te rodee el amor, la suerte y la alegría que mereces.</p>
-
     <p class="fadeIn delay-8" style="text-align:center; font-weight:bold; margin-top:1em;">
       A ti, siempre te voy a recordar con cariño, porque lo que fuiste para mí <span class="highlight">no se olvida así nomás</span>.
     </p>
@@ -251,6 +273,5 @@
     document.getElementById('btnRegresar').onclick = () => window.history.back();
     document.getElementById('btnSiguiente').onclick = () => window.location.href = 'index13.html';
   </script>
-
 </body>
 </html>
