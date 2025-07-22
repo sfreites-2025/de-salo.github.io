@@ -3,11 +3,101 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Index14 - Página Completa con Botones</title>
+  <title>Cita Poética Animada</title>
   <style>
-    /* Estilos básicos para los botones */
+    body {
+      background: linear-gradient(115deg, #ffe29f 0%, #ffc3a0 100%);
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      flex-direction: column; /* Cambiado para permitir contenido + botones */
+      align-items: center;
+      justify-content: center;
+      font-family: 'Merriweather', 'Georgia', serif;
+      padding: 20px; /* Añadido padding para evitar superposición con botones */
+      padding-bottom: 90px; /* Espacio para los botones de navegación */
+    }
+    .cita-container {
+      background: rgba(255,255,255,0.82);
+      box-shadow: 0 8px 45px #ffb17255;
+      border-radius: 28px 64px 38px 28px;
+      padding: 46px 34px 38px 38px;
+      max-width: 640px;
+      width: 92vw;
+      position: relative;
+      overflow: hidden;
+      z-index: 2;
+      margin-bottom: 20px; /* Espacio entre el contenedor y los botones si los hay */
+    }
+    .cita {
+      font-size: 1.26em;
+      font-weight: 500;
+      color: #ad5874;
+      text-shadow: 0px 2px 12px #ffb7c3dd;
+      letter-spacing: 0.01em;
+      line-height: 1.6;
+      opacity: 0;
+      animation: appearUp 2s forwards;
+    }
+    .autor {
+      display: block;
+      text-align: right;
+      margin-top: 32px;
+      font-size: 1em;
+      color: #484540;
+      letter-spacing: 0.09em;
+      font-style: italic;
+      opacity: 0;
+      animation: fadeAutor 2.4s 1.6s forwards;
+    }
+    @keyframes appearUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px) scale(.96);
+      }
+      60% {
+        opacity: 0.2;
+        transform: translateY(-8px) scale(1.03);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+    @keyframes fadeAutor {
+      from { opacity: 0; filter: blur(6px);}
+      70% { opacity: 0.4; filter: blur(1px);}
+      to { opacity: 1; filter: blur(0);}
+    }
+    .decoration {
+      position: absolute;
+      pointer-events: none;
+      opacity: .14;
+    }
+    .decoration.corazon {
+      left: 28px; top: -24px;
+      font-size: 6em;
+      color: #ff5598;
+      animation: heartFloat 1.8s infinite alternate;
+    }
+    .decoration.pluma {
+      right: 24px; bottom: -6px;
+      width: 85px;
+      opacity: 0.12;
+      animation: flyFeather 6s infinite alternate;
+    }
+    @keyframes heartFloat {
+      from { transform: scale(0.92) translateY(-9px);}
+      to { transform: scale(1.08) translateY(11px);}
+    }
+    @keyframes flyFeather {
+      0% { transform: rotate(-12deg) scaleX(-1);}
+      100% { transform: rotate(8deg) scaleX(-1) translateY(-9px);}
+    }
+
+    /* Estilos de los botones de navegación */
     .nav-button {
-      position: fixed;
+      position: fixed; /* Mantiene los botones en la pantalla */
       bottom: 30px;
       background: linear-gradient(110deg, #7ae0ea 12%, #fd558e 88%);
       color: #6d1472;
@@ -23,7 +113,7 @@
       transition: background 0.25s, color 0.22s, box-shadow 0.22s;
       outline: none;
       user-select: none;
-      z-index: 10;
+      z-index: 10; /* Asegura que estén por encima de otros elementos */
     }
     .nav-button:hover {
       background: linear-gradient(112deg, #fd558e, #7ae0ea 86%);
@@ -32,51 +122,33 @@
     }
     #btnRegresar { left: 30px; }
     #btnSiguiente { right: 30px; }
-
-    /* Ejemplo de contenido para la página */
-    body {
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
-      margin: 0;
-      padding: 40px 24px 100px 24px; /* bottom padding para que no tape botón */
-      background: #fdf6f0;
-      color: #4a3f35;
-      min-height: 100vh;
-    }
-
-    h1 {
-      font-family: 'Georgia', serif;
-      font-weight: 700;
-      font-size: 2.4em;
-      margin-bottom: 0.5em;
-      color: #964b00;
-      text-align: center;
-    }
-    p {
-      max-width: 700px;
-      margin: 0 auto 1.2em auto;
-      font-size: 1.1em;
-      color: #533a0c;
-    }
   </style>
 </head>
 <body>
+  <div class="cita-container">
+    <div class="decoration corazon" aria-hidden="true">❤</div>
+    <img src="https://cdn.pixabay.com/photo/2013/07/12/18/39/feather-153983_960_720.png" class="decoration pluma" alt="" />
+    <div class="cita">
+      “Te elijo a ti en esta vida y en las otras,<br>
+      aunque nuestros caminos vayan en direcciones opuestas.<br>
+      No borro tus huellas de lo que soy,<br>
+      porque el amor, cuando es verdadero, no aspira a poseer,<br>
+      sólo a dejar memoria viva en el alma.<br>
+      Por eso, aunque no me quede el abrazo,<br>
+      me quedan los latidos donde siempre tendrás hogar.”<br>
+    </div>
+    <span class="autor">— Salo inspirado en Mario Benedetti</span>
+  </div>
 
-  <h1>Bienvenido a Index14</h1>
-  <p>Este es un ejemplo de contenido para la página Index14, donde puedes colocar tus textos, imágenes o cualquier información que desees mostrar.</p>
-  <p>Al final de la página encontrarás los botones de navegación para <strong>Regresar</strong> a la página anterior o ir a la <strong>Siguiente</strong> página.</p>
-  <p>Puedes modificar este contenido según tus necesidades.</p>
-
-  <!-- Botones navegación -->
+  <!-- Botones de Navegación -->
   <button id="btnRegresar" class="nav-button" type="button" aria-label="Regresar a la página anterior">Regresar</button>
   <button id="btnSiguiente" class="nav-button" type="button" aria-label="Ir a la siguiente página">Siguiente →</button>
 
   <script>
-    // Botón regresar vuelve atrás en el historial
+    // Script para la funcionalidad de los botones
     document.getElementById('btnRegresar').onclick = () => window.history.back();
-    // Botón siguiente dirige a index15.html (ajusta si tu siguiente página tiene otro nombre)
-    document.getElementById('btnSiguiente').onclick = () => window.location.href = 'index14.html';
+    // Asume que la siguiente página se llama index15.html
+    document.getElementById('btnSiguiente').onclick = () => window.location.href = 'index15.html';
   </script>
-
 </body>
 </html>
