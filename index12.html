@@ -1,371 +1,179 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Me Rehúso - Diapositiva Inspiradora</title>
-  <style>
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background: radial-gradient(
-          ellipse at top left,
-          #ffe9ec 30%,
-          #ffe0d9 55%,
-          #b3f8fd 100%
-        ),
-        linear-gradient(to bottom, #daffe7 60%, #c6d0fc 100%);
-      font-family: "Montserrat", "Times New Roman", serif;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      align-items: stretch;
-      justify-content: center;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Me Rehúso - Mensaje Personal</title>
+<style>
+  /* Fondo degradado inspirado en azul, morado y rojo */
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #3b1a6d, #5e4b8b, #c73967, #fb3d81);
+    background-size: 400% 400%;
+    animation: gradientShift 20s ease infinite;
+    font-family: 'Montserrat', 'Times New Roman', serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+    color: #fbeef6;
+    overflow-x: hidden;
+  }
+  @keyframes gradientShift {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+  }
 
-    /* Vinilo decorativo girando */
-    .vinyl-record {
-      position: absolute;
-      top: 40px;
-      left: 32px;
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      background: radial-gradient(#222 55%, #fff 65%, #fb3d81 100%);
-      box-shadow: 0 8px 32px #fb3d8133;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 2;
-      animation: spinVinyl 7s linear infinite;
-    }
-    @keyframes spinVinyl {
-      100% {
-        transform: rotate(360deg);
-      }
-    }
+  /* Contenedor principal */
+  .card {
+    background: rgba(255 255 255 / 0.12);
+    border-radius: 48px 42px 36px 54px / 36px 54px 44px 48px;
+    box-shadow: 0 0 40px #fb3d81cc;
+    max-width: 680px;
+    width: 95vw;
+    padding: 36px 48px 48px 48px;
+    position: relative;
+    text-align: justify;
+    font-size: 1.12em;
+    line-height: 1.68;
+    user-select: text;
+    color: #fde8f0;
+    backdrop-filter: blur(10px);
+    animation: fadeInCard 1.8s ease forwards;
+  }
+  @keyframes fadeInCard {
+    from {opacity: 0; transform: translateY(40px);}
+    to {opacity: 1; transform: none;}
+  }
 
-    /* Notas musicales dispersas */
-    .nota-musical {
-      position: absolute;
-      color: #ed3491;
-      font-size: 1.7em;
-      opacity: 0.54;
-      pointer-events: none;
-      z-index: 2;
-      animation: flotarNota 7s infinite;
-    }
-    .notas1 {
-      left: 20vw;
-      top: 13vh;
-      animation-delay: 0.7s;
-    }
-    .notas2 {
-      right: 14vw;
-      top: 18vh;
-      animation-delay: 1.6s;
-    }
-    .notas3 {
-      left: 64vw;
-      bottom: 12vh;
-      animation-delay: 2.7s;
-    }
-    .notas4 {
-      right: 5vw;
-      bottom: 21vh;
-      animation-delay: 0.5s;
-    }
-    .notas5 {
-      left: 35vw;
-      bottom: 4vh;
-      animation-delay: 3.7s;
-    }
-    @keyframes flotarNota {
-      0% {
-        transform: translateY(0) scale(1);
-      }
-      60% {
-        transform: translateY(-30px) scale(1.17);
-      }
-      100% {
-        transform: translateY(-60px) scale(0.96);
-      }
-    }
+  /* Corazón animado */
+  .heart {
+    position: absolute;
+    top: 26px;
+    right: 32px;
+    font-size: 3.4em;
+    color: #fb3d81;
+    animation: heartbeat 1.2s ease-in-out infinite alternate;
+    user-select: none;
+  }
+  @keyframes heartbeat {
+    0% { transform: scale(1);}
+    40% { transform: scale(1.3);}
+    60% { transform: scale(1);}
+    100% { transform: scale(1.15);}
+  }
 
-    /* Slide estilo postal vertical */
+  /* Resaltados */
+  .highlight {
+    color: #ffb3d6;
+    font-weight: 700;
+  }
+
+  /* Párrafos con fade-in escalonada */
+  .fadeIn {
+    opacity: 0;
+    animation: fadeInUp 1.3s ease forwards;
+  }
+  .delay-1 { animation-delay: 0.3s; }
+  .delay-2 { animation-delay: 1s; }
+  .delay-3 { animation-delay: 1.7s; }
+  .delay-4 { animation-delay: 2.4s; }
+  .delay-5 { animation-delay: 3.1s; }
+  .delay-6 { animation-delay: 3.8s; }
+  .delay-7 { animation-delay: 4.5s; }
+  .delay-8 { animation-delay: 5.2s; }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(32px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Botones comunes */
+  .nav-button {
+    position: fixed;
+    bottom: 30px;
+    background: linear-gradient(110deg, #7ae0ea 12%, #fd558e 88%);
+    color: #6d1472;
+    border: none;
+    border-radius: 12px;
+    padding: 14px 42px;
+    font-family: 'Times New Roman', serif;
+    font-weight: 700;
+    font-size: 1.12em;
+    box-shadow: 0 2px 18px #5ff5fc42;
+    letter-spacing: 0.03em;
+    cursor: pointer;
+    transition: background 0.25s, color 0.22s, box-shadow 0.22s;
+    outline: none;
+    user-select: none;
+    z-index: 30;
+  }
+  .nav-button:hover {
+    background: linear-gradient(112deg, #fd558e, #7ae0ea 86%);
+    color: #ea20b8;
+    box-shadow: 0 8px 30px #ff5ea4cc;
+  }
+  #btnRegresar { left: 30px; }
+  #btnSiguiente { right: 30px; }
+
+  /* Responsivo */
+  @media (max-width: 520px) {
     .card {
-      background: rgba(255, 255, 255, 0.94);
-      border-radius: 26px 53px 34px 60px / 32px 60px 35px 55px;
-      box-shadow: 0 10px 36px #dfbdfc44, 0 0 7px #fb3d813b;
-      max-width: 450px;
-      width: 95vw;
-      margin: 85px auto 120px auto;
-      padding: 48px 38px 38px 38px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      z-index: 3;
-      border-left: 7px solid #fb3d81;
-      backdrop-filter: blur(2px);
-      animation: entrarCard 1.4s ease;
-      position: relative;
-      user-select: none;
+      padding: 24px 24px 36px 24px;
+      font-size: 1em;
+      line-height: 1.5;
     }
-    @keyframes entrarCard {
-      0% {
-        opacity: 0;
-        transform: scale(0.92) translateY(40px);
-      }
-      75% {
-        opacity: 0.95;
-      }
-      100% {
-        opacity: 1;
-        transform: none;
-      }
-    }
-
-    .titulo {
-      font-family: "Montserrat", serif;
-      font-size: 2em;
-      color: #3f2088;
-      font-weight: 900;
-      margin-bottom: 20px;
-      text-shadow: 0 2px 14px #dedcff;
-      letter-spacing: 0.04em;
-      text-align: center;
-      user-select: text;
-    }
-
-    /* Contenedor para frases */
-    .quote-container {
-      font-size: 1.15em;
-      font-style: italic;
-      color: #ec1b6d;
-      margin-bottom: 20px;
-      background: linear-gradient(95deg, #e5cfff44, #fcb6fc00);
-      border-radius: 12px;
-      padding: 30px 28px 20px 28px;
-      box-shadow: 0 0 16px #fa61ad66 inset;
-      min-height: 100px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      position: relative;
-      user-select: text;
-      transition: opacity 0.8s ease;
-    }
-
-    /* Botón copiar */
-    .btn-copy {
-      background: #fb3d81;
-      border: none;
-      color: white;
-      padding: 8px 18px;
-      border-radius: 22px;
-      cursor: pointer;
-      font-weight: 600;
-      font-family: "Montserrat", serif;
-      font-size: 0.95em;
-      box-shadow: 0 4px 12px #fb3d8177;
-      transition: background 0.25s;
-      position: absolute;
-      right: 12px;
-      bottom: 12px;
-      user-select: none;
-    }
-    .btn-copy:hover {
-      background: #ea2064;
-    }
-
-    .mensaje {
-      font-size: 0.94em;
-      color: #2f194c;
-      line-height: 1.7;
-      font-family: "Montserrat", "Times New Roman", serif;
-      margin: 0 0 12px 0;
-      text-align: justify;
-      animation: lyricFade 1.5s 0.45s both;
-      user-select: text;
-    }
-
-    .hashtag {
-      display: inline-block;
-      color: #e04da1;
-      font-size: 1.1em;
-      background: #fbeff7;
-      border-radius: 7px;
-      padding: 3px 11px;
-      margin-top: 12px;
-      box-shadow: 0 2px 9px #fb3d8131;
-      font-weight: 600;
-      letter-spacing: 0.03em;
-      user-select: text;
-    }
-
-    @keyframes lyricFade {
-      0% {
-        opacity: 0;
-        transform: scale(0.95);
-      }
-      100% {
-        opacity: 1;
-        transform: none;
-      }
-    }
-
-    /* Nota el corazón animado */
-    .card-heart {
-      display: inline-block;
-      color: #fd558e;
-      font-size: 2em;
-      animation: heartbeat 1s ease-in-out infinite alternate;
-      vertical-align: middle;
-      margin-left: 7px;
-      user-select: none;
-    }
-    @keyframes heartbeat {
-      to {
-        transform: scale(1.33);
-      }
-    }
-
-    /* Botones navegación en esquinas */
     .nav-button {
-      position: fixed;
-      bottom: 30px;
-      background: linear-gradient(110deg, #7ae0ea 12%, #fd558e 88%);
-      color: #6d1472;
-      border: none;
-      border-radius: 12px;
-      padding: 14px 44px;
-      font-family: "Times New Roman", serif;
-      font-weight: 700;
-      font-size: 1.12em;
-      box-shadow: 0 2px 18px #5ff5fc42;
-      letter-spacing: 0.03em;
-      cursor: pointer;
-      transition: background 0.25s, color 0.22s, box-shadow 0.22s;
-      outline: none;
-      z-index: 30;
-      user-select: none;
+      font-size: 1em;
+      padding: 12px 24px;
     }
-    .nav-button:hover {
-      background: linear-gradient(112deg, #fd558e, #7ae0ea 86%);
-      color: #ea20b8;
-      box-shadow: 0 8px 30px #ff5ea4cc;
+    .heart {
+      font-size: 2.8em;
+      top: 16px;
+      right: 24px;
     }
-    #btnRegresar {
-      left: 30px;
-    }
-    #btnSiguiente {
-      right: 30px;
-    }
-
-    @media (max-width: 520px) {
-      .card {
-        padding: 19px 5vw 19px 5vw;
-        margin: 64px 0 55px 0;
-      }
-      .nav-button {
-        font-size: 0.99em;
-        padding: 10px 13px;
-      }
-      .vinyl-record {
-        top: 6vw;
-        left: 8vw;
-        width: 45px;
-        height: 45px;
-      }
-      #message {
-        font-size: 0.91em;
-      }
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
-  <!-- Vinilo decorativo girando -->
-  <div class="vinyl-record"></div>
 
-  <!-- Notas musicales dispersas -->
-  <span class="nota-musical notas1">🎶</span>
-  <span class="nota-musical notas2">🎷</span>
-  <span class="nota-musical notas3">🎵</span>
-  <span class="nota-musical notas4">🎤</span>
-  <span class="nota-musical notas5">🎼</span>
+  <main class="card" role="main" aria-label="Mensaje personal basado en la canción Me Rehúso">
+    <div class="heart" aria-hidden="true">💓</div>
 
-  <!-- Diapositiva estilo postal -->
-  <section class="card" aria-label="Diapositiva inspiradora Me Rehúso">
-    <span class="titulo" aria-live="polite">
-      Me Rehúso <span class="card-heart" aria-hidden="true">💓</span>
-    </span>
+    <p class="fadeIn delay-1">Quiero ser <span class="highlight">completamente honesto contigo</span> y hablarte desde lo más sencillo de mi corazón, sin filtros, sin adornos y sin vueltas.</p>
 
-    <div class="quote-container" id="quoteContainer" role="region" aria-live="polite" aria-atomic="true">
-      “Y cada paso nos lleva más cerca de lo que realmente somos.”
-      <button class="btn-copy" id="copyBtn" aria-label="Copiar frase al portapapeles">Copiar</button>
-    </div>
+    <p class="fadeIn delay-2">Sé que la vida nos llevó por caminos distintos, pero todavía hay cosas que me cuesta dejar atrás. Me sigue importando cómo estás, me sigue alegrando verte brillar de esa manera tan tuya, aunque ahora solo pueda hacerlo <span class="highlight">desde la distancia</span>.</p>
 
-    <div class="mensaje">
-      Porque en la vida, el corazón aprende que dejar ir es parte de crecer. Las memorias no se pierden, se transforman y fortalecen el alma con cada latido. Aquí celebramos ese viaje, un baile donde la luz del presente abraza el eco del pasado.<br />
-      <b>Recordar es sanar, y avanzar es amar desde la libertad.</b>
-      <br />
-      <span class="hashtag">#MeRehúsoAVoltearAtrás</span>
-    </div>
-  </section>
+    <p class="fadeIn delay-3">No puedo mentir, extraño los ratos simples, tus gestos y hasta esos silencios donde no hacía falta decir nada. De verdad, me hace feliz saber que encuentras tu rumbo, que sigues creciendo y que te rodeas de personas y momentos que te hacen bien.</p>
+
+    <p class="fadeIn delay-4">No me acostumbro a la idea de desaparecer así porque sí de tu historia. No puedo forzarme a olvidar lo bonito o a dejar de sentir ese cariño tan fuerte.</p>
+
+    <p class="fadeIn delay-5">La verdad es que, aunque pase el tiempo, aunque cada uno siga su propio camino, <span class="highlight">me rehúso a dejar de desearte lo mejor, a preocuparme, a admirarte y llevarte conmigo en esos pequeños recuerdos de todos los días</span>.</p>
+
+    <p class="fadeIn delay-6">Gracias por darme tanto y por permitir que, al menos por un momento, formara parte de tu vida.</p>
+
+    <p class="fadeIn delay-7">Ojalá siempre tengas motivos para sonreír y te rodee el amor, la suerte y la alegría que mereces.</p>
+
+    <p class="fadeIn delay-8" style="text-align:center; font-weight:bold; margin-top:1em;">
+      A ti, siempre te voy a recordar con cariño, porque lo que fuiste para mí <span class="highlight">no se olvida así nomás</span>.
+    </p>
+  </main>
 
   <button id="btnRegresar" class="nav-button" type="button" aria-label="Regresar a la página anterior">Regresar</button>
   <button id="btnSiguiente" class="nav-button" type="button" aria-label="Ir a la siguiente página">Siguiente →</button>
 
   <script>
-    const quotes = [
-      "Y cada paso nos lleva más cerca de lo que realmente somos.",
-      "A veces aprender a soltar es el acto más profundo de amor propio.",
-      "Las heridas también dibujan la canción que hoy bailamos sin miedo.",
-      "Recordar con ternura es el primer paso para construir un nuevo amanecer.",
-      "Entre el ayer y el mañana, el presente siempre guarda la magia del ahora."
-    ];
-
-    let currentQuoteIndex = 0;
-    const quoteContainer = document.getElementById('quoteContainer');
-    const copyBtn = document.getElementById('copyBtn');
-
-    function showNextQuote() {
-      // Fade out
-      quoteContainer.style.opacity = '0';
-      setTimeout(() => {
-        currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
-        quoteContainer.firstChild.textContent = `“${quotes[currentQuoteIndex]}”`;
-        // Fade in
-        quoteContainer.style.opacity = '1';
-      }, 600);
-    }
-
-    // Cambia la frase cada 8 segundos
-    setInterval(showNextQuote, 8000);
-
-    // Copiar al portapapeles funcionalidad
-    copyBtn.addEventListener('click', () => {
-      // Extraemos el texto sin comillas para copiarlo limpio
-      const text = quotes[currentQuoteIndex];
-      navigator.clipboard.writeText(text).then(() => {
-        copyBtn.textContent = '¡Copiado!';
-        setTimeout(() => {
-          copyBtn.textContent = 'Copiar';
-        }, 2000);
-      })
-      .catch(() => {
-        copyBtn.textContent = 'Error';
-        setTimeout(() => {
-          copyBtn.textContent = 'Copiar';
-        }, 2000);
-      });
-    });
-
-    // Navegación botones
     document.getElementById('btnRegresar').onclick = () => window.history.back();
-    document.getElementById('btnSiguiente').onclick = () =>
-      (window.location.href = 'index13.html');
+    document.getElementById('btnSiguiente').onclick = () => window.location.href = 'index13.html';
   </script>
+
 </body>
 </html>
