@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Me Rehúso - Diapositiva Creativa</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #89ffdb 0%, #fcb6fc 64%, #46bdfc 100%);
+      font-family: 'Montserrat', 'Times New Roman', serif;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    /* Efecto de olas animadas al fondo */
+    .ocean {
+      position: fixed;
+      left: 0; right: 0; bottom: 0;
+      width: 100vw; height: 22vh;
+      z-index: 1;
+      pointer-events: none;
+    }
+    .wave {
+      position: absolute;
+      left: 0;
+      width: 200vw;
+      height: 120px;
+      opacity: 0.7;
+      animation: waveAnimate 28s linear infinite;
+    }
+    .wave2 {
+      opacity: 0.5;
+      animation-duration: 20s;
+      top: 25px;
+      filter: blur(2px);
+    }
+    @keyframes waveAnimate {
+      0% { transform: translateX(0);}
+      100% { transform: translateX(-50vw);}
+    }
+    /* Decoración: notas musicales animadas */
+    .note {
+      position: absolute;
+      color: #fb3d81;
+      font-size: 2.1em;
+      opacity: 0.7;
+      animation: floatNote 7s infinite;
+    }
+    .note1 { left: 12vw; top: 12vh; animation-delay: 0.7s;}
+    .note2 { left: 36vw; top: 17vh; animation-delay: 2.1s;}
+    .note3 { right: 24vw; top: 11vh; animation-delay: 1.4s;}
+    .note4 { left: 75vw; top: 15vh; animation-delay: 0s;}
+    .note5 { left: 58vw; top: 7vh; font-size:2.9em; animation-delay: 2.6s;}
+    @keyframes floatNote {
+      0% { transform: translateY(0) scale(1);}
+      60% { transform: translateY(-28px) scale(1.12);}
+      100% { transform: translateY(0) scale(0.96);}
+    }
+    /* Contenedor ESTILO CARRUSEL/DIAPOSITIVA */
+    .slide-container {
+      position: relative;
+      background: rgba(255,255,255,0.98);
+      box-shadow: 0 8px 28px #56c1f4cc, 0 1px 0 6px #fcb6fc80;
+      border-radius: 24px;
+      max-width: 480px;
+      width: 92vw;
+      padding: 45px 32px 40px 32px;
+      margin: 110px 0 95px 0;
+      text-align: center;
+      z-index: 2;
+      overflow: hidden;
+      border-left: 7px solid #fb3d81;
+    }
+
+    .slide-title {
+      font-family: 'Montserrat', 'Times New Roman', serif;
+      font-weight: 900;
+      font-size: 2.1em;
+      color: #2b5dd6;
+      margin-bottom: 12px;
+      letter-spacing: 0.03em;
+      text-shadow: 0 2px 14px #b2f5fef0;
+    }
+    .slide-lyric {
+      font-size: 1.04em;
+      color: #ed3491;
+      margin-bottom: 20px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      animation: appearText 1.4s cubic-bezier(.66,.06,.59,1.14) both;
+    }
+    @keyframes appearText {
+      0% { opacity:0; transform:scale(0.95);}
+      60%{ opacity:.84; }
+      100% { opacity:1; transform:none;}
+    }
+    .slide-message {
+      font-size: 0.94em;
+      color: #2f194c;
+      line-height: 1.68;
+      margin-bottom: 0;
+      font-family: 'Montserrat', 'Times New Roman', serif;
+      font-style: italic;
+      background:linear-gradient(98deg,#ecf2ff 70%,#fcb6fc 102%);
+      border-radius:14px;
+      padding:17px 20px;
+      box-shadow:0 0 12px #ffbbf87a inset;
+      animation: appearText 1.8s cubic-bezier(.66,.06,.59,1.14) 0.55s both;
+    }
+
+    /* concentos decorativos */
+    .slide-heartbeat {
+      display:inline-block;
+      color:#fd558e;
+      font-size:2em;
+      animation: heartbeat 0.9s infinite alternate;
+      vertical-align: middle;
+      margin-left: 6px;
+      margin-right: 0;
+    }
+    @keyframes heartbeat {
+      0% { transform: scale(1); }
+      40%{ transform: scale(1.23);}
+      100%{ transform: scale(1);}
+    }
+
+    /* Audio player bonito */
+    .music-player {
+      margin: 24px 0 10px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .music-player label {
+      font-size:.94em;
+      color:#225b66;
+      margin-bottom:4px;
+      letter-spacing:.04em;
+      font-weight:600;
+    }
+    .audio-bar {
+      width: 250px;
+      accent-color: #f770be;
+      margin-top:8px;
+    }
+    audio::-webkit-media-controls-panel {
+      background: #ffeef6;
+      border-radius: 8px;
+      color: #fb3d81;
+    }
+
+    /* Botones navegación en esquinas */
+    .nav-button {
+      position: fixed;
+      bottom: 30px;
+      background: linear-gradient(110deg, #7ae0ea 12%, #fd558e 88%);
+      color: #6d1472;
+      border: none;
+      border-radius: 12px;
+      padding: 14px 44px;
+      font-family: 'Times New Roman', serif;
+      font-weight: 700;
+      font-size: 1.12em;
+      box-shadow: 0 2px 18px #5ff5fc42;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      transition: background 0.25s, color 0.22s, box-shadow 0.22s;
+      outline: none;
+      z-index: 30;
+    }
+    .nav-button:hover {
+      background: linear-gradient(112deg, #fd558e, #7ae0ea 86%);
+      color: #ea20b8;
+      box-shadow: 0 8px 30px #ff5ea4cc;
+    }
+    #btnRegresar { left: 30px; }
+    #btnSiguiente { right: 30px; }
+    @media (max-width:540px){
+      .slide-container{padding:18px 4vw 22px 4vw;margin:65px 0 70px 0;}
+      .slide-title{font-size:1.23em;}
+      .nav-button{font-size:0.99em; padding:10px 13px;}
+    }
+  </style>
+</head>
+<body>
+  <!-- Olas animadas tipo portada tropical, Danny Ocean style -->
+  <div class="ocean">
+    <svg class="wave" viewBox="0 0 900 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 80Q150 120 300 80t300 0 300 0v50H0z" fill="#fb3d81"/>
+    </svg>
+    <svg class="wave wave2" viewBox="0 0 900 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 110Q180 36 320 92t290 10 290 26v30H0z" fill="#65f1ff"/>
+    </svg>
+  </div>
+  <!-- Notas musicales decorativas -->
+  <span class="note note1">🎶</span>
+  <span class="note note2">🎷</span>
+  <span class="note note3">🎵</span>
+  <span class="note note4">🎤</span>
+  <span class="note note5">🎼</span>
+
+  <!-- Slide principal -->
+  <section class="slide-container">
+    <h1 class="slide-title">Me Rehúso <span class="slide-heartbeat">💓</span></h1>
+    <div class="slide-lyric">
+      <em>“Y me rehúso… a darte un último beso, así que guárdalo…”</em>
+    </div>
+    <div class="music-player">
+      <label>Presiona para ambientar...</label>
+      <audio controls class="audio-bar" preload="none">
+        <source src="https://cdn.pixabay.com/audio/2023/03/28/audio_128f2b2c24.mp3?filename=latin-lovers-140730.mp3" type="audio/mp3">
+        Tu navegador no soporta audio.
+      </audio>
+    </div>
+    <div class="slide-message">
+      Porque a veces nos toca dejar ir, aunque el corazón se resista a cerrar capítulos. <br>
+      Así como en la canción, prefiero celebrar lo vivido antes que decir adiós. Amar con intensidad, aunque duela, es parte de crecer y sanar.<br><br>
+      <span style="font-weight:500;">Hoy le canto a esos recuerdos, porque aún en la distancia, lo que fue verdadero nunca se olvida.</span><br>
+      <span style="color: #e04da1; font-size:1.15em;">#MeRehúsoASoltar</span>
+    </div>
+  </section>
+
+  <button id="btnRegresar" class="nav-button" type="button">Regresar</button>
+  <button id="btnSiguiente" class="nav-button" type="button">Siguiente →</button>
+
+  <script>
+    const btnRegresar = document.getElementById('btnRegresar');
+    const btnSiguiente = document.getElementById('btnSiguiente');
+    btnRegresar.addEventListener('click', () => window.history.back());
+    btnSiguiente.addEventListener('click', () => window.location.href = 'index13.html');
+  </script>
+</body>
+</html>
