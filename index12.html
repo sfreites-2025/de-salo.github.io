@@ -3,9 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Me Rehúso - Mensaje Personal</title>
+<title>Me Rehúso - Mensaje Personal con Animaciones Laterales</title>
 <style>
-  /* Fondo estilo musical: siluetas de notas musicales difuminadas en degradado oscuro */
   body {
     margin: 0;
     min-height: 100vh;
@@ -21,8 +20,6 @@
     position: relative;
     text-align: justify;
   }
-
-  /* Overlay semitransparente "musical" para mejorar legibilidad */
   body::before {
     content: "";
     position: fixed;
@@ -30,7 +27,6 @@
     background: rgba(20, 11, 40, 0.7);
     z-index: 0;
   }
-
   .card {
     position: relative;
     background: rgba(255 255 255 / 0.14);
@@ -45,32 +41,12 @@
     font-size: 0.85em;
     color: #fde8f0;
     backdrop-filter: blur(14px);
+    overflow: visible;
   }
-
-  /* Corazón animado */
-  .heart {
-    position: absolute;
-    top: 26px;
-    right: 32px;
-    font-size: 2.8em;
-    color: #fb3d81;
-    animation: heartbeat 1.2s ease-in-out infinite alternate;
-    user-select: none;
-  }
-  @keyframes heartbeat {
-    0% { transform: scale(1);}
-    40% { transform: scale(1.3);}
-    60% { transform: scale(1);}
-    100% { transform: scale(1.15);}
-  }
-
-  /* Texto resaltado */
   .highlight {
     color: #ffb3d6;
     font-weight: 700;
   }
-
-  /* Aparición con animación */
   .fadeIn {
     opacity: 0;
     animation: fadeInUp 1.3s ease forwards;
@@ -84,7 +60,6 @@
   .delay-6 { animation-delay: 3.8s; }
   .delay-7 { animation-delay: 4.5s; }
   .delay-8 { animation-delay: 5.2s; }
-
   @keyframes fadeInUp {
     from {
       opacity: 0;
@@ -93,6 +68,61 @@
     to {
       opacity: 1;
       transform: translateY(0);
+    }
+  }
+
+  /* Animaciones laterales de notas musicales verticales */
+  .side-animation {
+    position: fixed;
+    top: 20vh;
+    bottom: 20vh;
+    width: 44px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 1.2em;
+    z-index: 5;
+    user-select: none;
+  }
+  .side-left {
+    left: 30px;
+  }
+  .side-right {
+    right: 30px;
+    align-items: flex-end;
+  }
+  /* Nota musical estilo */
+  .note {
+    font-size: 1.7em;
+    color: #fb3d81cc;
+    opacity: 0.7;
+    animation-name: floatDown;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-duration: 6s;
+  }
+  .side-right .note {
+    color: #ff8fc7cc;
+  }
+  /* Animaciones escalonadas para que no se muevan todas juntas */
+  .note:nth-child(1) { animation-delay: 0s; }
+  .note:nth-child(2) { animation-delay: 2s; }
+  .note:nth-child(3) { animation-delay: 4s; }
+  .note:nth-child(4) { animation-delay: 1s; }
+  .note:nth-child(5) { animation-delay: 3s; }
+
+  @keyframes floatDown {
+    0% {
+      transform: translateY(-50px) scale(1);
+      opacity: 0.7;
+    }
+    50% {
+      transform: translateY(20px) scale(1.15);
+      opacity: 0.95;
+    }
+    100% {
+      transform: translateY(100px) scale(0.85);
+      opacity: 0;
     }
   }
 
@@ -135,19 +165,33 @@
       font-size: 1em;
       padding: 12px 22px;
     }
-    .heart {
-      font-size: 2.4em;
-      top: 16px;
-      right: 24px;
+    .side-animation {
+      display: none; /* Ocultar animación lateral en móvil para no saturar */
     }
   }
 </style>
 </head>
 <body>
 
-  <main class="card" role="main" aria-label="Mensaje personalizado basado en la canción Me Rehúso">
-    <div class="heart" aria-hidden="true">💓</div>
+  <!-- Animación musical lateral izquierda -->
+  <div class="side-animation side-left" aria-hidden="true">
+    <div class="note">🎵</div>
+    <div class="note">🎶</div>
+    <div class="note">🎷</div>
+    <div class="note">🎼</div>
+    <div class="note">🎤</div>
+  </div>
 
+  <!-- Animación musical lateral derecha -->
+  <div class="side-animation side-right" aria-hidden="true">
+    <div class="note">🎼</div>
+    <div class="note">🎤</div>
+    <div class="note">🎷</div>
+    <div class="note">🎵</div>
+    <div class="note">🎶</div>
+  </div>
+
+  <main class="card" role="main" aria-label="Mensaje personal basado en la canción Me Rehúso">
     <p class="fadeIn delay-1">Quiero ser <span class="highlight">completamente honesto contigo</span> y hablarte desde lo más sencillo de mi corazón, sin filtros, sin adornos y sin vueltas.</p>
 
     <p class="fadeIn delay-2">Sé que la vida nos llevó por caminos distintos, pero todavía hay cosas que me cuesta dejar atrás. Me sigue importando cómo estás, me sigue alegrando verte brillar de esa manera tan tuya, aunque ahora solo pueda hacerlo <span class="highlight">desde la distancia</span>.</p>
