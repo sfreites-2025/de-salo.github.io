@@ -1,89 +1,131 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flor 2D</title>
-    <style>
-        .flor {
-            position: relative;
-            width: 200px;
-            height: 200px;
-            margin: 50px auto;
-        }
-        
-        /* Centro de la flor */
-        .centro {
-            position: absolute;
-            width: 40px;
-            height: 40px;
-            background-color: #FFD700;
-            border-radius: 50%;
-            top: 80px;
-            left: 80px;
-            z-index: 10;
-        }
-        
-        /* Pétalos */
-        .petalo {
-            position: absolute;
-            width: 60px;
-            height: 30px;
-            background-color: #FF69B4;
-            border-radius: 50px 50px 0 0;
-            top: 85px;
-            left: 70px;
-            transform-origin: 50% 100%;
-        }
-        
-        /* Tallo */
-        .tallo {
-            position: absolute;
-            width: 8px;
-            height: 150px;
-            background-color: #228B22;
-            top: 200px;
-            left: 96px;
-            z-index: -1;
-        }
-        
-        /* Hoja */
-        .hoja {
-            position: absolute;
-            width: 40px;
-            height: 20px;
-            background-color: #32CD32;
-            border-radius: 0 50px 50px 0;
-            top: 280px;
-            left: 104px;
-            transform: rotate(15deg);
-            z-index: -1;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Girasol Simple</title>
+  <style>
+    body {
+      background: #f7ffe1;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+    }
+    .girasol-simple {
+      position: relative;
+      width: 180px;
+      height: 320px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      user-select: none;
+    }
+    .tallo {
+      width: 16px;
+      height: 120px;
+      background: linear-gradient(to right, #85c965 60%, #4a8941 100%);
+      position: absolute;
+      left: 82px;
+      top: 140px;
+      border-radius: 8px;
+      z-index: 1;
+    }
+    .hoja {
+      position: absolute;
+      width: 55px;
+      height: 28px;
+      background: linear-gradient(60deg, #b3f38c 70%, #77c94d 100%);
+      border-radius: 25px 65px 39px 38px/36px 36px 38px 28px;
+      top: 220px;
+      left: 54px;
+      transform: rotate(-27deg);
+      z-index: 1;
+      opacity: .82;
+    }
+    .hoja.r {
+      left: 103px;
+      transform: scaleX(-1) rotate(-27deg);
+    }
+    .petalo {
+      position: absolute;
+      width: 48px;
+      height: 160px;
+      left: 50%;
+      top: 50%;
+      margin-left: -24px;
+      margin-top: -140px;
+      background: linear-gradient(180deg, #fff676 70%, #fbb858 100%);
+      border-radius: 40% 60% 70% 60%/55% 80% 70% 80%;
+      box-shadow: 0 8px 18px #d1bb10a8, 0 2px 2px #e39923;
+      opacity: 0.89;
+      transform-origin: center bottom;
+      animation: petalMove 3.5s infinite ease-in-out;
+      z-index: 2;
+    }
+    @keyframes petalMove {
+      0%, 100% { transform: translate(0, 0) scaleY(1); }
+      50% { transform: translate(0, -12px) scaleY(1.07); }
+    }
+    /* répartir pétalos alrededor */
+    .petalo:nth-child(1) { transform: rotate(0deg) translateX(0) translate(-50%, -100%); animation-delay: 0s;}
+    .petalo:nth-child(2) { transform: rotate(22.5deg) translateX(0) translate(-50%, -100%); animation-delay: 0.12s;}
+    .petalo:nth-child(3) { transform: rotate(45deg) translateX(0) translate(-50%, -100%); animation-delay: 0.25s;}
+    .petalo:nth-child(4) { transform: rotate(67.5deg) translateX(0) translate(-50%, -100%); animation-delay: 0.41s;}
+    .petalo:nth-child(5) { transform: rotate(90deg) translateX(0) translate(-50%, -100%); animation-delay: 0.6s;}
+    .petalo:nth-child(6) { transform: rotate(112.5deg) translateX(0) translate(-50%, -100%); animation-delay: 0.75s;}
+    .petalo:nth-child(7) { transform: rotate(135deg) translateX(0) translate(-50%, -100%); animation-delay: 0.91s;}
+    .petalo:nth-child(8) { transform: rotate(157.5deg) translateX(0) translate(-50%, -100%); animation-delay: 1.03s;}
+    .petalo:nth-child(9) { transform: rotate(180deg) translateX(0) translate(-50%, -100%); animation-delay: 1.2s;}
+    .petalo:nth-child(10) { transform: rotate(202.5deg) translateX(0) translate(-50%, -100%); animation-delay: 1.35s;}
+    .petalo:nth-child(11) { transform: rotate(225deg) translateX(0) translate(-50%, -100%); animation-delay: 1.5s;}
+    .petalo:nth-child(12) { transform: rotate(247.5deg) translateX(0) translate(-50%, -100%); animation-delay: 1.62s;}
+    .petalo:nth-child(13) { transform: rotate(270deg) translateX(0) translate(-50%, -100%); animation-delay: 1.7s;}
+    .petalo:nth-child(14) { transform: rotate(292.5deg) translateX(0) translate(-50%, -100%); animation-delay: 1.8s;}
+    .petalo:nth-child(15) { transform: rotate(315deg) translateX(0) translate(-50%, -100%); animation-delay: 1.88s;}
+    .petalo:nth-child(16) { transform: rotate(337.5deg) translateX(0) translate(-50%, -100%); animation-delay: 2.01s;}
+
+    .centro {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 60px;
+      height: 60px;
+      background: radial-gradient(circle at 60% 60%, #ffe59f 30%, #ad7430 57%, #714212 80%, #6e3820 100%);
+      border-radius: 50%;
+      border: 4px solid #ffd447;
+      box-shadow: 0 3px 12px #f5b13d44;
+      transform: translate(-50%, -50%);
+      z-index: 3;
+    }
+  </style>
 </head>
 <body>
-    <div class="flor">
-        <!-- Centro -->
-        <div class="centro"></div>
-        
-        <!-- Pétalos (creados con JavaScript) -->
-        
-        <!-- Tallo y hoja -->
-        <div class="tallo"></div>
-        <div class="hoja"></div>
-    </div>
+  <div class="girasol-simple" role="img" aria-label="Dibujo simple y animado de un girasol">
+    <div class="tallo"></div>
+    <div class="hoja"></div>
+    <div class="hoja r"></div>
 
-    <script>
-        // Crear pétalos dinámicamente
-        const flor = document.querySelector('.flor');
-        const numPetals = 8;
-        
-        for (let i = 0; i < numPetals; i++) {
-            const petalo = document.createElement('div');
-            petalo.className = 'petalo';
-            petalo.style.transform = `rotate(${i * (360 / numPetals)}deg)`;
-            flor.insertBefore(petalo, document.querySelector('.tallo'));
-        }
-    </script>
+    <div class="petalo"></div>
+    <div class="petalo"></div>
+    <div class="petalo"></div>
+    <div class="petalo"></div>
+    <div class="petalo"></div>
+    <div class="petalo"></div>
+    <div class="petalo"></div>
+    <div class="petalo"></div>
+    <div class="petalo"></div>
+    <div class="petalo"></div>
+    <div class="petalo"></div>
+    <div class="petalo"></div>
+    <div class="petalo"></div>
+    <div class="petalo"></div>
+    <div class="petalo"></div>
+    <div class="petalo"></div>
+
+    <div class="centro"></div>
+  </div>
 </body>
 </html>
