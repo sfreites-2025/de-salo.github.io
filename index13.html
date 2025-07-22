@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Muchas Flores Hermosas</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #f3e4ff 0%, #fae1e6 100%);
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .garden {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+    /* Flores base */
+    .flower {
+      position: absolute;
+      animation: sway 5s infinite alternate cubic-bezier(.45,.05,.55,.95);
+      transform: scale(var(--sz,1)) rotate(var(--rot,0deg));
+      opacity: 0.98;
+      z-index: 2;
+      pointer-events: none;
+    }
+    /* Animación movimiento suave */
+    @keyframes sway {
+      to { transform: scale(var(--sz,1)) rotate(calc(var(--rot,0deg) + 12deg)) translateY(7px);}
+    }
+
+    /* Tallo */
+    .stem {
+      width: 8px; height: 48px;
+      background: linear-gradient(#99d37f 70%, #448c53 100%);
+      border-radius: 8px;
+      margin: 0 auto;
+    }
+    /* Centro de flor */
+    .center {
+      width: 19px; height: 19px;
+      background: radial-gradient(circle, #ffc168 65%, #f08349 100%);
+      border-radius: 50%;
+      margin: -8px auto 0 auto;
+      box-shadow: 0 3px 8px #e6991e66;
+      z-index: 2;
+      position: relative;
+    }
+    /* Pétalos variados */
+    .petal {
+      position: absolute;
+      top: 2px; left: 50%;
+      width: 27px; height: 18px;
+      background: #ff7bbd;
+      border-radius: 55% 80% 60% 65% / 70% 70% 60% 80%;
+      box-shadow: 0 1.5px 4px #e458a933;
+      transform-origin: 0 53%;
+      opacity: 0.93;
+    }
+    /* Variaciones con colores */
+    .f1 { background: #ffd6e6; }
+    .f2 { background: #f8a674; }
+    .f3 { background: #8ad7e6; }
+    .f4 { background: #f7fc77; }
+    .f5 { background: #b8e98c; }
+    .f6 { background: #fab9fe; }
+    .f7 { background: #ffe7a7; }
+    /* Centro para margaritas */
+    .daisy-center { background: #fff967; box-shadow: 0 0 12px #e0d02055; }
+
+    /* Variación pétalos margarita */
+    .daisy-petal {
+      width: 22px; height: 13px;
+      background: #fff8e7;
+      border-radius: 50% 70% 60% 75% / 60% 90% 60% 90%;
+      box-shadow: 0 1px 3px #c4be8e35;
+    }
+
+    /* Flor animada girando */
+    .spin {
+      animation: spin 11s linear infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg);}
+    }
+    /* Responsive para móviles */
+    @media (max-width: 600px) {
+      .garden { width: 100vw; height: 100vw; }
+      .flower { --sz: 0.8; }
+    }
+  </style>
+</head>
+<body>
+  <div class="garden">
+    <!-- Muchas flores en posiciones y estilos -->
+    <div class="flower" style="top:85%; left:10%; --sz:1.2; --rot:10deg;">
+      <div class="stem"></div>
+      <div class="center"></div>
+      <div class="petal f2" style="transform:rotate(0deg)"></div>
+      <div class="petal f1" style="transform:rotate(60deg)"></div>
+      <div class="petal f3" style="transform:rotate(120deg)"></div>
+      <div class="petal f2" style="transform:rotate(180deg)"></div>
+      <div class="petal f4" style="transform:rotate(240deg)"></div>
+      <div class="petal f1" style="transform:rotate(300deg)"></div>
+    </div>
+    <div class="flower" style="top:50%; left:25%; --sz:1.1; --rot:25deg;">
+      <div class="stem"></div>
+      <div class="center"></div>
+      <div class="petal f6" style="transform:rotate(0deg)"></div>
+      <div class="petal f5" style="transform:rotate(60deg)"></div>
+      <div class="petal f7" style="transform:rotate(120deg)"></div>
+      <div class="petal f6" style="transform:rotate(180deg)"></div>
+      <div class="petal f3" style="transform:rotate(240deg)"></div>
+      <div class="petal f7" style="transform:rotate(300deg)"></div>
+    </div>
+    <div class="flower spin" style="top:60%; left:38%; --sz:1.7; --rot:0deg;">
+      <div class="stem"></div>
+      <div class="center"></div>
+      <div class="petal f4" style="transform:rotate(0deg)"></div>
+      <div class="petal f2" style="transform:rotate(60deg)"></div>
+      <div class="petal f3" style="transform:rotate(120deg)"></div>
+      <div class="petal f7" style="transform:rotate(180deg)"></div>
+      <div class="petal f1" style="transform:rotate(240deg)"></div>
+      <div class="petal f6" style="transform:rotate(300deg)"></div>
+    </div>
+    <!-- Margaritas -->
+    <div class="flower" style="top:80%; left:80%; --sz:.93; --rot:9deg;">
+      <div class="stem"></div>
+      <div class="center daisy-center"></div>
+      <div class="petal daisy-petal" style="background:#fff; transform:rotate(0deg)"></div>
+      <div class="petal daisy-petal" style="background:#fff; transform:rotate(36deg)"></div>
+      <div class="petal daisy-petal" style="background:#fff; transform:rotate(72deg)"></div>
+      <div class="petal daisy-petal" style="background:#fff; transform:rotate(108deg)"></div>
+      <div class="petal daisy-petal" style="background:#fff; transform:rotate(144deg)"></div>
+      <div class="petal daisy-petal" style="background:#f3f8e1; transform:rotate(180deg)"></div>
+      <div class="petal daisy-petal" style="background:#f3f8e1; transform:rotate(216deg)"></div>
+      <div class="petal daisy-petal" style="background:#fff; transform:rotate(252deg)"></div>
+      <div class="petal daisy-petal" style="background:#fff; transform:rotate(288deg)"></div>
+      <div class="petal daisy-petal" style="background:#ffd0f8; transform:rotate(324deg)"></div>
+    </div>
+    <div class="flower spin" style="top:30%; left:75%; --sz:1.4; --rot:15deg;">
+      <div class="stem"></div>
+      <div class="center daisy-center"></div>
+      <div class="petal daisy-petal" style="transform:rotate(0deg)"></div>
+      <div class="petal daisy-petal" style="transform:rotate(45deg)"></div>
+      <div class="petal daisy-petal" style="transform:rotate(90deg)"></div>
+      <div class="petal daisy-petal" style="transform:rotate(135deg)"></div>
+      <div class="petal daisy-petal" style="background:#fee; transform:rotate(180deg)"></div>
+      <div class="petal daisy-petal" style="background:#fff0ee; transform:rotate(225deg)"></div>
+      <div class="petal daisy-petal" style="transform:rotate(270deg)"></div>
+      <div class="petal daisy-petal" style="transform:rotate(315deg)"></div>
+    </div>
+    <!-- Más flores variadas -->
+    <div class="flower" style="top:74%; left:60%; --sz:1.13; --rot:-14deg;">
+      <div class="stem"></div>
+      <div class="center"></div>
+      <div class="petal f2" style="transform:rotate(0deg)"></div>
+      <div class="petal f1" style="transform:rotate(60deg)"></div>
+      <div class="petal f3" style="transform:rotate(120deg)"></div>
+      <div class="petal f4" style="transform:rotate(180deg)"></div>
+      <div class="petal f6" style="transform:rotate(240deg)"></div>
+      <div class="petal f5" style="transform:rotate(300deg)"></div>
+    </div>
+    <div class="flower" style="top:8%; left:56%; --sz:.99; --rot:12deg;">
+      <div class="stem"></div>
+      <div class="center"></div>
+      <div class="petal f5" style="transform:rotate(0deg)"></div>
+      <div class="petal f3" style="transform:rotate(60deg)"></div>
+      <div class="petal f2" style="transform:rotate(120deg)"></div>
+      <div class="petal f1" style="transform:rotate(180deg)"></div>
+      <div class="petal f7" style="transform:rotate(240deg)"></div>
+      <div class="petal f4" style="transform:rotate(300deg)"></div>
+    </div>
+    <div class="flower spin" style="top:44%; left:59%; --sz:0.93; --rot:-7deg;">
+      <div class="stem"></div>
+      <div class="center"></div>
+      <div class="petal f4" style="transform:rotate(0deg)"></div>
+      <div class="petal f2" style="transform:rotate(60deg)"></div>
+      <div class="petal f1" style="transform:rotate(120deg)"></div>
+      <div class="petal f6" style="transform:rotate(180deg)"></div>
+      <div class="petal f7" style="transform:rotate(240deg)"></div>
+      <div class="petal f5" style="transform:rotate(300deg)"></div>
+    </div>
+    <!-- Añade muchas más flores modificando top, left, color y tamaño -->
+    <div class="flower" style="top:23%; left:15%; --sz:0.84; --rot:17deg;">
+      <div class="stem"></div>
+      <div class="center daisy-center"></div>
+      <div class="petal daisy-petal" style="transform:rotate(0deg)"></div>
+      <div class="petal daisy-petal" style="transform:rotate(45deg)"></div>
+      <div class="petal daisy-petal" style="transform:rotate(90deg)"></div>
+      <div class="petal daisy-petal" style="transform:rotate(135deg)"></div>
+      <div class="petal daisy-petal" style="background:#fee; transform:rotate(180deg)"></div>
+      <div class="petal daisy-petal" style="background:#fff0ee; transform:rotate(225deg)"></div>
+      <div class="petal daisy-petal" style="transform:rotate(270deg)"></div>
+      <div class="petal daisy-petal" style="transform:rotate(315deg)"></div>
+    </div>
+    <!-- Se Puede duplicar y variar este bloque para todavía más flores -opcional- -->
+  </div>
+</body>
+</html>
