@@ -71,6 +71,7 @@
     font-weight:bold;
     margin: 26px 0 12px 0;
     color: #203047;
+    min-height: 3em;
   }
   .options {
     display: flex;
@@ -131,6 +132,7 @@
     background: #f7e1ee;
     padding: 20px 12px;
     border-radius: 14px;
+    text-align: center;
   }
 </style>
 </head>
@@ -167,67 +169,24 @@
   <!-- Resultados -->
   <div id="resultPage" style="display:none;">
     <div id="final-message"></div>
-    <div id="nice-message">
-      Siempre habrá cosas nuevas que aprender, pero con dedicación, curiosidad y tu toque especial, puedes con todo.<br>
-      ¡Tu esfuerzo es la mejor respuesta, y sonríe: la informática también es arte!
-    </div>
+    <div id="nice-message"></div>
     <button class="btn" id="finishQuizBtn">Siguiente</button>
   </div>
 </div>
 
 <script>
-// Preguntas y respuestas (solo una opción correcta por pregunta)
+// Preguntas y respuestas
 const quizData = [
-  {
-    q: "¿Cuál es el sistema operativo más usado en computadoras personales?",
-    opts: ["Linux", "Windows", "macOS", "FreeBSD"],
-    a: 1
-  },
-  {
-    q: "El cable de red más usado en una red LAN es:",
-    opts: ["USB", "HDMI", "Ethernet (RJ45)", "VGA"],
-    a:2
-  },
-  {
-    q: "¿Para qué sirve la memoria RAM?",
-    opts: ["Almacenar archivos a largo plazo", "Procesar gráficos", "Guardar datos temporales para el sistema", "Proteger el equipo de virus"],
-    a: 2
-  },
-  {
-    q: "¿Cuál extensión corresponde a un archivo ejecutable en Windows?",
-    opts: [".txt", ".exe", ".pdf", ".html"],
-    a: 1
-  },
-  {
-    q: "¿Qué representa 1 byte?",
-    opts: ["4 bits", "8 bits", "16 bits", "1,024 bits"],
-    a: 1
-  },
-  {
-    q: "¿Cuál de estos dispositivos es una salida de datos?",
-    opts: ["Teclado", "Monitor", "Ratón", "Micrófono"],
-    a: 1
-  },
-  {
-    q: "¿Cuál comando reinicia un equipo desde la terminal en sistemas Windows?",
-    opts: ["format C:", "ipconfig", "shutdown /r", "ping 127.0.0.1"],
-    a:2
-  },
-  {
-    q: "¿Qué es un software de código abierto (open source)?",
-    opts: ["Sólo disponible para empresas", "El usuario puede ver y modificar su código", "Solo puede instalarlo un técnico", "Es gratuito, pero no editable"],
-    a:1
-  },
-  {
-    q: "¿Qué hace un antivirus?",
-    opts: ["Acelera la RAM", "Monitorea temperatura", "Detecta y elimina software malicioso", "Enseña a programar"],
-    a:2
-  },
-  {
-    q: "¿Cuál puerto suele usarse para HTTP?",
-    opts: ["25", "21", "80", "443"],
-    a:2
-  }
+  { q: "¿Cuál es el sistema operativo más usado en computadoras personales?", opts: ["Linux", "Windows", "macOS", "FreeBSD"], a: 1 },
+  { q: "El cable de red más usado en una red LAN es:", opts: ["USB", "HDMI", "Ethernet (RJ45)", "VGA"], a: 2 },
+  { q: "¿Para qué sirve la memoria RAM?", opts: ["Almacenar archivos a largo plazo", "Procesar gráficos", "Guardar datos temporales para el sistema", "Proteger el equipo de virus"], a: 2 },
+  { q: "¿Cuál extensión corresponde a un archivo ejecutable en Windows?", opts: [".txt", ".exe", ".pdf", ".html"], a: 1 },
+  { q: "¿Qué representa 1 byte?", opts: ["4 bits", "8 bits", "16 bits", "1,024 bits"], a: 1 },
+  { q: "¿Cuál de estos dispositivos es una salida de datos?", opts: ["Teclado", "Monitor", "Ratón", "Micrófono"], a: 1 },
+  { q: "¿Cuál comando reinicia un equipo desde la terminal en sistemas Windows?", opts: ["format C:", "ipconfig", "shutdown /r", "ping 127.0.0.1"], a: 2 },
+  { q: "¿Qué es un software de código abierto (open source)?", opts: ["Sólo disponible para empresas", "El usuario puede ver y modificar su código", "Solo puede instalarlo un técnico", "Es gratuito, pero no editable"], a: 1 },
+  { q: "¿Qué hace un antivirus?", opts: ["Acelera la RAM", "Monitorea temperatura", "Detecta y elimina software malicioso", "Enseña a programar"], a: 2 },
+  { q: "¿Cuál puerto suele usarse para HTTP?", opts: ["25", "21", "80", "443"], a: 2 }
 ];
 let quizPos = 0;
 let score=0, errors=0;
@@ -292,7 +251,7 @@ quizNextBtn.onclick = () => {
     feedbackElem.textContent = "¡Correcto! ✔️";
     score++;
   } else {
-    optBtns[selectedOpt].classList.add('incorrect');
+    optBtns[selectedOpt]?.classList.add('incorrect');
     feedbackElem.textContent = `Incorrecto. La respuesta era: "${quizData[quizPos].opts[correctIdx]}"`;
     errors++;
   }
@@ -302,7 +261,7 @@ quizNextBtn.onclick = () => {
     if(quizPos < quizData.length) {
       loadQuestion();
     } else showResults();
-  }, 1150);
+  }, 1300);
 };
 
 function showResults() {
@@ -310,9 +269,16 @@ function showResults() {
   resultPage.style.display = "block";
   finalMessage.innerHTML = `<b>Has completado el quiz.</b><br>
     <span style="color:#366da6;font-size:1.15em;margin-top:3px;display:block;">
-    Tuviste <b>${errors} error${errors!==1? 'es' : ''}</b> y <b>${score} acierto${score!==1?'s':''}</b>.<br>
-    ${ score >=7 ? "¡Excelente dominio técnico! 🎉" : (score>=4?"¡Vas bien, sigue practicando!":"Cada error es una oportunidad para aprender.")}
+    Tuviste <b>${errors} error${errors!==1? 'es' : ''}</b> y <b>${score} acierto${score!==1?'s':''}</b>.
     </span>`;
+
+  if(score < 5){
+    niceMessage.textContent = "No que muy informática jajajaja? Mentira, yo sé que tú sabes.";
+  } else if(score > 6){
+    niceMessage.textContent = "Bicho usted es muy inteligente, si se graduó bien bien.";
+  } else {
+    niceMessage.textContent = "Vas bien, con un poco más seguro lo lograste!";
+  }
   niceMessage.style.display = "block";
 };
 
