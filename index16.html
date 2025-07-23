@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Último Jueguito</title>
+<style>
+  body {
+    margin: 0; padding: 0;
+    height: 100vh;
+    font-family: 'Georgia', serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #fce4ec 0%, #f48fb1 100%);
+    color: #6b2a40;
+    overflow: hidden;
+  }
+  #intro, #game {
+    position: absolute;
+    max-width: 600px;
+    background: rgba(255 255 255 / 0.9);
+    border-radius: 20px;
+    padding: 40px 30px;
+    box-shadow: 0 10px 32px rgba(219,90,128,0.35);
+    text-align: center;
+    box-sizing: border-box;
+  }
+  #intro {
+    width: 90vw;
+    max-width: 500px;
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    opacity: 1;
+    animation: fadeInText 2s ease forwards;
+  }
+  @keyframes fadeInText {
+    0% {opacity: 0; transform: translateY(20px);}
+    100% {opacity:1; transform: translateY(0);}
+  }
+  #game {
+    width: 90vw;
+    max-width: 700px;
+    height: 400px;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+  }
+  #info {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+  }
+  #board {
+    position: relative;
+    width: 100%;
+    height: 320px;
+    background: #ffe7f0;
+    border: 3px solid #cd6d8d;
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .target {
+    position: absolute;
+    background: #f06292;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 3px 10px #ec407aaa;
+    transition: transform 0.1s ease;
+  }
+  .target:active {
+    transform: scale(0.85);
+  }
+  #result {
+    margin-top: 20px;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #8b2340;
+  }
+  button#startGameBtn {
+    margin-top: 30px;
+    padding: 12px 36px;
+    border-radius: 30px;
+    border: none;
+    background: linear-gradient(90deg, #d43d6b, #f1669e);
+    box-shadow: 0 6px 18px #f1598a7d;
+    color: #fff;
+    font-size: 1.15rem;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.3s ease;
+  }
+  button#startGameBtn:hover:enabled {
+    background: linear-gradient(90deg, #ff6a8c, #ff82a4);
+  }
+  button#startGameBtn:disabled {
+    background: #f3c0c9;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+</style>
+</head>
+<body>
+
+<div id="intro" role="alert" aria-live="polite">
+  Pero primero un último jueguito
+  <br/>
+  <button id="startGameBtn" aria-label="Comenzar el juego">Comenzar</button>
+</div>
+
+<div id="game" role="main" aria-label="Juego interactivo de atrapar cuadros">
+  <div id="info">
+    Tiempo restante: <span id="time">30</span> segundos | Puntos: <span id="score">0</span>
+  </div>
+  <div id="board" aria-label="Área de juego con objetivo móvil"></div>
+  <div id="result" aria-live="polite"></div>
+</div>
+
+<script>
+  const intro = document.getElementById('intro');
+  const startBtn = document.getElementById('startGameBtn');
+  const game = document.getElementById('game');
+  const board = document.getElementById('board');
+  const timeDisplay = document.getElementById('time');
+  const scoreDisplay = document.getElementById('score');
+  const result = document.getElementById('result');
+
+  let timeLeft = 30;
+  let score = 0;
+  let timerId = null;
+  let moveTargetId = null;
+
+  startBtn.addEventListener('click', () => {
+    startBtn.disabled = true;
+    intro.style.display = 'none';
+    game.style.display = 'flex';
+    score = 0;
+    timeLeft = 30;
+    scoreDisplay.textContent = score;
+    timeDisplay.textContent = timeLeft;
+    result.textContent = "";
+    startTimer();
+    createTarget();
+  });
+
+  function startTimer() {
+    timerId = setInterval(() => {
+      timeLeft--;
+      timeDisplay.textContent = timeLeft;
+      if(timeLeft <= 0) {
+        clearInterval(timerId);
+        clearTimeout(moveTargetId);
+        endGame();
+      }
+    }, 1000);
+  }
+
+  function randomPosition(size) {
+    const maxX = board.clientWidth - size;
+    const maxY = board.clientHeight - size;
+    return {
+      x: Math.floor(Math.random() * maxX),
+      y: Math.floor(Math.random() * maxY),
+    };
+  }
+
+  function createTarget() {
+    const size = 50 + Math.floor(Math.random() * 30); // 50-80px
+    const pos = randomPosition(size);
+    let target = document.createElement('div');
+    target.className = 'target';
+    target.style.width = size + 'px';
+    target.style.height = size + 'px';
+    target.style.left = pos.x + 'px';
+    target.style.top = pos.y + 'px';
+    target.setAttribute('tabindex', '0');
+    target.setAttribute('role', 'button');
+    target.setAttribute('aria-label', 'Objetivo, haz clic para sumar puntos');
+
+    target.addEventListener('click', () => {
+      score++;
+      scoreDisplay.textContent = score;
+      board.removeChild(target);
+      clearTimeout(moveTargetId);
+      createTarget();
+    });
+
+    target.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        target.click();
+      }
+    });
+
+    board.appendChild(target);
+    moveTargetId = setTimeout(() => {
+      if(board.contains(target)) {
+        board.removeChild(target);
+        createTarget();
+      }
+    }, 2000); // Mueve el objetivo cada 2 segundos si no fue atrapado
+  }
+
+  function endGame() {
+    board.innerHTML = "";
+    result.textContent = `¡Tiempo terminado! Tu puntuación es: ${score} 🎉`;
+    startBtn.disabled = false;
+    intro.style.display = 'block';
+    intro.querySelector('button').disabled = false;
+  }
+</script>
+
+</body>
+</html>
