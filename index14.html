@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mensaje con fondo atardecer</title>
+  <title>Mensaje con fondo atardecer y navegación</title>
   <style>
     /* Fondo degradado tipo atardecer */
     body {
@@ -16,12 +16,13 @@
       justify-content: center;
       color: #4b2c20;
       overflow: hidden;
+      flex-direction: column;
     }
-    /* Opcional: suave animación de aparición */
+    /* Contenedor del texto y botones */
     .container {
       background: rgba(255 255 255 / 0.85);
       max-width: 700px;
-      padding: 40px 50px;
+      padding: 40px 50px 30px;
       border-radius: 18px;
       box-shadow: 0 12px 40px rgba(255 94 71 / 0.4);
       font-size: 0.9rem;
@@ -32,6 +33,10 @@
       overflow-y: auto;
       color: #582a1a;
       box-sizing: border-box;
+      width: 90vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
     @keyframes fadeInUp {
       from {
@@ -43,7 +48,7 @@
         transform: translateY(0);
       }
     }
-    /* Scroll suave para texto si hay overflow */
+    /* Scroll si texto es largo */
     .container::-webkit-scrollbar {
       width: 7px;
     }
@@ -51,13 +56,55 @@
       background: #ff8567;
       border-radius: 4px;
     }
+    /* Botones */
+    .buttons {
+      margin-top: 28px;
+      display: flex;
+      justify-content: space-between;
+    }
+    button {
+      cursor: pointer;
+      font-family: 'Georgia', serif;
+      font-size: 1rem;
+      padding: 10px 30px;
+      border-radius: 24px;
+      border: none;
+      color: white;
+      background: linear-gradient(90deg, #d94b68, #f38fa9);
+      box-shadow: 0 4px 14px rgba(243, 143, 169, 0.65);
+      transition: background 0.3s ease;
+      user-select: none;
+      min-width: 120px;
+    }
+    button:hover {
+      background: linear-gradient(90deg, #f3587a, #ffa1b9);
+    }
+
+    /* Responsive para pantallas pequeñas */
+    @media (max-width: 480px) {
+      .buttons {
+        flex-direction: column;
+        gap: 12px;
+      }
+      button {
+        min-width: 100%;
+        font-size: 1.1rem;
+        padding: 12px 0;
+      }
+    }
   </style>
 </head>
 <body>
   <article class="container" tabindex="0" aria-label="Mensaje principal lado izquierdo">
-    Supongo que al llegar a este momento te preguntas: ¿qué onda con este tipo? ¿Por qué todo esto de un día para otro? La verdad es que esto no es algo que surgió de la noche a la mañana. Son cosas que llevo pensando y sintiendo desde hace meses, y créeme que no es fácil para mí plasmarlo en palabras.
+    <div>
+      Supongo que al llegar a este momento te preguntas: ¿qué onda con este tipo? ¿Por qué todo esto de un día para otro? La verdad es que esto no es algo que surgió de la noche a la mañana. Son cosas que llevo pensando y sintiendo desde hace meses, y créeme que no es fácil para mí plasmarlo en palabras.
 
-    Todo este tiempo he estado aprendiendo, creciendo, enfrentando mis propias dudas y miedos. Llegar aquí me costó un montón, porque no quería que lo que tuviera para decirte fuera solo un impulso, ni tampoco una conversación suelta más. Quise hacer algo especial, algo que de verdad pudieras recordar y bueno aprendi de tus estudios y tienes esto que es tuyo y solamente tuyo, prometo mejorar. Pensé mucho en cuál sería el mejor momento, y aunque nunca hay un "momento perfecto", sentí que este era el más sincero para contarte todo lo que llevo dentro.
+      Todo este tiempo he estado aprendiendo, creciendo, enfrentando mis propias dudas y miedos. Llegar aquí me costó un montón, porque no quería que lo que tuviera para decirte fuera solo un impulso, ni tampoco una conversación suelta más. Quise hacer algo especial, algo que de verdad pudieras recordar y bueno aprendi de tus estudios y tienes esto que es tuyo y solamente tuyo, prometo mejorar. Pensé mucho en cuál sería el mejor momento, y aunque nunca hay un "momento perfecto", sentí que este era el más sincero para contarte todo lo que llevo dentro.
+    </div>
+    <div class="buttons" role="group" aria-label="Navegación de diapositivas">
+      <button type="button" onclick="window.history.back()" aria-label="Regresar">Regresar</button>
+      <button type="button" onclick="window.location.href='index15.html'" aria-label="Siguiente">Siguiente</button>
+    </div>
   </article>
 </body>
 </html>
