@@ -3,301 +3,314 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Pero primero un último jueguito</title>
+<title>Último jueguito: Dibujar y colorear</title>
 <style>
   body {
     margin: 0; padding: 0;
-    height: 100vh;
     font-family: 'Georgia', serif;
     background: linear-gradient(135deg, #fce4ec 0%, #f48fb1 100%);
     color: #6b2a40;
-    overflow: hidden;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
   }
-  #intro, #instructions, #game {
-    position: absolute;
-    max-width: 600px;
-    background: rgba(255,255,255,0.9);
+  .center-box {
+    background: rgba(255 255 255 / 0.9);
     border-radius: 20px;
-    padding: 40px 30px 30px;
-    box-sizing: border-box;
+    box-shadow: 0 12px 40px rgba(219, 90, 128, 0.35);
+    padding: 38px 36px 30px;
+    max-width: 720px;
+    width: 90vw;
     text-align: center;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%,-50%);
-    box-shadow: 0 10px 32px rgba(219,90,128,0.35);
+    box-sizing: border-box;
+    animation: fadeInUp 1.8s ease forwards;
   }
-  /* Animación original suave para el mensaje inicial */
-  #intro {
-    font-size: 1.45rem;
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  h1 {
+    margin-bottom: 26px;
     font-weight: 700;
-    letter-spacing: 0.04em;
-    animation: fadeInText 2s ease forwards;
-    z-index: 5;
+    font-size: 1.75rem;
   }
-  @keyframes fadeInText {
-    0% {opacity: 0; transform: translateY(20px);}
-    100% {opacity:1; transform: translateY(0);}
+  select {
+    font-family: inherit;
+    font-size: 1.1rem;
+    padding: 8px 16px;
+    border-radius: 12px;
+    border: 2px solid #f496b1;
+    margin-bottom: 28px;
+    cursor: pointer;
+    color: #6b2a40;
+    background: #fff0f3;
+    transition: border-color 0.3s;
+  }
+  select:hover, select:focus {
+    border-color: #d6336b;
+    outline: none;
   }
   button {
-    margin-top: 28px;
-    padding: 12px 36px;
+    cursor: pointer;
+    font-family: 'Georgia', serif;
+    font-size: 1.15rem;
+    padding: 12px 34px;
+    margin: 14px 18px 0 18px;
     border-radius: 30px;
     border: none;
     background: linear-gradient(90deg, #d43d6b, #f1669e);
-    box-shadow: 0 6px 18px #f1598a7d;
+    box-shadow: 0 6px 18px rgba(241,89,138,0.7);
     color: #fff;
-    font-size: 1.15rem;
-    cursor: pointer;
-    user-select: none;
-    font-family: inherit;
     transition: background 0.3s ease;
+    user-select: none;
   }
-  button:hover {
-    background: linear-gradient(90deg, #ff6a8c, #ff82a4);
+  button:hover:enabled {
+    background: linear-gradient(90deg, #f690a3, #ff9cc1);
+    color:#5e2241;
   }
-  #instructions {
-    display: none;
-    font-size: 1.05rem;
-    line-height: 1.4;
-    z-index: 4;
-    max-width: 520px;
+  button:disabled {
+    background: #f3c0c9;
+    cursor: not-allowed;
+    box-shadow: none;
   }
-  #startGameBtn {
-    margin-top: 24px;
+  #drawing-area {
+    margin-top: 32px;
+    text-align: center;
   }
-  #game {
-    display: none;
-    width: 90vw;
-    max-width: 700px;
-    min-height: 430px;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 30px;
-    z-index: 3;
-  }
-  #score, #timer {
-    font-size: 1.15rem;
-    font-weight: 600;
-    margin-bottom: 10px;
-  }
-  #board {
-    width: 320px;
-    min-height: 320px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
-    align-items: center;
-    background: #ffe7f0;
+  canvas {
+    background: white;
+    border-radius: 18px;
+    box-shadow: 0 6px 25px rgba(239,137,146,0.35);
+    max-width: 100%;
+    height: auto;
     border: 3px solid #cd6d8d;
-    border-radius: 14px;
-    padding: 16px 0 6px 0;
   }
-  .card {
-    width: 65px;
-    height: 65px;
-    background: linear-gradient(120deg, #fceabb 0%, #f8b500 100%);
-    color: #f44575;
-    font-size: 2.2rem;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    user-select: none;
-    transition: background 0.2s, color 0.2s;
-    box-shadow: 0 2px 8px #fdda8c33;
-    font-family: inherit;
-  }
-  .card.flipped {
-    background: linear-gradient(120deg, #e25186 0%, #f8b500 100%);
-    color: white;
-    cursor: default;
-  }
-  .card.matched {
-    background: linear-gradient(120deg, #94e9c9 0%, #84cca6 100%);
-    color: #f8c6f2;
-    cursor: default;
-  }
-  #result {
-    margin-top: 14px;
-    font-size: 1.15rem;
-    color: #b1004d;
-    font-weight: bold;
-    min-height: 28px;
-  }
-  #playAgainBtn {
+  #tools {
     margin-top: 18px;
-    padding: 12px 36px;
-    border-radius: 28px;
-    border: none;
-    background: linear-gradient(90deg, #d43d6b, #f1669e);
-    color: #fff;
-    font-size: 1.15rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+  }
+  input[type=color], input[type=range] {
     cursor: pointer;
-    box-shadow: 0 6px 18px #f1598a7d;
-    user-select: none;
-    transition: background 0.3s ease;
-    display: none;
-    font-family: inherit;
+    border-radius: 12px;
+    border: 1px solid #dca2b4;
+    padding: 4px;
+    height: 40px;
   }
-  #playAgainBtn:hover {
-    background: linear-gradient(90deg, #ff6a8c, #ff82a4);
+  label {
+    font-size: 0.9rem;
+    color: #6b2a40;
   }
-  @media(max-width:700px){
-    #board { width: 98vw; max-width: 320px; }
+  #status-msg {
+    margin-top: 20px;
+    font-weight: 600;
+    color: #7b2a3a;
+    min-height: 24px;
   }
 </style>
 </head>
 <body>
 
-<div id="intro" role="alert" aria-live="polite">
-  Pero primero un último jueguito
-  <br/>
-  <button id="showInstructionsBtn" aria-label="Ver instrucciones">Ver instrucciones</button>
-</div>
+<div class="center-box" role="main" aria-live="polite" aria-atomic="true" aria-label="Selecciona y dibuja">
+  <h1>Pero primero un último jueguito</h1>
 
-<div id="instructions" role="note" aria-live="polite" aria-hidden="true">
-  <strong>Instrucciones del Juego de Memoria Rápido con Corazones:</strong>
-  <ul style="text-align:left;margin:18px auto 14px 18px;max-width:520px;">
-    <li>Haz clic en las cartas para descubrir los corazones ocultos.</li>
-    <li>Encuentra todas las parejas iguales en el menor tiempo y con menos intentos posibles.</li>
-    <li>Si las cartas no coinciden, se voltean automáticamente.</li>
-    <li>Cuando encuentres todas las parejas, verás tu tiempo e intentos y podrás volver a jugar.</li>
-  </ul>
-  <button id="startGameBtn" aria-label="Comenzar juego">Comenzar juego</button>
-</div>
+  <label for="drawingChoice">¿Qué dibujo quieres colorear?</label><br/>
+  <select id="drawingChoice" aria-describedby="choiceHelp">
+    <option value="" selected disabled>Seleccione una opción</option>
+    <option value="sunflower">Girasol</option>
+    <option value="monkey">Mono</option>
+    <option value="sunset">Atardecer</option>
+    <option value="free">Hacer un dibujo a mi estilo</option>
+  </select>
+  <p id="choiceHelp" style="color:#a6557d; font-size:0.9rem; margin-top:-8px;margin-bottom:18px;">
+    Elige un dibujo para colorear o dibuja libremente.
+  </p>
 
-<div id="game" aria-label="Juego de memoria rápido con corazones" aria-live="polite" aria-hidden="true">
-  <div id="score">Intentos: 0</div>
-  <div id="timer">Tiempo: 0s</div>
-  <div id="board" role="grid" aria-label="Tablero de cartas"></div>
-  <div id="result"></div>
-  <button id="playAgainBtn" aria-label="Jugar de nuevo">Jugar otra vez</button>
+  <button id="startDrawingBtn" disabled aria-label="Comenzar a dibujar">Comenzar</button>
+
+  <div id="drawing-area" hidden>
+    <canvas id="canvas" width="570" height="400" aria-label="Área de dibujo"></canvas>
+
+    <div id="tools" aria-label="Herramientas de dibujo">
+      <label for="colorPicker">Color:</label>
+      <input type="color" id="colorPicker" value="#d43d6b" aria-label="Selector de color" />
+      <label for="brushSize">Pincel:</label>
+      <input type="range" id="brushSize" min="1" max="30" step="1" value="5" aria-label="Tamaño del pincel" />
+      <button id="eraser" aria-pressed="false" aria-label="Borrar dibujo">Borrador</button>
+      <button id="clear" aria-label="Borrar todo">Limpiar</button>
+    </div>
+
+    <div>
+      <button id="finishBtn" aria-label="Terminé el dibujo">Terminé</button>
+      <button id="nextBtn" aria-label="Siguiente" disabled>Siguiente</button>
+    </div>
+    <p id="status-msg" role="alert" aria-live="polite"></p>
+  </div>
 </div>
 
 <script>
-  const intro = document.getElementById('intro');
-  const instructions = document.getElementById('instructions');
-  const showInstructionsBtn = document.getElementById('showInstructionsBtn');
-  const startGameBtn = document.getElementById('startGameBtn');
-  const game = document.getElementById('game');
-  const board = document.getElementById('board');
-  const scoreDisplay = document.getElementById('score');
-  const timerDisplay = document.getElementById('timer');
-  const result = document.getElementById('result');
-  const playAgainBtn = document.getElementById('playAgainBtn');
+  const drawingChoice = document.getElementById('drawingChoice');
+  const startDrawingBtn = document.getElementById('startDrawingBtn');
+  const drawingArea = document.getElementById('drawing-area');
+  const canvas = document.getElementById('canvas');
+  const colorPicker = document.getElementById('colorPicker');
+  const brushSize = document.getElementById('brushSize');
+  const eraser = document.getElementById('eraser');
+  const clearBtn = document.getElementById('clear');
+  const finishBtn = document.getElementById('finishBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const statusMsg = document.getElementById('status-msg');
 
-  // Corazones en pareja, emojis amorosos para el tema
-  const heartSet = ['❤️','💕','💖','💘','💝','❣️','💟','💗'];
-  let deck = [];
-  let flippedCards = [];
-  let matched = [];
-  let tries = 0;
-  let timer = 0;
-  let intervalId = null;
-  let busy = false;
+  let ctx = canvas.getContext('2d');
+  let isDrawing = false;
+  let erasing = false;
 
-  showInstructionsBtn.onclick = () => {
-    intro.style.display = "none";
-    instructions.style.display = "block";
-    instructions.setAttribute('aria-hidden','false');
-    intro.setAttribute('aria-hidden','true');
+  // Imágenes en blanco y negro para colorear
+  // Para simplicidad uso SVGs en imagenes embedidas que cargaremos al canvas para que se pueda pintar encima.
+  // URLs de ejemplo o DataURLs:
+  const images = {
+    sunflower: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="570" height="400" viewBox="0 0 570 400"><circle cx="285" cy="200" r="80" fill="none" stroke="black" stroke-width="5"/><path d="M285 200 L250 70 M285 200 L320 70 M285 200 L360 80 M285 200 L220 150 M285 200 L350 150" fill="none" stroke="black" stroke-width="4"/></svg>',
+    monkey: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="570" height="400" viewBox="0 0 570 400"><circle cx="285" cy="200" r="90" fill="none" stroke="black" stroke-width="5"/><circle cx="230" cy="150" r="30" fill="none" stroke="black" stroke-width="3"/><circle cx="340" cy="150" r="30" fill="none" stroke="black" stroke-width="3"/><path d="M240 230 Q285 280 330 230" stroke="black" stroke-width="4" fill="none"/></svg>',
+    sunset: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="570" height="400" viewBox="0 0 570 400"><circle cx="285" cy="300" r="80" fill="none" stroke="black" stroke-width="5"/><path d="M0 350 Q285 100 570 350" fill="none" stroke="black" stroke-width="4"/><line x1="285" y1="220" x2="285" y2="140" stroke="black" stroke-width="3"/></svg>'
   };
 
-  startGameBtn.onclick = startGame;
-  playAgainBtn.onclick = startGame;
+  // Variables para dibujo
+  let currentImage = null;
 
-  function startGame() {
-    instructions.style.display = "none";
-    instructions.setAttribute('aria-hidden','true');
-    game.style.display = "flex";
-    game.setAttribute('aria-hidden','false');
-    result.textContent = "";
-    playAgainBtn.style.display = "none";
+  // Actualizar botón empezar al elegir dibujo
+  drawingChoice.addEventListener('change', e => {
+    startDrawingBtn.disabled = !e.target.value;
+    statusMsg.textContent = '';
+  });
 
-    let cards = heartSet.concat(heartSet); // parejas
-    deck = shuffle(cards);
-    tries = 0;
-    timer = 0;
-    flippedCards = [];
-    matched = [];
-    updateScore();
-    updateTimer();
+  // Limpiar y preparar canvas
+  function setupCanvas(imgSrc) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    erasing = false;
+    eraser.setAttribute('aria-pressed', 'false');
+    colorPicker.disabled = false;
+    brushSize.disabled = false;
 
-    board.innerHTML = "";
-    deck.forEach((emoji, idx) => {
-      const card = document.createElement('div');
-      card.className = "card";
-      card.dataset.index = idx;
-      card.setAttribute('tabindex', '0');
-      card.setAttribute('role', 'button');
-      card.setAttribute('aria-label', 'Carta volteada, toca para descubrir');
-      card.innerHTML = "";
-      card.onclick = () => flipCard(card, idx);
-      card.onkeydown = e => {
-        if(e.key === 'Enter' || e.key === ' ') flipCard(card, idx);
+    if (imgSrc) {
+      const img = new Image();
+      img.src = imgSrc;
+      img.onload = () => {
+        // Dibujar imagen en blanco y negro escalada
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
       };
-      board.appendChild(card);
-    });
-    clearInterval(intervalId);
-    intervalId = setInterval(() => {
-      timer++;
-      updateTimer();
-    }, 1000);
-  }
-
-  function updateScore() { scoreDisplay.textContent = `Intentos: ${tries}`; }
-  function updateTimer() { timerDisplay.textContent = `Tiempo: ${timer}s`; }
-  function shuffle(array) {
-    for(let i=array.length-1; i>0; i--) {
-      const j = Math.floor(Math.random()*(i+1));
-      [array[i],array[j]] = [array[j],array[i]];
-    }
-    return array;
-  }
-
-  function flipCard(card, idx) {
-    if (busy || flippedCards.includes(idx) || matched.includes(idx)) return;
-    card.innerHTML = deck[idx];
-    card.classList.add('flipped');
-    flippedCards.push(idx);
-    if (flippedCards.length === 2) {
-      busy = true;
-      tries++;
-      updateScore();
-      setTimeout(checkPair, 800);
     }
   }
 
-  function checkPair() {
-    const [i, j] = flippedCards;
-    const cards = board.querySelectorAll('.card');
-    if (deck[i] === deck[j]) {
-      cards[i].classList.add('matched');
-      cards[j].classList.add('matched');
-      matched.push(i, j);
+  startDrawingBtn.addEventListener('click', () => {
+    currentImage = drawingChoice.value;
+    document.getElementById('intro').style.display = 'none';
+    drawingArea.hidden = false;
+    nextBtn.disabled = true;
+    statusMsg.textContent = '';
+    if(currentImage === 'free'){
+      // lienzo blanco limpio
+      ctx.fillStyle = 'white';
+      ctx.fillRect(0,0,canvas.width,canvas.height);
     } else {
-      cards[i].innerHTML = "";
-      cards[j].innerHTML = "";
-      cards[i].classList.remove('flipped');
-      cards[j].classList.remove('flipped');
+      setupCanvas(images[currentImage]);
     }
-    flippedCards = [];
-    busy = false;
-    if (matched.length === deck.length) endGame();
-  }
+  });
 
-  function endGame() {
-    clearInterval(intervalId);
-    setTimeout(() => {
-      result.innerHTML = `¡Felicidades! Terminaste en <b>${timer} segundos</b> con <b>${tries} intentos</b> 🎉`;
-      playAgainBtn.style.display = "inline-block";
-    }, 600);
+  // Dibujo events
+  function getMousePos(evt) {
+    const rect = canvas.getBoundingClientRect();
+    return {
+      x: evt.clientX - rect.left,
+      y: evt.clientY - rect.top
+    };
   }
+  canvas.addEventListener('mousedown', e => {
+    isDrawing = true;
+    const pos = getMousePos(e);
+    ctx.beginPath();
+    ctx.moveTo(pos.x, pos.y);
+  });
+  canvas.addEventListener('mousemove', e => {
+    if (!isDrawing) return;
+    const pos = getMousePos(e);
+    if(erasing){
+      ctx.globalCompositeOperation = 'destination-out';
+      ctx.lineWidth = brushSize.value;
+      ctx.lineTo(pos.x, pos.y);
+      ctx.stroke();
+    } else {
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.strokeStyle = colorPicker.value;
+      ctx.lineWidth = brushSize.value;
+      ctx.lineTo(pos.x, pos.y);
+      ctx.stroke();
+    }
+  });
+  canvas.addEventListener('mouseup', e => {
+    if(isDrawing){
+      ctx.closePath();
+      isDrawing = false;
+      nextBtn.disabled = false;
+    }
+  });
+  canvas.addEventListener('mouseleave', e => {
+    if (isDrawing){
+      ctx.closePath();
+      isDrawing = false;
+    }
+  });
+
+  // Herramientas
+  eraser.onclick = () => {
+    erasing = !erasing;
+    eraser.setAttribute('aria-pressed', erasing ? 'true' : 'false');
+    colorPicker.disabled = erasing;
+  };
+  clearBtn.onclick = () => {
+    if(currentImage === 'free'){
+      ctx.fillStyle = 'white';
+      ctx.fillRect(0,0,canvas.width,canvas.height);
+    } else {
+      setupCanvas(images[currentImage]);
+    }
+    nextBtn.disabled = true;
+    statusMsg.textContent = '';
+  };
+
+  // Botón Terminé - envía dibujo por email (simulado)
+  finishBtn.onclick = () => {
+    const imageData = canvas.toDataURL('image/png');
+
+    // Simulamos el envío mostrando mensaje
+    statusMsg.textContent = "Enviando tu obra maestra por correo...";
+
+    // Aquí para una app real deberías enviarlo a un backend que gestione el mail.
+    // Como opción, puedes usar servicios o APIs de envío de email.
+
+    setTimeout(() => {
+      statusMsg.textContent = "¡Dibujo enviado a salomonfcarrasco@gmail.com! Gracias por compartir tu arte.";
+    }, 1500);
+  };
+
+  // Botón Siguiente - mensaje poético y luego link a index17.html
+  nextBtn.onclick = () => {
+    statusMsg.textContent = "El arte es estupenda, de muchos colores o de tonos grises, blanco, oscuros u opacos, siempre serás mi pintura favorita, el arte que pude apreciar de una gran maravilla.";
+    nextBtn.disabled = true;
+    finishBtn.disabled = true;
+    setTimeout(() => {
+      window.location.href = 'index17.html';
+    }, 7000);
+  };
 </script>
 
 </body>
