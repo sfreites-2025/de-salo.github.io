@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mensaje Derecho Animado con Decoración Visual</title>
+  <title>Mensaje Derecho Animado con Decoración Izquierda Moderna</title>
   <style>
     html, body {
       margin: 0; padding: 0;
@@ -17,13 +17,14 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      padding: 20px;
     }
     .container {
       display: flex;
       max-width: 960px;
-      width: 90vw;
+      width: 100%;
       height: 75vh;
-      background: rgba(255 255 255 / 0.9);
+      background: rgba(255 255 255 / 0.95);
       border-radius: 18px;
       box-shadow: 0 12px 36px rgba(207, 146, 169, 0.4);
       overflow: hidden;
@@ -40,40 +41,88 @@
         transform: scale(1);
       }
     }
-
-    /* Lado izquierdo con imagen y animación sutil */
-    .left-image {
+    /* Lado izquierdo decorativo */
+    .left-panel {
       flex: 1;
-      background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80');
-      background-size: cover;
-      background-position: center;
+      position: relative;
+      background: linear-gradient(135deg, #f8edea, #ffe4e9);
+      padding: 40px 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       border-top-left-radius: 18px;
       border-bottom-left-radius: 18px;
-      animation: subtleFloat 5s ease-in-out infinite alternate;
-      position: relative;
+      box-shadow: inset 0 0 30px rgba(255, 150, 170, 0.15);
+      overflow: hidden;
+      color: #ad5f70;
+      font-style: italic;
+      font-size: 1.1rem;
+      line-height: 1.5;
+      user-select: none;
     }
-    @keyframes subtleFloat {
-      0% {
-        transform: translateY(0) scale(1);
-        filter: brightness(0.95);
-      }
-      100% {
-        transform: translateY(-15px) scale(1.02);
-        filter: brightness(1);
-      }
-    }
-    /* Sobrepuesto un filtro degradado suave para suavizar colores */
-    .left-image::before {
-      content: "";
+    /* Sutileza textura de vetas */
+    .left-panel::before {
+      content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, rgba(255,120,130,0.55), rgba(255,180,200,0.3));
-      border-top-left-radius: 18px;
-      border-bottom-left-radius: 18px;
+      background: url('https://www.transparenttextures.com/patterns/pw-maze-white.png') repeat;
+      opacity: 0.05;
       pointer-events: none;
+      z-index: 0;
     }
-
-    /* Texto lado derecho */
+    /* Formas geométricas suaves */
+    .shape-circle {
+      position: absolute;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: #f6a0b4aa;
+      top: 15%;
+      left: 30%;
+      animation: floatSlow 6s ease-in-out infinite alternate;
+      z-index: 0;
+    }
+    .shape-square {
+      position: absolute;
+      width: 90px;
+      height: 90px;
+      background: #f293a6cc;
+      bottom: 20%;
+      right: 20%;
+      transform: rotate(25deg);
+      animation: floatSlow 5s ease-in-out infinite alternate-reverse;
+      z-index: 0;
+    }
+    @keyframes floatSlow {
+      0% { transform: translateY(0) rotate(0deg); }
+      100% { transform: translateY(15px) rotate(8deg); }
+    }
+    /* Texto manuscrito, con efecto máquina de escribir */
+    .left-text {
+      position: relative;
+      z-index: 1;
+      max-width: 90%;
+      margin: 0 auto;
+      font-family: 'Segoe Script', cursive, 'Brush Script MT', Georgia, serif;
+      font-style: italic;
+      color: #a44260;
+      font-size: 1.3rem;
+      line-height: 1.55;
+      display: inline-block;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 2px solid #a44260;
+      animation: typing 5s steps(50, end) forwards, blink-caret 0.75s step-end infinite;
+    }
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+    @keyframes blink-caret {
+      0%, 100% { border-color: transparent }
+      50% { border-color: #a44260 }
+    }
+    /* Lado derecho mantenemos tu diseño */
     .right-panel {
       flex: 1.2;
       padding: 42px 48px;
@@ -84,7 +133,6 @@
       justify-content: space-between;
       max-height: 85vh;
       overflow-y: auto;
-      position: relative;
       font-size: 1rem;
       line-height: 1.6;
       color: #5c2730;
@@ -92,6 +140,8 @@
       animation: fadeSlideIn 1.3s ease forwards;
       opacity: 0;
       transform: translateX(40px);
+      background: transparent;
+      position: relative;
     }
     @keyframes fadeSlideIn {
       to {
@@ -101,7 +151,6 @@
     }
     p {
       margin: 0 0 10px 0;
-      /* para texto separado se puede usar white-space para respetar saltos si quieres */
     }
     .buttons {
       margin-top: 32px;
@@ -134,35 +183,45 @@
       background: #d98e9f;
       border-radius: 4px;
     }
-    /* Responsive: apilar en vertical en pantallas pequeñas */
+    /* Responsive */
     @media (max-width: 850px) {
       .container {
         flex-direction: column;
         height: auto;
         border-radius: 18px;
       }
-      .left-image {
-        height: 250px;
-        border-radius: 18px 18px 0 0;
-        animation: none;
+      .left-panel, .right-panel {
+        width: 100%;
+        flex: none;
+        max-height: none;
+        padding: 30px 25px;
       }
       .right-panel {
-        padding: 30px 24px;
+        text-align: left;
         transform: none !important;
         opacity: 1 !important;
-        text-align: left;
-        max-height: none;
       }
       .buttons {
         justify-content: center;
+      }
+      .left-text {
+        white-space: normal;
+        animation: none;
+        border: none;
       }
     }
   </style>
 </head>
 <body>
 
-  <section class="container" aria-label="Mensaje animado con ilustración izquierda">
-    <div class="left-image" aria-hidden="true"></div>
+  <section class="container" aria-label="Mensaje con decoración moderna en lado izquierdo">
+    <aside class="left-panel" aria-hidden="true">
+      <div class="shape-circle"></div>
+      <div class="shape-square"></div>
+      <div class="left-text" aria-label="Texto motivacional animado">
+        Cada día es una nueva oportunidad para crecer y brillar.
+      </div>
+    </aside>
 
     <main class="right-panel" role="main" aria-label="Mensaje derecho animado">
       <p>
