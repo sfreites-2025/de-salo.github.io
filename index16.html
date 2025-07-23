@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Último Jueguito: Memoria Rápida</title>
+  <title>Último Jueguito Con Animación Suave</title>
   <style>
     body {
       margin: 0; padding: 0;
@@ -16,23 +16,19 @@
       justify-content: center;
       align-items: center;
     }
-    #intro, #game, #instructions {
+    #intro {
       position: absolute;
       max-width: 600px;
       background: rgba(255,255,255,0.9);
-      border-radius: 18px;
-      box-shadow: 0 10px 32px rgba(219,90,128,0.35);
-      padding: 40px 30px 24px;
+      border-radius: 20px;
+      padding: 40px 30px 30px;
       text-align: center;
-      box-sizing: border-box;
-      left: 50%; top: 50%; transform: translate(-50%,-50%);
-    }
-    #intro {
-      font-size: 1.45rem;
+      font-size: 1.4rem;
       font-weight: 700;
       letter-spacing: 0.04em;
+      left: 50%; top: 50%; transform: translate(-50%,-50%);
       opacity: 1;
-      animation: fadeInText 1s ease forwards;
+      animation: fadeInText 2s ease forwards;
       z-index: 2;
     }
     @keyframes fadeInText {
@@ -40,51 +36,64 @@
       100% {opacity:1; transform: translateY(0);}
     }
     #showInstructionsBtn {
-      margin-top: 22px;
-      padding: 11px 30px;
+      margin-top: 28px;
+      padding: 12px 36px;
+      border-radius: 30px;
       border: none;
-      border-radius: 24px;
-      background: linear-gradient(90deg, #e25186, #fd95ba);
-      color: white;
-      font-size: 1.1rem;
-      font-family: inherit;
+      background: linear-gradient(90deg, #d43d6b, #f1669e);
+      box-shadow: 0 6px 18px #f1598a7d;
+      color: #fff;
+      font-size: 1.15rem;
       cursor: pointer;
-      transition: background 0.2s;
-      box-shadow: 0 2px 8px #ec407a39;
+      user-select: none;
+      transition: background 0.3s ease;
     }
     #showInstructionsBtn:hover {
-      background: linear-gradient(90deg, #fd6890, #ffd1ea);
-      color: #be2d5e;
+      background: linear-gradient(90deg, #ff6a8c, #ff82a4);
     }
     #instructions {
       display: none;
+      position: absolute;
+      max-width: 520px;
+      background: rgba(255,255,255,0.93);
+      border-radius: 18px;
+      box-shadow: 0 8px 24px #de659633;
+      padding: 34px 22px 28px 22px;
       font-size: 1.05rem;
+      left: 50%; top: 50%; transform: translate(-50%,-50%);
       z-index: 3;
+      animation: fadeInText 1s ease;
     }
-    #startGameBtn, #playAgainBtn {
-      margin-top: 24px;
-      padding: 12px 34px;
-      border-radius: 28px;
+    #startGameBtn {
+      margin-top: 26px;
+      padding: 11px 35px;
+      border-radius: 26px;
       border: none;
-      background: linear-gradient(90deg, #d43d6b, #f1669e);
-      color: #fff;
-      font-size: 1.13rem;
+      background: linear-gradient(90deg, #e25186, #fda7be);
+      color: white;
+      font-size: 1.1rem;
       cursor: pointer;
-      transition: background 0.2s;
-      box-shadow: 0 4px 18px #ec407a33;
+      box-shadow: 0 2px 8px #ec407a35;
       font-family: inherit;
+      transition: background 0.2s;
     }
-    #startGameBtn:disabled {
-      background: #f3c0c9;
-      cursor: not-allowed;
+    #startGameBtn:hover {
+      background: linear-gradient(90deg, #e25186,#ffe3ea);
+      color: #be2d5e;
     }
     #game {
       width: 360px; min-height: 430px;
       display: none;
       flex-direction: column;
       align-items: center;
-      padding-top: 30px;
+      padding: 0 0 18px 0;
+      position: absolute;
+      left: 50%; top: 50%; transform: translate(-50%,-50%);
+      background: rgba(255,255,255,0.93);
+      border-radius: 20px;
+      box-shadow: 0 10px 32px rgba(219,90,128,0.35);
       z-index: 1;
+      animation: fadeInText 1s ease;
     }
     #board {
       width: 310px; min-height: 310px;
@@ -125,19 +134,37 @@
       cursor: default;
     }
     #score, #timer {
-      font-size: 1.15rem;
+      font-size: 1.12rem;
       font-weight: 600;
     }
     #result {
-      margin-top: 14px;
-      font-size: 1.15rem;
+      margin-top: 13px;
+      font-size: 1.12rem;
       color: #b1004d;
       font-weight: bold;
-      min-height: 28px;
+      min-height: 27px;
+    }
+    #playAgainBtn {
+      margin-top: 15px;
+      padding: 10px 30px;
+      border-radius: 22px;
+      border: none;
+      background: linear-gradient(90deg, #d43d6b, #f1669e);
+      color: #fff;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 2px 8px #ec407a31;
+      font-family: inherit;
+      transition: background 0.2s;
+      display: none;
+    }
+    #playAgainBtn:hover {
+      background: linear-gradient(90deg, #fd6890, #ffd1ea);
+      color: #be2d5e;
     }
     @media(max-width:600px){
       #intro, #instructions, #game {
-        width: 98vw; min-width: unset; max-width: 98vw; padding-left:10px; padding-right:10px;
+        width: 98vw; min-width: unset; max-width: 99vw; padding-left:10px; padding-right:10px;
       }
       #board { width: 99vw; max-width: 320px;}
     }
@@ -167,7 +194,7 @@
   <div id="timer">Tiempo: 0s</div>
   <div id="board"></div>
   <div id="result"></div>
-  <button id="playAgainBtn" style="display:none;" aria-label="Jugar de nuevo">Jugar otra vez</button>
+  <button id="playAgainBtn" aria-label="Jugar de nuevo">Jugar otra vez</button>
 </div>
 
 <script>
@@ -183,7 +210,7 @@
   const result = document.getElementById('result');
   const playAgainBtn = document.getElementById('playAgainBtn');
 
-  // Emojis para el juego (si quieres + dificultad, añade más)
+  // Emojis para el juego (puedes aumentar la dificultad agregando más pares)
   const emojiSet = ['🍓','🍍','🍉','🍒','🍇','🍑','🍌','🍎'];
   let deck = [];
   let flippedCards = [];
@@ -206,8 +233,7 @@
     result.textContent = "";
     playAgainBtn.style.display = "none";
     game.style.display = "flex";
-    // Preparar baraja y resetear estado
-    let cards = emojiSet.concat(emojiSet);
+    let cards = emojiSet.concat(emojiSet); // Crear parejas
     deck = shuffle(cards);
     tries = 0;
     timer = 0;
@@ -215,8 +241,6 @@
     matched = [];
     updateScore();
     updateTimer();
-
-    // Renderizar tablero
     board.innerHTML = "";
     deck.forEach((emoji, idx) => {
       const card = document.createElement('div');
@@ -230,7 +254,6 @@
       };
       board.appendChild(card);
     });
-    // Timer
     clearInterval(intervalId);
     intervalId = setInterval(() => {
       timer++;
@@ -278,7 +301,6 @@
     }
     flippedCards = [];
     busy = false;
-    // Fin de juego
     if (matched.length === deck.length) endGame();
   }
   function endGame() {
