@@ -3,287 +3,322 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Un último jueguito: Quiz del Amor</title>
+<title>Quiz Informático: Pero antes un último jueguito</title>
 <style>
   body {
     margin: 0; padding: 0;
-    font-family: 'Georgia', serif;
-    background: linear-gradient(135deg, #fce4ec 0%, #f48fb1 100%);
-    color: #6b2a40;
     min-height: 100vh;
+    font-family: 'Segoe UI', 'Georgia', serif;
+    background: linear-gradient(120deg, #304352 0%, #d7d2cc 100%);
+    color: #23324d;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
   }
   .center-box {
-    background: rgba(255 255 255 / 0.92);
-    border-radius: 22px;
-    box-shadow: 0 12px 36px rgba(219, 90, 128, 0.29);
-    padding: 38px 36px 36px;
-    max-width: 700px;
-    width: 90vw;
-    box-sizing: border-box;
+    background: rgba(240, 241, 246, 0.96);
+    border-radius: 20px;
+    box-shadow: 0 8px 36px rgba(52, 94, 130, 0.19);
+    padding: 35px 28px 34px;
+    max-width: 560px;
+    width: 93vw;
     text-align: center;
-    animation: fadeInUp 1.5s ease;
+    animation: fadeInUp 1.3s;
     position: relative;
   }
   @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(30px);}
+    from { opacity: 0; transform: translateY(38px);}
     to { opacity: 1; transform: translateY(0);}
   }
   h1 {
-    margin-bottom: 24px;
+    margin-bottom: 23px;
     font-weight: 700;
-    font-size: 1.7rem;
-    color: #c32e70;
+    letter-spacing: 0.03em;
+    font-size: 1.58rem;
+    color: #19538a;
+  }
+  .btn {
+    margin: 26px 9px 0 9px;
+    padding: 12px 34px;
+    border-radius: 28px;
+    background: linear-gradient(90deg, #1488cc, #2b32b2);
+    color: #fff;
+    font-size: 1.11rem;
+    font-family: inherit;
+    border: none;
+    cursor: pointer;
+    transition: background 0.22s;
+    min-width: 120px;
+    box-shadow: 0 2px 8px #2e4a6435;
+    font-weight: 500;
+  }
+  .btn:disabled { opacity: .6; cursor: not-allowed; }
+  .btn:hover { background: linear-gradient(90deg, #5c92d1, #1d3982); }
+  .quiz-bg {
+    background: linear-gradient(120deg, #304352 0%, #d7d2cc 100%);
+  }
+  .instructions {
+    margin:20px 2vw 0 2vw;
+    color:#14304e;
+    font-size:1.08rem;
+    line-height:1.5;
+    padding:18px 8px 6px 8px;
+    background: #eaf1fb;
+    border-radius:10px;
   }
   .question {
-    font-size: 1.18rem;
-    margin: 26px 0 16px 0;
-    font-weight: 600;
-    color: #c03254;
-    min-height: 1.3em;
+    font-size: 1.15rem;
+    font-weight:bold;
+    margin: 26px 0 12px 0;
+    color: #203047;
   }
   .options {
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    align-items: center;
+    gap: 10px;
+    align-items: stretch;
     margin-bottom: 18px;
   }
-  .option-btn {
-    padding: 12px 26px;
-    border-radius: 22px;
-    border: none;
-    background: linear-gradient(90deg, #fa7ea1, #f88dae);
-    color: #fff;
-    font-size: 1.06rem;
+  .opt-btn {
+    padding: 9px 0;
+    border-radius: 8px;
+    background: #fff;
+    color: #19538a;
+    font-size: 1.03rem;
     font-family: inherit;
+    border: 2px solid #a1c4fd;
     cursor: pointer;
-    margin-bottom: 4px;
-    min-width: 200px;
-    transition: background 0.25s;
-    box-shadow: 0 3px 10px #ffa0ba33;
+    transition: background 0.24s, border 0.18s;
+    font-weight: 500;
   }
-  .option-btn.selected, .option-btn:hover {
-    background: linear-gradient(90deg, #d43d6b, #f1669e);
-    color: #fffbea;
+  .opt-btn.selected, .opt-btn:hover {
+    background: #d1e3ff;
+    color: #243e63;
+    border: 2px solid #5281c5;
   }
-  #nextBtn, #restartBtn {
-    margin: 26px 8px 0 8px;
-    padding: 12px 32px;
-    border-radius: 28px;
-    background: linear-gradient(90deg, #d43d6b, #f1669e);
-    color: #fff;
-    border: none;
-    font-size: 1.1rem;
-    font-family: inherit;
-    cursor: pointer;
-    box-shadow: 0 2px 8px #ec407a35;
-    transition: background 0.2s;
-    display: inline-block;
-    min-width: 150px;
+  .correct {
+    border: 2px solid #62bc2b !important;
+    background: #d6fcc7 !important;
+    color: #235c13 !important;
   }
-  #nextBtn:disabled {
-    background: #f3c0c9;
-    color: #fff;
-    cursor: not-allowed;
-    opacity: 0.7;
-    box-shadow: none;
-  }
-  #restartBtn {
-    background: linear-gradient(90deg, #f483a7, #e468a3);
-    margin-left: 0;
+  .incorrect {
+    border: 2px solid #e94d4d !important;
+    background: #ffd7d7 !important;
+    color: #a11e19 !important;
   }
   #feedback {
     font-size: 1.05rem;
-    color: #7b255f;
-    min-height: 32px;
-    margin: 15px 0 10px 0;
+    color: #d8561c;
+    margin: 13px 0 2px 0;
+    min-height: 18px;
+    font-weight:500;
   }
   #final-message {
-    font-size: 1.19rem;
-    color: #a31545;
-    font-weight: 500;
-    margin-top: 25px;
-    margin-bottom: 17px;
-    min-height: 1.3em;
-  }
-  #poem-message {
-    display: none;
-    margin-top: 34px;
-    background: #fde6ef;
-    padding: 22px 20px;
-    border-radius: 20px;
-    color: #7b2a3a;
+    color: #1d3982;
     font-size: 1.18rem;
-    font-style: italic;
+    margin-top: 19px;
+    margin-bottom: 21px;
     font-weight: 600;
-    box-shadow: 0 6px 18px #fdaaea19;
+    min-height: 1.33em;
   }
-  @media(max-width:600px){
-    .center-box{padding:22px 8vw 16px;}
-    .option-btn, #nextBtn, #restartBtn { min-width: 90vw; }
+  #nice-message {
+    font-style: italic;
+    font-size: 1.13rem;
+    color: #d0597b;
+    margin-top: 14px;
+    margin-bottom: 16px;
+    display: none;
+    background: #f7e1ee;
+    padding: 20px 12px;
+    border-radius: 14px;
   }
 </style>
 </head>
-<body>
-  <div class="center-box">
-    <h1 id="title-msg">Pero antes un último jueguito</h1>
-    <div id="quiz-section">
-      <div class="question" id="question"></div>
-      <div class="options" id="options"></div>
-      <div id="feedback"></div>
-      <button id="nextBtn" disabled>Siguiente</button>
-    </div>
-    <div id="result-section" style="display:none;">
-      <div id="final-message"></div>
-      <button id="restartBtn">Jugar otra vez</button>
-      <button id="poemNextBtn">Siguiente</button>
-      <div id="poem-message">
-        El arte es estupenda, de muchos colores o de tonos grises, blanco, oscuros u opacos, siempre serás mi pintura favorita, el arte que pude apreciar de una gran maravilla.
-      </div>
-    </div>
+<body class="quiz-bg">
+
+<div class="center-box">
+
+  <!-- Página de introducción inicial -->
+  <div id="introPage">
+    <h1>Pero antes un último jueguito</h1>
+    <button class="btn" id="goToInstructionsBtn">Siguiente</button>
   </div>
+
+  <!-- Página de instrucciones -->
+  <div id="instructionsPage" style="display:none;">
+    <h1>Quiz técnico de informática</h1>
+    <div class="instructions">
+      Contesta las 10 preguntas siguientes. Cada pregunta tiene solo una respuesta correcta.<br>
+      Haz clic en tu respuesta y luego en <b>Siguiente</b> para avanzar.<br>
+      Al terminar, conocerás cuántos aciertos y errores tuviste.<br>
+      ¡Pon a prueba tus conocimientos de informática!
+    </div>
+    <button class="btn" id="letsGoBtn">¡Vamos!</button>
+  </div>
+
+  <!-- Quiz -->
+  <div id="quizPage" style="display:none;">
+    <div class="question" id="question"></div>
+    <div class="options" id="options"></div>
+    <div id="feedback"></div>
+    <button class="btn" id="quizNextBtn" disabled>Siguiente</button>
+  </div>
+
+  <!-- Resultados -->
+  <div id="resultPage" style="display:none;">
+    <div id="final-message"></div>
+    <div id="nice-message">
+      Siempre habrá cosas nuevas que aprender, pero con dedicación, curiosidad y tu toque especial, puedes con todo.<br>
+      ¡Tu esfuerzo es la mejor respuesta, y sonríe: la informática también es arte!
+    </div>
+    <button class="btn" id="finishQuizBtn">Siguiente</button>
+  </div>
+</div>
+
 <script>
-const questions = [
+// Preguntas y respuestas (solo una opción correcta por pregunta)
+const quizData = [
   {
-    q: "¿Cuál es el mejor plan de amor espontáneo?",
-    opts: [
-      "Un picnic inesperado con flores y postre",
-      "Un mensaje lindo y sincero a medianoche",
-      "Ver juntos el atardecer, hablando bajito",
-      "Hacer un playlist de canciones dedicadas"
-    ],
-    a: null
+    q: "¿Cuál es el sistema operativo más usado en computadoras personales?",
+    opts: ["Linux", "Windows", "macOS", "FreeBSD"],
+    a: 1
   },
   {
-    q: "¿Quién toma la iniciativa para un abrazo largo?",
-    opts: [
-      "Yo, sin pensarlo, siempre quiero abrazar",
-      "Ella, con una sonrisa que lo dice todo",
-      "A veces uno, a veces el otro, depende del día",
-      "Ambos al mismo tiempo: conexión total"
-    ],
-    a: null
+    q: "El cable de red más usado en una red LAN es:",
+    opts: ["USB", "HDMI", "Ethernet (RJ45)", "VGA"],
+    a:2
   },
   {
-    q: "¿Cuál frase te parece más acertada sobre el amor?",
-    opts: [
-      "El amor se demuestra en detalles, no palabras",
-      "Amar es apoyarse incluso en los días grises",
-      "Cada quien ama a su modo, y eso lo hace especial",
-      "El arte de amar es no rendirse nunca"
-    ],
-    a: null
+    q: "¿Para qué sirve la memoria RAM?",
+    opts: ["Almacenar archivos a largo plazo", "Procesar gráficos", "Guardar datos temporales para el sistema", "Proteger el equipo de virus"],
+    a: 2
   },
   {
-    q: "¿Qué color sientes que representa tu amor?",
-    opts: [
-      "Rosado cálido", "Azul profundo", "Amarillo alegre", "Multicolor, ¡imposible escoger!"
-    ],
-    a: null
+    q: "¿Cuál extensión corresponde a un archivo ejecutable en Windows?",
+    opts: [".txt", ".exe", ".pdf", ".html"],
+    a: 1
   },
   {
-    q: "Si tu amor fuera una estación del año, sería...",
-    opts: [
-      "Primavera 🌷", "Verano ☀️", "Otoño 🍁", "Invierno ⛄"
-    ],
-    a: null
+    q: "¿Qué representa 1 byte?",
+    opts: ["4 bits", "8 bits", "16 bits", "1,024 bits"],
+    a: 1
+  },
+  {
+    q: "¿Cuál de estos dispositivos es una salida de datos?",
+    opts: ["Teclado", "Monitor", "Ratón", "Micrófono"],
+    a: 1
+  },
+  {
+    q: "¿Cuál comando reinicia un equipo desde la terminal en sistemas Windows?",
+    opts: ["format C:", "ipconfig", "shutdown /r", "ping 127.0.0.1"],
+    a:2
+  },
+  {
+    q: "¿Qué es un software de código abierto (open source)?",
+    opts: ["Sólo disponible para empresas", "El usuario puede ver y modificar su código", "Solo puede instalarlo un técnico", "Es gratuito, pero no editable"],
+    a:1
+  },
+  {
+    q: "¿Qué hace un antivirus?",
+    opts: ["Acelera la RAM", "Monitorea temperatura", "Detecta y elimina software malicioso", "Enseña a programar"],
+    a:2
+  },
+  {
+    q: "¿Cuál puerto suele usarse para HTTP?",
+    opts: ["25", "21", "80", "443"],
+    a:2
   }
 ];
 let quizPos = 0;
-let totalAnswered = 0;
-let userAnswers = [];
+let score=0, errors=0;
+let answered=false, selectedOpt=null;
 
-const questionEl = document.getElementById('question');
-const optionsEl = document.getElementById('options');
-const nextBtn = document.getElementById('nextBtn');
-const feedback = document.getElementById('feedback');
-const quizSection = document.getElementById('quiz-section');
-const resultSection = document.getElementById('result-section');
-const finalMsg = document.getElementById('final-message');
-const restartBtn = document.getElementById('restartBtn');
-const poemNextBtn = document.getElementById('poemNextBtn');
-const poemMessage = document.getElementById('poem-message');
+const introPage = document.getElementById('introPage');
+const instructionsPage = document.getElementById('instructionsPage');
+const quizPage = document.getElementById('quizPage');
+const resultPage = document.getElementById('resultPage');
+const finishQuizBtn = document.getElementById('finishQuizBtn');
+const letsGoBtn = document.getElementById('letsGoBtn');
+const goToInstructionsBtn = document.getElementById('goToInstructionsBtn');
+const questionElem = document.getElementById('question');
+const optionsElem = document.getElementById('options');
+const quizNextBtn = document.getElementById('quizNextBtn');
+const feedbackElem = document.getElementById('feedback');
+const finalMessage = document.getElementById('final-message');
+const niceMessage = document.getElementById('nice-message');
 
-// Inicialización
-loadQuestion();
+goToInstructionsBtn.onclick = () => {
+  introPage.style.display = "none";
+  instructionsPage.style.display = "block";
+};
+
+letsGoBtn.onclick = () => {
+  instructionsPage.style.display = "none";
+  quizPage.style.display = "block";
+  loadQuestion();
+}
 
 function loadQuestion() {
-  feedback.textContent = '';
-  nextBtn.disabled = true;
-  questionEl.textContent = questions[quizPos].q;
-  optionsEl.innerHTML = '';
-  questions[quizPos].opts.forEach((opt, i) => {
+  quizNextBtn.disabled = true;
+  answered = false;
+  selectedOpt = null;
+  feedbackElem.textContent = "";
+  questionElem.textContent = quizData[quizPos].q;
+  optionsElem.innerHTML = "";
+  quizData[quizPos].opts.forEach((opt, idx) => {
     const btn = document.createElement('button');
-    btn.className = 'option-btn';
+    btn.className = 'opt-btn';
     btn.textContent = opt;
-    btn.onclick = () => selectAnswer(i, btn);
-    optionsEl.appendChild(btn);
+    btn.onclick = ()=>selectOpt(idx, btn);
+    optionsElem.appendChild(btn);
   });
 }
 
-function selectAnswer(idx, btn) {
-  // Desmarcar previas
-  optionsEl.querySelectorAll('.option-btn').forEach(b => {
-    b.classList.remove('selected');
-  });
+function selectOpt(idx, btn) {
+  if(answered) return;
+  optionsElem.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
   btn.classList.add('selected');
-  userAnswers[quizPos] = questions[quizPos].opts[idx];
-  nextBtn.disabled = false;
-  feedback.textContent = "¡Respuesta guardada!";
+  selectedOpt = idx;
+  quizNextBtn.disabled = false;
 }
 
-nextBtn.onclick = function() {
-  quizPos++;
-  if (quizPos < questions.length) {
-    loadQuestion();
+quizNextBtn.onclick = () => {
+  if(answered) return;
+  answered = true;
+  const correctIdx = quizData[quizPos].a;
+  const optBtns = optionsElem.querySelectorAll('.opt-btn');
+  optBtns[correctIdx].classList.add('correct');
+  if(selectedOpt === correctIdx) {
+    feedbackElem.textContent = "¡Correcto! ✔️";
+    score++;
   } else {
-    showResults();
+    optBtns[selectedOpt].classList.add('incorrect');
+    feedbackElem.textContent = `Incorrecto. La respuesta era: "${quizData[quizPos].opts[correctIdx]}"`;
+    errors++;
   }
+  quizNextBtn.disabled = true;
+  setTimeout(() => {
+    quizPos++;
+    if(quizPos < quizData.length) {
+      loadQuestion();
+    } else showResults();
+  }, 1150);
 };
 
 function showResults() {
-  quizSection.style.display = 'none';
-  resultSection.style.display = 'block';
-
-  let colorResponse = userAnswers[3] || "";
-  let arteColor = "";
-  if(colorResponse.includes("Rosado")) arteColor = "rosado cálido";
-  else if(colorResponse.includes("Azul")) arteColor = "azul profundo";
-  else if(colorResponse.includes("Amarillo")) arteColor = "amarillo vital";
-  else if(colorResponse.includes("Multi")) arteColor = "¡todos los colores!";
-  else arteColor = "color único";
-
-  finalMsg.innerHTML = `
-    <b>¡Completaste el quiz!</b><br>
-    <span style="color:#ff7c9b">Tus respuestas pintan una historia tan<br>
-    colorida y genuina como el arte verdadero.</span><br><br>
-    Si tu amor fuera un color sería <b>${arteColor}</b> y si fuera una estación, sería <b>${userAnswers[4]||"única"}</b>.
-  `;
-  poemMessage.style.display = 'none';
+  quizPage.style.display = "none";
+  resultPage.style.display = "block";
+  finalMessage.innerHTML = `<b>Has completado el quiz.</b><br>
+    <span style="color:#366da6;font-size:1.15em;margin-top:3px;display:block;">
+    Tuviste <b>${errors} error${errors!==1? 'es' : ''}</b> y <b>${score} acierto${score!==1?'s':''}</b>.<br>
+    ${ score >=7 ? "¡Excelente dominio técnico! 🎉" : (score>=4?"¡Vas bien, sigue practicando!":"Cada error es una oportunidad para aprender.")}
+    </span>`;
+  niceMessage.style.display = "block";
 };
 
-restartBtn.onclick = () => {
-  quizPos = 0;
-  userAnswers = [];
-  quizSection.style.display = 'block';
-  resultSection.style.display = 'none';
-  loadQuestion();
-};
-
-poemNextBtn.onclick = () => {
-  poemMessage.style.display = 'block';
-  poemNextBtn.style.display = "none";
-  setTimeout(() => {
-    window.location.href = "index17.html";
-  }, 7000);
-};
-
-finalMsg.onclick = () => {
-  poemNextBtn.focus();
+finishQuizBtn.onclick = () => {
+  niceMessage.textContent = "El arte de aprender informática es no rendirse nunca, siempre mejorar, y disfrutar el proceso. ¡Admira lo lejos que has llegado!";
+  setTimeout(()=>window.location.href="index17.html", 7000);
 };
 </script>
 </body>
