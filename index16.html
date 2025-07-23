@@ -3,289 +3,266 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Quiz Informático: Pero antes un último jueguito</title>
+<title>Último jueguito: Dibuja y escribe para ella</title>
 <style>
   body {
     margin: 0; padding: 0;
-    min-height: 100vh;
-    font-family: 'Segoe UI', 'Georgia', serif;
-    background: linear-gradient(120deg, #304352 0%, #d7d2cc 100%);
-    color: #23324d;
+    font-family: 'Georgia', serif;
+    background: linear-gradient(135deg, #fce4ec 0%, #f48fb1 100%);
+    color: #6b2a40;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
   }
   .center-box {
-    background: rgba(240, 241, 246, 0.96);
+    background: rgba(255 255 255 / 0.9);
     border-radius: 20px;
-    box-shadow: 0 8px 36px rgba(52, 94, 130, 0.19);
-    padding: 35px 28px 34px;
-    max-width: 560px;
-    width: 93vw;
+    box-shadow: 0 12px 40px rgba(219, 90, 128, 0.35);
+    padding: 40px 36px 36px;
+    max-width: 720px;
+    width: 90vw;
+    box-sizing: border-box;
     text-align: center;
-    animation: fadeInUp 1.3s;
+    animation: fadeInUp 1.8s ease forwards;
     position: relative;
   }
   @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(38px);}
-    to { opacity: 1; transform: translateY(0);}
+    0% {opacity: 0; transform: translateY(20px);}
+    100% {opacity: 1; transform: translateY(0);}
   }
   h1 {
-    margin-bottom: 23px;
+    margin-bottom: 26px;
     font-weight: 700;
-    letter-spacing: 0.03em;
-    font-size: 1.58rem;
-    color: #19538a;
+    font-size: 1.75rem;
   }
-  .btn {
-    margin: 26px 9px 0 9px;
-    padding: 12px 34px;
-    border-radius: 28px;
-    background: linear-gradient(90deg, #1488cc, #2b32b2);
-    color: #fff;
-    font-size: 1.11rem;
-    font-family: inherit;
-    border: none;
-    cursor: pointer;
-    transition: background 0.22s;
-    min-width: 120px;
-    box-shadow: 0 2px 8px #2e4a6435;
-    font-weight: 500;
+  label {
+    font-size: 1rem;
+    color: #6b2a40;
+    display: block;
+    margin-top: 14px;
+    font-weight: 600;
   }
-  .btn:disabled { opacity: .6; cursor: not-allowed; }
-  .btn:hover { background: linear-gradient(90deg, #5c92d1, #1d3982); }
-  .quiz-bg {
-    background: linear-gradient(120deg, #304352 0%, #d7d2cc 100%);
+  textarea {
+    width: 100%;
+    max-width: 100%;
+    height: 70px;
+    font-family: 'Georgia', serif;
+    font-size: 1.1rem;
+    padding: 8px 12px;
+    border-radius: 14px;
+    border: 2px solid #f496b1;
+    resize: vertical;
+    margin-bottom: 20px;
+    box-sizing: border-box;
   }
-  .instructions {
-    margin:20px 2vw 0 2vw;
-    color:#14304e;
-    font-size:1.08rem;
-    line-height:1.5;
-    padding:18px 8px 6px 8px;
-    background: #eaf1fb;
-    border-radius:10px;
+  textarea:focus {
+    outline: none;
+    border-color: #d6336b;
   }
-  .question {
-    font-size: 1.15rem;
-    font-weight:bold;
-    margin: 26px 0 12px 0;
-    color: #203047;
-    min-height: 3em;
-  }
-  .options {
+  #drawing-section {
+    margin-top: 20px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    align-items: stretch;
-    margin-bottom: 18px;
+    align-items: center;
+    user-select: none;
   }
-  .opt-btn {
-    padding: 9px 0;
-    border-radius: 8px;
-    background: #fff;
-    color: #19538a;
-    font-size: 1.03rem;
-    font-family: inherit;
-    border: 2px solid #a1c4fd;
+  canvas {
+    border-radius: 18px;
+    box-shadow: 0 6px 25px rgba(239, 137, 146, 0.35);
+    max-width: 100%;
+    height: auto;
+    border: 3px solid #cd6d8d;
+    background: white;
+    touch-action: none;
+  }
+  #tools {
+    margin-top: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    max-width: 720px;
+  }
+  input[type=color], input[type=range] {
     cursor: pointer;
-    transition: background 0.24s, border 0.18s;
-    font-weight: 500;
+    border-radius: 12px;
+    border: 1px solid #dca2b4;
+    padding: 4px;
+    height: 40px;
   }
-  .opt-btn.selected, .opt-btn:hover {
-    background: #d1e3ff;
-    color: #243e63;
-    border: 2px solid #5281c5;
+  button {
+    cursor: pointer;
+    font-family: 'Georgia', serif;
+    font-size: 1.15rem;
+    padding: 12px 34px;
+    margin: 20px 10px 0 10px;
+    border-radius: 30px;
+    border: none;
+    background: linear-gradient(90deg, #d43d6b, #f1669e);
+    box-shadow: 0 6px 18px rgba(241, 89, 138, 0.7);
+    color: #fff;
+    transition: background 0.3s ease;
+    user-select: none;
+    min-width: 140px;
   }
-  .correct {
-    border: 2px solid #62bc2b !important;
-    background: #d6fcc7 !important;
-    color: #235c13 !important;
+  button:hover:enabled {
+    background: linear-gradient(90deg, #f690a3, #ff9cc1);
+    color: #5e2241;
   }
-  .incorrect {
-    border: 2px solid #e94d4d !important;
-    background: #ffd7d7 !important;
-    color: #a11e19 !important;
+  button:disabled {
+    background: #f3c0c9;
+    cursor: not-allowed;
+    box-shadow: none;
   }
-  #feedback {
-    font-size: 1.05rem;
-    color: #d8561c;
-    margin: 13px 0 2px 0;
-    min-height: 18px;
-    font-weight:500;
-  }
-  #final-message {
-    color: #1d3982;
-    font-size: 1.18rem;
-    margin-top: 19px;
-    margin-bottom: 21px;
+  #status-msg {
+    margin-top: 20px;
     font-weight: 600;
-    min-height: 1.33em;
-  }
-  #nice-message {
-    font-style: italic;
-    font-size: 1.13rem;
-    color: #d0597b;
-    margin-top: 14px;
-    margin-bottom: 16px;
-    display: none;
-    background: #f7e1ee;
-    padding: 20px 12px;
-    border-radius: 14px;
-    text-align: center;
+    color: #7b2a3a;
+    min-height: 28px;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
   }
 </style>
 </head>
-<body class="quiz-bg">
+<body>
 
-<div class="center-box">
+<div class="center-box" role="main" aria-live="polite" aria-atomic="true" aria-label="Dibuja y escribe para ella">
+  <h1>Pero primero un último jueguito</h1>
 
-  <!-- Página de introducción inicial -->
-  <div id="introPage">
-    <h1>Pero antes un último jueguito</h1>
-    <button class="btn" id="goToInstructionsBtn">Siguiente</button>
+  <label for="messageText">Si quieres, escribe un mensaje para ella:</label>
+  <textarea id="messageText" placeholder="Escribe algo lindo... (opcional)" aria-label="Área para escribir mensaje"></textarea>
+
+  <label for="colorPicker">Elige el color del pincel:</label>
+  <input type="color" id="colorPicker" value="#d43d6b" aria-label="Selector de color" />
+
+  <label for="brushSize">Ajusta el tamaño del pincel:</label>
+  <input type="range" id="brushSize" min="1" max="30" step="1" value="5" aria-label="Tamaño del pincel" />
+
+  <div id="tools" aria-label="Herramientas de dibujo">
+    <button id="eraser" aria-pressed="false" aria-label="Activar borrador">Borrador</button>
+    <button id="clear" aria-label="Limpiar lienzo">Limpiar</button>
   </div>
 
-  <!-- Página de instrucciones -->
-  <div id="instructionsPage" style="display:none;">
-    <h1>Quiz técnico de informática</h1>
-    <div class="instructions">
-      Contesta las 10 preguntas siguientes. Cada pregunta tiene solo una respuesta correcta.<br>
-      Haz clic en tu respuesta y luego en <b>Siguiente</b> para avanzar.<br>
-      Al terminar, conocerás cuántos aciertos y errores tuviste.<br>
-      ¡Pon a prueba tus conocimientos de informática!
-    </div>
-    <button class="btn" id="letsGoBtn">¡Vamos!</button>
+  <div id="drawing-section">
+    <canvas id="canvas" width="570" height="400" aria-label="Lienzo de dibujo"></canvas>
   </div>
 
-  <!-- Quiz -->
-  <div id="quizPage" style="display:none;">
-    <div class="question" id="question"></div>
-    <div class="options" id="options"></div>
-    <div id="feedback"></div>
-    <button class="btn" id="quizNextBtn" disabled>Siguiente</button>
+  <div>
+    <button id="finishBtn" aria-label="Terminé el dibujo">Terminé</button>
+    <button id="nextBtn" disabled aria-label="Siguiente">Siguiente</button>
   </div>
 
-  <!-- Resultados -->
-  <div id="resultPage" style="display:none;">
-    <div id="final-message"></div>
-    <div id="nice-message"></div>
-    <button class="btn" id="finishQuizBtn">Siguiente</button>
-  </div>
+  <p id="status-msg" role="alert" aria-live="polite"></p>
 </div>
 
 <script>
-// Preguntas y respuestas
-const quizData = [
-  { q: "¿Cuál es el sistema operativo más usado en computadoras personales?", opts: ["Linux", "Windows", "macOS", "FreeBSD"], a: 1 },
-  { q: "El cable de red más usado en una red LAN es:", opts: ["USB", "HDMI", "Ethernet (RJ45)", "VGA"], a: 2 },
-  { q: "¿Para qué sirve la memoria RAM?", opts: ["Almacenar archivos a largo plazo", "Procesar gráficos", "Guardar datos temporales para el sistema", "Proteger el equipo de virus"], a: 2 },
-  { q: "¿Cuál extensión corresponde a un archivo ejecutable en Windows?", opts: [".txt", ".exe", ".pdf", ".html"], a: 1 },
-  { q: "¿Qué representa 1 byte?", opts: ["4 bits", "8 bits", "16 bits", "1,024 bits"], a: 1 },
-  { q: "¿Cuál de estos dispositivos es una salida de datos?", opts: ["Teclado", "Monitor", "Ratón", "Micrófono"], a: 1 },
-  { q: "¿Cuál comando reinicia un equipo desde la terminal en sistemas Windows?", opts: ["format C:", "ipconfig", "shutdown /r", "ping 127.0.0.1"], a: 2 },
-  { q: "¿Qué es un software de código abierto (open source)?", opts: ["Sólo disponible para empresas", "El usuario puede ver y modificar su código", "Solo puede instalarlo un técnico", "Es gratuito, pero no editable"], a: 1 },
-  { q: "¿Qué hace un antivirus?", opts: ["Acelera la RAM", "Monitorea temperatura", "Detecta y elimina software malicioso", "Enseña a programar"], a: 2 },
-  { q: "¿Cuál puerto suele usarse para HTTP?", opts: ["25", "21", "80", "443"], a: 2 }
-];
-let quizPos = 0;
-let score=0, errors=0;
-let answered=false, selectedOpt=null;
+  const canvas = document.getElementById('canvas');
+  const ctx = canvas.getContext('2d');
+  const colorPicker = document.getElementById('colorPicker');
+  const brushSizeInput = document.getElementById('brushSize');
+  const eraserBtn = document.getElementById('eraser');
+  const clearBtn = document.getElementById('clear');
+  const finishBtn = document.getElementById('finishBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const statusMsg = document.getElementById('status-msg');
+  const messageText = document.getElementById('messageText');
 
-const introPage = document.getElementById('introPage');
-const instructionsPage = document.getElementById('instructionsPage');
-const quizPage = document.getElementById('quizPage');
-const resultPage = document.getElementById('resultPage');
-const finishQuizBtn = document.getElementById('finishQuizBtn');
-const letsGoBtn = document.getElementById('letsGoBtn');
-const goToInstructionsBtn = document.getElementById('goToInstructionsBtn');
-const questionElem = document.getElementById('question');
-const optionsElem = document.getElementById('options');
-const quizNextBtn = document.getElementById('quizNextBtn');
-const feedbackElem = document.getElementById('feedback');
-const finalMessage = document.getElementById('final-message');
-const niceMessage = document.getElementById('nice-message');
+  let isDrawing = false;
+  let eraserActive = false;
 
-goToInstructionsBtn.onclick = () => {
-  introPage.style.display = "none";
-  instructionsPage.style.display = "block";
-};
+  ctx.lineCap = 'round';
+  ctx.lineJoin = 'round';
+  ctx.lineWidth = brushSizeInput.value;
+  ctx.strokeStyle = colorPicker.value;
 
-letsGoBtn.onclick = () => {
-  instructionsPage.style.display = "none";
-  quizPage.style.display = "block";
-  loadQuestion();
-}
+  ctx.fillStyle = 'white';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-function loadQuestion() {
-  quizNextBtn.disabled = true;
-  answered = false;
-  selectedOpt = null;
-  feedbackElem.textContent = "";
-  questionElem.textContent = quizData[quizPos].q;
-  optionsElem.innerHTML = "";
-  quizData[quizPos].opts.forEach((opt, idx) => {
-    const btn = document.createElement('button');
-    btn.className = 'opt-btn';
-    btn.textContent = opt;
-    btn.onclick = ()=>selectOpt(idx, btn);
-    optionsElem.appendChild(btn);
+  function getPos(evt) {
+    const rect = canvas.getBoundingClientRect();
+    let clientX, clientY;
+    if (evt.touches && evt.touches.length) {
+      clientX = evt.touches[0].clientX;
+      clientY = evt.touches[0].clientY;
+    } else {
+      clientX = evt.clientX;
+      clientY = evt.clientY;
+    }
+    return {
+      x: clientX - rect.left,
+      y: clientY - rect.top
+    };
+  }
+
+  function startDrawing(e) {
+    e.preventDefault();
+    isDrawing = true;
+    const pos = getPos(e);
+    ctx.beginPath();
+    ctx.moveTo(pos.x, pos.y);
+  }
+  function draw(e) {
+    if (!isDrawing) return;
+    e.preventDefault();
+    const pos = getPos(e);
+    if (eraserActive) {
+      ctx.globalCompositeOperation = 'destination-out';
+      ctx.lineWidth = brushSizeInput.value;
+      ctx.lineTo(pos.x, pos.y);
+      ctx.stroke();
+    } else {
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.strokeStyle = colorPicker.value;
+      ctx.lineWidth = brushSizeInput.value;
+      ctx.lineTo(pos.x, pos.y);
+      ctx.stroke();
+    }
+  }
+  function stopDrawing(e) {
+    if (!isDrawing) return;
+    ctx.closePath();
+    isDrawing = false;
+    nextBtn.disabled = false;
+  }
+
+  canvas.addEventListener('mousedown', startDrawing);
+  canvas.addEventListener('mousemove', draw);
+  canvas.addEventListener('mouseup', stopDrawing);
+  canvas.addEventListener('mouseleave', stopDrawing);
+  canvas.addEventListener('touchstart', startDrawing, {passive:false});
+  canvas.addEventListener('touchmove', draw, {passive:false});
+  canvas.addEventListener('touchend', stopDrawing);
+
+  brushSizeInput.addEventListener('change', () => { ctx.lineWidth = brushSizeInput.value; });
+  colorPicker.addEventListener('change', () => { if(!eraserActive) ctx.strokeStyle = colorPicker.value; });
+
+  eraserBtn.addEventListener('click', () => {
+    eraserActive = !eraserActive;
+    eraserBtn.setAttribute('aria-pressed', eraserActive.toString());
+    colorPicker.disabled = eraserActive;
+    if (!eraserActive) ctx.strokeStyle = colorPicker.value;
   });
-}
 
-function selectOpt(idx, btn) {
-  if(answered) return;
-  optionsElem.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
-  btn.classList.add('selected');
-  selectedOpt = idx;
-  quizNextBtn.disabled = false;
-}
+  clearBtn.addEventListener('click', () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = 'white';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    nextBtn.disabled = true;
+    statusMsg.textContent = '';
+  });
 
-quizNextBtn.onclick = () => {
-  if(answered) return;
-  answered = true;
-  const correctIdx = quizData[quizPos].a;
-  const optBtns = optionsElem.querySelectorAll('.opt-btn');
-  optBtns[correctIdx].classList.add('correct');
-  if(selectedOpt === correctIdx) {
-    feedbackElem.textContent = "¡Correcto! ✔️";
-    score++;
-  } else {
-    optBtns[selectedOpt]?.classList.add('incorrect');
-    feedbackElem.textContent = `Incorrecto. La respuesta era: "${quizData[quizPos].opts[correctIdx]}"`;
-    errors++;
-  }
-  quizNextBtn.disabled = true;
-  setTimeout(() => {
-    quizPos++;
-    if(quizPos < quizData.length) {
-      loadQuestion();
-    } else showResults();
-  }, 1300);
-};
+  finishBtn.addEventListener('click', () => {
+    statusMsg.textContent = "¡Listo! Puedes continuar cuando quieras.";
+  });
 
-function showResults() {
-  quizPage.style.display = "none";
-  resultPage.style.display = "block";
-  finalMessage.innerHTML = `<b>Has completado el quiz.</b><br>
-    <span style="color:#366da6;font-size:1.15em;margin-top:3px;display:block;">
-    Tuviste <b>${errors} error${errors!==1? 'es' : ''}</b> y <b>${score} acierto${score!==1?'s':''}</b>.
-    </span>`;
-
-  if(score < 5){
-    niceMessage.textContent = "No que muy informática jajajaja? Mentira, yo sé que tú sabes.";
-  } else if(score > 6){
-    niceMessage.textContent = "Bicho usted es muy inteligente, si se graduó bien bien.";
-  } else {
-    niceMessage.textContent = "Vas bien, con un poco más seguro lo lograste!";
-  }
-  niceMessage.style.display = "block";
-};
-
-finishQuizBtn.onclick = () => {
-  niceMessage.textContent = "El arte de aprender informática es no rendirse nunca, siempre mejorar, y disfrutar el proceso. ¡Admira lo lejos que has llegado!";
-  setTimeout(()=>window.location.href="index17.html", 7000);
-};
+  nextBtn.addEventListener('click', () => {
+    window.location.href = 'index17.html';
+  });
 </script>
+
 </body>
 </html>
