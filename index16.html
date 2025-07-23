@@ -25,7 +25,7 @@
     width: 90vw;
     box-sizing: border-box;
     text-align: center;
-    animation: fadeInUp 1.8s ease forwards;
+    animation: fadeInUp 2s ease forwards;
     position: relative;
   }
   @keyframes fadeInUp {
@@ -160,7 +160,6 @@
 </div>
 
 <script>
-  // Elementos y variables
   const canvas = document.getElementById('canvas');
   const ctx = canvas.getContext('2d');
   const colorPicker = document.getElementById('colorPicker');
@@ -175,17 +174,14 @@
   let isDrawing = false;
   let eraserActive = false;
 
-  // Configuraciones iniciales canvas
   ctx.lineCap = 'round';
   ctx.lineJoin = 'round';
   ctx.lineWidth = brushSizeInput.value;
   ctx.strokeStyle = colorPicker.value;
 
-  // Fondo blanco inicial
   ctx.fillStyle = 'white';
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  // Funciones dibujo
   function getPos(evt) {
     const rect = canvas.getBoundingClientRect();
     let clientX, clientY;
@@ -230,10 +226,9 @@
     if (!isDrawing) return;
     ctx.closePath();
     isDrawing = false;
-    nextBtn.disabled = false; // Se activa el botón siguiente después de dibujar algo
+    nextBtn.disabled = false;
   }
 
-  // Eventos dibujo mouse y touch
   canvas.addEventListener('mousedown', startDrawing);
   canvas.addEventListener('mousemove', draw);
   canvas.addEventListener('mouseup', stopDrawing);
@@ -242,7 +237,6 @@
   canvas.addEventListener('touchmove', draw, {passive:false});
   canvas.addEventListener('touchend', stopDrawing);
 
-  // Cambios herramientas
   brushSizeInput.addEventListener('change', () => { ctx.lineWidth = brushSizeInput.value; });
   colorPicker.addEventListener('change', () => { if(!eraserActive) ctx.strokeStyle = colorPicker.value; });
 
@@ -264,16 +258,13 @@
   finishBtn.addEventListener('click', async () => {
     statusMsg.textContent = "Enviando tu obra maestra al correo...";
 
-    // Obtener imagen base64
     const imgData = canvas.toDataURL('image/png');
-    // Obtener el mensaje escrito por el usuario (opcional)
     const userMessage = messageText.value.trim();
 
-    // Enviar ambas cosas al backend
     try {
       const response = await fetch('/send-drawing', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({ image: imgData, message: userMessage })
       });
       if (response.ok) {
