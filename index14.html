@@ -3,81 +3,214 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mensaje con Fondo Opaco</title>
+  <title>Mensaje para Oriana</title>
   <style>
-    html, body {
-      width: 100%;
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
+    /* Fondo amoroso con animación suave de corazones */
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(1); opacity: 0.8; }
+      50% { transform: translateY(-20px) scale(1.1); opacity: 1; }
+      100% { transform: translateY(0) scale(1); opacity: 0.8; }
     }
     body {
-      background-image: url("https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=2000&q=80");
-      background-repeat: no-repeat;
-      background-position: center center;
-      background-size: cover;
-    }
-    .container {
-      width: 100vw;
+      margin: 0;
       height: 100vh;
+      font-family: 'Georgia', serif;
+      background: linear-gradient(135deg, #fce1e4 0%, #fad1d8 100%);
+      overflow: hidden;
       display: flex;
-      flex-direction: row;
-      align-items: stretch;
+      align-items: center;
+      justify-content: center;
+      color: #522a2a;
+      position: relative;
     }
-    .side-message {
-      width: 40vw;
-      min-width: 270px;
-      max-width: 460px;
-      background: #ffffff; /* Fondo blanco opaco sin transparencia */
+    /* Corazones flotantes de fondo */
+    .heart {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      background: #f28ab2;
+      transform-origin: center;
+      opacity: 0.7;
+      animation: floatUp 4s ease-in-out infinite alternate;
+      clip-path: polygon(
+        50% 15%, 61% 8%, 75% 8%, 84% 17%, 88% 30%, 83% 45%, 
+        68% 60%, 50% 80%, 32% 60%, 17% 45%, 12% 30%, 16% 17%, 
+        25% 8%, 39% 8%
+      );
+    }
+    /* Varias posiciones y retrasos para animar varios corazones */
+    .heart:nth-child(1) {
+      top: 10%;
+      left: 15%;
+      animation-delay: 0s;
+      width: 50px;
+      height: 50px;
+    }
+    .heart:nth-child(2) {
+      top: 25%;
+      left: 80%;
+      animation-delay: 1.5s;
+      width: 30px;
+      height: 30px;
+      opacity: 0.6;
+    }
+    .heart:nth-child(3) {
+      top: 70%;
+      left: 50%;
+      animation-delay: 0.7s;
+      width: 40px;
+      height: 40px;
+    }
+    .heart:nth-child(4) {
+      top: 85%;
+      left: 20%;
+      animation-delay: 2.3s;
+      width: 35px;
+      height: 35px;
+      opacity: 0.5;
+    }
+
+    /* Contenedor general de la diapositiva */
+    .slide-container {
+      background: rgba(255, 255, 255, 0.92);
+      border-radius: 18px;
+      box-shadow: 0 12px 48px rgba(210, 140, 155, 0.35);
+      max-width: 960px;
+      width: 90vw;
+      height: 70vh;
+      display: flex;
+      padding: 40px 50px;
+      overflow-y: auto;
+      gap: 40px;
+      position: relative;
+      z-index: 10;
+    }
+
+    /* Lado izquierdo texto pequeño */
+    .left-text {
+      flex: 1;
+      font-size: 0.85rem;
+      color: #462a2a;
+      line-height: 1.5;
+      white-space: pre-wrap;
+      font-style: italic;
+      overflow-y: auto;
+    }
+
+    /* Lado derecho texto más grande */
+    .right-text {
+      flex: 1;
+      font-size: 1.07rem;
+      color: #812a43;
+      line-height: 1.6;
+      white-space: pre-wrap;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      align-items: flex-start;
-      padding: 60px 30px 60px 45px;
-      box-sizing: border-box;
-      height: 100vh;
-      animation: fadeInMove 1.2s ease forwards;
+      justify-content: space-between;
+    }
+
+    /* Contenedor de botones al final */
+    .buttons {
+      margin-top: 28px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 18px;
+    }
+
+    button {
+      cursor: pointer;
+      font-family: 'Georgia', serif;
+      font-size: 1rem;
+      padding: 10px 28px;
+      border-radius: 24px;
+      border: none;
+      color: white;
+      background: linear-gradient(90deg, #d94b68, #f38fa9);
+      box-shadow: 0 4px 14px rgba(243, 143, 169, 0.66);
+      transition: background 0.3s ease;
+      user-select: none;
+      min-width: 110px;
+    }
+    button:hover {
+      background: linear-gradient(90deg, #f3587a, #ffa1b9);
+    }
+
+    /* Scrollbar para texto si es necesario */
+    .left-text::-webkit-scrollbar,
+    .right-text::-webkit-scrollbar {
+      width: 6px;
+    }
+    .left-text::-webkit-scrollbar-thumb,
+    .right-text::-webkit-scrollbar-thumb {
+      background-color: #d7949c;
+      border-radius: 3px;
+    }
+
+    /* Respuesta visual animada */
+    .fade-in {
+      animation: fadeInSlide 1.2s ease forwards;
       opacity: 0;
-      transform: translateX(-30px);
-      color: #222222; /* Texto oscuro para buen contraste */
-      box-shadow: 0 4px 14px rgba(0,0,0,0.15); /* Sombra suave para resaltar el recuadro */
-      border-radius: 12px;
+      transform: translateY(10px);
     }
-    .mensaje {
-      font-family: 'Times New Roman', Times, serif;
-      font-size: 0.93rem;
-      line-height: 1.7;
-      margin: 0;
-    }
-    @keyframes fadeInMove {
+    @keyframes fadeInSlide {
       to {
         opacity: 1;
-        transform: translateX(0);
+        transform: translateY(0);
       }
     }
-    @media (max-width: 750px) {
-      .side-message {
-        width: 99vw;
-        max-width: unset;
-        min-width: unset;
-        padding: 20px 15px;
-        border-radius: 0;
+
+    @media (max-width: 900px) {
+      .slide-container {
+        flex-direction: column;
+        height: auto;
+        padding: 28px 30px;
       }
-      .mensaje {
-        font-size: 0.91rem;
+      .left-text, .right-text {
+        flex: none;
+        font-size: 0.9rem;
+        max-height: 180px;
+        overflow-y: auto;
+      }
+      .buttons {
+        justify-content: center;
+        margin-top: 24px;
+      }
+      button {
+        min-width: 100px;
       }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="side-message">
-      <div class="mensaje">
-        Supongo que al llegar a este momento te preguntas: ¿qué onda con este tipo? ¿Por qué todo esto de un día para otro? La verdad es que esto no es algo que surgió de la noche a la mañana. Son cosas que llevo pensando y sintiendo desde hace meses, y créeme que no es fácil para mí plasmarlo en palabras.<br><br>
+
+  <!-- Corazones animados de fondo -->
+  <div class="heart"></div>
+  <div class="heart"></div>
+  <div class="heart"></div>
+  <div class="heart"></div>
+
+  <section class="slide-container" aria-label="Mensaje de amor personal">
+    <article class="left-text fade-in" tabindex="0" aria-describedby="leftTextDesc">
+      <p id="leftTextDesc">
+        Supongo que al llegar a este momento te preguntas: ¿qué onda con este tipo? ¿Por qué todo esto de un día para otro? La verdad es que esto no es algo que surgió de la noche a la mañana. Son cosas que llevo pensando y sintiendo desde hace meses, y créeme que no es fácil para mí plasmarlo en palabras.
+
         Todo este tiempo he estado aprendiendo, creciendo, enfrentando mis propias dudas y miedos. Llegar aquí me costó un montón, porque no quería que lo que tuviera para decirte fuera solo un impulso, ni tampoco una conversación suelta más. Quise hacer algo especial, algo que de verdad pudieras recordar y bueno aprendi de tus estudios y tienes esto que es tuyo y solamente tuyo, prometo mejorar. Pensé mucho en cuál sería el mejor momento, y aunque nunca hay un "momento perfecto", sentí que este era el más sincero para contarte todo lo que llevo dentro.
+      </p>
+    </article>
+
+    <article class="right-text fade-in" tabindex="0" aria-describedby="rightTextDesc">
+      <p id="rightTextDesc">
+        Sé que ahora mismo estás pasando por momentos delicados, que hay cosas difíciles con tu hermanito y eso no pasa desapercibido para mí. Te lo digo en serio, lo tengo en cuenta, te respeto y te admiro, porque aun entre esas dificultades sigues siendo una persona fuerte, auténtica y valiosa.
+
+        Solo quiero que me leas, sin esperar nada, sin compromisos ni presiones. Lee esto con el corazón abierto. No busco respuestas inmediatas ni cambiarlo todo de golpe; solo sentí que te debía mi verdad, compartirte lo que soy y lo que siento. Si algo espero, es que puedas quedarte con la certeza de que cada palabra es genuina y que, aunque los caminos sean complejos, quise ser valiente y mostrarte esto que tantas vueltas me dio en la mente.
+      </p>
+
+      <div class="buttons">
+        <button onclick="window.history.back()" aria-label="Regresar">Regresar</button>
+        <button onclick="window.location.href='index15.html'" aria-label="Ir a siguiente diapositiva">Siguiente</button>
       </div>
-    </div>
-  </div>
+    </article>
+  </section>
+
 </body>
 </html>
