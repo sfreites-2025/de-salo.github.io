@@ -33,8 +33,7 @@
   }
   .buttons {
     display: flex;
-    justify-content: space-between;
-    gap: 20px;
+    justify-content: center;
   }
   button {
     font-family: 'Times New Roman', Times, serif;
@@ -48,7 +47,7 @@
     box-shadow: 0 6px 18px rgba(241, 89, 138, 0.7);
     transition: background 0.3s ease;
     user-select: none;
-    flex: 1;
+    flex: none;
   }
   button:hover {
     background: linear-gradient(90deg, #f690a3, #ff9cc1);
@@ -60,7 +59,6 @@
   <main class="container" role="main" aria-label="Bienvenida a las últimas páginas">
     <h1>Bienvenida a las últimas páginas de esta página</h1>
     <nav class="buttons" role="navigation" aria-label="Navegación entre páginas">
-      <button type="button" onclick="window.history.back()" aria-label="Página anterior">Anterior</button>
       <button type="button" onclick="window.location.href='index18.html'" aria-label="Página siguiente">Siguiente</button>
     </nav>
   </main>
