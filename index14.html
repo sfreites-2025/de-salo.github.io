@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mensaje con Animación Linda</title>
+  <title>Mensaje sin fondo blanco</title>
   <style>
     html, body {
       width: 100%;
@@ -29,7 +29,7 @@
       width: 40vw;
       min-width: 270px;
       max-width: 460px;
-      background: rgba(255,255,255,0.8);
+      /* background removed to show no white behind */
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -40,16 +40,13 @@
       animation: fadeInMove 1.2s ease forwards;
       opacity: 0;
       transform: translateX(-30px);
+      color: #fff; /* texto blanco para buena visibilidad */
+      text-shadow: 0 0 5px rgba(0,0,0,0.7); /* mejora legibilidad sobre fondo */
     }
     .mensaje {
       font-family: 'Times New Roman', Times, serif;
       font-size: 0.93rem;
-      color: #222;
       line-height: 1.7;
-      background: #ffffffcc;
-      border-radius: 8px;
-      padding: 18px 21px;
-      box-shadow: 0 2px 14px 0 rgba(90,90,110,0.04);
       margin: 0;
     }
     @keyframes fadeInMove {
@@ -67,7 +64,6 @@
       }
       .mensaje {
         font-size: 0.91rem;
-        padding: 10px;
       }
     }
   </style>
@@ -80,7 +76,6 @@
         Todo este tiempo he estado aprendiendo, creciendo, enfrentando mis propias dudas y miedos. Llegar aquí me costó un montón, porque no quería que lo que tuviera para decirte fuera solo un impulso, ni tampoco una conversación suelta más. Quise hacer algo especial, algo que de verdad pudieras recordar y bueno aprendi de tus estudios y tienes esto que es tuyo y solamente tuyo, prometo mejorar. Pensé mucho en cuál sería el mejor momento, y aunque nunca hay un "momento perfecto", sentí que este era el más sincero para contarte todo lo que llevo dentro.
       </div>
     </div>
-    <!-- El resto de la pantalla permanece vacío y solo muestra el fondo -->
   </div>
 </body>
 </html>
