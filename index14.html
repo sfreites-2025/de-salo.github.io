@@ -3,78 +3,101 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mensaje Especial</title>
+  <title>Mensaje Especial con Fondo de Paisaje</title>
   <style>
     html, body {
       width: 100%;
       height: 100%;
       margin: 0;
       padding: 0;
-      overflow: hidden;
+      overflow: hidden; /* Evita barras de desplazamiento */
       font-family: 'Segoe UI', Arial, sans-serif;
-      background: #f7fafc;
     }
+
+    body {
+      background-image: url("https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=2000&q=80"); /* Fondo de paisaje */
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: cover; /* Asegura que la imagen cubra todo */
+    }
+
     .container {
       display: flex;
       flex-direction: row;
-      justify-content: flex-end;
+      justify-content: flex-end; /* Alinea el contenido a la derecha */
       align-items: stretch;
       width: 100vw;
       height: 100vh;
       box-sizing: border-box;
     }
+
     .side-message {
-      flex: 1;
-      padding: 60px 40px 60px 40px;
+      flex: 1; /* Permite que ocupe el espacio restante */
+      padding: 60px 40px 60px 40px; /* Espaciado interno */
       display: flex;
       flex-direction: column;
       justify-content: center;
-      align-items: flex-end;
-      background: rgba(255,255,255,0.75);
+      align-items: flex-end; /* Alinea los mensajes a la derecha dentro de su contenedor */
+      background: rgba(255, 255, 255, 0.75); /* Fondo blanco semitransparente para los mensajes */
+      /* El ancho máximo se ajustará según el contenido, pero puedes fijarlo con max-width si es necesario */
     }
+
     .messages {
-      max-width: 480px;
+      max-width: 480px; /* Ancho máximo para los mensajes para mejor legibilidad */
       display: flex;
       flex-direction: column;
-      gap: 32px;
+      gap: 32px; /* Espacio entre los mensajes */
     }
+
     .mensaje1, .mensaje2 {
-      font-size: 0.97rem;
-      color: #333;
+      font-size: 0.89rem; /* Letra un poco pequeña, como solicitaste */
+      color: #333; /* Color de texto oscuro */
       margin-bottom: 0;
-      background: #ffffffcc;
-      border-radius: 8px;
-      padding: 18px 20px;
-      box-shadow: 0 2px 12px 0 rgba(90,90,110,0.04);
-      line-height: 1.7;
-      transition: box-shadow 0.2s;
+      background: #ffffffcc; /* Fondo ligeramente más opaco para cada mensaje */
+      border-radius: 8px; /* Bordes redondeados */
+      padding: 18px 20px; /* Relleno interno */
+      box-shadow: 0 2px 12px 0 rgba(90, 90, 110, 0.04); /* Sombra sutil */
+      line-height: 1.7; /* Espaciado entre líneas para legibilidad */
     }
-    .mensaje1 { font-size: 0.89rem; }
-    .mensaje2 { font-size: 0.89rem; }
+
     .buttons {
       display: flex;
       flex-direction: row;
-      gap: 18px;
-      margin-top: 40px;
-      justify-content: flex-end;
+      gap: 18px; /* Espacio entre los botones */
+      margin-top: 40px; /* Margen superior para separarlos de los mensajes */
+      justify-content: flex-end; /* Alinea los botones a la derecha */
     }
+
     .boton {
-      background: #3a86ff;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
+      background: #3a86ff; /* Color de fondo del botón */
+      color: #fff; /* Color de texto del botón */
+      border: none; /* Sin borde */
+      border-radius: 5px; /* Bordes redondeados */
       font-weight: 500;
       font-size: 1rem;
-      padding: 10px 24px;
-      cursor: pointer;
-      transition: background 0.2s;
-      text-decoration: none;
+      padding: 10px 24px; /* Relleno del botón */
+      cursor: pointer; /* Cursor de puntero al pasar por encima */
+      transition: background 0.2s; /* Transición suave al pasar el ratón */
+      text-decoration: none; /* Sin subrayado en los enlaces */
+      display: inline-block; /* Permite aplicar padding y width/height */
     }
-    .boton:hover { background: #265d97; }
+
+    .boton:hover {
+      background: #265d97; /* Color de fondo del botón al pasar el ratón */
+    }
+
+    /* Media queries para adaptar el diseño a pantallas más pequeñas */
     @media (max-width: 730px) {
-      .side-message { padding: 34px 8px 30px 8px; }
-      .messages { max-width: 99vw; }
-      .boton { font-size: 0.94rem; padding: 8px 12px; }
+      .side-message {
+        padding: 34px 8px 30px 8px; /* Reduce el padding en pantallas pequeñas */
+      }
+      .messages {
+        max-width: 99vw; /* Ocupa casi todo el ancho disponible */
+      }
+      .boton {
+        font-size: 0.94rem;
+        padding: 8px 12px;
+      }
     }
   </style>
 </head>
@@ -83,12 +106,12 @@
     <div class="side-message">
       <div class="messages">
         <div class="mensaje1">
-          “Supongo que al llegar a este momento te preguntas: ¿qué onda con este tipo? ¿Por qué todo esto de un día para otro? La verdad es que esto no es algo que surgió de la noche a la mañana. Son cosas que llevo pensando y sintiendo desde hace meses, y créeme que no es fácil para mí plasmarlo en palabras.<br><br>
-          Todo este tiempo he estado aprendiendo, creciendo, enfrentando mis propias dudas y miedos. Llegar aquí me costó un montón, porque no quería que lo que tuviera para decirte fuera solo un impulso, ni tampoco una conversación suelta más. Quise hacer algo especial, algo que de verdad pudieras recordar y bueno aprendi de tus estudios y tienes esto que es tuyo y solamente tuyo, prometo mejorar. Pensé mucho en cuál sería el mejor momento, y aunque nunca hay un "momento perfecto", sentí que este era el más sincero para contarte todo lo que llevo dentro.”
+          Supongo que al llegar a este momento te preguntas: ¿qué onda con este tipo? ¿Por qué todo esto de un día para otro? La verdad es que esto no es algo que surgió de la noche a la mañana. Son cosas que llevo pensando y sintiendo desde hace meses, y créeme que no es fácil para mí plasmarlo en palabras.<br><br>
+          Todo este tiempo he estado aprendiendo, creciendo, enfrentando mis propias dudas y miedos. Llegar aquí me costó un montón, porque no quería que lo que tuviera para decirte fuera solo un impulso, ni tampoco una conversación suelta más. Quise hacer algo especial, algo que de verdad pudieras recordar y bueno aprendi de tus estudios y tienes esto que es tuyo y solamente tuyo, prometo mejorar. Pensé mucho en cuál sería el mejor momento, y aunque nunca hay un "momento perfecto", sentí que este era el más sincero para contarte todo lo que llevo dentro.
         </div>
         <div class="mensaje2">
-          “Sé que ahora mismo estás pasando por momentos delicados, que hay cosas difíciles con tu hermanito y eso no pasa desapercibido para mí. Te lo digo en serio, lo tengo en cuenta, te respeto y te admiro, porque aun entre esas dificultades sigues siendo una persona fuerte, auténtica y valiosa.<br><br>
-          Solo quiero que me leas, sin esperar nada, sin compromisos ni presiones. Lee esto con el corazón abierto. No busco respuestas inmediatas ni cambiarlo todo de golpe; solo sentí que te debía mi verdad, compartirte lo que soy y lo que siento. Si algo espero, es que puedas quedarte con la certeza de que cada palabra es genuina y que, aunque los caminos sean complejos, quise ser valiente y mostrarte esto que tantas vueltas me dio en la mente.”
+          Sé que ahora mismo estás pasando por momentos delicados, que hay cosas difíciles con tu hermanito y eso no pasa desapercibido para mí. Te lo digo en serio, lo tengo en cuenta, te respeto y te admiro, porque aun entre esas dificultades sigues siendo una persona fuerte, auténtica y valiosa.<br><br>
+          Solo quiero que me leas, sin esperar nada, sin compromisos ni presiones. Lee esto con el corazón abierto. No busco respuestas inmediatas ni cambiarlo todo de golpe; solo sentí que te debía mi verdad, compartirte lo que soy y lo que siento. Si algo espero, es que puedas quedarte con la certeza de que cada palabra es genuina y que, aunque los caminos sean complejos, quise ser valiente y mostrarte esto que tantas vueltas me dio en la mente.
         </div>
         <div class="buttons">
           <a class="boton" href="index13.html">Regresar</a>
