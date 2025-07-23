@@ -3,33 +3,37 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mensaje tipo libro</title>
+  <title>Mensaje con fondo atardecer</title>
   <style>
+    /* Fondo degradado tipo atardecer */
     body {
-      margin: 0; padding: 0;
+      margin: 0;
       height: 100vh;
       font-family: 'Georgia', serif;
-      background: linear-gradient(135deg, #fdecec 0%, #f9d1d9 100%);
+      background: linear-gradient(120deg, #ff9966 0%, #ff5e62 50%, #ff9966 100%);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #502b30;
-    }
-    .slide-container {
-      max-width: 960px;
-      width: 90vw;
-      height: 70vh;
-      background: #fff0f3;
-      box-shadow: 0 12px 36px rgba(210, 140, 155, 0.4);
-      border-radius: 16px;
-      display: flex;
-      gap: 64px;
-      padding: 40px 50px;
-      box-sizing: border-box;
-      animation: fadeInMove 1.2s ease forwards;
+      color: #4b2c20;
       overflow: hidden;
     }
-    @keyframes fadeInMove {
+    /* Opcional: suave animación de aparición */
+    .container {
+      background: rgba(255 255 255 / 0.85);
+      max-width: 700px;
+      padding: 40px 50px;
+      border-radius: 18px;
+      box-shadow: 0 12px 40px rgba(255 94 71 / 0.4);
+      font-size: 0.9rem;
+      line-height: 1.55;
+      font-style: italic;
+      animation: fadeInUp 1.4s ease forwards;
+      max-height: 80vh;
+      overflow-y: auto;
+      color: #582a1a;
+      box-sizing: border-box;
+    }
+    @keyframes fadeInUp {
       from {
         opacity: 0;
         transform: translateY(20px);
@@ -39,89 +43,21 @@
         transform: translateY(0);
       }
     }
-    .column {
-      width: 50%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      line-height: 1.6;
-      font-size: 1rem;
-      white-space: pre-wrap;
+    /* Scroll suave para texto si hay overflow */
+    .container::-webkit-scrollbar {
+      width: 7px;
     }
-    .left-column {
-      text-align: left;
-      padding-left: 8px;
-      align-items: flex-start;
-    }
-    .right-column {
-      text-align: right;
-      padding-right: 8px;
-      align-items: flex-end;
-    }
-    .buttons {
-      margin-top: 32px;
-      display: flex;
-      gap: 20px;
-      justify-content: flex-end;
-    }
-    .buttons button {
-      cursor: pointer;
-      font-family: 'Georgia', serif;
-      font-size: 1rem;
-      padding: 10px 26px;
-      border-radius: 24px;
-      border: none;
-      color: white;
-      background: linear-gradient(90deg, #d94b68, #f38fa9);
-      box-shadow: 0 4px 14px rgba(243, 143, 169, 0.65);
-      transition: background 0.3s ease;
-      user-select: none;
-      min-width: 110px;
-    }
-    .buttons button:hover {
-      background: linear-gradient(90deg, #f3587a, #ffa1b9);
-    }
-
-    /* Responsivo: en pantallas pequeñas apila vertical */
-    @media (max-width: 850px) {
-      .slide-container {
-        flex-direction: column;
-        height: auto;
-        padding: 30px 25px;
-      }
-      .column {
-        width: 100%;
-        max-height: 180px;
-        overflow-y: auto;
-        font-size: 0.95rem;
-        padding: 0 10px;
-      }
-      .buttons {
-        justify-content: center;
-      }
+    .container::-webkit-scrollbar-thumb {
+      background: #ff8567;
+      border-radius: 4px;
     }
   </style>
 </head>
 <body>
+  <article class="container" tabindex="0" aria-label="Mensaje principal lado izquierdo">
+    Supongo que al llegar a este momento te preguntas: ¿qué onda con este tipo? ¿Por qué todo esto de un día para otro? La verdad es que esto no es algo que surgió de la noche a la mañana. Son cosas que llevo pensando y sintiendo desde hace meses, y créeme que no es fácil para mí plasmarlo en palabras.
 
-  <section class="slide-container" aria-label="Mensaje tipo libro con dos textos separados">
-    <article class="column left-column" tabindex="0" aria-label="Texto izquierdo">
-      Supongo que al llegar a este momento te preguntas: ¿qué onda con este tipo? ¿Por qué todo esto de un día para otro? La verdad es que esto no es algo que surgió de la noche a la mañana. Son cosas que llevo pensando y sintiendo desde hace meses, y créeme que no es fácil para mí plasmarlo en palabras.
-
-      Todo este tiempo he estado aprendiendo, creciendo, enfrentando mis propias dudas y miedos. Llegar aquí me costó un montón, porque no quería que lo que tuviera para decirte fuera solo un impulso, ni tampoco una conversación suelta más. Quise hacer algo especial, algo que de verdad pudieras recordar y bueno aprendi de tus estudios y tienes esto que es tuyo y solamente tuyo, prometo mejorar. Pensé mucho en cuál sería el mejor momento, y aunque nunca hay un "momento perfecto", sentí que este era el más sincero para contarte todo lo que llevo dentro.
-    </article>
-
-    <article class="column right-column" tabindex="0" aria-label="Texto derecho">
-      Sé que ahora mismo estás pasando por momentos delicados, que hay cosas difíciles con tu hermanito y eso no pasa desapercibido para mí. Te lo digo en serio, lo tengo en cuenta, te respeto y te admiro, porque aun entre esas dificultades sigues siendo una persona fuerte, auténtica y valiosa.
-
-      Solo quiero que me leas, sin esperar nada, sin compromisos ni presiones. Lee esto con el corazón abierto. No busco respuestas inmediatas ni cambiarlo todo de golpe; solo sentí que te debía mi verdad, compartirte lo que soy y lo que siento. Si algo espero, es que puedas quedarte con la certeza de que cada palabra es genuina y que, aunque los caminos sean complejos, quise ser valiente y mostrarte esto que tantas vueltas me dio en la mente.
-
-      <div class="buttons" role="group" aria-label="Navegación de diapositivas">
-        <button type="button" onclick="window.history.back()" aria-label="Regresar">Regresar</button>
-        <button type="button" onclick="window.location.href='index15.html'" aria-label="Siguiente">Siguiente</button>
-      </div>
-    </article>
-  </section>
-
+    Todo este tiempo he estado aprendiendo, creciendo, enfrentando mis propias dudas y miedos. Llegar aquí me costó un montón, porque no quería que lo que tuviera para decirte fuera solo un impulso, ni tampoco una conversación suelta más. Quise hacer algo especial, algo que de verdad pudieras recordar y bueno aprendi de tus estudios y tienes esto que es tuyo y solamente tuyo, prometo mejorar. Pensé mucho en cuál sería el mejor momento, y aunque nunca hay un "momento perfecto", sentí que este era el más sincero para contarte todo lo que llevo dentro.
+  </article>
 </body>
 </html>
