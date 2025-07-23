@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Último jueguito: Dibuja y colorea</title>
+<title>Último jueguito: Dibuja y escribe para ella</title>
 <style>
   body {
     margin: 0; padding: 0;
@@ -37,42 +37,33 @@
     font-weight: 700;
     font-size: 1.75rem;
   }
-  select, button {
-    font-family: inherit;
-    font-size: 1.1rem;
-    padding: 10px 18px;
-    border-radius: 12px;
-    border: 2px solid #f496b1;
-    margin-top: 12px;
-    cursor: pointer;
+  label {
+    font-size: 1rem;
     color: #6b2a40;
-    background: #fff0f3;
-    transition: border-color 0.3s;
+    display: block;
+    margin-top: 14px;
+    font-weight: 600;
   }
-  select:hover, select:focus {
-    border-color: #d6336b;
+  textarea {
+    width: 100%;
+    max-width: 100%;
+    height: 70px;
+    font-family: 'Georgia', serif;
+    font-size: 1.1rem;
+    padding: 8px 12px;
+    border-radius: 14px;
+    border: 2px solid #f496b1;
+    resize: vertical;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+  }
+  textarea:focus {
     outline: none;
-  }
-  button {
-    border: none;
-    background: linear-gradient(90deg, #d43d6b, #f1669e);
-    color: white;
-    box-shadow: 0 6px 18px rgba(241, 89, 138, 0.7);
-    min-width: 140px;
-    margin-left: 8px;
-  }
-  button:hover:enabled {
-    background: linear-gradient(90deg, #f690a3, #ff9cc1);
-    color:#5e2241;
-  }
-  button:disabled {
-    background: #f3c0c9;
-    cursor: not-allowed;
-    box-shadow: none;
+    border-color: #d6336b;
   }
   #drawing-section {
-    margin-top: 32px;
-    display: none;
+    margin-top: 20px;
+    display: flex;
     flex-direction: column;
     align-items: center;
     user-select: none;
@@ -93,6 +84,7 @@
     align-items: center;
     gap: 14px;
     flex-wrap: wrap;
+    max-width: 720px;
   }
   input[type=color], input[type=range] {
     cursor: pointer;
@@ -101,88 +93,74 @@
     padding: 4px;
     height: 40px;
   }
-  label {
-    font-size: 0.9rem;
-    color: #6b2a40;
-    user-select:none;
+  button {
+    cursor: pointer;
+    font-family: 'Georgia', serif;
+    font-size: 1.15rem;
+    padding: 12px 34px;
+    margin: 20px 10px 0 10px;
+    border-radius: 30px;
+    border: none;
+    background: linear-gradient(90deg, #d43d6b, #f1669e);
+    box-shadow: 0 6px 18px rgba(241, 89, 138, 0.7);
+    color: #fff;
+    transition: background 0.3s ease;
+    user-select: none;
+    min-width: 140px;
   }
-  #buttons-container {
-    margin-top: 28px;
+  button:hover:enabled {
+    background: linear-gradient(90deg, #f690a3, #ff9cc1);
+    color: #5e2241;
+  }
+  button:disabled {
+    background: #f3c0c9;
+    cursor: not-allowed;
+    box-shadow: none;
   }
   #status-msg {
     margin-top: 20px;
     font-weight: 600;
     color: #7b2a3a;
-    min-height: 24px;
-  }
-  .button-group {
-    margin-top: 20px;
+    min-height: 28px;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
   }
 </style>
 </head>
 <body>
 
-<div class="center-box" role="main" aria-live="polite" aria-atomic="true" aria-label="Selecciona y dibuja">
+<div class="center-box" role="main" aria-live="polite" aria-atomic="true" aria-label="Dibuja y escribe para ella">
   <h1>Pero primero un último jueguito</h1>
 
-  <label for="drawingChoice">¿Qué dibujo quieres colorear o dibujar?</label><br/>
-  <select id="drawingChoice" aria-describedby="choiceHelp">
-    <option value="" selected disabled>Seleccione una opción</option>
-    <option value="sunflower">Colorear un Girasol</option>
-    <option value="monkey">Colorear un Mono</option>
-    <option value="sunset">Colorear un Atardecer</option>
-    <option value="free">Dibujar a mi estilo</option>
-  </select>
-  <p id="choiceHelp" style="color:#a6557d; font-size:0.9rem; margin-top:-8px;margin-bottom:18px;">
-    Elige un dibujo para colorear o dibuja libremente.
-  </p>
+  <label for="messageText">Si quieres, escribe un mensaje para ella:</label>
+  <textarea id="messageText" placeholder="Escribe algo lindo... (opcional)" aria-label="Área para escribir mensaje"></textarea>
 
-  <button id="startDrawingBtn" disabled aria-label="Comenzar a dibujar">Comenzar</button>
+  <label for="colorPicker">Elige el color del pincel:</label>
+  <input type="color" id="colorPicker" value="#d43d6b" aria-label="Selector de color" />
 
-  <section id="drawing-section" aria-label="Área de dibujo">
+  <label for="brushSize">Ajusta el tamaño del pincel:</label>
+  <input type="range" id="brushSize" min="1" max="30" step="1" value="5" aria-label="Tamaño del pincel" />
+
+  <div id="tools" aria-label="Herramientas de dibujo">
+    <button id="eraser" aria-pressed="false" aria-label="Activar borrador">Borrador</button>
+    <button id="clear" aria-label="Limpiar lienzo">Limpiar</button>
+  </div>
+
+  <div id="drawing-section">
     <canvas id="canvas" width="570" height="400" aria-label="Lienzo de dibujo"></canvas>
+  </div>
 
-    <div id="tools" aria-label="Herramientas de dibujo">
-      <label for="colorPicker">Color:</label>
-      <input type="color" id="colorPicker" value="#d43d6b" aria-label="Selector de color" />
-      <label for="brushSize">Pincel:</label>
-      <input type="range" id="brushSize" min="1" max="30" step="1" value="5" aria-label="Tamaño del pincel" />
-      <button id="eraser" aria-pressed="false" aria-label="Activar borrador">Borrador</button>
-      <button id="clear" aria-label="Limpiar lienzo">Limpiar</button>
-    </div>
+  <div>
+    <button id="finishBtn" aria-label="Terminé el dibujo">Terminé</button>
+    <button id="nextBtn" disabled aria-label="Siguiente">Siguiente</button>
+  </div>
 
-    <div id="buttons-container" class="button-group">
-      <button id="finishBtn" aria-label="Terminé el dibujo">Terminé</button>
-      <button id="nextBtn" disabled aria-label="Siguiente">Siguiente</button>
-    </div>
-    <p id="status-msg" role="alert" aria-live="polite"></p>
-  </section>
+  <p id="status-msg" role="alert" aria-live="polite"></p>
 </div>
 
 <script>
-  // SVGs simplificados para cargar y colorear en canvas
-  const imagesData = {
-    sunflower: `<svg xmlns="http://www.w3.org/2000/svg" width="570" height="400" viewBox="0 0 570 400">
-      <circle cx="285" cy="200" r="80" fill="none" stroke="black" stroke-width="5"/>
-      <path d="M285 200 L250 70 M285 200 L320 70 M285 200 L360 80 M285 200 L220 150 M285 200 L350 150" fill="none" stroke="black" stroke-width="4"/>
-    </svg>`,
-    monkey: `<svg xmlns="http://www.w3.org/2000/svg" width="570" height="400" viewBox="0 0 570 400">
-      <circle cx="285" cy="200" r="90" fill="none" stroke="black" stroke-width="5"/>
-      <circle cx="230" cy="150" r="30" fill="none" stroke="black" stroke-width="3"/>
-      <circle cx="340" cy="150" r="30" fill="none" stroke="black" stroke-width="3"/>
-      <path d="M240 230 Q285 280 330 230" stroke="black" stroke-width="4" fill="none"/>
-    </svg>`,
-    sunset: `<svg xmlns="http://www.w3.org/2000/svg" width="570" height="400" viewBox="0 0 570 400">
-      <circle cx="285" cy="300" r="80" fill="none" stroke="black" stroke-width="5"/>
-      <path d="M0 350 Q285 100 570 350" fill="none" stroke="black" stroke-width="4"/>
-      <line x1="285" y1="220" x2="285" y2="140" stroke="black" stroke-width="3"/>
-    </svg>`
-  };
-
-  // Elementos DOM
-  const drawingChoice = document.getElementById('drawingChoice');
-  const startDrawingBtn = document.getElementById('startDrawingBtn');
-  const drawingSection = document.getElementById('drawing-section');
+  // Elementos y variables
   const canvas = document.getElementById('canvas');
   const ctx = canvas.getContext('2d');
   const colorPicker = document.getElementById('colorPicker');
@@ -192,77 +170,26 @@
   const finishBtn = document.getElementById('finishBtn');
   const nextBtn = document.getElementById('nextBtn');
   const statusMsg = document.getElementById('status-msg');
+  const messageText = document.getElementById('messageText');
 
-  let drawing = false;
+  let isDrawing = false;
   let eraserActive = false;
-  let currentImage = null;
-  let imgElement = null;
 
-  // Activa botón comenzar solo si hay selección
-  drawingChoice.addEventListener('change', () => {
-    startDrawingBtn.disabled = !drawingChoice.value;
-    statusMsg.textContent = '';
-  });
+  // Configuraciones iniciales canvas
+  ctx.lineCap = 'round';
+  ctx.lineJoin = 'round';
+  ctx.lineWidth = brushSizeInput.value;
+  ctx.strokeStyle = colorPicker.value;
 
-  startDrawingBtn.addEventListener('click', () => {
-    currentImage = drawingChoice.value;
-    drawingSection.style.display = 'flex';
-    startDrawingBtn.disabled = true;
-    drawingChoice.disabled = true;
-    statusMsg.textContent = '';
+  // Fondo blanco inicial
+  ctx.fillStyle = 'white';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    ctx.lineCap = 'round';
-    ctx.lineJoin = 'round';
-    ctx.lineWidth = brushSizeInput.value;
-    ctx.strokeStyle = colorPicker.value;
-    eraserActive = false;
-    eraserBtn.setAttribute('aria-pressed', 'false');
-    colorPicker.disabled = false;
-    brushSizeInput.disabled = false;
-    nextBtn.disabled = true;
-
-    if (currentImage === 'free') {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = 'white';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      imgElement = null;
-      enableDrawing();
-    } else {
-      const svg = imagesData[currentImage];
-      const src = "data:image/svg+xml;base64," + btoa(unescape(encodeURIComponent(svg)));
-      imgElement = new Image();
-      imgElement.onload = () => {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(imgElement, 0, 0, canvas.width, canvas.height);
-        enableDrawing();
-      };
-      imgElement.src = src;
-    }
-  });
-
-  function enableDrawing() {
-    canvas.addEventListener('mousedown', startDrawing);
-    canvas.addEventListener('mousemove', draw);
-    canvas.addEventListener('mouseup', stopDrawing);
-    canvas.addEventListener('mouseleave', stopDrawing);
-    canvas.addEventListener('touchstart', startDrawing, {passive:false});
-    canvas.addEventListener('touchmove', draw, {passive:false});
-    canvas.addEventListener('touchend', stopDrawing);
-  }
-  function disableDrawing() {
-    canvas.removeEventListener('mousedown', startDrawing);
-    canvas.removeEventListener('mousemove', draw);
-    canvas.removeEventListener('mouseup', stopDrawing);
-    canvas.removeEventListener('mouseleave', stopDrawing);
-    canvas.removeEventListener('touchstart', startDrawing);
-    canvas.removeEventListener('touchmove', draw);
-    canvas.removeEventListener('touchend', stopDrawing);
-  }
-
+  // Funciones dibujo
   function getPos(evt) {
     const rect = canvas.getBoundingClientRect();
     let clientX, clientY;
-    if (evt.touches && evt.touches.length) { 
+    if (evt.touches && evt.touches.length) {
       clientX = evt.touches[0].clientX;
       clientY = evt.touches[0].clientY;
     } else {
@@ -277,13 +204,13 @@
 
   function startDrawing(e) {
     e.preventDefault();
-    drawing = true;
+    isDrawing = true;
     const pos = getPos(e);
     ctx.beginPath();
     ctx.moveTo(pos.x, pos.y);
   }
   function draw(e) {
-    if (!drawing) return;
+    if (!isDrawing) return;
     e.preventDefault();
     const pos = getPos(e);
     if (eraserActive) {
@@ -300,52 +227,63 @@
     }
   }
   function stopDrawing(e) {
-    if (!drawing) return;
+    if (!isDrawing) return;
     ctx.closePath();
-    drawing = false;
-    nextBtn.disabled = false;
+    isDrawing = false;
+    nextBtn.disabled = false; // Se activa el botón siguiente después de dibujar algo
   }
 
+  // Eventos dibujo mouse y touch
+  canvas.addEventListener('mousedown', startDrawing);
+  canvas.addEventListener('mousemove', draw);
+  canvas.addEventListener('mouseup', stopDrawing);
+  canvas.addEventListener('mouseleave', stopDrawing);
+  canvas.addEventListener('touchstart', startDrawing, {passive:false});
+  canvas.addEventListener('touchmove', draw, {passive:false});
+  canvas.addEventListener('touchend', stopDrawing);
+
+  // Cambios herramientas
   brushSizeInput.addEventListener('change', () => { ctx.lineWidth = brushSizeInput.value; });
   colorPicker.addEventListener('change', () => { if(!eraserActive) ctx.strokeStyle = colorPicker.value; });
+
   eraserBtn.addEventListener('click', () => {
     eraserActive = !eraserActive;
     eraserBtn.setAttribute('aria-pressed', eraserActive.toString());
     colorPicker.disabled = eraserActive;
     if (!eraserActive) ctx.strokeStyle = colorPicker.value;
   });
+
   clearBtn.addEventListener('click', () => {
-    if (imgElement) {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.drawImage(imgElement, 0, 0, canvas.width, canvas.height);
-    } else {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = 'white';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-    }
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = 'white';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
     nextBtn.disabled = true;
     statusMsg.textContent = '';
   });
 
-  // Envío a backend con la imagen en base64
   finishBtn.addEventListener('click', async () => {
-    statusMsg.textContent = "Enviando tu dibujo al correo...";
+    statusMsg.textContent = "Enviando tu obra maestra al correo...";
 
+    // Obtener imagen base64
+    const imgData = canvas.toDataURL('image/png');
+    // Obtener el mensaje escrito por el usuario (opcional)
+    const userMessage = messageText.value.trim();
+
+    // Enviar ambas cosas al backend
     try {
-      const imgData = canvas.toDataURL('image/png');
-      const res = await fetch('/send-drawing', {
+      const response = await fetch('/send-drawing', {
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({ image: imgData })
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ image: imgData, message: userMessage })
       });
-      if (res.ok) {
-        statusMsg.textContent = "¡Dibujo enviado a salomonfcarrasco@gmail.com! Gracias por compartir tu arte.";
+      if (response.ok) {
+        statusMsg.textContent = "¡Dibujo y mensaje enviados a salomonfcarrasco@gmail.com! Gracias por compartir tu arte.";
       } else {
-        statusMsg.textContent = "Error enviando el dibujo, intenta nuevamente.";
+        statusMsg.textContent = "Error al enviar. Inténtalo de nuevo.";
       }
-    } catch (e) {
+    } catch (err) {
       statusMsg.textContent = "Error de conexión al enviar el dibujo.";
-      console.error(e);
+      console.error(err);
     }
   });
 
