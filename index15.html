@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mensaje Derecho Animado con Decoración Izquierda</title>
+  <title>Mensaje Derecho Animado con Decoración Visual</title>
   <style>
     html, body {
       margin: 0; padding: 0;
@@ -27,50 +27,68 @@
       border-radius: 18px;
       box-shadow: 0 12px 36px rgba(207, 146, 169, 0.4);
       overflow: hidden;
-      font-size: 1rem;
-      color: #5c2730;
       box-sizing: border-box;
+      animation: fadeInContainer 1.3s ease forwards;
     }
-    .left-panel {
+    @keyframes fadeInContainer {
+      from {
+        opacity: 0;
+        transform: scale(0.97);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    /* Lado izquierdo con imagen y animación sutil */
+    .left-image {
       flex: 1;
-      background: linear-gradient(145deg, #fba6b8, #e64c72);
-      color: white;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 40px 30px;
-      box-sizing: border-box;
+      background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80');
+      background-size: cover;
+      background-position: center;
+      border-top-left-radius: 18px;
+      border-bottom-left-radius: 18px;
+      animation: subtleFloat 5s ease-in-out infinite alternate;
       position: relative;
     }
-    .left-panel h2 {
-      font-size: 1.8rem;
-      font-weight: 700;
-      margin-bottom: 24px;
-      text-align: center;
-      text-shadow: 0 2px 8px rgba(102, 9, 29, 0.7);
+    @keyframes subtleFloat {
+      0% {
+        transform: translateY(0) scale(1);
+        filter: brightness(0.95);
+      }
+      100% {
+        transform: translateY(-15px) scale(1.02);
+        filter: brightness(1);
+      }
     }
-    .heart-icon {
-      font-size: 80px;
-      animation: heartbeat 1.5s ease-in-out infinite;
-      user-select: none;
-      text-shadow: 0 0 15px #ff7396;
+    /* Sobrepuesto un filtro degradado suave para suavizar colores */
+    .left-image::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,120,130,0.55), rgba(255,180,200,0.3));
+      border-top-left-radius: 18px;
+      border-bottom-left-radius: 18px;
+      pointer-events: none;
     }
-    @keyframes heartbeat {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.25); }
-    }
+
+    /* Texto lado derecho */
     .right-panel {
       flex: 1.2;
       padding: 42px 48px;
       box-sizing: border-box;
       text-align: right;
-      background: transparent;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       max-height: 85vh;
       overflow-y: auto;
+      position: relative;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #5c2730;
+      font-style: normal;
       animation: fadeSlideIn 1.3s ease forwards;
       opacity: 0;
       transform: translateX(40px);
@@ -82,9 +100,8 @@
       }
     }
     p {
-      line-height: 1.6;
-      font-style: normal;
-      color: #5c2730;
+      margin: 0 0 10px 0;
+      /* para texto separado se puede usar white-space para respetar saltos si quieres */
     }
     .buttons {
       margin-top: 32px;
@@ -117,22 +134,24 @@
       background: #d98e9f;
       border-radius: 4px;
     }
-    /* Responsive */
+    /* Responsive: apilar en vertical en pantallas pequeñas */
     @media (max-width: 850px) {
       .container {
         flex-direction: column;
         height: auto;
+        border-radius: 18px;
       }
-      .left-panel, .right-panel {
-        width: 100%;
-        flex: none;
-        max-height: none;
-        padding: 30px 20px;
+      .left-image {
+        height: 250px;
+        border-radius: 18px 18px 0 0;
+        animation: none;
       }
       .right-panel {
-        text-align: left;
-        transform: none !important; /* evito transformación en móvil */
+        padding: 30px 24px;
+        transform: none !important;
         opacity: 1 !important;
+        text-align: left;
+        max-height: none;
       }
       .buttons {
         justify-content: center;
@@ -142,16 +161,14 @@
 </head>
 <body>
 
-  <section class="container" aria-label="Mensaje con decoración lado izquierdo">
-    <aside class="left-panel" aria-hidden="true">
-      <h2>Con Cariño y Fuerza</h2>
-      <div class="heart-icon" aria-hidden="true">❤️</div>
-    </aside>
+  <section class="container" aria-label="Mensaje animado con ilustración izquierda">
+    <div class="left-image" aria-hidden="true"></div>
 
     <main class="right-panel" role="main" aria-label="Mensaje derecho animado">
       <p>
         Sé que ahora mismo estás pasando por momentos delicados, que hay cosas difíciles con tu hermanito y eso no pasa desapercibido para mí. Te lo digo en serio, lo tengo en cuenta, te respeto y te admiro, porque aun entre esas dificultades sigues siendo una persona fuerte, auténtica y valiosa.
-
+      </p>
+      <p>
         Solo quiero que me leas, sin esperar nada, sin compromisos ni presiones. Lee esto con el corazón abierto. No busco respuestas inmediatas ni cambiarlo todo de golpe; solo sentí que te debía mi verdad, compartirte lo que soy y lo que siento. Si algo espero, es que puedas quedarte con la certeza de que cada palabra es genuina y que, aunque los caminos sean complejos, quise ser valiente y mostrarte esto que tantas vueltas me dio en la mente.
       </p>
       <div class="buttons" role="group" aria-label="Navegación de diapositivas">
