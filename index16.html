@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Último Jueguito: Dibuja y Colorea</title>
+<title>Último jueguito: Dibuja y colorea</title>
 <style>
   body {
     margin: 0; padding: 0;
@@ -59,6 +59,7 @@
     color: white;
     box-shadow: 0 6px 18px rgba(241, 89, 138, 0.7);
     min-width: 140px;
+    margin-left: 8px;
   }
   button:hover:enabled {
     background: linear-gradient(90deg, #f690a3, #ff9cc1);
@@ -114,6 +115,9 @@
     color: #7b2a3a;
     min-height: 24px;
   }
+  .button-group {
+    margin-top: 20px;
+  }
 </style>
 </head>
 <body>
@@ -147,7 +151,7 @@
       <button id="clear" aria-label="Limpiar lienzo">Limpiar</button>
     </div>
 
-    <div id="buttons-container">
+    <div id="buttons-container" class="button-group">
       <button id="finishBtn" aria-label="Terminé el dibujo">Terminé</button>
       <button id="nextBtn" disabled aria-label="Siguiente">Siguiente</button>
     </div>
@@ -156,6 +160,7 @@
 </div>
 
 <script>
+  // SVGs simplificados para cargar y colorear en canvas
   const imagesData = {
     sunflower: `<svg xmlns="http://www.w3.org/2000/svg" width="570" height="400" viewBox="0 0 570 400">
       <circle cx="285" cy="200" r="80" fill="none" stroke="black" stroke-width="5"/>
@@ -173,11 +178,13 @@
       <line x1="285" y1="220" x2="285" y2="140" stroke="black" stroke-width="3"/>
     </svg>`
   };
-  
+
+  // Elementos DOM
   const drawingChoice = document.getElementById('drawingChoice');
   const startDrawingBtn = document.getElementById('startDrawingBtn');
   const drawingSection = document.getElementById('drawing-section');
   const canvas = document.getElementById('canvas');
+  const ctx = canvas.getContext('2d');
   const colorPicker = document.getElementById('colorPicker');
   const brushSizeInput = document.getElementById('brushSize');
   const eraserBtn = document.getElementById('eraser');
@@ -185,13 +192,13 @@
   const finishBtn = document.getElementById('finishBtn');
   const nextBtn = document.getElementById('nextBtn');
   const statusMsg = document.getElementById('status-msg');
-  const ctx = canvas.getContext('2d');
 
   let drawing = false;
   let eraserActive = false;
   let currentImage = null;
   let imgElement = null;
 
+  // Activa botón comenzar solo si hay selección
   drawingChoice.addEventListener('change', () => {
     startDrawingBtn.disabled = !drawingChoice.value;
     statusMsg.textContent = '';
@@ -204,7 +211,6 @@
     drawingChoice.disabled = true;
     statusMsg.textContent = '';
 
-    // Inicializar lienzo
     ctx.lineCap = 'round';
     ctx.lineJoin = 'round';
     ctx.lineWidth = brushSizeInput.value;
@@ -216,23 +222,21 @@
     nextBtn.disabled = true;
 
     if (currentImage === 'free') {
-      // lienzo blanco
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.fillStyle = 'white';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       imgElement = null;
       enableDrawing();
     } else {
-      // Cargar SVG como imagen para dibujar encima
-      const svgData = imagesData[currentImage];
-      const imgSrc = "data:image/svg+xml;base64," + btoa(unescape(encodeURIComponent(svgData)));
+      const svg = imagesData[currentImage];
+      const src = "data:image/svg+xml;base64," + btoa(unescape(encodeURIComponent(svg)));
       imgElement = new Image();
       imgElement.onload = () => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(imgElement, 0, 0, canvas.width, canvas.height);
         enableDrawing();
       };
-      imgElement.src = imgSrc;
+      imgElement.src = src;
     }
   });
 
@@ -241,9 +245,8 @@
     canvas.addEventListener('mousemove', draw);
     canvas.addEventListener('mouseup', stopDrawing);
     canvas.addEventListener('mouseleave', stopDrawing);
-    // Para tactil
-    canvas.addEventListener('touchstart', startDrawing);
-    canvas.addEventListener('touchmove', draw);
+    canvas.addEventListener('touchstart', startDrawing, {passive:false});
+    canvas.addEventListener('touchmove', draw, {passive:false});
     canvas.addEventListener('touchend', stopDrawing);
   }
   function disableDrawing() {
@@ -300,7 +303,7 @@
     if (!drawing) return;
     ctx.closePath();
     drawing = false;
-    nextBtn.disabled = false; // Activamos boton siguiente porque dibujó algo
+    nextBtn.disabled = false;
   }
 
   brushSizeInput.addEventListener('change', () => { ctx.lineWidth = brushSizeInput.value; });
@@ -309,9 +312,7 @@
     eraserActive = !eraserActive;
     eraserBtn.setAttribute('aria-pressed', eraserActive.toString());
     colorPicker.disabled = eraserActive;
-    if (!eraserActive) {
-      ctx.strokeStyle = colorPicker.value;
-    }
+    if (!eraserActive) ctx.strokeStyle = colorPicker.value;
   });
   clearBtn.addEventListener('click', () => {
     if (imgElement) {
@@ -326,17 +327,26 @@
     statusMsg.textContent = '';
   });
 
-  finishBtn.addEventListener('click', () => {
-    // Se genera la imagen base64 y se envía al correo (simulado)
-    const imageDataUrl = canvas.toDataURL('image/png');
+  // Envío a backend con la imagen en base64
+  finishBtn.addEventListener('click', async () => {
     statusMsg.textContent = "Enviando tu dibujo al correo...";
 
-    // Aquí deberías usar un backend o servicio externo para enviar el email.
-    // Por ejemplo puedes usar EmailJs, Formspree, tu propio servidor, etc.
-    // Este código solo simula el proceso:
-    setTimeout(() => {
-      statusMsg.textContent = "¡Dibujo enviado a salomonfcarrasco@gmail.com! Gracias por compartir tu arte.";
-    }, 1800);
+    try {
+      const imgData = canvas.toDataURL('image/png');
+      const res = await fetch('/send-drawing', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ image: imgData })
+      });
+      if (res.ok) {
+        statusMsg.textContent = "¡Dibujo enviado a salomonfcarrasco@gmail.com! Gracias por compartir tu arte.";
+      } else {
+        statusMsg.textContent = "Error enviando el dibujo, intenta nuevamente.";
+      }
+    } catch (e) {
+      statusMsg.textContent = "Error de conexión al enviar el dibujo.";
+      console.error(e);
+    }
   });
 
   nextBtn.addEventListener('click', () => {
