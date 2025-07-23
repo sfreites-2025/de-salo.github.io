@@ -2,8 +2,8 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mensaje sin fondo blanco</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mensaje con Fondo Opaco</title>
   <style>
     html, body {
       width: 100%;
@@ -29,7 +29,7 @@
       width: 40vw;
       min-width: 270px;
       max-width: 460px;
-      /* background removed to show no white behind */
+      background: #ffffff; /* Fondo blanco opaco sin transparencia */
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -40,8 +40,9 @@
       animation: fadeInMove 1.2s ease forwards;
       opacity: 0;
       transform: translateX(-30px);
-      color: #fff; /* texto blanco para buena visibilidad */
-      text-shadow: 0 0 5px rgba(0,0,0,0.7); /* mejora legibilidad sobre fondo */
+      color: #222222; /* Texto oscuro para buen contraste */
+      box-shadow: 0 4px 14px rgba(0,0,0,0.15); /* Sombra suave para resaltar el recuadro */
+      border-radius: 12px;
     }
     .mensaje {
       font-family: 'Times New Roman', Times, serif;
@@ -60,7 +61,8 @@
         width: 99vw;
         max-width: unset;
         min-width: unset;
-        padding: 20px 8px;
+        padding: 20px 15px;
+        border-radius: 0;
       }
       .mensaje {
         font-size: 0.91rem;
