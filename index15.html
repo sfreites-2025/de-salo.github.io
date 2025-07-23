@@ -41,7 +41,6 @@
         transform: scale(1);
       }
     }
-    /* Lado izquierdo decorativo */
     .left-panel {
       flex: 1;
       position: relative;
@@ -60,7 +59,6 @@
       line-height: 1.5;
       user-select: none;
     }
-    /* Sutileza textura de vetas */
     .left-panel::before {
       content: '';
       position: absolute;
@@ -70,7 +68,6 @@
       pointer-events: none;
       z-index: 0;
     }
-    /* Formas geométricas suaves */
     .shape-circle {
       position: absolute;
       width: 140px;
@@ -97,32 +94,36 @@
       0% { transform: translateY(0) rotate(0deg); }
       100% { transform: translateY(15px) rotate(8deg); }
     }
-    /* Texto manuscrito, con efecto máquina de escribir */
+    /* Mensaje especial estilizado */
     .left-text {
       position: relative;
       z-index: 1;
-      max-width: 90%;
+      max-width: 95%;
       margin: 0 auto;
-      font-family: 'Segoe Script', cursive, 'Brush Script MT', Georgia, serif;
-      font-style: italic;
-      color: #a44260;
-      font-size: 1.3rem;
-      line-height: 1.55;
-      display: inline-block;
-      white-space: nowrap;
-      overflow: hidden;
-      border-right: 2px solid #a44260;
-      animation: typing 5s steps(50, end) forwards, blink-caret 0.75s step-end infinite;
+      font-family: 'Great Vibes', 'Segoe Script', cursive, 'Brush Script MT', Georgia, serif;
+      color: #c32f5c;
+      font-size: 1.7rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-align: center;
+      background: linear-gradient(90deg, #ffcfc9 10%, #f775ab 100%);
+      padding: 16px 2px;
+      border-radius: 14px;
+      box-shadow: 0 6px 28px #ebbbd61a;
+      border: 1px solid #f6d7df;
+      text-shadow: 0 2px 10px #fad2e1a6, 0 3px 10px #fff3;
+      /* Animación suave */
+      opacity: 0;
+      transform: translateY(25px) scale(0.95);
+      animation: fadeUpIn 1.4s cubic-bezier(.76,.18,.25,.80) 0.4s forwards;
     }
-    @keyframes typing {
-      from { width: 0 }
-      to { width: 100% }
+    @keyframes fadeUpIn {
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
     }
-    @keyframes blink-caret {
-      0%, 100% { border-color: transparent }
-      50% { border-color: #a44260 }
-    }
-    /* Lado derecho mantenemos tu diseño */
+    /* Lado derecho */
     .right-panel {
       flex: 1.2;
       padding: 42px 48px;
@@ -205,11 +206,13 @@
         justify-content: center;
       }
       .left-text {
-        white-space: normal;
-        animation: none;
-        border: none;
+        font-size: 1.1rem;
+        padding: 10px 0;
+        margin: 10px 0;
       }
     }
+    /* Carga fuente manuscrita si está disponible */
+    @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
   </style>
 </head>
 <body>
@@ -218,8 +221,8 @@
     <aside class="left-panel" aria-hidden="true">
       <div class="shape-circle"></div>
       <div class="shape-square"></div>
-      <div class="left-text" aria-label="Texto motivacional animado">
-        Cada día es una nueva oportunidad para crecer y brillar.
+      <div class="left-text" aria-label="Texto manuscrito especial">
+        every day you are more beautiful
       </div>
     </aside>
 
