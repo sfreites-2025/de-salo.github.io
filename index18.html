@@ -3,116 +3,162 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Para Ti, Un Mensaje Especial</title>
+<title>Un Mensaje desde el Corazón</title>
 <style>
   body {
-    margin: 0; padding: 0;
-    min-height: 100vh;
-    background: linear-gradient(120deg, #fff1f8 0%, #a18cd1 70%, #fbc2eb 100%);
+    margin: 0; padding: 0; min-height: 100vh;
+    background: linear-gradient(120deg, #fbd3e9 0%, #bb377d 100%);
+    display: flex; justify-content: center; align-items: center;
     font-family: 'Times New Roman', Times, serif;
-    color: #5f3556;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    color: #732069;
+    overflow-x: hidden;
+    overflow-y: auto;
   }
   .container {
-    background: rgba(255,255,255,0.93);
-    border-radius: 25px;
-    box-shadow: 0 10px 32px rgba(130,50,94,0.11);
-    max-width: 630px;
-    width: 93vw;
-    padding: 52px 32px 40px 32px;
+    background: rgba(255,255,255,0.92);
+    border-radius: 26px;
+    box-shadow: 0 12px 40px 0 #e17dc7a3;
+    padding: 50px 32px 40px 32px;
+    max-width: 670px;
+    width: 92vw;
     text-align: center;
-    animation: fadeIn 1.35s ease;
+    animation: fadeInBox 1.4s cubic-bezier(0.45,0.05,0.55,0.95);
     position: relative;
   }
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(40px);}
-    to { opacity: 1; transform: translateY(0);}
+  @keyframes fadeInBox {
+    from { opacity: 0; transform: translateY(40px) scale(0.98);}
+    to { opacity: 1; transform: translateY(0) scale(1);}
   }
-  h1 {
-    font-size: 2.1rem;
-    margin-bottom: 18px;
-    font-weight: 700;
-    color: #bc3492;
-    font-family: 'Times New Roman', Times, serif;
+  .heart-anim {
+    font-size: 3.2rem;
+    color: #ff5499;
+    margin-bottom: 24px;
+    display: inline-block;
+    animation: beat 1.2s infinite;
   }
-  .heart {
-    font-size: 2.5rem;
-    color: #f25c99;
-    margin-bottom: 18px;
-    animation: heartbeat 1.45s infinite;
-    display: block;
-  }
-  @keyframes heartbeat {
-    0% { transform: scale(1);}
-    15% { transform: scale(1.18);}
-    35% { transform: scale(0.93);}
-    60% { transform: scale(1.10);}
+  @keyframes beat {
+    0%   { transform: scale(1);}
+    10%  { transform: scale(1.23);}
+    20%  { transform: scale(1.05);}
+    30%  { transform: scale(1.15);}
+    40%  { transform: scale(1);}
     100% { transform: scale(1);}
   }
+  .sparkle {
+    position: absolute;
+    display: block;
+    width: 22px;
+    height: 22px;
+    background: radial-gradient(circle, #ffd5f6 60%, #fff0);
+    border-radius: 50%;
+    opacity: 0.7;
+    animation: sparkleMove 2.7s infinite;
+  }
+  .sparkle1 { left: 40px; top: 23px; animation-delay: 0.3s;}
+  .sparkle2 { right: 55px; top: 60px; animation-delay: 1.5s;}
+  .sparkle3 { left: 60px; bottom: 42px; animation-delay: 2.0s;}
+  .sparkle4 { right: 32px; bottom: 52px; animation-delay: 0.7s;}
+  @keyframes sparkleMove {
+    0% {transform: scale(0.7) translateY(0);}
+    60%{opacity:1;}
+    100% {transform: scale(1.25) translateY(-16px); opacity:0;}
+  }
+  h1 {
+    margin-bottom: 18px;
+    font-size: 2.1rem;
+    color: #d53885;
+    letter-spacing: 0.02em;
+    font-weight: 700;
+    animation: fadeInTitle 1.3s cubic-bezier(.77,0,.18,1.09);
+  }
+  @keyframes fadeInTitle {
+    from { opacity: 0; transform: translateY(-28px);}
+    to { opacity:1; transform: translateY(0);}
+  }
   .message {
-    font-size: 1.22rem;
-    margin-bottom: 30px;
-    color: #6c2e5b;
+    font-size: 1.23rem;
+    color: #611f60;
+    letter-spacing: 0.01em;
     font-style: italic;
-    letter-spacing: 0.009em;
-    line-height: 1.56;
-    padding: 0 12px;
+    line-height: 1.68;
+    margin-bottom: 34px;
+    padding: 0 10px;
+    min-height: 145px;
+    animation: fadeInMessage 1.7s 0.35s backwards;
+  }
+  @keyframes fadeInMessage {
+    from { opacity: 0; filter: blur(8px);}
+    to { opacity:1; filter: blur(0);}
+  }
+  .highlight {
+    background: linear-gradient(120deg, #ffd1f8cc, #fbe9ff80);
+    border-radius: 9px;
+    padding: 2px 6px;
+    color: #a02081;
+    transition: background 0.8s;
   }
   .signature {
-    margin-top: 28px;
-    color: #a44b7d;
-    font-size: 1.04rem;
-    font-family: 'Times New Roman', Times, serif;
-    border-top: 1px solid #e6c5df;
-    padding-top: 15px;
-    font-style: italic;
-    opacity: 0.82;
-  }
-  .nav-btns {
-    margin-top: 34px;
-    display: flex;
-    justify-content: center;
-    gap: 28px;
-  }
-  button {
-    padding: 12px 36px;
-    border-radius: 28px;
-    border: none;
-    background: linear-gradient(90deg, #bc3492, #f1669e);
-    color: #fff;
-    font-family: 'Times New Roman', Times, serif;
+    margin-top: 24px;
     font-size: 1.08rem;
-    cursor: pointer;
-    box-shadow: 0 4px 14px rgba(218,90,128,0.18);
-    transition: background 0.3s ease, color 0.19s;
-    user-select: none;
+    color: #ac629b;
+    font-style: italic;
+    opacity: 0.81;
+    animation: fadeInSignature 1.3s 1.1s backwards;
   }
-  button:hover {
+  @keyframes fadeInSignature {
+    from { opacity: 0; filter: blur(4px);}
+    to { opacity:1; filter: blur(0);}
+  }
+  .fade-btns {
+    margin-top: 38px;
+    animation: fadeInBtns 1.8s 1.2s backwards;
+  }
+  @keyframes fadeInBtns {
+    from { opacity: 0;}
+    to { opacity:1;}
+  }
+  .fade-btns button {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.07rem;
+    padding: 12px 34px;
+    border-radius: 26px;
+    border: none;
+    background: linear-gradient(90deg, #d43d6b, #f1669e);
+    color: #fff;
+    cursor: pointer;
+    margin: 0 10px;
+    box-shadow: 0 4px 14px rgba(218,90,128,0.17);
+    transition: background 0.3s, color 0.19s;
+    min-width: 120px;
+  }
+  .fade-btns button:hover {
     background: linear-gradient(90deg, #ff91c2, #bc8cf2);
     color: #5f3556;
   }
 </style>
 </head>
 <body>
-  <main class="container" role="main" aria-label="Mensaje especial para ti">
-    <span class="heart" aria-hidden="true">❤</span>
-    <h1>Hay páginas finales, pero contigo nada termina</h1>
+  <div class="container">
+    <span class="sparkle sparkle1"></span>
+    <span class="sparkle sparkle2"></span>
+    <span class="sparkle sparkle3"></span>
+    <span class="sparkle sparkle4"></span>
+    <span class="heart-anim" aria-hidden="true">❤</span>
+    <h1>Un Mensaje desde el Corazón</h1>
     <div class="message">
-      A veces la vida es como estas páginas:<br>
-      llenas de colores, cambios, juegos y recuerdos que no se repiten igual.<br><br>
-      Nadie logra borrar lo que significó alguien verdadero. Pase lo que pase, haber compartido historia, cariño y tantas primeras veces, ¡eso queda grabado!<br><br>
-      Ojalá sonrías, sueñes, y que sigas siendo tan especial <b>como este espacio donde solo tú podías llegar</b>.<br>
-      <br>Gracias por inspirar, por tu forma de mirar la vida, y por dejar huella en tantas líneas.
+      Al llegar aquí, me doy cuenta de <span class="highlight">cuánto has significado para mí</span> y de lo grande que fue tu influencia en mi vida.<br>
+      Fuiste alguien que me impulsó a ser mejor, a encontrar una versión de mí mismo más auténtica,<br>
+      y aunque el tiempo haya puesto distancia entre nosotros,<br>
+      <span class="highlight">no he dejado de desearte lo mejor</span>.
     </div>
     <div class="signature">
-      Con cariño,<br>
-      Quien siempre te desea lo mejor<br>
+      Con agradecimiento, admiración y el cariño de siempre.<br>
+      <span style="font-size:1.03rem;">🌸</span>
     </div>
-    <div class="nav-btns">
-      <button type="button" onclick="window.location.href='index19.html'">Siguiente</button>
+    <div class="fade-btns">
+      <button onclick="window.history.back()">Anterior</button>
+      <button onclick="window.location.href='index19.html'">Siguiente</button>
     </div>
-  </main>
+  </div>
 </body>
 </html>
