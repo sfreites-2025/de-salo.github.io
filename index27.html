@@ -17,13 +17,13 @@
   }
 
   body {
-    height: 100vh;
-    width: 100vw;
-    min-height: 100vh;
-    min-width: 100vw;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: 100vh;
+    padding: 24px 20px;
+    box-sizing: border-box;
     position: relative;
   }
 
@@ -125,7 +125,6 @@
     100% { background: linear-gradient(90deg,#fce3fa99 60%, #d4e2fdcc 100%);}
   }
 
-  /* Animación de destellos */
   .sparkle {
     position: absolute;
     width: 26px; height: 26px;
@@ -142,8 +141,41 @@
     100% {opacity: .1; transform: scale(1.25) rotate(13deg);}
   }
 
-  /* Responsivo */
+  /* Barra lateral de botones derecha */
+  .side-nav {
+    position: fixed;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    z-index: 10;
+  }
+  .side-nav button {
+    padding: 12px 28px;
+    border-radius: 28px;
+    border: none;
+    background: linear-gradient(90deg, #1799cc, #c2a9ff);
+    color: #283a52;
+    font-family: 'Georgia', serif;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 6px 14px rgba(67, 142, 192, 0.23);
+    transition: background 0.3s, color 0.15s;
+    user-select: none;
+    min-width: 120px;
+  }
+  .side-nav button:hover {
+    background: linear-gradient(90deg, #d7e2fa, #1799cc 80%);
+    color: #1a3755;
+  }
+
+  /* Responsive */
   @media (max-width: 950px) {
+    body {
+      overflow-y: auto;
+    }
     .container {
       flex-direction: column;
       align-items: center;
@@ -159,6 +191,15 @@
       text-align: left;
     }
     .sparkle1,.sparkle2,.sparkle3 {display:none;}
+    .side-nav {
+      position: static;
+      transform: none;
+      flex-direction: row;
+      justify-content: center;
+      margin-top: 20px;
+      right: auto;
+      top: auto;
+    }
   }
 </style>
 </head>
@@ -181,5 +222,9 @@
       Confío en que, sea cual sea tu elección, estará guiada por lo que sientes y has vivido, por esa esencia única que te define y que siempre ilumina el camino. Eres <span class="highlight">fantástica, inigualable e irrepetible</span>, nunca dudes de eso ¿ok?
     </section>
   </main>
+  <nav class="side-nav" aria-label="Navegación entre páginas">
+    <button type="button" onclick="window.history.back()" aria-label="Página anterior">Anterior</button>
+    <button type="button" onclick="window.location.href='index28.html'" aria-label="Página siguiente">Siguiente</button>
+  </nav>
 </body>
 </html>
