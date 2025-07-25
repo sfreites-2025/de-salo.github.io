@@ -3,21 +3,49 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Fondo de Playa Blanco y Negro</title>
+<title>Fondo de Playa con Texto en Esquina Superior Izquierda</title>
 <style>
+  /* Reset y base */
   html, body {
     height: 100%;
-    margin: 0; padding: 0;
-    overflow: hidden;
-  }
-  body {
+    margin: 0; 
+    padding: 0;
+    overflow: hidden; /* evitar scroll */
     font-family: 'Georgia', serif;
     background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1470&q=80') no-repeat center center fixed;
     background-size: cover;
     filter: grayscale(100%);
   }
+
+  /* Overlay oscuro para mejorar contraste */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Texto fijo en la esquina superior izquierda */
+  .top-left-text {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    color: white;
+    font-weight: 600;
+    font-size: 1.2rem;
+    z-index: 10;
+    user-select: none;
+    text-shadow: 0 0 5px rgba(0,0,0,0.9);
+  }
 </style>
 </head>
 <body>
+
+  <div class="top-left-text" aria-label="Texto en esquina superior izquierda">
+    Y si decides enamorarte
+  </div>
+
 </body>
 </html>
