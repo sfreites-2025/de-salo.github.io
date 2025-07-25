@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Conclusión tu regalo</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Georgia:wght@400;700&display=swap');
+
+  html, body {
+    height: 100%;
+    margin: 0; padding: 0;
+    font-family: 'Georgia', serif;
+    background: linear-gradient(135deg, #f7d8ce 0%, #f6bfd1 50%, #e3a7c1 100%);
+    color: #4a2c3f;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .conclusion-box {
+    max-width: 700px;
+    background: rgba(255 255 255 / 0.85);
+    border-radius: 28px;
+    padding: 36px 40px;
+    box-shadow: 0 12px 35px rgba(211, 102, 147, 0.42);
+    animation: fadeFloatIn 2.5s ease forwards;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    font-weight: 500;
+    font-style: italic;
+    user-select: text;
+  }
+
+  @keyframes fadeFloatIn {
+    0% {
+      opacity: 0;
+      transform: translateY(40px) scale(0.95);
+    }
+    70% {
+      opacity: 1;
+      transform: translateY(-10px) scale(1.05);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  /* Botones de navegación */
+  .side-nav {
+    position: fixed;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    z-index: 20;
+  }
+  .side-nav button {
+    padding: 12px 28px;
+    border-radius: 28px;
+    border: none;
+    background: linear-gradient(90deg, #d968ac, #f9a0d9);
+    color: #4a2c3f;
+    font-family: 'Georgia', serif;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 6px 14px rgba(217, 104, 159, 0.45);
+    transition: background 0.3s, color 0.15s;
+    user-select: none;
+    min-width: 120px;
+  }
+  .side-nav button:hover {
+    background: linear-gradient(90deg, #f9a0d9, #d968ac);
+    color: #3a1f2c;
+  }
+
+  /* Responsive */
+  @media (max-width: 950px) {
+    body {
+      overflow-y: auto;
+      flex-direction: column;
+      padding: 20px;
+    }
+    .conclusion-box {
+      width: 100%;
+      max-width: none;
+      padding: 28px 20px;
+      font-size: 1.1rem;
+    }
+    .side-nav {
+      position: static;
+      transform: none;
+      flex-direction: row;
+      justify-content: center;
+      margin-top: 24px;
+      gap: 12px;
+    }
+    .side-nav button {
+      flex-grow: 1;
+      min-width: auto;
+      padding: 12px 22px;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <div class="conclusion-box" role="main" aria-label="Mensaje de conclusión de la aplicación">
+    Gracias por leer esto enserio. <br><br>
+    Espero que esto haya sido un buen regalo y te haya gustado, enserio gracias.<br><br>
+    Sigue adelante con valentía y amor, porque lo mejor está por venir, y tu historia aun no acaba, apenas empieza. <br><br>
+    Probablemente diras, este tipo esta loco, You'll never stop being my love, never in my life. I want to go back to where I was always happy and never leave... Thank you, Ori. I love you so much. <br><br>
+  </div>
+  
+  <nav class="side-nav" aria-label="Navegación entre páginas">
+    <button type="button" onclick="window.history.back()" aria-label="Página anterior">Anterior</button>
+  </nav>
+
+</body>
+</html>
