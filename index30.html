@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Fondo de Playa con Texto Izquierdo Centrado</title>
+<title>Fondo de Playa con Texto Izquierdo Centrado y Navegación</title>
 <style>
   html, body {
     height: 100%;
@@ -38,7 +38,7 @@
     width: 40%; /* ocupando un 40% de ancho en el lado izquierdo */
     display: flex;
     align-items: center;    /* centrado vertical */
-    justify-content: flex-start; /* alineado a la izquierda horizontalmente */
+    justify-content: flex-start; /* alineado a la izquierda */
     padding-left: 24px;
     min-height: 100vh;
     box-sizing: border-box;
@@ -49,6 +49,65 @@
     text-shadow: 0 0 8px rgba(0, 0, 0, 0.85);
     user-select: text;
   }
+
+  /* Barra lateral de botones derecha */
+  .side-nav {
+    position: fixed;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    z-index: 20;
+  }
+  .side-nav button {
+    padding: 12px 28px;
+    border-radius: 28px;
+    border: none;
+    background: linear-gradient(90deg, #1799cc, #c2a9ff);
+    color: #283a52;
+    font-family: 'Georgia', serif;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 6px 14px rgba(67, 142, 192, 0.23);
+    transition: background 0.3s, color 0.15s;
+    user-select: none;
+    min-width: 120px;
+  }
+  .side-nav button:hover {
+    background: linear-gradient(90deg, #d7e2fa, #1799cc 80%);
+    color: #1a3755;
+  }
+
+  /* Responsive para pantallas pequeñas */
+  @media (max-width: 950px) {
+    body {
+      overflow-y: auto; /* permitir scroll en móvil */
+      flex-direction: column;
+    }
+    .left-center-text {
+      width: 100%;
+      min-height: auto;
+      padding: 16px 20px;
+      font-size: 1.1rem;
+      text-align: center;
+      justify-content: center;
+    }
+    .side-nav {
+      position: static;
+      transform: none;
+      flex-direction: row;
+      justify-content: center;
+      margin: 16px 0;
+      gap: 12px;
+    }
+    .side-nav button {
+      flex-grow: 1;
+      min-width: auto;
+      padding: 12px 20px;
+    }
+  }
 </style>
 </head>
 <body>
@@ -56,6 +115,11 @@
   <div class="left-center-text" aria-label="Cita en lado izquierdo centrada verticalmente">
     Y si decides enamorarte otra vez, enamorate de mí una última vez
   </div>
+
+  <nav class="side-nav" aria-label="Navegación entre páginas">
+    <button type="button" onclick="window.history.back()" aria-label="Página anterior">Anterior</button>
+    <button type="button" onclick="window.location.href='index28.html'" aria-label="Página siguiente">Siguiente</button>
+  </nav>
 
 </body>
 </html>
