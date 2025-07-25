@@ -3,52 +3,110 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Fondo de Playa con Texto Destacado</title>
+<title>Mensajes con Flecha Animada</title>
 <style>
-  html, body {
-    height: 100%;
-    margin: 0; padding: 0;
-    overflow: hidden; /* sin scroll */
-    font-family: 'Georgia', serif;
-  }
+  @import url('https://fonts.googleapis.com/css2?family=Georgia:wght@400;700&display=swap');
 
   body {
-    background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1470&q=80') no-repeat center center fixed;
-    background-size: cover;
-    filter: grayscale(100%);
+    margin: 0;
+    padding: 40px 30px;
+    font-family: 'Georgia', serif;
+    background: #f0f0f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .container {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+
+  /* Texto de los mensajes */
+  .message {
+    max-width: 240px;
+    font-size: 1.3rem;
+    font-style: italic;
+    color: #3a3a5a;
+    background: white;
+    padding: 22px 20px;
+    border-radius: 16px;
+    box-shadow: 0 8px 16px rgb(0 0 0 / 0.1);
+    user-select: text;
     position: relative;
-    color: white;
   }
 
-  /* Overlay oscuro para mejorar contraste */
-  body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.45);
-    pointer-events: none;
-    z-index: 0;
+  /* Flecha SVG animada */
+  .arrow {
+    width: 80px;
+    height: 40px;
+    overflow: visible;
   }
 
-  /* Texto fijo en esquina superior izquierda */
-  .top-left-text {
-    position: fixed;
-    top: 16px;
-    left: 16px;
-    color: white;
-    font-weight: 600;
-    font-size: 1.2rem;
-    z-index: 10;
-    text-shadow: 0 0 8px rgba(0, 0, 0, 0.85);
-    user-select: none;
+  .arrow path {
+    stroke: #3a3a5a;
+    stroke-width: 3;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    animation: arrowDraw 2s ease-in-out forwards;
+  }
+
+  .arrow path.arrow-head {
+    animation-delay: 1.8s;
+  }
+
+  @keyframes arrowDraw {
+    from {
+      stroke-dasharray: 0 100;
+      opacity: 0;
+    }
+    to {
+      stroke-dasharray: 100 0;
+      opacity: 1;
+    }
+  }
+
+  /* Flecha con movimiento de deslizamiento suave */
+  .arrow {
+    animation: arrowSlide 2.5s ease-in-out infinite alternate;
+  }
+
+  @keyframes arrowSlide {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(8px);
+    }
+  }
+
+  /* Opcional para que el texto sea un poco diferente tipografía para mayor estilo */
+  .message.first {
+    font-weight: 700;
+    color: #253858;
   }
 </style>
 </head>
 <body>
+  <div class="container" aria-label="Mensajes con flecha animada que apunta">
+    <div class="message first" aria-label="Primer mensaje">
+      otra vez
+    </div>
 
-  <div class="top-left-text" aria-label="Texto fijo en esquina superior izquierda">
-    Y si decides enamorarte
+    <svg class="arrow" aria-hidden="true" viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg" role="img" focusable="false" >
+      <!-- Línea -->
+      <path d="M5 20 H70" />
+      <!-- Cabeza de flecha -->
+      <path class="arrow-head" d="M60 12 L70 20 L60 28" />
+    </svg>
+
+    <div class="message second" aria-label="Segundo mensaje">
+      <!-- aquí podrías poner el segundo texto si lo quieres -->
+      tu siguiente mensaje aquí
+    </div>
   </div>
-
 </body>
 </html>
