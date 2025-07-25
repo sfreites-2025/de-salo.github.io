@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mensaje Dividido Lado a Lado</title>
+<style>
+  /* Evitar scroll y centrar el contenido horizontal y vertical */
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: linear-gradient(135deg, #f3e9f8 0%, #d7c4f7 100%);
+    font-family: 'Georgia', serif;
+    color: #4a356f;
+  }
+
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 24px 20px;
+    box-sizing: border-box;
+  }
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    max-width: 900px;
+    width: 100%;
+    gap: 40px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 24px;
+    padding: 32px 40px;
+    box-shadow: 0 12px 40px rgba(97, 70, 169, 0.25);
+    box-sizing: border-box;
+  }
+
+  .left-message, .right-message {
+    width: 48%;
+    font-size: 1rem;
+    line-height: 1.5;
+    font-style: italic;
+    text-align: justify;
+    color: #4a356f;
+    user-select: text;
+  }
+
+  /* Destacar el texto con un sutil fondo */
+  .highlight {
+    background: linear-gradient(120deg, #cda9f9cc, #d3bdfeba);
+    border-radius: 6px;
+    padding: 2px 6px;
+    font-weight: 600;
+  }
+
+  /* Responsividad móvil: apilar vertical */
+  @media (max-width: 700px) {
+    body {
+      overflow-y: auto; /* permitir scroll vertical móvil */
+    }
+    .container {
+      flex-direction: column;
+      padding: 24px 26px;
+      max-width: 95vw;
+      gap: 24px;
+    }
+    .left-message, .right-message {
+      width: 100%;
+      text-align: left;
+      font-size: 1rem;
+    }
+  }
+</style>
+</head>
+<body>
+  <main class="container" role="main" aria-label="Mensajes divididos lado izquierdo y derecho">
+    <section class="left-message" aria-label="Primer mensaje sobre la salida y decisión personal">
+      Lo de la salida no es una obligación ni una presión; si en verdad no quieres salir, no tienes que hacer nada, no tienes que desbloquearme ni escribirme tampoco. Pero si tu respuesta es que sí, te prometo que será una experiencia divertida, que vas a disfrutar cada momento y que te encantará. No sé qué decidirás, ni siquiera ahora, mientras escribo esto, puedo adivinar qué dirás; solo sé que esa decisión la tomarás desde el <span class="highlight">corazón</span>, con esa sabiduría y luz que te hacen ser tan auténtica y especial.
+    </section>
+    <section class="right-message" aria-label="Segundo mensaje sobre la confianza y singularidad">
+      Confío en que, sea cual sea tu elección, estará guiada por lo que sientes y has vivido, por esa esencia única que te define y que siempre ilumina el camino. Eres <span class="highlight">fantástica, inigualable e irrepetible</span>, nunca dudes de eso ¿ok?
+    </section>
+  </main>
+</body>
+</html>
