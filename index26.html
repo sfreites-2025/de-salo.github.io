@@ -3,204 +3,222 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Cupón Cine - Invitación Especial</title>
+<title>Cupón Estilo Ticket de Tren Antiguo</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
-
+  @import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
   body {
-    margin: 0; padding: 30px 16px;
+    margin: 0; padding: 26px 10px;
     min-height: 100vh;
-    background: linear-gradient(135deg, #1e1e2f 0%, #3b3b58 90%);
-    font-family: 'Arial', sans-serif;
-    color: #eee;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 44px;
-    flex-wrap: wrap;
-  }
-
-  /* Cupón estilo cine */
-  .coupon {
-    background: linear-gradient(45deg, #222233 0%, #141424 100%);
-    border-radius: 22px;
-    box-shadow:
-      0 0 12px #ff0057,
-      inset 0 0 25px #ff0057;
-    max-width: 420px;
-    width: 100%;
-    padding: 30px 40px 38px 40px;
-    position: relative;
+    background: linear-gradient(120deg, #e9e2d0 0%, #dbcfc1 90%);
+    font-family: 'Times New Roman', Times, serif;
+    color: #584932;
+    display: flex; justify-content: center; align-items: center;
     text-align: center;
-    font-family: 'Orbitron', monospace;
-    letter-spacing: 0.1em;
-    color: #ff4b7f;
-    user-select: none;
-    animation: pulseGlow 3s ease-in-out infinite alternate;
   }
-  @keyframes pulseGlow {
-    0%, 100% { box-shadow:
-      0 0 12px #ff0057,
-      inset 0 0 25px #ff0057;
-    }
-    50% { box-shadow:
-      0 0 35px #ff4777,
-      inset 0 0 42px #ff4777;
-    }
+  .ticket-wrap {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
   }
-
-  /* Perforaciones simuladas en los bordes */
-  .coupon:before, .coupon:after {
-    content: "";
-    position: absolute;
-    width: 24px; height: 24px;
-    border-radius: 50%;
-    background: #141424;
-    border: 3.5px solid #ff0057;
-    top: 50%;
-    transform: translateY(-50%);
-    box-shadow: 0 0 6px #ff0057;
-  }
-  .coupon:before {
-    left: -14px;
-  }
-  .coupon:after {
-    right: -14px;
-  }
-
-  .coupon-title {
-    font-size: 1.35rem;
-    font-weight: 900;
-    margin-bottom: 14px;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    text-shadow: 0 0 12px #ff7ab8;
-  }
-  .coupon-code {
-    font-size: 2.4rem;
-    letter-spacing: 0.23em;
-    margin: 8px 0 12px 0;
-    text-shadow: 0 0 14px #ff58a3;
-  }
-  .coupon-subtitle {
-    font-size: 1.02rem;
-    font-weight: 600;
-    letter-spacing: 0.07em;
-    margin-bottom: 26px;
-    color: #ffa6bfaa;
-    font-family: 'Arial', sans-serif;
-  }
-  .coupon-info {
-    font-size: 1rem;
-    color: #d1b0c4;
-    font-style: italic;
-    line-height: 1.5;
-    letter-spacing: 0.04em;
-    padding: 0 14px;
-    user-select: text;
-  }
-  .coupon-info b {
-    color: #ff70a3;
-  }
-
-  /* Contenedor derecha: invitación y link */
-  .invite-section {
-    max-width: 360px;
-    padding: 28px 32px;
-    background: #12122a;
-    border-radius: 24px;
-    box-shadow: 0 0 36px #ff417e85;
-    color: #f9c8da;
-    font-family: 'Georgia', serif;
-    font-style: italic;
-    line-height: 1.6;
-    letter-spacing: 0.03em;
-    user-select: text;
+  .antique-ticket {
+    background: repeating-linear-gradient(-45deg, #f6ecd5 0px, #f8ecd1 8px, #f6ecd5 28px, #e9dac2 30px);
+    box-shadow:
+      0 3px 18px #b9ab86cc,
+      0 0 0 4.5px #dac49c inset;
+    border: 3px dashed #94743a;
+    border-radius: 32px 16px 32px 16px/22px 40px 22px 40px;
+    min-width: 294px; max-width: 388px;
+    width: 95vw;
+    padding: 36px 32px 32px 32px;
     position: relative;
+    font-family: 'Special Elite', 'Times New Roman', Times, serif;
+    font-size: 1.09rem;
+    letter-spacing: 0.03em;
+    transition: box-shadow .4s;
+    animation: fadein 2s;
+    z-index: 1;
   }
-  .invite-text {
-    margin-bottom: 30px;
-    font-size: 1rem;
+  @keyframes fadein {
+    from { opacity: 0; filter: blur(12px);}
+    to { opacity: 1; filter: blur(0);}
+  }
+  .ticket-title {
+    font-size: 1.38rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .10em;
+    color: #725335;
+    margin-bottom: 8px;
+    margin-top: 8px;
+  }
+  .ticket-div {
+    border-top: 1.5px dashed #94743a55;
+    width: 80%;
+    margin: 16px auto;
+  }
+  .ticket-detail {
+    margin: 5px 0 10px 0;
+    font-size: 1.01rem;
+    color: #847060;
+    font-style: italic;
+    letter-spacing: 0.01em;
+  }
+  .ticket-code {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.24rem;
+    background: #f9edce;
+    border: 1.5px dotted #94743a;
+    display: inline-block;
+    margin: 13px 0 11px 0;
+    letter-spacing: 0.12em;
+    color: #7d5a2c;
+    border-radius: 7px;
+    padding: 7px 18px;
+    font-weight: 600;
+    box-shadow: 0 1.5px 11px #8470481b;
+  }
+  .ticket-footer {
+    font-size: .93rem;
+    color: #9e835e;
+    margin-top: 16px;
+    font-style: italic;
+    opacity: .86;
+  }
+  .ticket-decor {
+    position: absolute;
+    left: -23px; top: 35px;
+    font-size: 2.7rem;
+    color: #c9b27344;
+    transform: rotate(-16deg);
+    user-select: none;
+    pointer-events: none;
+    z-index: 0;
+    animation: flutterHeart 3.4s infinite alternate ease-in-out;
+  }
+  .ticket-decor2 {
+    position: absolute;
+    right: -23px; bottom: 29px;
+    font-size: 2.35rem;
+    color: #bbac865a;
+    transform: rotate(12deg);
+    user-select: none;
+    pointer-events: none;
+    z-index: 0;
+    animation: flutterHeart 4.1s 1.2s infinite alternate-reverse;
+  }
+  @keyframes flutterHeart {
+    0% {transform: scale(1.05);}
+    100% {transform: scale(1.15) rotate(-8deg);}
+  }
+  .perforation {
+    position: absolute;
+    top: 0; left: 50%; transform: translateX(-50%);
+    width: 92%; height: 14px; z-index: 5;
+    background: repeating-linear-gradient(
+      90deg, transparent, transparent 10px,
+      #94743a55 10px, #94743a55 12px);
+    border-radius: 0 0 8px 8px;
+  }
+  .perforation-bottom {
+    bottom: 0; top: auto;
+    border-radius: 8px 8px 0 0;
+    background: repeating-linear-gradient(
+      90deg, transparent, transparent 12px,
+      #94743a43 12px, #94743a43 14px);
   }
 
-  /* Link de WhatsApp con animacion chida */
-  .whatsapp-link {
+  /* Sección de invitación y WhatsApp */
+  .invite-section {
+    margin-top: 18px;
+    max-width: 340px;
+    min-width: 200px;
+    padding: 23px 18px 20px 18px;
+    background: #f7f2e6cc;
+    border-radius: 22px;
+    box-shadow: 0 6px 20px #ad8c687a;
+    color: #8b6a55;
+    font-family: 'Georgia', serif;
+    font-size: 1rem;
+    font-style: italic;
+    line-height: 1.7;
+    display: flex; flex-direction: column; align-items: center;
+    z-index: 1;
+    animation: fadeInInvite 2.3s;
+  }
+  @keyframes fadeInInvite {
+    from {opacity:0;filter:blur(12px);}
+    to {opacity:1;filter:blur(0);}
+  }
+  .ws-link {
+    margin-top: 19px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     color: #25d366;
-    text-decoration: none;
     font-weight: 700;
-    font-size: 1.12rem;
-    font-family: 'Arial', sans-serif;
-    border: 2.6px solid #25d366;
-    border-radius: 28px;
-    padding: 12px 22px;
+    font-size: 1.08rem;
+    border: 2.1px solid #25d366;
+    border-radius: 31px;
+    padding: 11px 20px 11px 19px;
+    background: #fff;
+    box-shadow: 0 2px 16px #25d3662a;
+    text-decoration: none;
     cursor: pointer;
-    box-shadow: 0 4px 28px #25d36699;
-    animation: pulseGreen 2.6s ease-in-out infinite alternate;
-    transition: background-color 0.3s ease, transform 0.15s ease;
-    user-select: none;
+    transition: background 0.3s, color 0.15s, box-shadow 0.3s;
+    animation: wsPulse 2.1s ease-in-out infinite alternate;
   }
-  .whatsapp-link:hover, .whatsapp-link:focus {
-    background-color: #25d366;
-    color: #121212;
-    transform: scale(1.07);
-    box-shadow: 0 8px 36px #25d366cc;
+  .ws-link:hover, .ws-link:focus {
+    background: #25d366;
+    color: #151c13;
+    box-shadow: 0 6px 32px #25d36655;
   }
-
-  .whatsapp-icon {
-    margin-right: 10px;
-    font-size: 1.45rem;
-    animation: bounceIcon 3s ease-in-out infinite;
+  .ws-icon {
+    font-size: 1.52rem;
+    margin-right: 12px;
+    animation: shakeIcon 2.3s infinite alternate;
   }
-
-  @keyframes pulseGreen {
-    0%, 100% {
-      box-shadow: 0 4px 28px #25d36699;
-    }
-    50% {
-      box-shadow: 0 12px 52px #25d366cc;
-    }
+  @keyframes wsPulse {
+    0% { box-shadow: 0 2px 16px #25d3662a;}
+    100% { box-shadow: 0 7px 34px #25d366aa;}
   }
-  @keyframes bounceIcon {
-    0%, 100% { transform: translateY(0);}
-    50% { transform: translateY(-6px);}
+  @keyframes shakeIcon {
+    0% { transform: rotate(-10deg);}
+    50% { transform: rotate(14deg);}
+    100% { transform: rotate(-4deg);}
   }
-
-  /* Responsive: apila vertical en pantallas estrechas */
-  @media (max-width: 800px) {
-    body {
-      flex-direction: column;
-      padding: 24px 12px;
-    }
-    .coupon, .invite-section {
-      max-width: 90vw;
-      width: 100%;
-    }
+  /* Responsive para móviles */
+  @media (max-width: 850px) {
+    .ticket-wrap { flex-direction: column; align-items: center; gap: 24px;}
+    .antique-ticket, .invite-section {max-width: 98vw;}
   }
 </style>
 </head>
 <body>
-  <div class="coupon" role="region" aria-label="Cupón canjeable estilo cine">
-    <div class="coupon-title" aria-hidden="true">Entrada VIP</div>
-    <div class="coupon-code" aria-label="Código del cupón">CINE-GRAD-2025</div>
-    <div class="coupon-subtitle" aria-hidden="true">Canjeable para salir y celebrar</div>
-    <div class="coupon-info">
-      Presenta este cupón para disfrutar una salida especial.<br>
-      ¡Disfruta la función y el momento juntos!
+  <div class="ticket-wrap">
+    <div class="antique-ticket" role="region" aria-label="Ticket de tren antiguo canjeable">
+      <div class="perforation"></div>
+      <span class="ticket-title">Ticket de Tren &mdash; Amor y Celebración</span>
+      <div class="ticket-detail">Destino: Una salida para celebrar <b>tu graduación</b> y compartir un momento especial.<br>Válido para el portador y su acompañante favorito.</div>
+      <div class="ticket-div"></div>
+      <div class="ticket-code">TREN-LOVE-2025</div>
+      <div class="ticket-footer">
+        <span>Un viaje, un reencuentro.<br>Válido hasta 31/dic/2025</span>
+      </div>
+      <span class="ticket-decor" aria-hidden="true">❤</span>
+      <span class="ticket-decor2" aria-hidden="true">❦</span>
+      <div class="perforation perforation-bottom"></div>
     </div>
-  </div>
-
-  <aside class="invite-section" role="complementary" aria-label="Instrucciones e invitación para canjear el cupón">
-    <div class="invite-text" id="inviteText">
+    <aside class="invite-section" role="complementary" aria-label="Instrucciones y Whatsapp">
       Te invito a una salida, a celebrar su graduación y a hablar, solo si así lo desea usted.<br><br>
-      Para canjear el código debes tomarle foto a este cupón, enviármelo por Whatsapp y escribir <b>mondongo italiano</b>.
-    </div>
-    <a class="whatsapp-link" href="https://wa.me/584143568666" target="_blank" rel="noopener" aria-label="Enviar mensaje por Whatsapp">
-      <span class="whatsapp-icon" aria-hidden="true">📱</span> 
-      Enviar Whatsapp
-    </a>
-  </aside>
+      Para canjear el código debes tomarle foto a este ticket, enviármelo por Whatsapp y escribir <b>mondongo italiano</b>.
+      <a class="ws-link" href="https://wa.me/584143568666" target="_blank" rel="noopener" aria-label="Enviar Whatsapp">
+        <span class="ws-icon" aria-hidden="true">📱</span>
+        Enviar Whatsapp
+      </a>
+    </aside>
+  </div>
 </body>
 </html>
