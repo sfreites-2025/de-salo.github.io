@@ -101,6 +101,34 @@
     94% { opacity:1;}
     100% { opacity:0; transform:translateY(160px) rotate(44deg);}
   }
+  /* Nueva animación: brillo girando alrededor del regalo */
+  .halo-orbit {
+    pointer-events: none;
+    position: absolute;
+    left: 50%; top: 50%; z-index: 15;
+    width: 170px; height: 170px;
+    transform: translate(-50%, -50%);
+    opacity: 0.82;
+    animation: rotateHalo 5.8s linear infinite;
+    mix-blend-mode: lighten;
+  }
+  @keyframes rotateHalo {
+    0% { transform: translate(-50%,-50%) rotate(0);}
+    100% {transform: translate(-50%,-50%) rotate(360deg);}
+  }
+  .halo {
+    position: absolute;
+    left: 0; top: 0; right: 0; bottom: 0;
+    border: 4px dotted #e3ccfc;
+    border-radius: 50%;
+    box-shadow: 0 0 22px #ceb6f3, 0 0 60px #edc3f6 inset;
+    animation: haloPulse 2.4s infinite alternate;
+  }
+  @keyframes haloPulse {
+    from { box-shadow: 0 0 14px #ceb6f3, 0 0 38px #edc3f6 inset;}
+    to   { box-shadow: 0 0 30px #ceb6f3, 0 0 88px #f6daf2cc inset;}
+  }
+  /* ---------- FIN nueva animación ----------- */
   .message-wrap {
     max-width: 650px;
     margin: 0 auto;
@@ -191,6 +219,7 @@
 <body>
   <div class="gift-box-wrap">
     <div class="gift-box">
+      <div class="halo-orbit"><div class="halo"></div></div>
       <div class="lid"></div>
       <div class="box-body"></div>
       <div class="ribbon-v"></div>
@@ -231,7 +260,7 @@
     </div>
   </div>
   <script>
-    // Activa confeti al abrir la tapa del regalo
+    // Activa confeti después de abrir el regalo
     setTimeout(()=>{
       document.querySelectorAll('.confetti span').forEach((el,i)=>{
         el.style.opacity = '1';
