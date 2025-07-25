@@ -3,39 +3,36 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Fondo de Guitarra</title>
+<title>Fondo con Imagen de Guitarra</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Georgia:wght@400;700&display=swap');
 
   html, body {
     height: 100%;
-    margin: 0;
-    padding: 0;
+    margin: 0; padding: 0;
     overflow: hidden;
     font-family: 'Georgia', serif;
-    color: #fff;
   }
 
   body {
+    height: 100vh;
+    background: 
+      linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), /* filtro para mejorar legibilidad */
+      url('https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1470&q=80') center center/cover no-repeat fixed;
+    color: #f0e6d2;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    background: 
-      linear-gradient(180deg, rgba(0,0,0,0.5) 30%, rgba(0,0,0,0.8) 90%), 
-      url('https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1470&q=80') no-repeat center center fixed;
-    background-size: cover;
-    position: relative;
     text-align: center;
-    padding: 24px 20px;
+    padding: 20px;
     box-sizing: border-box;
   }
 
   .content {
     max-width: 700px;
-    background: rgba(0,0,0,0.55);
+    background: rgba(0,0,0,0.4);
     border-radius: 20px;
-    padding: 30px 28px 28px 28px;
+    padding: 30px 28px;
     box-shadow: 0 12px 35px rgba(0,0,0,0.7);
     animation: fadeInContent 1.5s ease forwards;
   }
@@ -47,9 +44,8 @@
 
   h1 {
     font-size: 2.2rem;
-    margin-bottom: 16px;
     font-weight: 700;
-    color: #f0e6d2;
+    margin-bottom: 16px;
     text-shadow: 0 2px 8px #000000bb;
   }
 
@@ -57,11 +53,10 @@
     font-size: 1.18rem;
     line-height: 1.6;
     font-style: italic;
-    color: #d3caaf;
     text-shadow: 0 1px 4px #000000cc;
   }
 
-  /* Botones laterales */
+  /* Botones de navegación fijos a la derecha */
   .side-nav {
     position: fixed;
     top: 50%;
@@ -89,7 +84,7 @@
     color: #291a06;
   }
 
-  /* Responsive para móviles */
+  /* Responsive para pantallas pequeñas */
   @media (max-width: 600px) {
     body {
       padding: 18px 16px;
@@ -121,6 +116,7 @@
       Este fondo inspira pasión, música y sentimiento, ideal para continuar la secuencia de mensajes emotivos.
     </p>
   </div>
+
   <nav class="side-nav" aria-label="Navegación entre páginas">
     <button type="button" onclick="window.history.back()" aria-label="Página anterior">Anterior</button>
     <button type="button" onclick="window.location.href='index29.html'" aria-label="Página siguiente">Siguiente</button>
