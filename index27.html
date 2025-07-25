@@ -3,85 +3,181 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Mensaje Dividido Lado a Lado</title>
+<title>Mensaje Dividido Animado</title>
 <style>
-  /* Evitar scroll y centrar el contenido horizontal y vertical */
+  @import url('https://fonts.googleapis.com/css2?family=Georgia:wght@400;700&display=swap');
+
   html, body {
     height: 100%;
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background: linear-gradient(135deg, #f3e9f8 0%, #d7c4f7 100%);
     font-family: 'Georgia', serif;
-    color: #4a356f;
+    background: radial-gradient(circle at 60% 60%, #faf7f3 55%, #c9e3fa 87%, #0a334d 100%);
   }
 
   body {
+    height: 100vh;
+    width: 100vw;
+    min-height: 100vh;
+    min-width: 100vw;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    padding: 24px 20px;
-    box-sizing: border-box;
+    position: relative;
+  }
+
+  .animated-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .bubble {
+    position: absolute;
+    border-radius: 50%;
+    opacity: .38;
+    animation: floatBubble 12s linear infinite;
+    pointer-events: none;
+    background: radial-gradient(circle at 60% 40%, #f5faff 0%, #f2e3fa 90%, transparent 100%);
+  }
+  .bubble1 {width: 110px; height: 110px; left: 3vw; bottom: 6vh; animation-duration: 15s;}
+  .bubble2 {width: 75px; height: 75px; right: 12vw; top: 7vh; animation-duration: 17s;}
+  .bubble3 {width: 98px; height: 98px; right: 6vw; bottom: 3vh; animation-duration: 13s;}
+  .bubble4 {width: 68px; height: 68px; left: 28vw; top: 12vh; animation-duration: 14.5s;}
+  .bubble5 {width: 95px; height: 95px; left: 60vw; bottom: 6vh; animation-duration: 18s;}
+
+  @keyframes floatBubble {
+    0% {transform: translateY(0) scale(1);}
+    30% {transform: translateY(-18px) scale(1.13);}
+    60% {transform: translateY(-33px) scale(0.97);}
+    100% {transform: translateY(0) scale(1);}
   }
 
   .container {
+    position: relative;
+    z-index: 2;
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
-    max-width: 900px;
-    width: 100%;
-    gap: 40px;
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 24px;
-    padding: 32px 40px;
-    box-shadow: 0 12px 40px rgba(97, 70, 169, 0.25);
-    box-sizing: border-box;
+    align-items: stretch;
+    max-width: 940px;
+    width: 96vw;
+    min-width: 250px;
+    gap: 50px;
+    background: rgba(254,255,255,0.77);
+    border-radius: 32px;
+    box-shadow: 0 12px 55px 0 #1799cc0c;
+    padding: 38px 40px;
+    backdrop-filter: blur(9px);
+    animation: dropIn 1.2s cubic-bezier(.52,-0.12,.27,1.13);
+  }
+  @keyframes dropIn {
+    0% { opacity: 0; transform: translateY(70px) scale(0.95);}
+    70% { opacity: 1; transform: translateY(-18px) scale(1.06);}
+    100% { opacity: 1; transform: translateY(0) scale(1);}
   }
 
   .left-message, .right-message {
-    width: 48%;
-    font-size: 1rem;
-    line-height: 1.5;
+    width: 46%;
+    min-width: 220px;
+    font-size: 1.07rem;
+    line-height: 1.56;
     font-style: italic;
+    color: #484869;
     text-align: justify;
-    color: #4a356f;
     user-select: text;
+    background: linear-gradient(120deg, #eaf7ff 88%, #f8f5fa 100%);
+    border-radius: 20px;
+    padding: 26px 26px 20px 22px;
+    box-shadow: 0 4px 28px 0 #cbe3f14c;
+    opacity: 0;
+    animation: fadeMessage 1.1s 0.45s forwards;
+    position: relative;
+    overflow: visible;
+  }
+  .right-message {
+    background: linear-gradient(120deg,#f9ebfa 65%,#dbe5fa 100%);
+    box-shadow: 0 4px 22px 0 #decef69c;
+    animation-delay: 1s;
   }
 
-  /* Destacar el texto con un sutil fondo */
+  @keyframes fadeMessage {
+    0% {opacity:0; filter: blur(26px) scale(1.16);}
+    60% {opacity:.8; filter: blur(3px);}
+    100% {opacity:1; filter:blur(0);}
+  }
+
   .highlight {
-    background: linear-gradient(120deg, #cda9f9cc, #d3bdfeba);
-    border-radius: 6px;
-    padding: 2px 6px;
+    background: linear-gradient(90deg, #c9e4efcc, #e4c6eab7);
+    border-radius: 7px;
+    padding: 2.5px 7px;
     font-weight: 600;
+    color: #047e88;
+    box-shadow: 0 2px 7px #e0ddff2a;
+    transition: background 0.5s;
+    font-style: normal;
+    animation: pulseHighlight 2s infinite alternate;
   }
 
-  /* Responsividad móvil: apilar vertical */
-  @media (max-width: 700px) {
-    body {
-      overflow-y: auto; /* permitir scroll vertical móvil */
-    }
+  @keyframes pulseHighlight {
+    0% { background: linear-gradient(90deg, #c9e4efcc 90%, #e4c6ea99 100%);}
+    100% { background: linear-gradient(90deg,#fce3fa99 60%, #d4e2fdcc 100%);}
+  }
+
+  /* Animación de destellos */
+  .sparkle {
+    position: absolute;
+    width: 26px; height: 26px;
+    background: radial-gradient(circle, #fff5fbaf 55%, #c9f7fe30 100%);
+    border-radius: 90%;
+    animation: sparkleFly 2.8s infinite alternate;
+    pointer-events: none;
+  }
+  .sparkle1 { left: 95px; bottom: -25px; animation-delay: .3s;}
+  .sparkle2 { right: 65px; top: -19px; animation-delay: .7s;}
+  .sparkle3 { left: 50%; top: -33px; transform: translateX(-50%); animation-delay: 1.2s;}
+  @keyframes sparkleFly {
+    0% { opacity: .82; transform: scale(1) rotate(-8deg);}
+    100% {opacity: .1; transform: scale(1.25) rotate(13deg);}
+  }
+
+  /* Responsivo */
+  @media (max-width: 950px) {
     .container {
       flex-direction: column;
-      padding: 24px 26px;
-      max-width: 95vw;
-      gap: 24px;
+      align-items: center;
+      gap: 22px;
+      padding: 29px 4vw;
     }
     .left-message, .right-message {
-      width: 100%;
+      width: 98vw;
+      min-width: 0;
+      padding: 17px 8vw 14px 8vw;
+      font-size: 1.03rem;
+      margin-bottom: 0;
       text-align: left;
-      font-size: 1rem;
     }
+    .sparkle1,.sparkle2,.sparkle3 {display:none;}
   }
 </style>
 </head>
 <body>
-  <main class="container" role="main" aria-label="Mensajes divididos lado izquierdo y derecho">
-    <section class="left-message" aria-label="Primer mensaje sobre la salida y decisión personal">
+  <div class="animated-bg">
+    <div class="bubble bubble1"></div>
+    <div class="bubble bubble2"></div>
+    <div class="bubble bubble3"></div>
+    <div class="bubble bubble4"></div>
+    <div class="bubble bubble5"></div>
+  </div>
+  <main class="container" role="main" aria-label="Mensajes especiales divididos en dos columnas">
+    <section class="left-message" aria-label="Mensaje izquierdo sobre la salida y decisión personal">
+      <div class="sparkle sparkle1"></div>
       Lo de la salida no es una obligación ni una presión; si en verdad no quieres salir, no tienes que hacer nada, no tienes que desbloquearme ni escribirme tampoco. Pero si tu respuesta es que sí, te prometo que será una experiencia divertida, que vas a disfrutar cada momento y que te encantará. No sé qué decidirás, ni siquiera ahora, mientras escribo esto, puedo adivinar qué dirás; solo sé que esa decisión la tomarás desde el <span class="highlight">corazón</span>, con esa sabiduría y luz que te hacen ser tan auténtica y especial.
     </section>
-    <section class="right-message" aria-label="Segundo mensaje sobre la confianza y singularidad">
+    <section class="right-message" aria-label="Mensaje derecho sobre confianza y autenticidad">
+      <div class="sparkle sparkle2"></div>
+      <div class="sparkle sparkle3"></div>
       Confío en que, sea cual sea tu elección, estará guiada por lo que sientes y has vivido, por esa esencia única que te define y que siempre ilumina el camino. Eres <span class="highlight">fantástica, inigualable e irrepetible</span>, nunca dudes de eso ¿ok?
     </section>
   </main>
