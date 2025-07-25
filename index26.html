@@ -12,7 +12,7 @@
     background: linear-gradient(120deg, #e9e2d0 0%, #dbcfc1 90%);
     font-family: 'Times New Roman', Times, serif;
     color: #584932;
-    display: flex; justify-content: center; align-items: center;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
     text-align: center;
   }
   .ticket-wrap {
@@ -22,6 +22,8 @@
     justify-content: center;
     align-items: flex-start;
     width: 100%;
+    max-width: 820px;
+    margin-bottom: 30px;
   }
   .antique-ticket {
     background: repeating-linear-gradient(-45deg, #f6ecd5 0px, #f8ecd1 8px, #f6ecd5 28px, #e9dac2 30px);
@@ -129,7 +131,6 @@
       90deg, transparent, transparent 12px,
       #94743a43 12px, #94743a43 14px);
   }
-
   /* Sección de invitación y WhatsApp */
   .invite-section {
     margin-top: 18px;
@@ -189,6 +190,38 @@
     50% { transform: rotate(14deg);}
     100% { transform: rotate(-4deg);}
   }
+
+  /* Botones de navegación */
+  .nav-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    margin-top: 20px;
+    animation: fadeInNav 1.5s ease forwards;
+  }
+  @keyframes fadeInNav {
+    from {opacity: 0; transform: translateY(10px);}
+    to {opacity: 1; transform: translateY(0);}
+  }
+  .nav-buttons button {
+    padding: 11px 36px;
+    border-radius: 28px;
+    border: none;
+    background: linear-gradient(90deg, #94743a, #d6bf7a);
+    color: #332800;
+    font-family: 'Georgia', serif;
+    font-size: 1.05rem;
+    cursor: pointer;
+    box-shadow: 0 6px 14px rgba(148, 124, 55, 0.35);
+    transition: background 0.3s ease, color 0.15s ease;
+    user-select: none;
+    min-width: 130px;
+  }
+  .nav-buttons button:hover {
+    background: linear-gradient(90deg, #d6bf7a, #94743a);
+    color: #201a00;
+  }
+
   /* Responsive para móviles */
   @media (max-width: 850px) {
     .ticket-wrap { flex-direction: column; align-items: center; gap: 24px;}
@@ -203,9 +236,9 @@
       <span class="ticket-title">Ticket de Tren &mdash; Charla y Celebración</span>
       <div class="ticket-detail">Destino: Una salida para celebrar <b>tu graduación</b> y compartir un momento especial.<br>Válido para el portador y el acompañante presente.</div>
       <div class="ticket-div"></div>
-      <div class="ticket-code"> Mondongo-LOVE-2025</div>
+      <div class="ticket-code">Mondongo-LOVE-2025</div>
       <div class="ticket-footer">
-        <span>Un nuevo aire, una celebracion.<br>Válido hasta ∞ /∞ /∞ </span>
+        <span>Un nuevo aire, una celebración.<br>Válido hasta ∞ /∞ /∞ </span>
       </div>
       <span class="ticket-decor" aria-hidden="true">❤</span>
       <span class="ticket-decor2" aria-hidden="true">❦</span>
@@ -213,12 +246,16 @@
     </div>
     <aside class="invite-section" role="complementary" aria-label="Instrucciones y Whatsapp">
       Te invito a una salida, a celebrar su graduación y a hablar, solo si así lo desea usted.<br><br>
-      Para canjear el código debes tomarle foto a este ticket, enviármelo por Whatsapp y escribir, obvio me desbloquea xd <b>mondongo italiano</b>.
+      Para canjear el código debes tomarle foto a este ticket, enviármelo por Whatsapp y escribir <b>mondongo italiano</b>.
       <a class="ws-link" href="https://wa.me/584143568666" target="_blank" rel="noopener" aria-label="Enviar Whatsapp">
         <span class="ws-icon" aria-hidden="true">📱</span>
         Enviar Whatsapp
       </a>
     </aside>
   </div>
+  <nav class="nav-buttons" aria-label="Navegación entre páginas">
+    <button type="button" onclick="window.history.back()" aria-label="Página anterior">Anterior</button>
+    <button type="button" onclick="window.location.href='index27.html'" aria-label="Página siguiente">Siguiente</button>
+  </nav>
 </body>
 </html>
