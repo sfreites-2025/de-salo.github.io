@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>  Mensaje Animado</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Georgia:wght@400;700&display=swap');
+
+  html, body {
+    height: 100%;
+    margin: 0; padding: 0;
+    overflow: hidden;
+    font-family: 'Georgia', serif;
+    background: radial-gradient(circle at center, #e0d8f7 0%, #b3abd8 100%);
+    color: #3a2f5a;
+  }
+  body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    flex-direction: column;
+  }
+
+  .message-container {
+    max-width: 720px;
+    background: rgba(255 255 255 / 0.9);
+    border-radius: 24px;
+    box-shadow: 0 8px 40px rgba(68, 56, 110, 0.19);
+    padding: 36px 40px;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    font-style: italic;
+    color: #392e5a;
+    opacity: 0;
+    transform: scale(0.92);
+    animation: appearMessage 2s ease forwards;
+    font-family: 'Georgia', serif;
+    user-select: text;
+  }
+
+  /* Luego de la animación, muestra la barra con botones */
+  .side-nav {
+    margin-top: 32px;
+    display: none;
+    gap: 20px;
+    justify-content: center;
+  }
+  .side-nav.show {
+    display: flex;
+  }
+  .side-nav button {
+    padding: 12px 36px;
+    border-radius: 30px;
+    border: none;
+    background: linear-gradient(90deg, #7666db, #c4aaff);
+    color: #381f81;
+    font-family: 'Georgia', serif;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 6px 16px rgba(118, 102, 219, 0.45);
+    transition: background 0.3s ease, color 0.15s ease;
+    user-select: none;
+    min-width: 140px;
+  }
+  .side-nav button:hover {
+    background: linear-gradient(90deg, #baa9fb, #7e5aff);
+    color: #220e70;
+  }
+
+  /* Animación para aparecer el texto */
+  @keyframes appearMessage {
+    0% {
+      opacity: 0;
+      transform: scale(0.92) translateY(30px);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  /* Sapo animado en la esquina inferior izquierda */
+  .frog {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    width: 90px;
+    height: 90px;
+    z-index: 15;
+    animation: floatSapo 4s ease-in-out infinite;
+    cursor: default;
+  }
+  @keyframes floatSapo {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .message-container {
+      width: 90vw;
+      font-size: 0.80rem;
+      padding: 28px 24px;
+    }
+    .side-nav {
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+    .side-nav button {
+      flex-grow: 1;
+      min-width: auto;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="message-container" id="msg" aria-label="Mensaje emocional">
+    He llegado a un punto en el que ya estoy bien conmigo mismo, y aunque ya no te necesito para poder vivir, deseo con cada fibra de mi ser que mi vida conserve tu forma, tu olor, tu esencia. Quiero compartir mis días contigo, que mis recuerdos tengan tu sonrisa y que mis sueños se entrelacen con los tuyos. Porque no se trata solo de estar juntos, sino de sentir que tu luz sigue iluminando mi camino, el mismo camino que, de alguna manera, decidí que juntos íbamos a recorrer.<br><br>
+
+    No te pido que regreses para llenar un vacío, sino que sepas que siempre llevas contigo un lugar especial en mi vida. Quiero que, aunque sea una vez más, podamos mirarnos a los ojos y comprender sin palabras todo lo que hemos sido y lo que aún queda por sentir. Eso es lo que guardo en mi corazón, un deseo profundo y sincero de tenerte cerca, de vivir ese instante que pueda sellar lo que siempre significaste para mí.
+  </div>
+
+  <!-- Sapo animado (mismo SVG) -->
+  <svg class="frog" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" focusable="false" >
+    <title>Sapo animado decorativo</title>
+    <circle cx="32" cy="32" r="30" fill="#4CAF50" stroke="#2E7D32" stroke-width="3" />
+    <ellipse cx="22" cy="25" rx="6" ry="8" fill="#2E7D32"/>
+    <ellipse cx="42" cy="25" rx="6" ry="8" fill="#2E7D32"/>
+    <circle cx="22" cy="25" r="3" fill="#fff"/>
+    <circle cx="42" cy="25" r="3" fill="#fff"/>
+    <circle cx="22" cy="25" r="1.5" fill="#000"/>
+    <circle cx="42" cy="25" r="1.5" fill="#000"/>
+    <path d="M20 40 Q32 50 44 40" stroke="#2E7D32" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M14 35 Q16 32 20 35" stroke="#2E7D32" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M50 35 Q48 32 44 35" stroke="#2E7D32" stroke-width="3" fill="none" stroke-linecap="round"/>
+  </svg>
+
+  <nav class="side-nav" aria-label="Navegación entre páginas" id="navButtons">
+    <button type="button" onclick="window.history.back()" aria-label="Página anterior">Anterior</button>
+    <button type="button" onclick="window.location.href='index29.html'" aria-label="Página siguiente">Siguiente</button>
+  </nav>
+
+  <script>
+    // Mostrar los botones al terminar la animación del texto (aprox 2s)
+    window.onload = function() {
+      const nav = document.getElementById('navButtons');
+      nav.style.display = 'none';
+      const msg = document.getElementById('msg');
+      msg.addEventListener('animationend', () => {
+        nav.style.display = 'flex';
+      });
+    };
+  </script>
+</body>
+</html>
