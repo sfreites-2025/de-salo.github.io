@@ -6,28 +6,35 @@
 <title>Cupón Estilo Ticket de Tren Antiguo</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
-  body {
+
+  /* Evitar scroll vertical y horizontal */
+  html, body {
+    height: 100%;
+    overflow: hidden;
     margin: 0; padding: 26px 10px 26px 10px;
-    min-height: 100vh;
     background: linear-gradient(120deg, #e9e2d0 0%, #dbcfc1 90%);
     font-family: 'Times New Roman', Times, serif;
     color: #584932;
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* arriba para dejar espacio a la barra */
+    align-items: flex-start; /* para colocar barra fija y contenido separado */
     text-align: center;
     position: relative;
   }
+
+  /* Contenedor para ticket y mensaje */
   .ticket-wrap {
     display: flex;
     gap: 40px;
-    flex-wrap: nowrap; /* para que estén lado a lado */
+    flex-wrap: nowrap;
     justify-content: center;
     align-items: flex-start;
     width: 100%;
     max-width: 820px;
-    padding-right: 110px; /* espacio para barra side nav */
+    padding-right: 110px; /* espacio para barra lateral */
   }
+
+  /* Estilo ticket antiguo */
   .antique-ticket {
     background: repeating-linear-gradient(-45deg, #f6ecd5 0px, #f8ecd1 8px, #f6ecd5 28px, #e9dac2 30px);
     box-shadow:
@@ -35,7 +42,8 @@
       0 0 0 4.5px #dac49c inset;
     border: 3px dashed #94743a;
     border-radius: 32px 16px 32px 16px/22px 40px 22px 40px;
-    min-width: 294px; max-width: 388px;
+    min-width: 294px; 
+    max-width: 388px;
     width: 48%;
     padding: 36px 32px 32px 32px;
     position: relative;
@@ -134,7 +142,8 @@
       90deg, transparent, transparent 12px,
       #94743a43 12px, #94743a43 14px);
   }
-  /* Sección de invitación y WhatsApp */
+
+  /* Invitación y enlace WhatsApp */
   .invite-section {
     margin-top: 18px;
     max-width: 32%;
@@ -197,7 +206,7 @@
     100% { transform: rotate(-4deg);}
   }
 
-  /* Barra lateral de navegación con botones a la derecha */
+  /* Barra lateral fija con navegación */
   .side-nav {
     position: fixed;
     top: 50%;
@@ -227,13 +236,16 @@
     color: #201a00;
   }
 
-  /* Responsive para móviles */
+  /* Responsividad para móviles */
   @media (max-width: 850px) {
     body {
-      padding-right: 10px; /* evitar choque con barra */
+      padding-right: 10px;
       flex-direction: column;
       align-items: center;
+      overflow-y: auto; /* para permitir scroll en móvil */
+      height: auto;
     }
+    /* En móvil apilar los bloques */
     .ticket-wrap { 
       flex-wrap: wrap;
       flex-direction: column;
@@ -241,11 +253,13 @@
       gap: 24px;
       max-width: 98vw;
       padding-right: 0;
+      width: 100%;
     }
     .antique-ticket, .invite-section { 
       width: 95% !important;
       max-width: none;
     }
+    /* Barra horizontal abajo en móvil */
     .side-nav {
       position: static;
       transform: none;
