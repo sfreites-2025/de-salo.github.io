@@ -3,126 +3,151 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Fondo Floral Azul Pastel</title>
+<title>Index 27 - Página sin mensajes</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Georgia:wght@400;700&display=swap');
 
   html, body {
     height: 100%;
-    margin: 0; padding: 0;
+    margin: 0;
+    padding: 0;
     overflow: hidden;
     font-family: 'Georgia', serif;
+    background: radial-gradient(circle at 60% 60%, #faf7f3 55%, #c9e3fa 87%, #0a334d 100%);
+    color: #484869;
   }
 
-  /* Fondo floral artístico azul pastel */
   body {
     height: 100vh;
-    background:
-      linear-gradient(rgba(36,66,115,0.12),rgba(184,223,237,0.12)),
-      url('https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1470&q=80') center center / cover no-repeat fixed;
-    color: #3a315c;
+    width: 100vw;
+    min-height: 100vh;
+    min-width: 100vw;
     display: flex;
     justify-content: center;
     align-items: center;
-    text-align: center;
-    padding: 20px;
-    box-sizing: border-box;
+    position: relative;
   }
 
-  .content {
-    max-width: 700px;
-    background: rgba(255,255,255,0.52);
-    border-radius: 20px;
-    padding: 32px 25px;
-    box-shadow: 0 12px 35px rgba(55,30,96,0.11);
-    animation: fadeInContent 1.5s ease forwards;
-    color: #392b56;
+  .animated-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .bubble {
+    position: absolute;
+    border-radius: 50%;
+    opacity: .38;
+    animation: floatBubble 12s linear infinite;
+    pointer-events: none;
+    background: radial-gradient(circle at 60% 40%, #f5faff 0%, #f2e3fa 90%, transparent 100%);
+  }
+  .bubble1 {width: 110px; height: 110px; left: 3vw; bottom: 6vh; animation-duration: 15s;}
+  .bubble2 {width: 75px; height: 75px; right: 12vw; top: 7vh; animation-duration: 17s;}
+  .bubble3 {width: 98px; height: 98px; right: 6vw; bottom: 3vh; animation-duration: 13s;}
+  .bubble4 {width: 68px; height: 68px; left: 28vw; top: 12vh; animation-duration: 14.5s;}
+  .bubble5 {width: 95px; height: 95px; left: 60vw; bottom: 6vh; animation-duration: 18s;}
+
+  @keyframes floatBubble {
+    0% {transform: translateY(0) scale(1);}
+    30% {transform: translateY(-18px) scale(1.13);}
+    60% {transform: translateY(-33px) scale(0.97);}
+    100% {transform: translateY(0) scale(1);}
   }
 
-  @keyframes fadeInContent {
-    from { opacity: 0; transform: translateY(40px);}
-    to { opacity: 1; transform: translateY(0);}
+  /* Sapo animado flotante */
+  .frog {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    width: 90px;
+    height: 90px;
+    z-index: 15;
+    animation: floatSapo 4s ease-in-out infinite;
+    cursor: default;
   }
 
-  h1 {
-    font-size: 2.12rem;
-    font-weight: 700;
-    margin-bottom: 16px;
-    color: #3967a7;
-    text-shadow: 0 2px 12px #efeffa88;
+  @keyframes floatSapo {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
   }
 
-  p {
-    font-size: 1.14rem;
-    line-height: 1.6;
-    color: #5946a1;
-    font-style: italic;
-  }
-
-  /* Botones de navegación */
+  /* Botones navegación fijos a la derecha */
   .side-nav {
     position: fixed;
     top: 50%;
-    right: 14px;
+    right: 20px;
     transform: translateY(-50%);
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 18px;
     z-index: 10;
   }
   .side-nav button {
-    padding: 12px 30px;
+    padding: 12px 28px;
     border-radius: 28px;
     border: none;
-    background: linear-gradient(90deg, #5a60cc, #c7e5f5);
-    color: #31235a;
+    background: linear-gradient(90deg, #1799cc, #c2a9ff);
+    color: #283a52;
     font-family: 'Georgia', serif;
     font-size: 1rem;
     cursor: pointer;
-    box-shadow: 0 6px 14px rgba(97,74,202,0.18);
+    box-shadow: 0 6px 14px rgba(67, 142, 192, 0.23);
     transition: background 0.3s, color 0.15s;
+    user-select: none;
+    min-width: 120px;
   }
   .side-nav button:hover {
-    background: linear-gradient(90deg, #b6d7fa, #758cc9 80%);
-    color: #211238;
+    background: linear-gradient(90deg, #d7e2fa, #1799cc 80%);
+    color: #1a3755;
   }
 
   /* Responsive */
-  @media (max-width: 600px) {
+  @media (max-width: 950px) {
     body {
-      padding: 10px 4px;
-    }
-    .content {
-      width: 100%;
-      padding: 18px 8px;
+      overflow-y: auto;
     }
     .side-nav {
       position: static;
       transform: none;
       flex-direction: row;
       justify-content: center;
-      gap: 15px;
-      margin-top: 19px;
-    }
-    .side-nav button {
-      flex-grow: 1;
-      min-width: auto;
+      margin-top: 20px;
+      right: auto;
+      top: auto;
     }
   }
 </style>
 </head>
 <body>
-  <div class="content" role="main" aria-label="Mensaje con fondo floral artístico">
-    <h1>Un Mensaje Envuelt@ en Azules y Flores</h1>
-    <p>
-      Aquí puedes poner cualquier mensaje especial que quieras compartir.<br>
-      El fondo es ahora un motivo floral azul pastel, lleno de calma y elegancia, para dar un aire íntimo, alegre y renovado a tu hoja.
-    </p>
+  <div class="animated-bg">
+    <div class="bubble bubble1"></div>
+    <div class="bubble bubble2"></div>
+    <div class="bubble bubble3"></div>
+    <div class="bubble bubble4"></div>
+    <div class="bubble bubble5"></div>
   </div>
 
+  <!-- Sapo animado (SVG simple) -->
+  <svg class="frog" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" focusable="false" >
+    <title>Sapo animado decorativo</title>
+    <circle cx="32" cy="32" r="30" fill="#4CAF50" stroke="#2E7D32" stroke-width="3" />
+    <ellipse cx="22" cy="25" rx="6" ry="8" fill="#2E7D32"/>
+    <ellipse cx="42" cy="25" rx="6" ry="8" fill="#2E7D32"/>
+    <circle cx="22" cy="25" r="3" fill="#fff"/>
+    <circle cx="42" cy="25" r="3" fill="#fff"/>
+    <circle cx="22" cy="25" r="1.5" fill="#000"/>
+    <circle cx="42" cy="25" r="1.5" fill="#000"/>
+    <path d="M20 40 Q32 50 44 40" stroke="#2E7D32" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M14 35 Q16 32 20 35" stroke="#2E7D32" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M50 35 Q48 32 44 35" stroke="#2E7D32" stroke-width="3" fill="none" stroke-linecap="round"/>
+  </svg>
+
+  <!-- Navegación -->
   <nav class="side-nav" aria-label="Navegación entre páginas">
     <button type="button" onclick="window.history.back()" aria-label="Página anterior">Anterior</button>
-    <button type="button" onclick="window.location.href='index29.html'" aria-label="Página siguiente">Siguiente</button>
+    <button type="button" onclick="window.location.href='index28.html'" aria-label="Página siguiente">Siguiente</button>
   </nav>
 </body>
 </html>
