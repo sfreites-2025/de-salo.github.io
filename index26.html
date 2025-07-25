@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Cupón Canjeable</title>
+<style>
+  body {
+    margin: 0; padding: 40px 24px;
+    background: linear-gradient(135deg, #fce4f1 0%, #d3a0d6 90%);
+    font-family: 'Times New Roman', Times, serif;
+    color: #46254a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow-y: auto;
+    text-align: center;
+  }
+
+  .coupon-container {
+    background: #fff9ff;
+    border: 3px dashed #bc65af;
+    border-radius: 24px;
+    max-width: 480px;
+    width: 90vw;
+    box-shadow: 0 8px 30px rgba(188, 101, 175, 0.3);
+    padding: 36px 28px;
+    position: relative;
+    animation: glowPulse 3.6s ease-in-out infinite alternate;
+  }
+
+  @keyframes glowPulse {
+    0% {
+      box-shadow: 0 0 18px 6px rgba(188, 101, 175, 0.3);
+    }
+    100% {
+      box-shadow: 0 0 30px 13px rgba(188, 101, 175, 0.6);
+    }
+  }
+
+  .title {
+    font-size: 1.95rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: #7a3e6a;
+    letter-spacing: 0.03em;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+    margin-bottom: 24px;
+    font-style: italic;
+    color: #a64a9e;
+  }
+
+  .coupon-code {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.8rem;
+    font-weight: 800;
+    background: linear-gradient(90deg, #bc65af, #d19ed2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 0.12em;
+    border: 2px solid #bc65af;
+    border-radius: 12px;
+    padding: 14px 28px;
+    margin-bottom: 30px;
+    display: inline-block;
+    animation: pulseCode 2.8s ease-in-out infinite alternate;
+  }
+
+  @keyframes pulseCode {
+    0% {
+      box-shadow: 0 0 10px 1.5px #bc65af;
+      transform: scale(1);
+    }
+    100% {
+      box-shadow: 0 0 20px 6px #d19ed2;
+      transform: scale(1.07);
+    }
+  }
+
+  .description {
+    font-size: 1rem;
+    color: #5d3b5c;
+    margin-bottom: 34px;
+    line-height: 1.52;
+  }
+
+  .validity {
+    font-size: 0.88rem;
+    color: #7f5a81;
+    margin-bottom: 28px;
+  }
+
+  .btns {
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+  }
+
+  button {
+    background: linear-gradient(90deg, #bc65af, #d19ed2);
+    border: none;
+    border-radius: 28px;
+    color: white;
+    cursor: pointer;
+    font-family: 'Georgia', serif;
+    font-size: 1.05rem;
+    padding: 12px 36px;
+    box-shadow: 0 6px 18px rgba(188, 101, 175, 0.35);
+    transition: background 0.3s ease, transform 0.12s ease;
+    user-select: none;
+    min-width: 130px;
+  }
+
+  button:hover {
+    background: linear-gradient(90deg, #d19ed2, #bc65af);
+    transform: scale(1.05);
+    color: #4a2253;
+  }
+</style>
+</head>
+<body>
+  <div class="coupon-container" role="main" aria-label="Cupón canjeable por una salida">
+    <div class="title">Cupón Especial para Ti</div>
+    <div class="subtitle">Canjeable por una salida inolvidable</div>
+    <div class="coupon-code" aria-label="Código del cupón">SALIDA2025</div>
+    <div class="description">
+      Hoy te regalo esta invitación para disfrutar juntos de una salida especial.<br>
+      Es un detalle que guarda mi cariño y ganas de compartir momentos contigo.<br>
+      ¡Espero que lo disfrutes tanto como yo disfrutaré acompañarte!
+    </div>
+    <div class="validity">Válido hasta: 31 de diciembre de 2025</div>
+    <div class="btns">
+      <button type="button" onclick="window.history.back()" aria-label="Página anterior">Anterior</button>
+      <button type="button" onclick="window.location.href='index27.html'" aria-label="Página siguiente">Siguiente</button>
+    </div>
+  </div>
+</body>
+</html>
