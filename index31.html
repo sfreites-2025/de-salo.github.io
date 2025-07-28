@@ -27,26 +27,20 @@
     border-radius: 28px;
     padding: 36px 40px;
     box-shadow: 0 12px 35px rgba(211, 102, 147, 0.42);
-    animation: fadeFloatIn 2.5s ease forwards;
+    animation: fadeSlideUp 2s ease forwards;
     font-size: 1.2rem;
     line-height: 1.6;
     font-weight: 500;
     font-style: italic;
     user-select: text;
+    opacity: 0;
+    transform: translateY(30px);
   }
 
-  @keyframes fadeFloatIn {
-    0% {
-      opacity: 0;
-      transform: translateY(40px) scale(0.95);
-    }
-    70% {
+  @keyframes fadeSlideUp {
+    to {
       opacity: 1;
-      transform: translateY(-10px) scale(1.05);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0) scale(1);
+      transform: translateY(0);
     }
   }
 
@@ -119,7 +113,7 @@
   </div>
   
   <nav class="side-nav" aria-label="Navegación entre páginas">
-    <button type="button" onclick="window.history.back()" aria-label="Página anterior">Anterior</button>
+    <button type="button" onclick="window.location.href='index31.html'" aria-label="Página anterior">Anterior</button>
   </nav>
 
 </body>
