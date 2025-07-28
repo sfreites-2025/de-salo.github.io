@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Créditos</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Georgia&display=swap');
+
+  body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #f7d8ce 0%, #f6bfd1 50%, #e3a7c1 100%);
+    font-family: 'Georgia', serif;
+    color: #4a2c3f;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .credits-box {
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 28px;
+    padding: 40px 50px;
+    max-width: 500px;
+    box-shadow: 0 12px 35px rgba(211, 102, 147, 0.42);
+    animation: fadeIn 2s ease forwards;
+  }
+
+  h2 {
+    margin-bottom: 24px;
+    font-weight: 700;
+    font-size: 2rem;
+    letter-spacing: 0.05em;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  ul li {
+    font-style: italic;
+    font-weight: 500;
+    font-size: 1.2rem;
+    margin: 16px 0;
+    animation: fadeInUp 1.2s ease forwards;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  /* Agregar retraso de animación a cada elemento para hacerlos aparecer secuencialmente */
+  ul li:nth-child(1) { animation-delay: 0.4s; }
+  ul li:nth-child(2) { animation-delay: 0.8s; }
+  ul li:nth-child(3) { animation-delay: 1.2s; }
+  ul li:nth-child(4) { animation-delay: 1.6s; }
+
+  /* Animaciones */
+  @keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+</head>
+<body>
+  <section class="credits-box" aria-label="Sección de créditos">
+    <h2>Créditos a:</h2>
+    <ul>
+      <li>Salomon Freites, graduado de Jesús Obrero</li>
+      <li>Mi cerebrito</li>
+      <li>Mis manitas</li>
+      <li>Y más cosas, etc.</li>
+    </ul>
+  </section>
+</body>
+</html>
