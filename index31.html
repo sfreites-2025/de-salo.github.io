@@ -21,91 +21,36 @@
     position: relative;
   }
 
-  /* Animación de fondo */
-  body::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path fill="rgba(255,255,255,0.05)" d="M0,0 L100,0 L100,100 L0,100 Z" /><path fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5" d="M0,50 Q25,25 50,50 T100,50" /></svg>');
-    animation: bgPulse 15s infinite alternate;
-    z-index: -1;
-  }
-
-  @keyframes bgPulse {
-    0% { opacity: 0.3; transform: scale(1); }
-    100% { opacity: 0.5; transform: scale(1.05); }
-  }
-
   .conclusion-box {
     max-width: 700px;
-    background: rgba(255 255 255 / 0.85);
+    background: rgba(255,255,255,0.85);
     border-radius: 28px;
     padding: 36px 40px;
-    box-shadow: 0 12px 35px rgba(211, 102, 147, 0.42);
-    animation: fadeSlideUp 2s ease forwards, gentlePulse 8s ease-in-out infinite;
+    box-shadow: 0 12px 35px rgba(211,102,147,0.42);
     font-size: 1.2rem;
     line-height: 1.6;
     font-weight: 500;
     font-style: italic;
     user-select: text;
+    /* Animaciones: aparecer, luego "respirar" suavemente */
     opacity: 0;
-    transform: translateY(30px);
-    position: relative;
-    overflow: hidden;
+    transform: translateY(30px) scale(0.97);
+    animation: fadeSlideUp 1.7s cubic-bezier(.61,-0.01,.48,1.07) forwards, breathing 4s ease-in-out 2s infinite;
   }
 
-  /* Efecto de brillo sutil */
-  .conclusion-box::after {
-    content: '';
-    position: absolute;
-    top: -50%; left: -50%;
-    width: 200%; height: 200%;
-    background: linear-gradient(
-      to bottom right,
-      rgba(255,255,255,0) 0%,
-      rgba(255,255,255,0) 45%,
-      rgba(255,255,255,0.3) 50%,
-      rgba(255,255,255,0) 55%,
-      rgba(255,255,255,0) 100%
-    );
-    transform: rotate(30deg);
-    animation: shine 8s infinite;
-  }
-
+  /* Fade-in + slide-up */
   @keyframes fadeSlideUp {
     to {
       opacity: 1;
-      transform: translateY(0);
+      transform: translateY(0) scale(1);
     }
   }
 
-  @keyframes gentlePulse {
-    0%, 100% { transform: translateY(0) scale(1); box-shadow: 0 12px 35px rgba(211, 102, 147, 0.42); }
-    50% { transform: translateY(-5px) scale(1.01); box-shadow: 0 16px 45px rgba(211, 102, 147, 0.5); }
-  }
-
-  @keyframes shine {
-    0% { transform: rotate(30deg) translate(-30%, -30%); }
-    100% { transform: rotate(30deg) translate(30%, 30%); }
-  }
-
-  /* Animación para el texto */
-  .conclusion-box span {
-    display: inline-block;
-    opacity: 0;
-    transform: translateY(20px);
-  }
-
-  .conclusion-box span.animated {
-    animation: textFadeIn 0.8s forwards;
-  }
-
-  @keyframes textFadeIn {
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  /* Efecto breathing (escala suave) */
+  @keyframes breathing {
+    0%   {box-shadow: 0 12px 35px rgba(211,102,147,0.42); transform: scale(1);}
+    50%  {box-shadow: 0 18px 48px rgba(211,102,147,0.53); transform: scale(1.025);}
+    100% {box-shadow: 0 12px 35px rgba(211,102,147,0.42); transform: scale(1);}
   }
 
   /* Botones de navegación */
@@ -118,6 +63,12 @@
     flex-direction: column;
     gap: 18px;
     z-index: 20;
+    animation: floatVertical 3.7s ease-in-out infinite;
+  }
+  /* Floating animation para side nav */
+  @keyframes floatVertical {
+    0%, 100% { transform: translateY(-50%) translateY(0); }
+    50%      { transform: translateY(-50%) translateY(-24px);}
   }
   .side-nav button {
     padding: 12px 28px;
@@ -128,61 +79,16 @@
     font-family: 'Georgia', serif;
     font-size: 1rem;
     cursor: pointer;
-    box-shadow: 0 6px 14px rgba(217, 104, 159, 0.45);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 6px 14px rgba(217,104,159,0.45);
+    transition: background 0.3s, color 0.15s, transform .17s, box-shadow .25s;
     user-select: none;
     min-width: 120px;
-    opacity: 0;
-    transform: translateX(30px);
-    animation: buttonFadeIn 1s 1.5s forwards;
   }
   .side-nav button:hover {
     background: linear-gradient(90deg, #f9a0d9, #d968ac);
     color: #3a1f2c;
-    transform: translateX(0) scale(1.05);
-  }
-
-  @keyframes buttonFadeIn {
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-
-  /* Corazones flotantes */
-  .floating-hearts {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: -1;
-  }
-
-  .heart {
-    position: absolute;
-    opacity: 0;
-    font-size: 20px;
-    color: rgba(217, 104, 172, 0.6);
-    animation: floatHeart 10s linear infinite;
-  }
-
-  @keyframes floatHeart {
-    0% {
-      transform: translateY(100vh) rotate(0deg);
-      opacity: 0;
-    }
-    10% {
-      opacity: 0.7;
-    }
-    90% {
-      opacity: 0.7;
-    }
-    100% {
-      transform: translateY(-100px) rotate(360deg);
-      opacity: 0;
-    }
+    transform: scale(1.075) translateY(-3px);
+    box-shadow: 0 10px 26px rgba(217,104,159,0.60);
   }
 
   /* Responsive */
@@ -205,26 +111,19 @@
       justify-content: center;
       margin-top: 24px;
       gap: 12px;
+      animation: none;
     }
     .side-nav button {
       flex-grow: 1;
       min-width: auto;
       padding: 12px 22px;
-      animation: buttonFadeInMobile 1s 1.5s forwards;
-    }
-    
-    @keyframes buttonFadeInMobile {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
     }
   }
 </style>
 </head>
 <body>
 
-  <div class="conclusion-box" role="main" aria-label="Mensaje de conclusión de la aplicación" id="conclusionBox">
+  <div class="conclusion-box" role="main" aria-label="Mensaje de conclusión de la aplicación">
     Gracias por leer esto enserio. <br><br>
     Espero que esto haya sido un buen regalo y te haya gustado, enserio gracias.<br><br>
     Sigue adelante con valentía y amor, porque lo mejor está por venir, y tu historia aun no acaba, apenas empieza. <br><br>
@@ -232,65 +131,8 @@
   </div>
   
   <nav class="side-nav" aria-label="Navegación entre páginas">
-    <button type="button" onclick="window.location.href='index31.html'" aria-label="Página anterior">Anterior</button>
+    <button type="button" onclick="window.location.href='index32.html'" aria-label="Página anterior">Anterior</button>
   </nav>
 
-  <div class="floating-hearts" id="heartsContainer"></div>
-
-  <script>
-    // Animación de texto letra por letra
-    document.addEventListener('DOMContentLoaded', function() {
-      const box = document.getElementById('conclusionBox');
-      const text = box.innerHTML;
-      box.innerHTML = '';
-      
-      // Dividir el texto en líneas y animar cada línea
-      const lines = text.split('<br>');
-      
-      lines.forEach((line, lineIndex) => {
-        if (line.trim() === '') {
-          box.innerHTML += '<br>';
-          return;
-        }
-        
-        const lineDiv = document.createElement('div');
-        line.split('').forEach((char, charIndex) => {
-          const span = document.createElement('span');
-          span.textContent = char === ' ' ? ' ' : char;
-          span.style.animationDelay = `${(lineIndex * 0.3) + (charIndex * 0.05)}s`;
-          lineDiv.appendChild(span);
-          
-          // Aplicar animación después de un pequeño retraso
-          setTimeout(() => {
-            span.classList.add('animated');
-          }, 100);
-        });
-        
-        box.appendChild(lineDiv);
-        if (lineIndex < lines.length - 1) {
-          box.innerHTML += '<br>';
-        }
-      });
-      
-      // Crear corazones flotantes
-      createHearts();
-    });
-    
-    function createHearts() {
-      const container = document.getElementById('heartsContainer');
-      const heartCount = 15;
-      
-      for (let i = 0; i < heartCount; i++) {
-        const heart = document.createElement('div');
-        heart.className = 'heart';
-        heart.innerHTML = '❤';
-        heart.style.left = `${Math.random() * 100}%`;
-        heart.style.animationDelay = `${Math.random() * 10}s`;
-        heart.style.animationDuration = `${8 + Math.random() * 7}s`;
-        heart.style.fontSize = `${15 + Math.random() * 20}px`;
-        container.appendChild(heart);
-      }
-    }
-  </script>
 </body>
 </html>
